@@ -11,6 +11,7 @@ const IndexPage = ({ allPosts }: Props) => {
 
   return (
     <>
+      {/* TODO: 포스트들 보여줄 컴포넌트 작성하기  */}
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
         <div>
           <img style={{ width: '100px', height: '100px', objectFit: 'contain' }} src={coverImage} />
