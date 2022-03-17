@@ -5,10 +5,10 @@ import PostBody from '../../components/PostBody';
 import markdownToHtml from '../../lib/markdownToHtml';
 import PostType from '../../types/post';
 
-type Props = {
+interface Props {
   post: PostType;
   preview?: boolean;
-};
+}
 
 const Post = ({ post, preview }: Props) => {
   const router = useRouter();
@@ -40,11 +40,11 @@ const Post = ({ post, preview }: Props) => {
 
 export default Post;
 
-type Params = {
+interface Params {
   params: {
     slug: string;
   };
-};
+}
 
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
