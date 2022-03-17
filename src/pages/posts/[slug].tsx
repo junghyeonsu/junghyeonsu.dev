@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getAllPosts, getPostBySlug } from '../../lib/api';
+import PostBody from '../../components/PostBody';
 import markdownToHtml from '../../lib/markdownToHtml';
 import PostType from '../../types/post';
 
@@ -30,7 +31,7 @@ const Post = ({ post, preview }: Props) => {
             post header
             <div>{post.title}</div>
           </div>
-          <div>{post.content}</div>
+          <PostBody content={post.content} />
         </article>
       )}
     </div>
