@@ -13,20 +13,25 @@ interface Props {
 const Post = ({ post, preview }: Props) => {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
+    // TODO: 에러 페이지 만들기
     return <div>statusCode 404</div>;
   }
 
   return (
     <div>
+      {/* TODO: 헤더 만들기 */}
       <header>헤더</header>
       {router.isFallback ? (
+        // TODO: 로딩 페이지 만들기
         <div>Loading…</div>
       ) : (
         <article>
+          {/* TODO: 모든 포스트에 적용될 Head 만들기 */}
           <Head>
-            <title>{post.title} | 현수의 블로그</title>
+            <title>{post.title} | junghyeonsu.dev</title>
             <meta property="og:image" content={post.ogImage.url} />
           </Head>
+          {/* TODO: 포스트 맨 위의 내용 만들기 */}
           <div>
             post header
             <div>{post.title}</div>
@@ -34,6 +39,8 @@ const Post = ({ post, preview }: Props) => {
           <PostBody content={post.content} />
         </article>
       )}
+      {/* TODO: 푸터 만들기 */}
+      <footer>푸터</footer>
     </div>
   );
 };
