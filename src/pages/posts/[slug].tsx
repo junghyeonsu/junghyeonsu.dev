@@ -1,3 +1,4 @@
+import { GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getAllPosts, getPostBySlug } from '../../lib/api';
@@ -75,7 +76,7 @@ export async function getStaticProps({ params }: Params) {
   };
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts(['slug']);
 
   return {
@@ -88,4 +89,4 @@ export async function getStaticPaths() {
     }),
     fallback: false,
   };
-}
+};
