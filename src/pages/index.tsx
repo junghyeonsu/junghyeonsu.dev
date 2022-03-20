@@ -8,13 +8,7 @@ interface Props {
 }
 
 const IndexPage = ({ allPosts }: Props) => {
-  return (
-    <>
-      {allPosts.map(post => (
-        <PostCard post={post} />
-      ))}
-    </>
-  );
+  return allPosts.map(post => <PostCard post={post} />);
 };
 
 export default IndexPage;
