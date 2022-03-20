@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import PostType from '../types/post';
+import PostType from '../../types/post';
 
 interface Props {
   post: PostType;
