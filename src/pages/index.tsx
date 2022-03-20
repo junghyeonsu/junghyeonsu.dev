@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { GetStaticProps } from 'next';
 import { PostCard } from '../components';
 import { getAllPosts } from '../lib/api';
@@ -7,9 +8,18 @@ interface Props {
   allPosts: Post[];
 }
 
-const IndexPage = ({ allPosts }: Props) => {
-  return allPosts.map(post => <PostCard post={post} />);
-};
+const Contents = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
+const IndexPage = ({ allPosts }: Props) => (
+  <Contents>
+    {allPosts.map((post, index) => (
+      <PostCard key={`post${index}-${post.title}`} post={post} />
+    ))}
+  </Contents>
+);
 
 export default IndexPage;
 
