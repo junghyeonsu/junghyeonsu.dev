@@ -7,10 +7,10 @@ const Container = styled.header`
   border: 1px solid black;
   width: 100vw;
   height: 100px;
-  background-color: black;
+  background-color: ${props => props.theme.header.background};
 
   a {
-    color: white;
+    color: ${props => props.theme.header.text};
   }
 `;
 

@@ -1,29 +1,16 @@
-interface Theme {
-  light: ThemeMode;
-  dark: ThemeMode;
-}
+// TODO: css-variable로 변환하기
+import { Theme } from '@emotion/react';
 
-interface ThemeMode {
-  header: {
-    [style: string]: string;
-  };
-}
-
-const light: ThemeMode = {
+export const light: Theme = {
   header: {
     text: '#1f1f1f',
     background: '#ffffff',
   },
 };
 
-const dark: ThemeMode = {
+export const dark: Theme = {
   header: {
     text: '#ffffff',
     background: '#1f1f1f',
   },
-};
-
-export const theme: Theme = {
-  light: { ...light },
-  dark: { ...dark },
 };

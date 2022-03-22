@@ -7,8 +7,8 @@ const Container = styled.footer`
   border: 1px solid black;
   width: 100vw;
   height: 100px;
-  background-color: black;
-  color: white;
+  background-color: ${props => props.theme.header.background};
+  color: ${props => props.theme.header.text};
 `;
 
 const Footer = () => {
