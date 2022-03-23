@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
-import { ThemeProvider } from '@emotion/react';
 import { AppProps } from 'next/app';
 import { Layout } from '../components';
-import { globalStyles } from '../styles/GlobalStyles';
-import { dark, light } from '../styles/theme';
+import { reset } from '../styles/reset';
 
 function MyApp({ Component, pageProps }: AppProps) {
   // TODO: 다크모드 훅 만들기
   const [mode, setMode] = useState('light');
-  const currentTheme = mode === 'light' ? light : dark;
 
   useEffect(() => {
     console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -22,14 +19,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {globalStyles}
-      <ThemeProvider theme={currentTheme}>
-        <Layout>
-          <Component {...pageProps} />
-          {/* TODO: 버튼 지우기 */}
-          <button onClick={onClickButton}>darkmode</button>
-        </Layout>
-      </ThemeProvider>
+      {reset}
+
+      <Layout>
+        <Component {...pageProps} />
+        {/* TODO: 버튼 지우기 */}
+        <button onClick={onClickButton}>darkmode</button>
+      </Layout>
     </>
   );
 }

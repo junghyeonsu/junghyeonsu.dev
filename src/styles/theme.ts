@@ -1,16 +1,18 @@
-// TODO: css-variable로 변환하기
-import { Theme } from '@emotion/react';
+// TODO: velopert님 다크모드 보고 JS를 CSS로 고치는 것 해보기
+export interface Theme {
+  color: {
+    header: {
+      text: string;
+      background: string;
+    };
+  };
+}
 
-export const light: Theme = {
-  header: {
-    text: '#1f1f1f',
-    background: '#ffffff',
-  },
-};
-
-export const dark: Theme = {
-  header: {
-    text: '#ffffff',
-    background: '#1f1f1f',
+export const theme: Theme = {
+  color: {
+    header: {
+      text: 'var(--header-text-primary)',
+      background: 'var(--header-bg-primary)',
+    },
   },
 };
