@@ -2,7 +2,7 @@ import { css, Global } from '@emotion/react';
 
 // reset css
 // https://meyerweb.com/eric/tools/css/reset/
-export const globalStyles = (
+export const reset = (
   <Global
     styles={css`
       html,
