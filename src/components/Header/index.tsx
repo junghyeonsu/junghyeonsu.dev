@@ -1,16 +1,18 @@
 import styled from '@emotion/styled';
+import { themedPalette } from '../../styles/theme';
+import ThemeToggler from '../ThemeToggler';
 
 const Container = styled.header`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   border: 1px solid black;
   width: 100vw;
   height: 100px;
-  background-color: ${props => props.theme.header.background};
+  background-color: ${themedPalette.bg_page1};
 
   a {
-    color: ${props => props.theme.header.text};
+    color: ${themedPalette.text1};
   }
 `;
 
@@ -20,6 +22,7 @@ const Header = () => {
       <a target="_blank" href="https://hyeonsu-jung.vercel.app/">
         소개
       </a>
+      <ThemeToggler />
     </Container>
   );
 };

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { themedPalette } from '../../styles/theme';
 
 const Container = styled.footer`
   display: flex;
@@ -7,8 +8,8 @@ const Container = styled.footer`
   border: 1px solid black;
   width: 100vw;
   height: 100px;
-  background-color: ${props => props.theme.header.background};
-  color: ${props => props.theme.header.text};
+  background-color: ${themedPalette.bg_element1};
+  color: ${themedPalette.text1};
 `;
 
 const Footer = () => {

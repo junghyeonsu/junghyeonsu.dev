@@ -1,9 +1,0 @@
-body[data-theme='light'] {
-  ---header-text-primary: #1a1a1a;
-  ---header-bg-primary: #e6e6e6;
-}
-
-body[data-theme='dark'] {
-  --header-text-primary: #e6e6e6;
-  --header-bg-primary: #111111;
-}
