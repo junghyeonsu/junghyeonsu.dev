@@ -8,17 +8,14 @@ const Button = styled.button`
 `;
 
 const ThemeToggler = () => {
-  const [activeTheme, setActiveTheme] = useState('light');
+  const [activeTheme, setActiveTheme] = useState<string | undefined>(document.body.dataset.theme);
   const inactiveTheme = activeTheme === 'light' ? 'dark' : 'light';
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem('theme');
-    savedTheme && setActiveTheme(savedTheme);
-  }, []);
-
-  useEffect(() => {
-    document.body.dataset.theme = activeTheme;
-    window.localStorage.setItem('theme', activeTheme);
+    if (activeTheme) {
+      document.body.dataset.theme = activeTheme;
+      window.localStorage.setItem('theme', activeTheme);
+    }
   }, [activeTheme]);
 
   return (

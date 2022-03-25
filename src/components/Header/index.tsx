@@ -1,6 +1,10 @@
+import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import { themedPalette } from '../../styles/theme';
-import ThemeToggler from '../ThemeToggler';
+
+const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
+  ssr: false,
+});
 
 const Container = styled.header`
   display: flex;
