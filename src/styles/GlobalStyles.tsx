@@ -1,5 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { themes } from './theme';
+import { FONT } from '../constants';
 
 const reset = css`
   html,
@@ -135,9 +136,39 @@ export const globalStyles = (
     styles={css`
       ${reset}
 
+      @font-face {
+        font-family: ${FONT.NEXON_BOLD};
+        src: url('/assets/fonts/NEXON-Lv2-Gothic-Bold.ttf');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: ${FONT.NEXON_LIGHT};
+        src: url('/assets/fonts/NEXON-Lv2-Gothic-Light.ttf');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: ${FONT.NEXON_MEDIUM};
+        src: url('/assets/fonts/NEXON-Lv2-Gothic-Medium.ttf');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: ${FONT.NEXON_REGULAR};
+        src: url('/assets/fonts/NEXON-Lv2-Gothic.ttf');
+        font-weight: normal;
+        font-style: normal;
+      }
+
       body {
         ${themes.light}
         transition: 0.125s all ease-in;
+
+        font-family: ${FONT.NEXON_REGULAR};
       }
 
       @media (prefers-color-scheme: dark) {

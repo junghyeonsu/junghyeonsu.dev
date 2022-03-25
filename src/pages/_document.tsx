@@ -14,7 +14,12 @@ export default class MyDocument extends Document {
 
     return (
       <Html lang="ko">
-        <Head />
+        <Head>
+          <link href="/assets/fonts/NEXON-Lv2-Gothic-Bold.ttf" rel="stylesheet" />
+          <link href="/assets/fonts/NEXON-Lv2-Gothic-Light.ttf" rel="stylesheet" />
+          <link href="/assets/fonts/NEXON-Lv2-Gothic-Medium.ttf" rel="stylesheet" />
+          <link href="/assets/fonts/NEXON-Lv2-Gothic.ttf" rel="stylesheet" />
+        </Head>
         <body>
           <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
           <Main />
