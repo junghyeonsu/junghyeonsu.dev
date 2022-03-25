@@ -7,16 +7,23 @@ const Button = styled.button`
   height: 40px;
 `;
 
-// TODO: localstorage에 저장하고 불러오는 기능 해보기
 const ThemeToggler = () => {
-  const [theme, setTheme] = useState('light');
-  const nextTheme = theme === 'light' ? 'dark' : 'light';
+  const [activeTheme, setActiveTheme] = useState('light');
+  const inactiveTheme = activeTheme === 'light' ? 'dark' : 'light';
 
   useEffect(() => {
-    document.body.dataset.theme = theme;
-  }, [theme]);
+    const savedTheme = window.localStorage.getItem('theme');
+    savedTheme && setActiveTheme(savedTheme);
+  }, []);
 
-  return <Button onClick={() => setTheme(nextTheme)}>Change to {nextTheme} mode</Button>;
+  useEffect(() => {
+    document.body.dataset.theme = activeTheme;
+    window.localStorage.setItem('theme', activeTheme);
+  }, [activeTheme]);
+
+  return (
+    <Button onClick={() => setActiveTheme(inactiveTheme)}>Change to {inactiveTheme} mode</Button>
+  );
 };
 
 export default ThemeToggler;
