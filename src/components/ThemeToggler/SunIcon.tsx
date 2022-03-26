@@ -26,7 +26,7 @@ const SunIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       whileTap={whileTap}
       // Centers the rotation anchor point vertically & horizontally
-      style={{ color: 'white', originX: '50%', originY: '50%' }}
+      style={{ originX: '50%', originY: '50%' }}
     >
       <motion.circle
         cx="11.9998"

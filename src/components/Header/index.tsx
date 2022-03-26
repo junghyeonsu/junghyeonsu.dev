@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
-import { themedPalette } from '../../styles/theme';
 
 const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
   ssr: false,
@@ -13,11 +12,6 @@ const Container = styled.header`
   border: 1px solid black;
   width: 100vw;
   height: 100px;
-  background-color: ${themedPalette.bg_page1};
-
-  a {
-    color: ${themedPalette.text1};
-  }
 `;
 
 const Header = () => {
