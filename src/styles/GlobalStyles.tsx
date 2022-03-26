@@ -1,6 +1,5 @@
 import { css, Global } from '@emotion/react';
 import { themes } from './theme';
-import { FONT } from '../constants';
 
 const reset = css`
   html,
@@ -137,8 +136,8 @@ export const globalStyles = (
       ${reset}
 
       body {
-        ${themes.light}
         transition: 0.125s all ease-in;
+        ${themes.light}
       }
 
       @media (prefers-color-scheme: dark) {

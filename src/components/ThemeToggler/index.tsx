@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Button, Text } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { IconButton, IconButtonProps } from '@chakra-ui/react';
+import MoonIcon from './MoonIcon';
+import SunIcon from './SunIcon';
 
-// const Button = styled.button`
-//   margin: 10px;
-//   width: 100px;
-//   height: 40px;
-// `;
+type ThemeModeTogglerProps = Omit<IconButtonProps, 'aria-label'>;
 
-const ThemeToggler = () => {
+const ThemeToggler: React.FC<ThemeModeTogglerProps> = () => {
   const [activeTheme, setActiveTheme] = useState<string | undefined>(document.body.dataset.theme);
   const inactiveTheme = activeTheme === 'light' ? 'dark' : 'light';
+  const SwitchIcon = activeTheme === 'light' ? MoonIcon : SunIcon;
 
   useEffect(() => {
     if (activeTheme) {
@@ -20,10 +18,16 @@ const ThemeToggler = () => {
   }, [activeTheme]);
 
   return (
-    <Button onClick={() => setActiveTheme(inactiveTheme)}>
-      Change to {inactiveTheme} 모드
-      <Text>모드</Text>
-    </Button>
+    <IconButton
+      fontSize="4xl"
+      variant="ghost"
+      onClick={() => setActiveTheme(inactiveTheme)}
+      icon={<SwitchIcon />}
+      _hover={{ bg: 'transparent' }}
+      _active={{ bg: 'transparent' }}
+      style={{ boxShadow: 'none' }}
+      aria-label="darkmode toggle button"
+    />
   );
 };
 

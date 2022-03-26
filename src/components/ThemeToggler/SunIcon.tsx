@@ -1,17 +1,43 @@
 // https://medium.com/next-generation-web/create-a-dark-mode-toggle-micro-interaction-like-a-pro-279305e9c2
 import React from 'react';
+import { motion } from 'framer-motion';
+import { FRAMER_TRANSITION } from '../../constants';
 
-export const SunIcon = () => {
+const SunIcon = () => {
+  const raysVariants = {
+    initial: { rotate: 45 },
+    animate: { rotate: 0, FRAMER_TRANSITION },
+  };
+
+  const coreVariants = {
+    initial: { scale: 1.5 },
+    animate: { scale: 1, FRAMER_TRANSITION },
+  };
+
+  const whileTap = { scale: 0.95, rotate: 15 };
+
   return (
-    <svg
+    <motion.svg
+      key="sun"
       width="1em"
       height="1em"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      whileTap={whileTap}
+      // Centers the rotation anchor point vertically & horizontally
+      style={{ color: 'white', originX: '50%', originY: '50%' }}
     >
-      <circle cx="11.9998" cy="11.9998" r="5.75375" fill="currentColor" />
-      <g>
+      <motion.circle
+        cx="11.9998"
+        cy="11.9998"
+        r="5.75375"
+        fill="currentColor"
+        initial="initial"
+        animate="animate"
+        variants={coreVariants}
+      />
+      <motion.g initial="initial" animate="animate" variants={raysVariants}>
         <circle
           cx="3.08982"
           cy="6.85502"
@@ -42,7 +68,9 @@ export const SunIcon = () => {
           fill="currentColor"
         />
         <circle cx="12" cy="1.71143" r="1.71143" fill="currentColor" />
-      </g>
-    </svg>
+      </motion.g>
+    </motion.svg>
   );
 };
+
+export default SunIcon;
