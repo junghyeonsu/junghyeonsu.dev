@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { Button, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-const Button = styled.button`
-  margin: 10px;
-  width: 100px;
-  height: 40px;
-`;
+// const Button = styled.button`
+//   margin: 10px;
+//   width: 100px;
+//   height: 40px;
+// `;
 
 const ThemeToggler = () => {
   const [activeTheme, setActiveTheme] = useState<string | undefined>(document.body.dataset.theme);
@@ -19,7 +20,10 @@ const ThemeToggler = () => {
   }, [activeTheme]);
 
   return (
-    <Button onClick={() => setActiveTheme(inactiveTheme)}>Change to {inactiveTheme} mode</Button>
+    <Button onClick={() => setActiveTheme(inactiveTheme)}>
+      Change to {inactiveTheme} 모드
+      <Text>모드</Text>
+    </Button>
   );
 };
 

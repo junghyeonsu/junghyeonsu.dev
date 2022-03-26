@@ -7,8 +7,10 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
+    "@chakra-ui/react": "^1.8.6",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^6",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "react": "^17.0.2",
