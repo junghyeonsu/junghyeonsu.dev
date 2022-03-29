@@ -27,10 +27,12 @@ const Post = ({ post, preview }: Props) => {
         <div>Loading…</div>
       ) : (
         <article>
-          {/* TODO: 모든 포스트에 적용될 Head 만들기 */}
           <Head>
             <title>{post.title} | junghyeonsu.dev</title>
-            <meta property="og:image" content={post.ogImage.url} />
+            <meta property="og:image" content={post.coverImage} />
+            <meta property="og:title" content={post.title} />
+            <meta property="og:description" content={post.description} />
+            <meta property="og:type" content="website" />
           </Head>
           {/* TODO: 포스트 맨 위의 내용 만들기 */}
           <div>
