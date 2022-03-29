@@ -16,3 +16,5 @@ Tristique senectus et netus et malesuada fames ac turpis. Ridiculous mus mauris 
 ```typescript
 console.log('hi');
 ```
+
+![hi](/assets/blog/first-post/cover.jpeg)
