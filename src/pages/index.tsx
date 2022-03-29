@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { GetStaticProps } from 'next';
 import { PostCard } from '../components';
+import { CONTENT_ELEMENTS } from '../constants';
 import { getAllPosts } from '../lib/api';
 import Post from '../types/post';
 
@@ -24,7 +25,7 @@ const IndexPage = ({ allPosts }: Props) => (
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPosts = getAllPosts(['title', 'date', 'slug', 'author', 'coverImage', 'excerpt']);
+  const allPosts = getAllPosts(CONTENT_ELEMENTS.POST_CARD);
 
   return {
     props: { allPosts },

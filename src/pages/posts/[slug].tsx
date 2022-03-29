@@ -5,6 +5,7 @@ import { getAllPosts, getPostBySlug } from '../../lib/api';
 import PostBody from '../../components/PostBody';
 import markdownToHtml from '../../lib/markdownToHtml';
 import PostType from '../../types/post';
+import { CONTENT_ELEMENTS } from '../../constants';
 
 interface Props {
   post: PostType;
@@ -57,15 +58,7 @@ interface Params {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'author',
-    'content',
-    'ogImage',
-    'coverImage',
-  ]);
+  const post = getPostBySlug(params.slug, CONTENT_ELEMENTS.POST_WITH_CONTENT);
   const content = await markdownToHtml(post.content || '');
 
   return {
@@ -79,7 +72,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getAllPosts(['slug']);
+  const posts = getAllPosts(CONTENT_ELEMENTS.POST_PATHS);
 
   return {
     paths: posts.map(post => {

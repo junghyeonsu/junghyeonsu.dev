@@ -12,7 +12,7 @@ const Container = styled.article`
 `;
 
 const PostCard = ({ post }: Props) => {
-  const { slug, title, date, author, coverImage } = post;
+  const { slug, title, date, coverImage, description } = post;
   return (
     <Container>
       <Link as={`/posts/${slug}`} href="/posts/[slug]">
@@ -20,7 +20,7 @@ const PostCard = ({ post }: Props) => {
           <img width="100px" src={coverImage} alt="cover image" />
           <h1>{title}</h1>
           <p>{date}</p>
-          <p>{author.name}</p>
+          <p>{description}</p>
         </div>
       </Link>
     </Container>
