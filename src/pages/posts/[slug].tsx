@@ -1,7 +1,7 @@
 import { GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { getAllPosts, getPostBySlug } from '../../lib/api';
+import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import PostBody from '../../components/PostBody';
 import markdownToHtml from '../../lib/markdownToHtml';
 import PostType from '../../types/post';
@@ -58,7 +58,11 @@ interface Params {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, CONTENT_ELEMENTS.POST_WITH_CONTENT);
+  console.log('params', params);
+
+  // TODO: 왜 안받아오지?..
+  const path = getPathBySlug(params.slug);
+  const post = getPostBySlug({ slug: params.slug, path }, CONTENT_ELEMENTS.POST_WITH_CONTENT);
   const content = await markdownToHtml(post.content || '');
 
   return {

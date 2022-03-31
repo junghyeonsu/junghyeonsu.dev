@@ -3,6 +3,7 @@ title: '현수의 첫 포스트입니다.'
 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
 coverImage: '/assets/blog/first-post/cover.jpeg'
 date: '2022/03/17'
+path: 'posts'
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
@@ -16,3 +17,5 @@ Tristique senectus et netus et malesuada fames ac turpis. Ridiculous mus mauris 
 ```typescript
 console.log('hi');
 ```
+
+![hi](/assets/blog/first-post/cover.jpeg)
