@@ -1,5 +1,6 @@
 type PostType = {
   slug: string;
+  path: string;
   title: string;
   date: string;
   coverImage: string;
