@@ -1,27 +1,31 @@
+import { Box, useColorMode } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
-import styled from '@emotion/styled';
 
 const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
   ssr: false,
 });
 
-const Container = styled.header`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border: 1px solid black;
-  width: 100vw;
-  height: 100px;
-`;
-
 const Header = () => {
+  const { colorMode } = useColorMode();
   return (
-    <Container>
+    <Box
+      as="header"
+      position="sticky"
+      top="0"
+      display="flex"
+      zIndex="5"
+      justifyContent="space-evenly"
+      alignItems="center"
+      width="100vw"
+      height="70px"
+      shadow="sm"
+      backgroundColor={colorMode === 'dark' ? '#202125' : 'gray.50'}
+    >
       <a target="_blank" href="https://hyeonsu-jung.vercel.app/">
         소개
       </a>
       <ThemeToggler />
-    </Container>
+    </Box>
   );
 };
 
