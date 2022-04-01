@@ -1,9 +1,12 @@
 import styled from '@emotion/styled';
 import { GetStaticProps } from 'next';
+
 import { PostCard } from '../components';
+
+import type Post from '../types/post';
+
 import { CONTENT_ELEMENTS } from '../constants';
 import { getAllPosts } from '../lib/api';
-import Post from '../types/post';
 
 interface Props {
   allPosts: Post[];
