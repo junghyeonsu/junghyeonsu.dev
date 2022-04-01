@@ -2,8 +2,6 @@ import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
-const postsDirectory = join(process.cwd(), '_posts/posts');
-const retrospectsDirectory = join(process.cwd(), '_posts/retrospects');
 const paths = ['posts', 'retrospects'];
 
 interface PostSlugWithPath {
@@ -38,8 +36,6 @@ export function getPathBySlug(slug: string): string {
 }
 
 export function getPostBySlug(slugWithPath: PostSlugWithPath, fields: string[] = []) {
-  console.log('slugWithPath', slugWithPath);
-
   const realSlug = slugWithPath.slug.replace(/\.md$/, '');
   const directory = join(process.cwd(), `_posts/${slugWithPath.path}`);
   const fullPath = join(directory, `${realSlug}.md`);
@@ -75,14 +71,10 @@ export function getPostBySlug(slugWithPath: PostSlugWithPath, fields: string[] =
 export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
 
-  console.log('slugs', slugs);
-
   const posts = slugs
     .map(slugWithPath => getPostBySlug(slugWithPath, fields))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-
-  console.log('posts', posts);
 
   return posts;
 }
