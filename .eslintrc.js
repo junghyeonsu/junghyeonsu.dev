@@ -1,11 +1,23 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: './tsconfig.json',
-  },
   env: {
+    browser: true,
+    es2021: true,
     node: true,
   },
-  // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
-  extends: ['plugin:prettier/recommended', 'prettier/@typescript-eslint'],
+  extends: [
+    'airbnb',
+    'prettier/@typescript-eslint',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['react', '@typescript-eslint'],
+  rules: {},
 };
