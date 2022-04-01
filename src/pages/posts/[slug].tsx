@@ -21,7 +21,7 @@ const Section = chakra(Box, {
     display: 'flex',
     justifyContent: 'center',
     width: '100vw',
-    minHeight: 'calc(100vh - 200px)', // TODO: 바꿔야함 100vh - (2 * header)
+    minHeight: 'calc(100vh - 170px)', // TODO: 바꿔야함 100vh - (2 * header)
   },
 });
 
