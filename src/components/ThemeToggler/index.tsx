@@ -17,8 +17,8 @@ const ThemeToggler: React.FC<ThemeModeTogglerProps> = () => {
   return (
     <>
       <IconButton
-        fontSize="4xl"
-        variant="ghost"
+        fontSize="2xl"
+        variant="solid"
         onClick={() => toggleColorMode()}
         icon={<SwitchIcon />}
         _hover={{ bg: 'transparent' }}
