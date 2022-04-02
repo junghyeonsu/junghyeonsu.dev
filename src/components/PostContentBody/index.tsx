@@ -17,15 +17,25 @@ const Content = styled.article`
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   h2 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   p {
     font-size: 16px;
+    margin-top: 30px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #0a91ff;
+
+    :hover {
+      color: #0a91ffa6;
+    }
   }
 `;
 
