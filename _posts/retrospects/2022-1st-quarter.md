@@ -38,6 +38,8 @@ path: 'retrospects'
 정말 재미있었고 색다른 경험이었습니다.
 상위 10%에도 들어서 좋았습니다.
 
+[다른 색깔 찾기 게임](https://find-different-color.vercel.app/)
+
 ![넘블 상위 10%](/assets/blog/2022-1st-quarter-retrospect/3.png)
 
 # 책 읽기
