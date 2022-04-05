@@ -2,7 +2,7 @@ import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
-const paths = ['posts', 'retrospects'];
+const paths = ['retrospects'];
 
 interface PostSlugWithPath {
   slug: string;
