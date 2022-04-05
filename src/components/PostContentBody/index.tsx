@@ -45,6 +45,8 @@ const Content = styled.article<ContentProps>`
     }
 
     code {
+      font-family: 'Noto Sans KR, sans-serif';
+      font-weight: 700;
       background: ${props => (props.colorMode === 'dark' ? '' : 'var(--chakra-colors-gray-100)')};
       border-radius: ${props =>
         props.colorMode === 'dark' ? 'var(--chakra-radii-md)' : 'var(--chakra-radii-md)'};

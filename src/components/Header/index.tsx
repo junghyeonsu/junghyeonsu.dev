@@ -1,5 +1,7 @@
-import { Box, useColorMode } from '@chakra-ui/react';
+import { Box, Spacer, useColorMode } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
+import Introduction from './Introduction';
+import Logo from './Logo';
 
 const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
   ssr: false,
@@ -13,17 +15,19 @@ const Header = () => {
       position="sticky"
       top="0"
       display="flex"
+      paddingLeft={5}
+      paddingRight={10}
+      columnGap={5}
       zIndex="5"
-      justifyContent="space-evenly"
       alignItems="center"
       width="100vw"
       height="70px"
-      shadow="sm"
+      shadow="md"
       backgroundColor={colorMode === 'dark' ? '#202125' : 'gray.50'}
     >
-      <a target="_blank" href="https://hyeonsu-jung.vercel.app/">
-        소개
-      </a>
+      <Logo />
+      <Spacer />
+      <Introduction />
       <ThemeToggler />
     </Box>
   );
