@@ -1,29 +1,45 @@
-import styled from '@emotion/styled';
+import { Box, Heading, Text, Badge } from '@chakra-ui/react';
+import Image from 'next/image';
 import Link from 'next/link';
-import PostType from '../../types/post';
+
+import type PostType from '../../types/post';
+
+import useBreakPoint from '../../hooks/useBreakPoint';
 
 interface Props {
   post: PostType;
 }
 
-const Container = styled.article`
-  border: 1px solid black;
-  width: 300px;
-`;
-
 const PostCard = ({ post }: Props) => {
   const { slug, title, date, coverImage, description } = post;
+  const isLargerThan900 = useBreakPoint();
+
   return (
-    <Container>
-      <Link as={`/posts/${slug}`} href="/posts/[slug]">
-        <div>
-          <img width="100px" src={coverImage} alt="cover image" />
-          <h1>{title}</h1>
-          <p>{date}</p>
-          <p>{description}</p>
-        </div>
-      </Link>
-    </Container>
+    <Link as={`/posts/${slug}`} href="/posts/[slug]">
+      <Box
+        margin="10px"
+        as="article"
+        width={isLargerThan900 ? '400px' : '80vw'}
+        boxShadow="sm"
+        _hover={{ boxShadow: 'md', cursor: 'pointer' }}
+        borderRadius={2}
+      >
+        <Box display="block" as="span" width={isLargerThan900 ? '400px' : '80vw'} borderRadius={2}>
+          <Image src={coverImage} alt="cover image" width={400} height={240} layout="responsive" />
+        </Box>
+        <Box padding={2}>
+          <Badge colorScheme="blue" fontSize={14}>
+            {date}
+          </Badge>
+          <Heading marginTop={2} fontSize={24}>
+            {title}
+          </Heading>
+          <Text fontSize={16} color={'gray.600'}>
+            {description}
+          </Text>
+        </Box>
+      </Box>
+    </Link>
   );
 };
 
