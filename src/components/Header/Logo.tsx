@@ -1,10 +1,9 @@
-import { Button, useColorMode, useMediaQuery } from '@chakra-ui/react';
+import { Button, useColorMode } from '@chakra-ui/react';
 
 import Link from 'next/link';
 
 const Logo = () => {
   const { colorMode } = useColorMode();
-  const [isLargerThan600] = useMediaQuery('(min-width: 600px)');
   return (
     <Link href="/">
       <Button
@@ -15,7 +14,7 @@ const Logo = () => {
         _active={{ bg: 'transparent' }}
         style={{ boxShadow: 'none' }}
       >
-        {isLargerThan600 ? 'junghyeonsu.dev' : 'hyeonsu'}
+        junghyeonsu.dev
       </Button>
     </Link>
   );
