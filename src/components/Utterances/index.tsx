@@ -3,8 +3,9 @@ import { useColorMode } from '@chakra-ui/react';
 
 const UTTERANC_SRC = 'https://utteranc.es';
 const DARK_THEME = 'photon-dark';
-const LIGHT_THEME = 'boxy-light';
+const LIGHT_THEME = 'github-light';
 const UTTERANCES_SELECTOR = 'iframe.utterances-frame';
+const REPOSITORY = 'junghyeonsu.dev.comment';
 
 const Utterances: React.FC = () => {
   const { colorMode } = useColorMode();
@@ -16,7 +17,7 @@ const Utterances: React.FC = () => {
       const comment = document.createElement('script');
       const attributes = {
         src: `${UTTERANC_SRC}/client.js`,
-        repo: 'junghyeonsu/junghyeonsu.dev',
+        repo: `junghyeonsu/${REPOSITORY}`,
         'issue-term': 'title',
         label: 'comment',
         theme,
