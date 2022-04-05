@@ -11,6 +11,7 @@ const Header = () => {
   const { colorMode } = useColorMode();
   return (
     <Box
+      overflow="hidden"
       as="header"
       position="sticky"
       top="0"
@@ -20,7 +21,7 @@ const Header = () => {
       columnGap={5}
       zIndex="5"
       alignItems="center"
-      width="100vw"
+      width="100%"
       height="70px"
       shadow="md"
       backgroundColor={colorMode === 'dark' ? '#202125' : 'gray.50'}
