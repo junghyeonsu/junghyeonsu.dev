@@ -1,10 +1,18 @@
+import { ColorMode, useColorMode } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-interface Props {
+interface BodyProps {
   content: string;
 }
 
-const Content = styled.article`
+interface ContentProps {
+  colorMode: ColorMode;
+}
+
+const Content = styled.article<ContentProps>`
+  position: relative;
+  margin-bottom: 100px;
+
   h1,
   h2,
   h3,
@@ -17,16 +25,35 @@ const Content = styled.article`
   }
 
   h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 23px;
   }
 
   p {
-    font-size: 16px;
-    margin-top: 30px;
+    font-size: 18px;
+    margin-top: 28px;
+
+    img {
+      margin-bottom: 20px;
+    }
+  }
+
+  blockquote {
+    background-color: ${props => props.colorMode === 'dark' ? 'rgba(251, 211, 141, 0.16)': 'rgb(254, 235, 200)'};
+    border-inline-start-width: 4px;
+    border-inline-start-color: ${props => props.colorMode === 'dark' ? 'var(--chakra-colors-orange-200)' : 'var(--chakra-colors-orange-500)'};
+    border-radius: 5px;
+
+    p {
+      padding: 10px;
+    }
   }
 
   a {
@@ -37,10 +64,17 @@ const Content = styled.article`
       color: #0a91ffa6;
     }
   }
+
+  ul {
+    position: relative;
+    left: 10px;
+    padding: 10px;
+  }
 `;
 
-const PostContentBody = ({ content }: Props) => {
-  return <Content dangerouslySetInnerHTML={{ __html: content }} />;
+const PostContentBody = ({ content }: BodyProps) => {
+  const { colorMode } = useColorMode();
+  return <Content colorMode={colorMode} dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
 export default PostContentBody;
