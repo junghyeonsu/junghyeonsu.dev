@@ -43,12 +43,24 @@ const Content = styled.article<ContentProps>`
     img {
       margin-bottom: 20px;
     }
+
+    code {
+      background: ${props => (props.colorMode === 'dark' ? '' : 'var(--chakra-colors-gray-100)')};
+      border-radius: ${props =>
+        props.colorMode === 'dark' ? 'var(--chakra-radii-md)' : 'var(--chakra-radii-md)'};
+      border-width: 1px 1px 3px;
+      padding: 2px;
+    }
   }
 
   blockquote {
-    background-color: ${props => props.colorMode === 'dark' ? 'rgba(251, 211, 141, 0.16)': 'rgb(254, 235, 200)'};
+    background-color: ${props =>
+      props.colorMode === 'dark' ? 'rgba(251, 211, 141, 0.16)' : 'rgb(254, 235, 200)'};
     border-inline-start-width: 4px;
-    border-inline-start-color: ${props => props.colorMode === 'dark' ? 'var(--chakra-colors-orange-200)' : 'var(--chakra-colors-orange-500)'};
+    border-inline-start-color: ${props =>
+      props.colorMode === 'dark'
+        ? 'var(--chakra-colors-orange-200)'
+        : 'var(--chakra-colors-orange-500)'};
     border-radius: 5px;
 
     p {
