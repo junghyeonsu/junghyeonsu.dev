@@ -10,6 +10,7 @@ const theme = extendTheme({
   styles: {
     global: (props: { colorMode: 'dark' | 'light' }) => ({
       'html, body': {
+        fontFamily: 'Noto Sans KR, sans-serif',
         backgroundColor: props.colorMode === 'dark' ? '#202125' : 'gray.50',
       },
     }),

@@ -37,7 +37,7 @@ const Content = styled.article<ContentProps>`
   }
 
   p {
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 28px;
 
     img {
