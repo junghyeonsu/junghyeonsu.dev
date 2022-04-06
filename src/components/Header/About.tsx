@@ -12,7 +12,7 @@ const Introduction = () => {
         _active={{ bg: 'transparent' }}
         style={{ boxShadow: 'none' }}
       >
-        intro
+        About
       </Button>
     </a>
   );

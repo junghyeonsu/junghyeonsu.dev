@@ -1,6 +1,6 @@
 import { Box, Spacer, useColorMode } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
-import Introduction from './Introduction';
+import Introduction from './About';
 import Logo from './Logo';
 
 const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
