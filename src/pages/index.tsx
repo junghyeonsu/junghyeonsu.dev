@@ -7,6 +7,7 @@ import type Post from '../types/post';
 
 import { CONTENT_ELEMENTS } from '../constants';
 import { getAllPosts } from '../lib/api';
+import { generateRssFeed } from '../lib/generateRssFeed';
 import useBreakPoint from '../hooks/useBreakPoint';
 
 interface Props {
@@ -37,6 +38,7 @@ const IndexPage = ({ allPosts }: Props) => {
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
+  generateRssFeed();
   const allPosts = getAllPosts(CONTENT_ELEMENTS.POST_CARD);
 
   return {
