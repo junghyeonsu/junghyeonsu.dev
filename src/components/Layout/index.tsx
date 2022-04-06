@@ -21,7 +21,7 @@ export default function Layout({ children }: Props) {
     <>
       <Head>
         {favicon}
-        <title>정현수</title>
+        <title>정현수 기술 블로그</title>
       </Head>
       <Header />
       <main>{children}</main>

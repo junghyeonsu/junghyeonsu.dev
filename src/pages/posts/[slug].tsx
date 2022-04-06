@@ -44,7 +44,7 @@ const Post = ({ post, preview }: Props) => {
       ) : (
         <Section as="section">
           <Head>
-            <title>{post.title} | 정현수</title>
+            <title>{post.title} | 정현수 기술 블로그</title>
             <meta property="og:image" content={post.coverImage} />
             <meta property="og:title" content={post.title} />
             <meta property="og:description" content={post.description} />
