@@ -28,7 +28,7 @@ export const generateRssFeed = () => {
     author,
   });
   posts.forEach(post => {
-    const url = `${siteURL}/blog/${post.slug}`;
+    const url = `${siteURL}/${post.path}/${post.slug}`;
     feed.addItem({
       title: post.title,
       id: url,
@@ -41,5 +41,5 @@ export const generateRssFeed = () => {
     });
   });
 
-  fs.writeFileSync('/rss.xml', feed.rss2());
+  fs.writeFileSync('public/rss.xml', feed.rss2());
 };
