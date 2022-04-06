@@ -1,6 +1,6 @@
 import { GetStaticPaths } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { Box, chakra } from '@chakra-ui/react';
 
@@ -43,9 +43,8 @@ const Post = ({ post, preview }: Props) => {
         <div>Loading…</div> // TODO: 로딩 페이지 만들기
       ) : (
         <Section as="section">
-          {/* TODO: NEXESCRIPT 컴포넌트로 묶어보기 */}
           <Head>
-            <title>{post.title} | junghyeonsu.dev</title>
+            <title>{post.title} | 정현수</title>
             <meta property="og:image" content={post.coverImage} />
             <meta property="og:title" content={post.title} />
             <meta property="og:description" content={post.description} />

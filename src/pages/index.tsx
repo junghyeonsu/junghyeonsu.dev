@@ -39,7 +39,6 @@ export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPosts = getAllPosts(CONTENT_ELEMENTS.POST_CARD);
-
   generateRssFeed(allPosts);
 
   return {
