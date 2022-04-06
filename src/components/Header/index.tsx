@@ -1,7 +1,8 @@
 import { Box, Spacer, useColorMode } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
-import Introduction from './About';
+import About from './About';
 import Logo from './Logo';
+import RSS from '../RSS';
 
 const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
   ssr: false,
@@ -18,7 +19,7 @@ const Header = () => {
       display="flex"
       paddingLeft={5}
       paddingRight={10}
-      columnGap={5}
+      columnGap={4}
       zIndex="5"
       alignItems="center"
       width="100%"
@@ -28,7 +29,8 @@ const Header = () => {
     >
       <Logo />
       <Spacer />
-      <Introduction />
+      <About />
+      <RSS />
       <ThemeToggler />
     </Box>
   );

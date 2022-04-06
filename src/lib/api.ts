@@ -11,6 +11,10 @@ interface PostSlugWithPath {
   path: string;
 }
 
+export interface Items {
+  [key: string]: string;
+}
+
 export function getPostSlugs() {
   const postSlugsWithPath: PostSlugWithPath[] = [];
   paths.forEach(path => {
@@ -42,10 +46,6 @@ export function getPostBySlug(slugWithPath: PostSlugWithPath, fields: string[] =
   const fullPath = join(directory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
-
-  interface Items {
-    [key: string]: string;
-  }
 
   const items: Items = {};
 

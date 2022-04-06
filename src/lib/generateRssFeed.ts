@@ -1,22 +1,22 @@
 import fs from 'fs';
 import { Feed } from 'feed';
 
-import { getAllPosts } from './api';
+import type PostType from '../types/post';
+import type { Items } from './api';
 
-export const generateRssFeed = () => {
-  const posts = getAllPosts();
-  const siteURL = process.env.SITE_URL;
+export const generateRssFeed = (posts: PostType[] | Items[]) => {
+  const siteURL = 'https://junghyeonsu-dev.vercel.app';
   const date = new Date();
   const author = {
     name: '정현수',
     email: 'jung660317@naver.com',
-    link: 'https://junghyeonsu-dev.vercel.app/',
+    link: 'https://junghyeonsu-dev.vercel.app',
   };
   const feed = new Feed({
     title: '정현수의 기술 블로그',
     description: '주니어 프론트엔드 개발자 정현수의 기술 블로그입니다.',
     language: 'ko',
-    id: `${siteURL}`,
+    id: siteURL,
     link: siteURL,
     favicon: `${siteURL}/favicon.png`,
     copyright: `Copyright ${date.getFullYear()}. junghyeonsu all rights reserved.`,
@@ -29,6 +29,7 @@ export const generateRssFeed = () => {
   });
   posts.forEach(post => {
     const url = `${siteURL}/posts/${post.slug}`;
+
     feed.addItem({
       title: post.title,
       id: url,
