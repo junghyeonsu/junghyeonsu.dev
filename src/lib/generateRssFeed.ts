@@ -41,5 +41,5 @@ export const generateRssFeed = () => {
     });
   });
 
-  fs.writeFileSync('../../public/rss.xml', feed.rss2());
+  fs.writeFileSync('/rss.xml', feed.rss2());
 };
