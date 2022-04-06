@@ -5,7 +5,7 @@ import { getAllPosts } from './api';
 
 export const generateRssFeed = () => {
   const posts = getAllPosts();
-  const siteURL = 'https://junghyeonsu-dev.vercel.app/';
+  const siteURL = process.env.SITE_URL;
   const date = new Date();
   const author = {
     name: '정현수',
@@ -16,16 +16,14 @@ export const generateRssFeed = () => {
     title: '정현수의 기술 블로그',
     description: '주니어 프론트엔드 개발자 정현수의 기술 블로그입니다.',
     language: 'ko',
-    id: siteURL,
+    id: `${siteURL}`,
     link: siteURL,
     favicon: `${siteURL}/favicon.png`,
     copyright: `Copyright ${date.getFullYear()}. junghyeonsu all rights reserved.`,
     updated: date,
     generator: 'Feed for Node.js',
     feedLinks: {
-      rss2: `${siteURL}/rss/feed.xml`,
-      json: `${siteURL}/rss/feed.json`,
-      atom: `${siteURL}/rss/atom.xml`,
+      rss2: `${siteURL}/rss.xml`,
     },
     author,
   });
@@ -43,8 +41,5 @@ export const generateRssFeed = () => {
     });
   });
 
-  fs.mkdirSync('../../public/rss', { recursive: true });
-  fs.writeFileSync('../../public/rss/feed.xml', feed.rss2());
-  fs.writeFileSync('../../public/rss/atom.xml', feed.atom1());
-  fs.writeFileSync('../../public/rss/feed.json', feed.json1());
+  fs.writeFileSync('../../public/rss.xml', feed.rss2());
 };
