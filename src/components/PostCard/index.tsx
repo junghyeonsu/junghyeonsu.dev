@@ -17,14 +17,14 @@ const PostCard = ({ post }: Props) => {
   return (
     <Link as={`/posts/${slug}`} href="/posts/[slug]">
       <Box
-        margin="10px"
+        padding="10px"
         as="article"
-        width={isLargerThan900 ? '400px' : '80vw'}
+        width={isLargerThan900 ? '400px' : '100%'}
         boxShadow="sm"
         _hover={{ boxShadow: 'md', cursor: 'pointer' }}
         borderRadius={2}
       >
-        <Box display="block" as="span" width={isLargerThan900 ? '400px' : '80vw'} borderRadius={2}>
+        <Box display="block" as="span" width={isLargerThan900 ? '400px' : '100%'} borderRadius={2}>
           <Image src={coverImage} alt="cover image" width={400} height={240} layout="responsive" />
         </Box>
         <Box padding={2}>
