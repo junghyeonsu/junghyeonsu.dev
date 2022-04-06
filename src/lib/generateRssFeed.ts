@@ -28,7 +28,7 @@ export const generateRssFeed = () => {
     author,
   });
   posts.forEach(post => {
-    const url = `${siteURL}/${post.path}/${post.slug}`;
+    const url = `${siteURL}/posts/${post.slug}`;
     feed.addItem({
       title: post.title,
       id: url,
