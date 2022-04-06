@@ -2,6 +2,8 @@ import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
+// TODO: 자동화 할 수는 없을까? : 폴더 읽는 라이브러리 있었는데 그거 잘 사용하면 되지 않을까?
+// NOTE: 블로그 포스팅 폴더 생길 때 마다 추가해줘야 함.
 const paths = ['retrospects'];
 
 interface PostSlugWithPath {
@@ -18,7 +20,6 @@ export function getPostSlugs() {
     });
   });
   return postSlugsWithPath;
-  // return fs.readdirSync(postsDirectory);
 }
 
 export function getPathBySlug(slug: string): string {
