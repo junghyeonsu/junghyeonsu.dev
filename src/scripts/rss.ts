@@ -2,7 +2,7 @@ import fs from 'fs';
 import { Feed } from 'feed';
 
 import type PostType from '../types/post';
-import type { Items } from './api';
+import type { Items } from '../lib/api';
 
 export const generateRssFeed = (posts: PostType[] | Items[]) => {
   const siteURL = 'https://junghyeonsu-dev.vercel.app';
