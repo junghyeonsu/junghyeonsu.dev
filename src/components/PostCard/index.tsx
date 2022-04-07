@@ -24,7 +24,7 @@ const PostCard = ({ post }: Props) => {
         _hover={{ boxShadow: 'md', cursor: 'pointer' }}
         borderRadius={2}
       >
-        <Box display="block" as="span" width={isLargerThan900 ? '400px' : '100%'} borderRadius={2}>
+        <Box display="block" as="span" width="100%" borderRadius={2}>
           <Image src={coverImage} alt="cover image" width={400} height={240} layout="responsive" />
         </Box>
         <Box padding={2}>
