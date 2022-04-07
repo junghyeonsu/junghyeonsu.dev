@@ -20,28 +20,20 @@ const IndexPage = ({ allPosts }: Props) => {
   const isLargerThan900 = useBreakPoint();
 
   return (
-    <>
-      <Head>
-        <meta property="og:image" content="/profile.jpeg" />
-        <meta property="og:title" content="정현수 기술 블로그" />
-        <meta property="og:description" content="정현수의 기술 블로그입니다." />
-        <meta property="og:type" content="website" />
-      </Head>
-      <Box width="100%" display="flex" justifyContent="center">
-        <Box
-          as="section"
-          marginTop="50px"
-          marginBottom="50px"
-          width={isLargerThan900 ? '840px' : '80vw'}
-          display="flex"
-          flexWrap="wrap"
-        >
-          {allPosts.map((post, index) => (
-            <PostCard key={`post${index}-${post.title}`} post={post} />
-          ))}
-        </Box>
+    <Box width="100%" display="flex" justifyContent="center">
+      <Box
+        as="section"
+        marginTop="50px"
+        marginBottom="50px"
+        width={isLargerThan900 ? '840px' : '80vw'}
+        display="flex"
+        flexWrap="wrap"
+      >
+        {allPosts.map((post, index) => (
+          <PostCard key={`post${index}-${post.title}`} post={post} />
+        ))}
       </Box>
-    </>
+    </Box>
   );
 };
 

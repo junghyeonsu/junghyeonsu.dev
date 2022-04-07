@@ -6,3 +6,4 @@ Allow : /
 
 User-agent: Yeti
 Allow: /
+Sitemap: https://junghyeonsu-dev.vercel.app/sitemap.xml
