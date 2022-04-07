@@ -8,7 +8,8 @@ import type Post from '../types/post';
 
 import { CONTENT_ELEMENTS } from '../constants';
 import { getAllPosts } from '../lib/api';
-import { generateRssFeed } from '../lib/generateRssFeed';
+import { generateRssFeed } from '../scripts/rss';
+import { generateSiteMap } from '../scripts/sitemap';
 import useBreakPoint from '../hooks/useBreakPoint';
 
 interface Props {
@@ -49,6 +50,7 @@ export default IndexPage;
 export const getStaticProps: GetStaticProps = async () => {
   const allPosts = getAllPosts(CONTENT_ELEMENTS.POST_CARD);
   generateRssFeed(allPosts);
+  generateSiteMap(allPosts);
 
   return {
     props: { allPosts },
