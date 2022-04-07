@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap"
             rel="stylesheet"
           />
+          <title>정현수 기술 블로그</title>
           <meta
             name="google-site-verification"
             content="03tUkcTUQFs2twM6WNUdGdFy78xmlW1U0EfmTfRGCS8"
