@@ -18,8 +18,8 @@ export default class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || []; function
                 gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config',
                 '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', { page_path:
-                window.location.pathname, });
-              `,
+                  window.location.pathname, });
+                  `,
             }}
           />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,6 +32,7 @@ export default class MyDocument extends Document {
             name="google-site-verification"
             content="03tUkcTUQFs2twM6WNUdGdFy78xmlW1U0EfmTfRGCS8"
           />
+          <meta name="naver-site-verification" content="e7d38efb01c531754d6451648bcf717de8faf98e" />
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
