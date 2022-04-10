@@ -28,17 +28,11 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap"
             rel="stylesheet"
           />
-          <title>정현수 기술 블로그</title>
           <meta
             name="google-site-verification"
             content="03tUkcTUQFs2twM6WNUdGdFy78xmlW1U0EfmTfRGCS8"
           />
           <meta name="naver-site-verification" content="e7d38efb01c531754d6451648bcf717de8faf98e" />
-          <meta property="og:image" content="/profile.jpeg" />
-          <meta property="og:title" content="정현수 기술 블로그" />
-          <meta property="og:description" content="정현수의 기술 블로그입니다." />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://junghyeonsu-dev.vercel.app" />
         </Head>
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />

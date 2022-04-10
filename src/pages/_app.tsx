@@ -7,6 +7,7 @@ import { Layout } from '../components';
 
 import theme from '../styles/theme';
 import * as ga from '../lib/ga';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -23,11 +24,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   return (
-    <ChakraProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <ChakraProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </>
   );
 }
 

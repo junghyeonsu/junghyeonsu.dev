@@ -48,7 +48,11 @@ const Post = ({ post, preview }: Props) => {
             <meta property="og:image" content={post.coverImage} />
             <meta property="og:title" content={post.title} />
             <meta property="og:description" content={post.description} />
-            <meta property="og:type" content="website" />
+            <meta property="og:type" content="article" />
+            <meta
+              property="og:url"
+              content={`https://junghyeonsu-dev.vercel.app/posts/${post.slug}`}
+            />
           </Head>
           <PostContentContainer>
             <PostContentTitle title={post.title} date={post.date} coverImage={post.coverImage} />

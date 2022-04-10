@@ -19,10 +19,7 @@ export default function Layout({ children }: Props) {
 
   return (
     <>
-      <Head>
-        {favicon}
-        <title>정현수 기술 블로그</title>
-      </Head>
+      <Head>{favicon}</Head>
       <Header />
       <main>{children}</main>
       <Footer />
