@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Box, Text, Divider } from '@chakra-ui/react';
+import { Box, Divider } from '@chakra-ui/react';
 
 import { PostCard, CategoryChangeButton } from '../components';
 
@@ -15,9 +15,10 @@ import useBreakPoint from '../hooks/useBreakPoint';
 
 interface Props {
   allPosts: Post[];
+  categoies: string[];
 }
 
-const IndexPage = ({ allPosts }: Props) => {
+const IndexPage = ({ allPosts, categoies }: Props) => {
   const [currentCategory, setCurrentCategory] = useState('전체');
   const isLargerThan900 = useBreakPoint();
 
@@ -51,11 +52,13 @@ const IndexPage = ({ allPosts }: Props) => {
             currentCategory={currentCategory}
             setCurrentCategory={setCurrentCategory}
           />
-          <CategoryChangeButton
-            category="회고"
-            currentCategory={currentCategory}
-            setCurrentCategory={setCurrentCategory}
-          />
+          {categoies.map(category => (
+            <CategoryChangeButton
+              category={category}
+              currentCategory={currentCategory}
+              setCurrentCategory={setCurrentCategory}
+            />
+          ))}
         </Box>
         <Divider width={isLargerThan900 ? '840px' : '80vw'} margin="20px" />
         <Box
@@ -81,10 +84,12 @@ export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPosts = getAllPosts(CONTENT_ELEMENTS.POST_CARD);
+  const categoies = Array.from(new Set(allPosts.map(post => post.category)));
+
   generateRssFeed(allPosts);
   generateSiteMap(allPosts);
 
   return {
-    props: { allPosts },
+    props: { allPosts, categoies },
   };
 };
