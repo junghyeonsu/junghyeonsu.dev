@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Box } from '@chakra-ui/react';
+import { Box, Text, Divider } from '@chakra-ui/react';
 
-import { PostCard } from '../components';
+import { PostCard, CategoryChangeButton } from '../components';
 
 import type Post from '../types/post';
 
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const IndexPage = ({ allPosts }: Props) => {
+  const [currentCategory, setCurrentCategory] = useState('전체');
   const isLargerThan900 = useBreakPoint();
 
   return (
@@ -29,18 +31,46 @@ const IndexPage = ({ allPosts }: Props) => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://junghyeonsu-dev.vercel.app" />
       </Head>
-      <Box width="100%" display="flex" justifyContent="center">
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        marginTop="20px"
+      >
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          columnGap="10px"
+          rowGap="10px"
+          width={isLargerThan900 ? '840px' : '80vw'}
+          marginTop="20px"
+        >
+          <CategoryChangeButton
+            category="전체"
+            currentCategory={currentCategory}
+            setCurrentCategory={setCurrentCategory}
+          />
+          <CategoryChangeButton
+            category="회고"
+            currentCategory={currentCategory}
+            setCurrentCategory={setCurrentCategory}
+          />
+        </Box>
+        <Divider width={isLargerThan900 ? '840px' : '80vw'} margin="20px" />
         <Box
           as="section"
-          marginTop="50px"
           marginBottom="50px"
-          width={isLargerThan900 ? '840px' : '80vw'}
+          width={isLargerThan900 ? '880px' : '80vw'}
           display="flex"
           flexWrap="wrap"
         >
-          {allPosts.map((post, index) => (
-            <PostCard key={`post${index}-${post.title}`} post={post} />
-          ))}
+          {allPosts.map(
+            (post, index) =>
+              (currentCategory === '전체' || post.category === currentCategory) && (
+                <PostCard key={`post${index}-${post.title}`} post={post} />
+              ),
+          )}
         </Box>
       </Box>
     </>
