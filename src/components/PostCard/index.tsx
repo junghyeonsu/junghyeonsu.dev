@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PostCard = ({ post }: Props) => {
-  const { slug, title, date, coverImage, description } = post;
+  const { slug, title, date, category, coverImage, description } = post;
   const isLargerThan900 = useBreakPoint();
 
   return (
@@ -21,6 +21,7 @@ const PostCard = ({ post }: Props) => {
         as="article"
         width={isLargerThan900 ? '400px' : '100%'}
         boxShadow="sm"
+        transition="all 0.25s ease"
         _hover={{ boxShadow: 'md', cursor: 'pointer' }}
         borderRadius={2}
       >
@@ -28,9 +29,10 @@ const PostCard = ({ post }: Props) => {
           <Image src={coverImage} alt="cover image" width={400} height={240} layout="responsive" />
         </Box>
         <Box padding={2}>
-          <Badge colorScheme="blue" fontSize={14}>
-            {date}
-          </Badge>
+          <Box display="flex" columnGap="10px">
+            <Badge fontSize={14}>{date}</Badge>
+            <Badge fontSize={14}>{category}</Badge>
+          </Box>
           <Heading marginTop={2} fontSize={24}>
             {title}
           </Heading>

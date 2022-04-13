@@ -55,7 +55,12 @@ const Post = ({ post, preview }: Props) => {
             />
           </Head>
           <PostContentContainer>
-            <PostContentTitle title={post.title} date={post.date} coverImage={post.coverImage} />
+            <PostContentTitle
+              title={post.title}
+              category={post.category}
+              date={post.date}
+              coverImage={post.coverImage}
+            />
             <PostContentBody content={post.content} />
             <DynamicUtterances />
           </PostContentContainer>
