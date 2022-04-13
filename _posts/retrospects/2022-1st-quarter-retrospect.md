@@ -1,7 +1,7 @@
 ---
 title: '2022년 1분기 회고'
 description: '2022년 1분기 회고입니다.'
-coverImage: '/assets/blog/2022-1st-quarter-retrospect/cover.png'
+coverImage: '/assets/blog/retrospects/2022-1st-quarter-retrospect/cover.png'
 category: '회고'
 date: '2022/04/02'
 path: 'retrospects'
@@ -11,7 +11,7 @@ path: 'retrospects'
 
 > 2022/2/10
 
-![with-jojoldu](/assets/blog/2022-1st-quarter-retrospect/1.jpg)
+![with-jojoldu](/assets/blog/retrospects/2022-1st-quarter-retrospect/1.jpg)
 
 2월초 어느 날 친구 한명이 오직 동욱님을 향한 팬심으로 페이스북 메세지를 보낸 것이 시작이었습니다.
 
@@ -27,7 +27,7 @@ path: 'retrospects'
 
 # 1일 1커밋
 
-![1일 1커밋](/assets/blog/2022-1st-quarter-retrospect/2.png)
+![1일 1커밋](/assets/blog/retrospects/2022-1st-quarter-retrospect/2.png)
 
 2022년 들어서 취업준비를 하면서 1일 1커밋을 실천하고 있습니다.
 
@@ -39,7 +39,7 @@ path: 'retrospects'
 
 > 2022/2/4 - 2022/2/13
 
-![다른색깔찾기 게임](/assets/blog/2022-1st-quarter-retrospect/5.gif)
+![다른색깔찾기 게임](/assets/blog/retrospects/2022-1st-quarter-retrospect/5.gif)
 
 [넘블](https://www.numble.it/)에서 챌린지를 했는데 다른 색깔 찾기 게임을 했습니다.
 정말 재미있었고 색다른 경험이었습니다.
@@ -53,7 +53,7 @@ path: 'retrospects'
 그리고 제출후에 점수를 매겨서 상위 10%를 추려서 멘토링을 받을 수 있는 기회를 얻을 수 있는데
 상위 10%에 얻어서 제 프로젝트 코드 피드백을 받을 수 있었습니다.
 
-![넘블 상위 10%](/assets/blog/2022-1st-quarter-retrospect/3.png)
+![넘블 상위 10%](/assets/blog/retrospects/2022-1st-quarter-retrospect/3.png)
 
 그리고 요구 구현사항외에 제가 랭킹시스템을 도입하고 싶어서 `firebase`를 이용해서 랭킹을 도입했고, [벨로그에도 글을 올려서](https://velog.io/@junghyeonsu/React-Numble-Challenge-%EB%8B%A4%EB%A5%B8-%EC%83%89%EA%B9%94-%EC%B0%BE%EA%B8%B0-%EA%B2%8C%EC%9E%84-%EB%A7%8C%EB%93%A4%EA%B8%B0) 많은 관심을 받아서 기분이 좋았습니다.
 
@@ -86,7 +86,7 @@ path: 'retrospects'
 
 ## 유튜브
 
-![제로초 영상 강의](/assets/blog/2022-1st-quarter-retrospect/8.png)
+![제로초 영상 강의](/assets/blog/retrospects/2022-1st-quarter-retrospect/8.png)
 
 - 제로초 | 인간 JS 엔진 되기 시리즈
 - 배민근 | [react-query와 상태 관리 우아한테크세미나](https://www.youtube.com/watch?v=MArE6Hy371c&t=6103s)
@@ -109,7 +109,7 @@ path: 'retrospects'
 
 # 포트폴리오 리모델링
 
-![바뀐 포트폴리오](/assets/blog/2022-1st-quarter-retrospect/4.gif)
+![바뀐 포트폴리오](/assets/blog/retrospects/2022-1st-quarter-retrospect/4.gif)
 
 작년 말부터 계속 마음속에 간직하고 있던 숙제를 끝냈습니다.
 빛 좋은 개살구 같은 제 포트폴리오를 언제 고치나 했는데 이번에 후다닥 해버렸습니다.
@@ -146,7 +146,7 @@ path: 'retrospects'
 
 - [유튜브 채널](https://www.youtube.com/channel/UCkC6sYPPSvpnRprmp2GcXZw)
 
-![유튜브 현재 조회수](/assets/blog/2022-1st-quarter-retrospect/6.png)
+![유튜브 현재 조회수](/assets/blog/retrospects/2022-1st-quarter-retrospect/6.png)
 
 아무 기대없이 시작했는데 꽤(?) 많은 사람들이 제 영상을 봐주었습니다. 그리고 댓글도 달려서 신기했습니다.
 
@@ -175,7 +175,7 @@ path: 'retrospects'
 
 지금 문제점은 블로그를 깃허브 블로그로 옮기려고 하고 있는데 티스토리의 조회수가 꽤나 잘나와서 사실 많이 아깝기도 합니다..
 
-![티스토리 방문자 수](/assets/blog/2022-1st-quarter-retrospect/7.png)
+![티스토리 방문자 수](/assets/blog/retrospects/2022-1st-quarter-retrospect/7.png)
 
 이 누추한 블로그에 구독자가 **18명**이나 되고, 하루 방문자수가 제일 많았을 때는 **300명**이나 됐었습니다.
 
