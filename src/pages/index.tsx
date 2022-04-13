@@ -54,6 +54,7 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
           />
           {categoies.map(category => (
             <CategoryChangeButton
+              key={category}
               category={category}
               currentCategory={currentCategory}
               setCurrentCategory={setCurrentCategory}
