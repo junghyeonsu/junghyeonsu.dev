@@ -17,11 +17,11 @@ const PostCard = ({ post }: Props) => {
   return (
     <Link as={`/posts/${slug}`} href="/posts/[slug]">
       <Box
-        padding="10px"
+        margin="20px"
         as="article"
         width={isLargerThan900 ? '400px' : '100%'}
         boxShadow="sm"
-        transition="all 0.25s ease"
+        transition="box-shadow 0.25s ease"
         _hover={{ boxShadow: 'md', cursor: 'pointer' }}
         borderRadius={2}
       >
@@ -36,7 +36,7 @@ const PostCard = ({ post }: Props) => {
           <Heading marginTop={2} fontSize={24}>
             {title}
           </Heading>
-          <Text fontSize={16} color={'gray.600'}>
+          <Text fontSize={16} color={'gray.600'} isTruncated>
             {description}
           </Text>
         </Box>
