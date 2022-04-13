@@ -1,12 +1,21 @@
----
-title: '2022년 1분기 회고'
-description: '2022년 1분기 회고입니다.'
-coverImage: '/assets/blog/2022-1st-quarter-retrospect/cover.png'
-category: '회고'
-date: '2022/04/02'
-path: 'retrospects'
----
-
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>정현수의 기술 블로그</title>
+        <link>https://junghyeonsu-dev.vercel.app</link>
+        <description>주니어 프론트엔드 개발자 정현수의 기술 블로그입니다.</description>
+        <lastBuildDate>Wed, 13 Apr 2022 07:31:21 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>Feed for Node.js</generator>
+        <language>ko</language>
+        <copyright>Copyright 2022. junghyeonsu all rights reserved.</copyright>
+        <item>
+            <title><![CDATA[2022년 1분기 회고]]></title>
+            <link>https://junghyeonsu-dev.vercel.app/posts/2022-1st-quarter-retrospect</link>
+            <guid>https://junghyeonsu-dev.vercel.app/posts/2022-1st-quarter-retrospect</guid>
+            <pubDate>Fri, 01 Apr 2022 15:00:00 GMT</pubDate>
+            <description><![CDATA[2022년 1분기 회고입니다.]]></description>
+            <content:encoded><![CDATA[
 # 동욱님 만나기
 
 > 2022/2/10
@@ -210,3 +219,8 @@ path: 'retrospects'
 이 외에도 만들고 있는 블로그 다듬기, 유튜브 영상 올리기, NextStep 잘 마무리하기, 프로브 주니어 프로젝트 잘 진행하기 등등 많은데 조급하지 않게 천천히 하나씩 진행하면 될 것 같습니다.
 
 취준 기간이 길어질수록 불안감은 조금 커지겠지만, 그리고 면접 때 취준기간 때 무엇을 했냐고 물을 수도 있지만 이렇게 잘 정리해나가면 충분히 증명할 수 있고 할 수 있다고 생각합니다.
+]]></content:encoded>
+            <author>jung660317@naver.com (정현수)</author>
+        </item>
+    </channel>
+</rss>

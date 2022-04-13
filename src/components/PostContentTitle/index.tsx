@@ -1,9 +1,10 @@
-import { Heading, Text, Box, Image, chakra } from '@chakra-ui/react';
+import { Heading, Box, Image, chakra, Badge } from '@chakra-ui/react';
 
 interface Props {
   title: string;
   date: string;
   coverImage: string;
+  category: string;
 }
 
 const Img = chakra(Image, {
@@ -12,7 +13,7 @@ const Img = chakra(Image, {
   },
 });
 
-const PostContentTitle = ({ title, date, coverImage }: Props) => {
+const PostContentTitle = ({ title, date, category, coverImage }: Props) => {
   return (
     <Box
       as="article"
@@ -25,7 +26,10 @@ const PostContentTitle = ({ title, date, coverImage }: Props) => {
       <Heading as="h1" marginBottom="3">
         {title}
       </Heading>
-      <Text opacity="0.7">{date}</Text>
+      <Box display="flex" columnGap="10px">
+        <Badge fontSize="14px">{date}</Badge>
+        <Badge fontSize="14px">{category}</Badge>
+      </Box>
       <Img
         draggable="false"
         objectFit="contain"

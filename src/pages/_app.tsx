@@ -12,6 +12,7 @@ import Head from 'next/head';
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
+  // Google Analytics
   useEffect(() => {
     const handleRouteChange = (url: string) => {
       ga.pageview(url);

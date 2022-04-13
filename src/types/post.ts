@@ -3,6 +3,7 @@ type PostType = {
   path: string;
   title: string;
   date: string;
+  category: string;
   coverImage: string;
   description: string;
   content: string;

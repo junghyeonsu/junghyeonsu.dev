@@ -5,7 +5,7 @@ export const FRAMER_TRANSITION = {
 };
 
 export const CONTENT_ELEMENTS = {
-  POST_CARD: ['title', 'date', 'slug', 'description', 'coverImage', 'content'],
-  POST_WITH_CONTENT: ['title', 'date', 'slug', 'description', 'coverImage', 'content'],
+  POST_CARD: ['title', 'date', 'slug', 'description', 'category', 'coverImage', 'content'],
+  POST_WITH_CONTENT: ['title', 'date', 'slug', 'description', 'category', 'coverImage', 'content'],
   POST_PATHS: ['slug', 'path'],
 };
