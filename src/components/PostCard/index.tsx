@@ -14,6 +14,9 @@ const PostCard = ({ post }: Props) => {
   const { slug, title, date, category, coverImage, description } = post;
   const isLargerThan900 = useBreakPoint();
 
+  const diffMs = new Date().getTime() - new Date(date).getTime();
+  const isNewPost = Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10;
+
   return (
     <Link as={`/posts/${slug}`} href="/posts/[slug]">
       <Box
@@ -32,6 +35,11 @@ const PostCard = ({ post }: Props) => {
           <Box display="flex" columnGap="10px">
             <Badge fontSize={14}>{date}</Badge>
             <Badge fontSize={14}>{category}</Badge>
+            {isNewPost && (
+              <Badge fontSize={14} colorScheme="green">
+                new
+              </Badge>
+            )}
           </Box>
           <Heading marginTop={2} fontSize={24}>
             {title}

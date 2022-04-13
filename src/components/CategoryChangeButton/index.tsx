@@ -23,8 +23,8 @@ const CategoryChangeButton = ({ category, currentCategory, setCurrentCategory }:
 
   return (
     <Button
-      bgColor={currentCategory === category ? 'cyan.300' : 'none'}
-      colorScheme={currentCategory === category ? 'cyan' : undefined}
+      bgColor={currentCategory === category ? 'green.300' : 'none'}
+      colorScheme={currentCategory === category ? 'green' : undefined}
       onClick={onClickButton}
       style={{ boxShadow: 'none' }}
     >
