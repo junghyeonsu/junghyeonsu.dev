@@ -7,4 +7,6 @@ date: '2022/04/13'
 path: 'computer-science'
 ---
 
-#
+# 인터넷
+
+> internet
