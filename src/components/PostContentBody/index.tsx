@@ -41,6 +41,14 @@ const Content = styled.article<ContentProps>`
     margin-top: 28px;
 
     img {
+      margin-bottom: 10px;
+    }
+
+    img + em {
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.6;
       margin-bottom: 20px;
     }
 
