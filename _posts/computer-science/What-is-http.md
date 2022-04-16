@@ -1,6 +1,6 @@
 ---
 title: 'HTTP가 무엇인가'
-description: '읽고 쓰고'
+description: '읽고 쓰고 맛보고 즐기고'
 coverImage: '/assets/blog/computer-science/What-is-http/cover.png'
 category: '컴퓨터 과학'
 date: '2022/04/16'
