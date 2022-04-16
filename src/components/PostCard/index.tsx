@@ -20,7 +20,7 @@ const PostCard = ({ post }: Props) => {
   return (
     <Link as={`/posts/${slug}`} href="/posts/[slug]">
       <Box
-        margin={isLargerThan900 ? '20px' : '20px 00px'}
+        margin={isLargerThan900 ? '20px' : '20px 0px'}
         as="article"
         width={isLargerThan900 ? '400px' : '100%'}
         boxShadow="sm"
