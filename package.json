@@ -16,15 +16,16 @@
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remark": "^14.0.2",
-    "remark-html": "^15.0.1"
+    "react-markdown": "^8.0.2",
+    "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.7.2",
     "@types/next": "^9.0.0",
-    "@types/node": "^12.12.21",
-    "@types/react": "^17.0.2",
+    "@types/node": "^17.0.24",
+    "@types/react": "^18.0.5",
     "@types/react-dom": "^17.0.1",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "eslint": "^8.12.0",

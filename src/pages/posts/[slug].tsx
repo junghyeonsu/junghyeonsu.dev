@@ -8,7 +8,6 @@ import { PostContentBody, PostContentTitle, PostContentContainer } from '../../c
 
 import type PostType from '../../types/post';
 
-import markdownToHtml from '../../lib/markdownToHtml';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import { CONTENT_ELEMENTS } from '../../constants';
 
@@ -81,13 +80,13 @@ interface Params {
 export async function getStaticProps({ params }: Params) {
   const path = getPathBySlug(params.slug);
   const post = getPostBySlug({ slug: params.slug, path }, CONTENT_ELEMENTS.POST_WITH_CONTENT);
-  const content = await markdownToHtml(post.content || '');
+  // const content = await markdownToHtml(post.content || '');
 
   return {
     props: {
       post: {
         ...post,
-        content,
+        content: post.content,
       },
     },
   };

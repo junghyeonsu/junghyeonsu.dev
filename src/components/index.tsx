@@ -11,3 +11,4 @@ export { default as Layout } from './Layout';
 
 export { default as ThemeToggler } from './ThemeToggler';
 export { default as Utterances } from './Utterances';
+export { default as CodeBlock } from './CodeBlock';
