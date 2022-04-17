@@ -7,7 +7,7 @@ const LIGHT_THEME = 'github-light';
 const UTTERANCES_SELECTOR = 'iframe.utterances-frame';
 const REPOSITORY = 'junghyeonsu.dev.comment';
 
-const Utterances: React.FC = () => {
+const Utterances = (): JSX.Element => {
   const { colorMode } = useColorMode();
   const containerRef = useRef<any>(); // TODO: any 처리
   const theme = colorMode === 'dark' ? DARK_THEME : LIGHT_THEME;
@@ -42,7 +42,11 @@ const Utterances: React.FC = () => {
     utterancesEl ? postThemeMessage() : createUtterancesEl();
   }, [theme]);
 
-  return <div ref={containerRef} />;
+  return (
+    <>
+      <div ref={containerRef} />
+    </>
+  );
 };
 
 export default Utterances;
