@@ -1,6 +1,7 @@
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import ReactMarkdown from 'react-markdown';
+import useBreakPoint from '../../hooks/useBreakPoint';
 import CodeBlock from '../CodeBlock';
 
 interface BodyProps {
@@ -13,6 +14,7 @@ interface ContentProps {
 
 const Content = styled.article<ContentProps>`
   position: relative;
+  width: 100%;
   margin-bottom: 100px;
 
   h1,
