@@ -2,10 +2,6 @@ import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
-// TODO: 자동화 할 수는 없을까? : 폴더 읽는 라이브러리 있었는데 그거 잘 사용하면 되지 않을까?
-// NOTE: 블로그 포스팅 폴더 생길 때 마다 추가해줘야 함.
-const paths = ['retrospects', 'computer-science'];
-
 interface PostSlugWithPath {
   slug: string;
   path: string;
@@ -15,9 +11,16 @@ export interface Items {
   [key: string]: string;
 }
 
+export function getDirectories() {
+  return fs
+    .readdirSync(join(process.cwd(), '_posts'), { withFileTypes: true })
+    .filter(direct => direct.isDirectory())
+    .map(direct => direct.name);
+}
+
 export function getPostSlugs() {
   const postSlugsWithPath: PostSlugWithPath[] = [];
-  paths.forEach(path => {
+  getDirectories().forEach(path => {
     const directory = join(process.cwd(), `_posts/${path}`);
     fs.readdirSync(directory).forEach(slug => {
       postSlugsWithPath.push({ slug, path });
@@ -51,19 +54,10 @@ export function getPostBySlug(slugWithPath: PostSlugWithPath, fields: string[] =
 
   // Ensure only the minimal needed data is exposed
   fields.forEach(field => {
-    if (field === 'slug') {
-      items[field] = realSlug;
-    }
-    if (field === 'path') {
-      items[field] = slugWithPath.path;
-    }
-    if (field === 'content') {
-      items[field] = content;
-    }
-
-    if (typeof data[field] !== 'undefined') {
-      items[field] = data[field];
-    }
+    if (field === 'slug') items[field] = realSlug;
+    if (field === 'path') items[field] = slugWithPath.path;
+    if (field === 'content') items[field] = content;
+    if (typeof data[field] !== 'undefined') items[field] = data[field];
   });
 
   return items;
