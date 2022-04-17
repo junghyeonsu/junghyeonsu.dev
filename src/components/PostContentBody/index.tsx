@@ -89,10 +89,15 @@ const Content = styled.article<ContentProps>`
     }
   }
 
-  ul {
+  ul,
+  ol {
     position: relative;
     left: 10px;
     padding: 10px;
+  }
+
+  pre {
+    margin: 30px 0px;
   }
 `;
 
