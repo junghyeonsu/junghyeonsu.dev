@@ -1,7 +1,6 @@
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import ReactMarkdown from 'react-markdown';
-import useBreakPoint from '../../hooks/useBreakPoint';
 import CodeBlock from '../CodeBlock';
 
 interface BodyProps {

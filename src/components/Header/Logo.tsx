@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Logo = () => {
   const { colorMode } = useColorMode();
   return (
-    <Link href="/">
+    <Link href="/" passHref>
       <Button
         variant="unstyled"
         fontSize={14}

@@ -3,7 +3,7 @@ import { Button, useColorMode } from '@chakra-ui/react';
 const Introduction = () => {
   const { colorMode } = useColorMode();
   return (
-    <a href="https://hyeonsu-jung.vercel.app/" target="_blank">
+    <a href="https://hyeonsu-jung.vercel.app/" target="_blank" rel="noreferrer">
       <Button
         variant="unstyled"
         fontSize={14}

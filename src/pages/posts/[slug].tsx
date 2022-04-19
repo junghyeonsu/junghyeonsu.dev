@@ -12,7 +12,6 @@ import { CONTENT_ELEMENTS } from '../../constants';
 
 interface Props {
   post: PostType;
-  preview?: boolean;
 }
 
 const Section = chakra(Box, {
@@ -24,7 +23,7 @@ const Section = chakra(Box, {
   },
 });
 
-const Post = ({ post, preview }: Props) => {
+const Post = ({ post }: Props) => {
   const router = useRouter();
 
   if (!router.isFallback && !post?.slug) {

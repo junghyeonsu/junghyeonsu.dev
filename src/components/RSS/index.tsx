@@ -10,7 +10,7 @@ const RSS: React.FC<ThemeModeTogglerProps> = () => {
   const SwitchIcon = useColorModeValue(LightModeRSS, DarkModeRSS);
 
   return (
-    <Link href="/rss.xml">
+    <Link href="/rss.xml" passHref>
       <IconButton
         display="flex"
         justifyContent="center"
