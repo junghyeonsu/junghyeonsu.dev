@@ -1,19 +1,14 @@
 import { GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { Box, chakra } from '@chakra-ui/react';
 
-import { PostContentBody, PostContentTitle, PostContentContainer } from '../../components';
+import { PostContentBody, PostContentTitle, PostContentContainer, Giscus } from '../../components';
 
 import type PostType from '../../types/post';
 
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import { CONTENT_ELEMENTS } from '../../constants';
-
-const DynamicUtterances = dynamic(() => import('../../components/Utterances'), {
-  ssr: false,
-});
 
 interface Props {
   post: PostType;
@@ -61,7 +56,7 @@ const Post = ({ post, preview }: Props) => {
               coverImage={post.coverImage}
             />
             <PostContentBody content={post.content} />
-            <DynamicUtterances />
+            <Giscus />
           </PostContentContainer>
         </Section>
       )}
