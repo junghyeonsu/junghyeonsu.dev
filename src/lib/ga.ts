@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 declare global {
   interface Window {
     gtag: (param1: string, param2: string | undefined, param3: object) => void;
