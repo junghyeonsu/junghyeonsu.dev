@@ -10,6 +10,7 @@
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@giscus/react": "^2.0.3",
     "feed": "^4.2.2",
     "framer-motion": "^6",
     "gray-matter": "^4.0.3",
