@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
 
 import { Layout } from '../components';
+import { Chakra } from '../components/Chakra';
 
-import theme from '../styles/theme';
 import * as ga from '../lib/ga';
 import Head from 'next/head';
 
@@ -29,11 +28,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <ChakraProvider theme={theme}>
+      <Chakra cookies={pageProps.cookies}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </ChakraProvider>
+      </Chakra>
     </>
   );
 }

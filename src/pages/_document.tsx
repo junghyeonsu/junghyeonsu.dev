@@ -1,7 +1,7 @@
-import { ColorModeScript } from '@chakra-ui/react';
+// import { ColorModeScript } from '@chakra-ui/react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-import theme from '../styles/theme';
+// import theme from '../styles/theme';
 
 export default class MyDocument extends Document {
   render() {
@@ -35,7 +35,7 @@ export default class MyDocument extends Document {
           <meta name="naver-site-verification" content="e7d38efb01c531754d6451648bcf717de8faf98e" />
         </Head>
         <body>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          {/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
           <Main />
           <NextScript />
         </body>
