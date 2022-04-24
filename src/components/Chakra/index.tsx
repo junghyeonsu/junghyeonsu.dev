@@ -2,7 +2,7 @@ import { ChakraProvider, cookieStorageManager, localStorageManager } from '@chak
 import theme from '../../styles/theme';
 
 interface Props {
-  cookies: any; // TODO: 타입 고치기
+  cookies: string;
   children: React.ReactNode;
 }
 
@@ -10,8 +10,6 @@ export function Chakra({ cookies, children }: Props) {
   // b) Pass `colorModeManager` prop
   const colorModeManager =
     typeof cookies === 'string' ? cookieStorageManager(cookies) : localStorageManager;
-
-  console.log(colorModeManager, 'colorModeNanager');
 
   return (
     <ChakraProvider theme={theme} colorModeManager={colorModeManager}>
