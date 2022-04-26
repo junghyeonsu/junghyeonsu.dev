@@ -52,6 +52,7 @@ const Content = styled.article<ContentProps>`
       display: block;
       text-align: center;
       font-size: 14px;
+      font-style: normal;
       opacity: 0.6;
       margin-bottom: 20px;
     }
