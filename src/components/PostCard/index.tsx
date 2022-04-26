@@ -29,7 +29,15 @@ const PostCard = ({ post }: Props) => {
         borderRadius={2}
       >
         <Box display="block" as="span" width="100%" borderRadius={2}>
-          <Image src={coverImage} alt="cover image" width={400} height={240} layout="responsive" />
+          <Image
+            placeholder="blur"
+            blurDataURL="https://via.placeholder.com/400x240"
+            src={coverImage}
+            alt={`${slug} cover image`}
+            width={400}
+            height={240}
+            layout="responsive"
+          />
         </Box>
         <Box padding={2}>
           <Box display="flex" columnGap="10px">
