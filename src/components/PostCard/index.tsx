@@ -18,7 +18,7 @@ const PostCard = ({ post }: Props) => {
   const isNewPost = Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10;
 
   return (
-    <Link as={`/posts/${slug}`} href="/posts/[slug]">
+    <Link as={`/posts/${slug}`} href="/posts/[slug]" passHref>
       <Box
         margin={isLargerThan900 ? '20px' : '20px 0px'}
         as="article"

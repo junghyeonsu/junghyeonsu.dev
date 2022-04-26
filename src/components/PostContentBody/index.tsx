@@ -1,5 +1,7 @@
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import ReactMarkdown from 'react-markdown';
+import CodeBlock from '../CodeBlock';
 
 interface BodyProps {
   content: string;
@@ -11,6 +13,7 @@ interface ContentProps {
 
 const Content = styled.article<ContentProps>`
   position: relative;
+  width: 100%;
   margin-bottom: 100px;
 
   h1,
@@ -87,16 +90,26 @@ const Content = styled.article<ContentProps>`
     }
   }
 
-  ul {
+  ul,
+  ol {
     position: relative;
     left: 10px;
     padding: 10px;
+  }
+
+  pre {
+    margin: 30px 0px;
   }
 `;
 
 const PostContentBody = ({ content }: BodyProps) => {
   const { colorMode } = useColorMode();
-  return <Content colorMode={colorMode} dangerouslySetInnerHTML={{ __html: content }} />;
+
+  return (
+    <Content colorMode={colorMode}>
+      <ReactMarkdown components={CodeBlock}>{content}</ReactMarkdown>
+    </Content>
+  );
 };
 
 export default PostContentBody;

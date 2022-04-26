@@ -1,24 +1,17 @@
 import { GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { Box, chakra } from '@chakra-ui/react';
 
-import { PostContentBody, PostContentTitle, PostContentContainer } from '../../components';
+import { PostContentBody, PostContentTitle, PostContentContainer, Giscus } from '../../components';
 
 import type PostType from '../../types/post';
 
-import markdownToHtml from '../../lib/markdownToHtml';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import { CONTENT_ELEMENTS } from '../../constants';
 
-const DynamicUtterances = dynamic(() => import('../../components/Utterances'), {
-  ssr: false,
-});
-
 interface Props {
   post: PostType;
-  preview?: boolean;
 }
 
 const Section = chakra(Box, {
@@ -30,7 +23,7 @@ const Section = chakra(Box, {
   },
 });
 
-const Post = ({ post, preview }: Props) => {
+const Post = ({ post }: Props) => {
   const router = useRouter();
 
   if (!router.isFallback && !post?.slug) {
@@ -62,7 +55,7 @@ const Post = ({ post, preview }: Props) => {
               coverImage={post.coverImage}
             />
             <PostContentBody content={post.content} />
-            <DynamicUtterances />
+            <Giscus />
           </PostContentContainer>
         </Section>
       )}
@@ -81,13 +74,13 @@ interface Params {
 export async function getStaticProps({ params }: Params) {
   const path = getPathBySlug(params.slug);
   const post = getPostBySlug({ slug: params.slug, path }, CONTENT_ELEMENTS.POST_WITH_CONTENT);
-  const content = await markdownToHtml(post.content || '');
+  // const content = await markdownToHtml(post.content || '');
 
   return {
     props: {
       post: {
         ...post,
-        content,
+        content: post.content,
       },
     },
   };

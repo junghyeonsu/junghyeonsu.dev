@@ -44,7 +44,7 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
           flexWrap="wrap"
           columnGap="10px"
           rowGap="10px"
-          width={isLargerThan900 ? '840px' : '80vw'}
+          width={isLargerThan900 ? '840px' : '90vw'}
           marginTop="20px"
         >
           <CategoryChangeButton
@@ -61,11 +61,11 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
             />
           ))}
         </Box>
-        <Divider width={isLargerThan900 ? '840px' : '80vw'} margin="20px" />
+        <Divider width={isLargerThan900 ? '840px' : '90vw'} margin="20px" />
         <Box
           as="section"
           marginBottom="50px"
-          width={isLargerThan900 ? '880px' : '80vw'}
+          width={isLargerThan900 ? '880px' : '90vw'}
           display="flex"
           flexWrap="wrap"
         >
