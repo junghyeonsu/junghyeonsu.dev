@@ -45,6 +45,7 @@ const Content = styled.article<ContentProps>`
 
     img {
       margin-bottom: 10px;
+      pointer-events: none;
     }
 
     img + em {
