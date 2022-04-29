@@ -1,7 +1,11 @@
+import React from 'react';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import ReactMarkdown from 'react-markdown';
-import CodeBlock from '../CodeBlock';
+import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
+import CustomHeading1 from './CustomHeading1';
 
 interface BodyProps {
   content: string;
@@ -103,12 +107,28 @@ const Content = styled.article<ContentProps>`
   }
 `;
 
+const CustomComponents = {
+  h1({ ...props }) {
+    return <CustomHeading1 {...props} />;
+  },
+  code({ className, children, ...props }: SyntaxHighlighterProps) {
+    const match = /language-(\w+)/.exec(className || '');
+    return match ? (
+      <SyntaxHighlighter style={dracula} language={match[1]} PreTag="div" {...props}>
+        {String(children).replace(/\n$/, '')}
+      </SyntaxHighlighter>
+    ) : (
+      <code>{children}</code>
+    );
+  },
+};
+
 const PostContentBody = ({ content }: BodyProps) => {
   const { colorMode } = useColorMode();
 
   return (
     <Content colorMode={colorMode}>
-      <ReactMarkdown components={CodeBlock}>{content}</ReactMarkdown>
+      <ReactMarkdown components={CustomComponents}>{content}</ReactMarkdown>
     </Content>
   );
 };
