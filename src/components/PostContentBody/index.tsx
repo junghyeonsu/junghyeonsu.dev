@@ -1,7 +1,11 @@
+import React from 'react';
 import { ColorMode, useColorMode } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import ReactMarkdown from 'react-markdown';
-import CodeBlock from '../CodeBlock';
+import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
+import CustomHeading from './CustomHeading';
 
 interface BodyProps {
   content: string;
@@ -84,7 +88,6 @@ const Content = styled.article<ContentProps>`
   }
 
   a {
-    text-decoration: underline;
     color: #0a91ff;
 
     :hover {
@@ -104,12 +107,43 @@ const Content = styled.article<ContentProps>`
   }
 `;
 
+const CustomComponents = {
+  h1({ ...props }) {
+    return <CustomHeading level="h1">{props.children}</CustomHeading>;
+  },
+  h2({ ...props }) {
+    return <CustomHeading level="h2">{props.children}</CustomHeading>;
+  },
+  h3({ ...props }) {
+    return <CustomHeading level="h3">{props.children}</CustomHeading>;
+  },
+  h4({ ...props }) {
+    return <CustomHeading level="h4">{props.children}</CustomHeading>;
+  },
+  h5({ ...props }) {
+    return <CustomHeading level="h5">{props.children}</CustomHeading>;
+  },
+  h6({ ...props }) {
+    return <CustomHeading level="h6">{props.children}</CustomHeading>;
+  },
+  code({ className, children, ...props }: SyntaxHighlighterProps) {
+    const match = /language-(\w+)/.exec(className || '');
+    return match ? (
+      <SyntaxHighlighter style={dracula} language={match[1]} PreTag="div" {...props}>
+        {String(children).replace(/\n$/, '')}
+      </SyntaxHighlighter>
+    ) : (
+      <code>{children}</code>
+    );
+  },
+};
+
 const PostContentBody = ({ content }: BodyProps) => {
   const { colorMode } = useColorMode();
 
   return (
     <Content colorMode={colorMode}>
-      <ReactMarkdown components={CodeBlock}>{content}</ReactMarkdown>
+      <ReactMarkdown components={CustomComponents}>{content}</ReactMarkdown>
     </Content>
   );
 };

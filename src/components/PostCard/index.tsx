@@ -28,8 +28,21 @@ const PostCard = ({ post }: Props) => {
         _hover={{ boxShadow: 'md', cursor: 'pointer' }}
         borderRadius={2}
       >
-        <Box display="block" as="span" width="100%" borderRadius={2}>
+        <Box
+          css={{
+            '&:hover': {
+              img: {
+                transform: 'scale(1.15)',
+              },
+            },
+          }}
+          display="block"
+          as="span"
+          width="100%"
+          borderRadius={2}
+        >
           <Image
+            style={{ transition: 'all 0.3s ease' }}
             placeholder="blur"
             blurDataURL="https://via.placeholder.com/400x240"
             src={coverImage}
