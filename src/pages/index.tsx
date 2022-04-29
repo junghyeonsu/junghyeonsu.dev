@@ -46,6 +46,7 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
           rowGap="10px"
           width={isLargerThan900 ? '840px' : '90vw'}
           marginTop="20px"
+          as="nav"
         >
           <CategoryChangeButton
             category="전체"
