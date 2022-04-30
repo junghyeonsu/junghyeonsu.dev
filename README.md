@@ -16,7 +16,10 @@
 - [x] robots.txt 생성 [robots.txt 테스터](https://www.google.com/webmasters/tools/robots-testing-tool?hl=ko&siteUrl=https://junghyeonsu-dev.vercel.app/)
 - [x] 모바일, 데스크탑 반응형 디자인 적용
 - [x] 시멘틱 태그 적용
-- [ ] Table of Content (WIP)
+- [ ] Table of Content
+- [ ] 최근 수정 날짜 추가
+- [ ] 페이지 스크롤 프로그래스바 추가
+- [ ] 포스트 읽는 시간 추가
 
 ## 사용 기술
 
