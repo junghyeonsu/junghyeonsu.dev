@@ -3,7 +3,13 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Box, chakra } from '@chakra-ui/react';
 
-import { PostContentBody, PostContentTitle, PostContentContainer, Giscus } from '../../components';
+import {
+  PostContentBody,
+  PostContentTitle,
+  PostContentContainer,
+  Giscus,
+  TableOfContents,
+} from '../../components';
 
 import type PostType from '../../types/post';
 
@@ -48,6 +54,7 @@ const Post = ({ post }: Props) => {
             />
           </Head>
           <PostContentContainer>
+            <TableOfContents />
             <PostContentTitle
               title={post.title}
               category={post.category}
