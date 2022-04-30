@@ -4,6 +4,7 @@ description: '의미에 맞는 태그를 작성해보자'
 coverImage: '/assets/blog/html/Semantic-tag/cover.png'
 category: 'HTML'
 date: '2022/04/28'
+LastModifiedDate: '2022/04/30'
 path: 'html'
 ---
 
@@ -69,6 +70,7 @@ path: 'html'
 ## 웹 접근성
 
 시각 장애가 있는 사용자가 화면 판독기로 페이지를 탐색할 때 의미론적 마크업을 푯말로 사용할 수 있습니다.
+또한 적절한 시멘틱 태그로 잘 만들어진 웹 이라면 스크린리더, 키보드로만 문제 없이 동작할 수 있습니다.
 
 ## 개발자 경험
 
