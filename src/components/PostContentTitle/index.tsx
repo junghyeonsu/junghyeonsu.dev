@@ -36,7 +36,6 @@ const PostContentTitle = ({ title, date, category, coverImage }: Props) => {
         src={coverImage}
         alt="cover image"
         marginTop="10"
-        marginBottom="16"
       />
     </Box>
   );
