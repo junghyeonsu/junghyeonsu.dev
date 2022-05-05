@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { Box, Text, useColorMode } from '@chakra-ui/react';
+import React, { useEffect, useState, memo, useMemo } from 'react';
+
+import useIntersectionObserver from './useIntersectionObserver';
+import HeadingListItem from './HeadingListItem';
+
+import { STYLE } from '../../constants';
 
 interface NestedHeadingType {
   nodeName: string;
@@ -6,51 +12,12 @@ interface NestedHeadingType {
   id: string;
 }
 
-// TODO: any 없애기
-const useIntersectionObserver = (setActiveId: any) => {
-  const headingElementsRef = useRef<any>({});
-
-  useEffect(() => {
-    const callback = (headings: any) => {
-      headingElementsRef.current = headings.reduce((map: any, headingElement: any) => {
-        // eslint-disable-next-line no-param-reassign
-        map[headingElement.target.id] = headingElement;
-        return map;
-      }, headingElementsRef.current);
-
-      const visibleHeadings: any = [];
-      Object.keys(headingElementsRef.current).forEach(key => {
-        const headingElement = headingElementsRef.current[key];
-        if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
-      });
-
-      const getIndexFromId = (id: string) =>
-        headingElements.findIndex(heading => heading.id === id);
-
-      if (visibleHeadings.length === 1) {
-        setActiveId(visibleHeadings[0].target.id);
-      } else if (visibleHeadings.length > 1) {
-        const sortedVisibleHeadings = visibleHeadings.sort(
-          (a: any, b: any) => getIndexFromId(a.target.id) > getIndexFromId(b.target.id),
-        );
-        setActiveId(sortedVisibleHeadings[0].target.id);
-      }
-    };
-
-    const observer = new IntersectionObserver(callback, {
-      rootMargin: '0px 0px -100px 0px',
-    });
-
-    const headingElements = Array.from(document.querySelectorAll('h1, h2, h3'));
-    headingElements.forEach(element => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [setActiveId]);
-};
-
 const TableOfContents = () => {
   const [nestedHeadings, setNestedHeadings] = useState<NestedHeadingType[]>([]);
-  const [activeId, setActiveId] = useState();
+  const { colorMode } = useColorMode();
+  const [activeId, setActiveId] = useState<string>();
+
+  const isDarkMode = useMemo(() => colorMode === 'dark', [colorMode]);
 
   useIntersectionObserver(setActiveId);
 
@@ -58,44 +25,52 @@ const TableOfContents = () => {
     const headingElements = Array.from(document.querySelectorAll('h1, h2, h3'));
     const headingElementsTexts = headingElements.map(heading => {
       const { nodeName, childNodes, id } = heading;
-      if (childNodes[0].nodeName === 'IMG') {
-        // Open Source Section
-        return { nodeName, id, text: childNodes[1].textContent };
-      }
       return { nodeName, id, text: childNodes[0].textContent };
     });
     setNestedHeadings(headingElementsTexts);
   }, []);
 
-  const onClickAnchor = useCallback(
-    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
-      event.preventDefault();
-      document.querySelector(`#${id}`)?.scrollIntoView({
-        behavior: 'smooth',
-      });
-    },
-    [],
-  );
-
   return (
-    <div>
-      {nestedHeadings.map(heading => {
-        const { nodeName, text, id } = heading;
-        // const active = id === activeId;
-
-        switch (nodeName) {
-          case 'H1':
-            return <p>{text}</p>;
-          case 'H2':
-            return <p>{text}</p>;
-          case 'H3':
-            return <p>{text}</p>;
-          default:
-            return '';
-        }
-      })}
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      position="fixed"
+      width={`calc((100vw - ${STYLE.CONTENT_WIDTH}) / 2 - 50px)`} // NOTE: ((전체 화면 사이즈 - 컨텐츠 사이즈) / 2) - 여분 px)
+      height="80vh"
+      right="10px"
+      top="150px"
+      padding="0px 20px"
+      as="nav"
+      overflow="hidden auto"
+      sx={{
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+      }}
+    >
+      <Text as="p" fontSize="14px" fontWeight="bold">
+        ON THIS PAGE
+      </Text>
+      <Box
+        as="ul"
+        display="flex"
+        position="relative"
+        flexDirection="column"
+        transition="fontWeight 0.3s ease"
+      >
+        {nestedHeadings.map(({ nodeName, text, id }) => (
+          <HeadingListItem
+            key={id}
+            isActive={id === activeId}
+            isDarkMode={isDarkMode}
+            id={id}
+            text={text}
+            nodeName={nodeName}
+          />
+        ))}
+      </Box>
+    </Box>
   );
 };
 
-export default TableOfContents;
+export default memo(TableOfContents);
