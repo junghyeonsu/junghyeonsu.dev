@@ -10,7 +10,6 @@ const Introduction = () => {
         _hover={{ bg: colorMode === 'dark' ? 'whiteAlpha.200' : 'blackAlpha.200' }}
         padding={1}
         _active={{ bg: 'transparent' }}
-        style={{ boxShadow: 'none' }}
       >
         About
       </Button>

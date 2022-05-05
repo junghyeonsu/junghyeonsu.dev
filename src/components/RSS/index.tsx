@@ -21,7 +21,6 @@ const RSS: React.FC<ThemeModeTogglerProps> = () => {
         icon={<SwitchIcon />}
         _hover={{ bg: colorMode === 'dark' ? 'whiteAlpha.200' : 'blackAlpha.200' }}
         _active={{ bg: 'transparent' }}
-        style={{ boxShadow: 'none' }}
         aria-label="darkmode toggle button"
       />
     </Link>
