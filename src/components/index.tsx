@@ -12,4 +12,3 @@ export { default as Layout } from './Layout';
 export { default as TableOfContents } from './TableOfContents';
 export { default as ThemeToggler } from './ThemeToggler';
 export { default as Giscus } from './Giscus';
-export { default as CodeBlock } from './CodeBlock';

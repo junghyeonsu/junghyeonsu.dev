@@ -1,9 +1,10 @@
-User-agent: *
-Disallow: /
-
 User-agent: Googlebot
 Allow : / 
 
 User-agent: Yeti
 Allow: /
+
+User-agent: *
+Disallow: /
+
 Sitemap: https://junghyeonsu-dev.vercel.app/sitemap.xml
