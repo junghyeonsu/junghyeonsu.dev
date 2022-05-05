@@ -1,4 +1,5 @@
-import { Box, Heading, Text, Badge } from '@chakra-ui/react';
+import { useMemo } from 'react';
+import { Box, Heading, Text, Badge, useColorMode } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,10 +13,12 @@ interface Props {
 
 const PostCard = ({ post }: Props) => {
   const { slug, title, date, category, coverImage, description } = post;
+  const { colorMode } = useColorMode();
   const mediaQuery = useMediaQuery();
 
-  const diffMs = new Date().getTime() - new Date(date).getTime();
-  const isNewPost = Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10;
+  const isDarkMode = useMemo(() => colorMode === 'dark', [colorMode]);
+  const diffMs = useMemo(() => new Date().getTime() - new Date(date).getTime(), [date]);
+  const isNewPost = useMemo(() => Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10, [diffMs]);
 
   return (
     <Link as={`/posts/${slug}`} href="/posts/[slug]" passHref>
@@ -65,7 +68,7 @@ const PostCard = ({ post }: Props) => {
           <Heading marginTop={2} fontSize={24}>
             {title}
           </Heading>
-          <Text fontSize={16} color={'gray.600'} isTruncated>
+          <Text fontSize={16} color={isDarkMode ? 'whiteAlpha.600' : 'gray.600'} isTruncated>
             {description}
           </Text>
         </Box>
