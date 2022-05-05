@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import type PostType from '../../types/post';
 
-import useBreakPoint from '../../hooks/useBreakPoint';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 interface Props {
   post: PostType;
@@ -12,7 +12,7 @@ interface Props {
 
 const PostCard = ({ post }: Props) => {
   const { slug, title, date, category, coverImage, description } = post;
-  const isLargerThan900 = useBreakPoint();
+  const mediaQuery = useMediaQuery();
 
   const diffMs = new Date().getTime() - new Date(date).getTime();
   const isNewPost = Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10;
@@ -20,9 +20,9 @@ const PostCard = ({ post }: Props) => {
   return (
     <Link as={`/posts/${slug}`} href="/posts/[slug]" passHref>
       <Box
-        margin={isLargerThan900 ? '20px' : '20px 0px'}
+        margin={mediaQuery?.isLargerThan900 ? '20px' : '20px 0px'}
         as="article"
-        width={isLargerThan900 ? '400px' : '100%'}
+        width={mediaQuery?.isLargerThan900 ? '400px' : '100%'}
         boxShadow="sm"
         transition="box-shadow 0.25s ease"
         _hover={{ boxShadow: 'md', cursor: 'pointer' }}

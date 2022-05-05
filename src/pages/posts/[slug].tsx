@@ -13,6 +13,7 @@ import {
 
 import type PostType from '../../types/post';
 
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import { CONTENT_ELEMENTS } from '../../constants';
 
@@ -31,6 +32,7 @@ const Section = chakra(Box, {
 
 const Post = ({ post }: Props) => {
   const router = useRouter();
+  const mediaQuery = useMediaQuery();
 
   if (!router.isFallback && !post?.slug) {
     return <div>statusCode 404</div>; // TODO: 에러 페이지 만들기
@@ -54,7 +56,7 @@ const Post = ({ post }: Props) => {
             />
           </Head>
           <PostContentContainer>
-            <TableOfContents />
+            {mediaQuery?.isLargerThan1400 && <TableOfContents />}
             <PostContentTitle
               title={post.title}
               category={post.category}
