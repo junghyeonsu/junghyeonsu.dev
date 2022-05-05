@@ -9,3 +9,7 @@ export const CONTENT_ELEMENTS = {
   POST_WITH_CONTENT: ['title', 'date', 'slug', 'description', 'category', 'coverImage', 'content'],
   POST_PATHS: ['slug', 'path'],
 };
+
+export const STYLE = {
+  CONTENT_WIDTH: '800px',
+};
