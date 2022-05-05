@@ -3,10 +3,17 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { Box, chakra } from '@chakra-ui/react';
 
-import { PostContentBody, PostContentTitle, PostContentContainer, Giscus } from '../../components';
+import {
+  PostContentBody,
+  PostContentTitle,
+  PostContentContainer,
+  Giscus,
+  TableOfContents,
+} from '../../components';
 
 import type PostType from '../../types/post';
 
+import useMediaQuery from '../../hooks/useMediaQuery';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import { CONTENT_ELEMENTS } from '../../constants';
 
@@ -25,6 +32,7 @@ const Section = chakra(Box, {
 
 const Post = ({ post }: Props) => {
   const router = useRouter();
+  const mediaQuery = useMediaQuery();
 
   if (!router.isFallback && !post?.slug) {
     return <div>statusCode 404</div>; // TODO: 에러 페이지 만들기
@@ -48,6 +56,7 @@ const Post = ({ post }: Props) => {
             />
           </Head>
           <PostContentContainer>
+            {mediaQuery?.isLargerThan1400 && <TableOfContents />}
             <PostContentTitle
               title={post.title}
               category={post.category}

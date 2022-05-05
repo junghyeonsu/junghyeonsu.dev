@@ -1,4 +1,9 @@
 import { extendTheme } from '@chakra-ui/react';
+import { mode } from '@chakra-ui/theme-tools'; // usage: mode(ligthModeColor, darkModeColor)(props)
+
+interface ColorMode {
+  colorMode: 'dark' | 'light';
+}
 
 const config = {
   initialColorMode: 'system',
@@ -8,10 +13,10 @@ const config = {
 const theme = extendTheme({
   config,
   styles: {
-    global: (props: { colorMode: 'dark' | 'light' }) => ({
+    global: (props: ColorMode) => ({
       'html, body': {
         fontFamily: 'Noto Sans KR, sans-serif',
-        backgroundColor: props.colorMode === 'dark' ? '#202125' : 'gray.50',
+        backgroundColor: mode('gray.50', '#202125')(props),
       },
     }),
   },
