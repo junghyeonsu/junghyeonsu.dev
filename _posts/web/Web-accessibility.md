@@ -1,5 +1,5 @@
 ---
-title: '웹 접근성에 대해서'
+title: '웹 접근성 (Web Accessibility)'
 description: '접근성이 좋은 웹은 무엇일까'
 coverImage: '/assets/blog/web/Web-accessibility/cover.png'
 category: '웹'
@@ -171,8 +171,174 @@ a:active {
 
 > `aria-블라블라` 와 같은 속성들을 보셨나요?
 
+`WAI-ARIA`는 브라우저가 인식할 수 있고, 웹을 사용하는 사용자들에게 진행 상황을 알리는데 사용할 수 있는 특성을 부여해서 접근성을 향상시킬 수 있는 기술입니다.
+
+`WAI-ARIA`는 `W3C`에서 작성한 사양으로, HTML 요소에 적용할 수 있는 추가 HTML 속성 집합을 작성해서 추가 의미 체계를 제공하고 부족할 때마다 접근성을 개선합니다. 세 가지 주요 기능을 간단히 살펴보겠습니다.
+
+### Roles
+
+> HTML 요소의 역할이 무엇인지 정의할 수 있는 속성입니다.
+
+`role="navigation"`, `role="complementary"`, `role="banner"`, `role="search"`, `role="tablist"`, `role="tab"` 등과 같은 속성이 있습니다.
+
+### Properties
+
+> HTML 요소의 추가 의미 또는 의미를 부여하는데 사용할 수 있는 속성입니다.
+
+`aria-required="true"`와 같은 속성을 넣어서 form 입력이 필수적으로 입력되게 할 수도 있습니다. `aria-labelledby="label"` 와 같이 테이블 셀의 레이블을 지정할 수도 있습니다.
+
+### States
+
+> 상태는 자바스크립트에 의해 변경될 수 있는 속성을 말합니다.
+
+`aria-disabled="true"`와 같이 form 입력이 비활성화 되어있는지, 활성화되어 있는지 정의할 수 있습니다.
+
+## WAI-ARIA를 사용해야 하는 상황
+
+### Signposts & Landmarks (이정표 & 랜드마크)
+
+> 스크린리더에게 정보를 제공하여 사용자가 공통 페이지 요소를 찾을 수 있도록 할 수 있습니다.
+
+```html
+<header>
+  <h1>...</h1>
+  <nav>
+    <ul>
+      ...
+    </ul>
+    <form>
+      <!-- search form  -->
+    </form>
+  </nav>
+</header>
+
+<main>
+  <article>...</article>
+  <aside>...</aside>
+</main>
+
+<footer>...</footer>
+```
+
+위와 같이 하는 것 보다는 아래와 같이 해보세요
+
+```html
+<header>
+  <h1>...</h1>
+  <nav role="navigation">
+    <ul>
+      ...
+    </ul>
+    <form role="search">
+      <!-- search form  -->
+    </form>
+  </nav>
+</header>
+
+<main>
+  <article role="article">...</article>
+  <aside role="complementary">...</aside>
+</main>
+
+<footer>...</footer>
+```
+
+각 요소에 역할을 부여해서 스크린리더 사용자가 조금 더 접근하기 쉽도록 만들 수 있습니다.
+
+또한 `input` 태그에는 `label` 속성을 부여해서 스크린리더가 읽을 수 있는 설명 레이블을 제공합니다.
+
+```html
+<input type="search" name="q" placeholder="Search query" aria-label="Search through site content" />
+```
+
+### Dynamic content updates (동적 컨텐츠 업데이트)
+
+> 웹 사이트는 보통 정적이기 보다는 `fetch`, `DOM API`, `XMLHttpRequest`를 통한 동적 컨텐츠를 받아오는 사이트가 많습니다. 컨텐츠 업데이트는 스크린 리더에 의해 감지되지 않으므로 무슨 일이 일어나고 있는지 알려 줄 필요가 있습니다.
+
+```html
+<section>
+  <h1>Random quote</h1>
+  <blockquote>
+    <p></p>
+  </blockquote>
+</section>
+```
+
+위와 같은 코드는 아래와 같이 바꿀 수 있습니다.
+
+```html
+<!-- 1. -->
+<section aria-live="assertive"></section>
+
+<!-- 2. -->
+<section aria-live="assertive" aria-atomic="true"></section>
+```
+
+`aria-live` 속성을 조절해서 스크린리더가 컨텐츠를 얼마나 빠르게 읽을 지 결정할 수 있습니다.
+
+- `off`: 기본 값입니다. 업데이트를 알리지 않습니다.
+- `polite`: 사용자가 `idle` 상태일 때만 컨텐츠 업데이트를 알립니다.
+- `assertive`: 업데이트 가능한 한 빠른 시간내에 사용자에게 알려집니다.
+
+또한 `aria-atomic` 속성을 이용하면 전체 요소 내용을 하나의 원자 단위로 읽도록 지시할 수 있습니다. 하나의 묶음 단위로 컨텐츠를 제공하는 것 같습니다.
+
+### Enhancing keyboard accessibility (키보드 접근성 향상)
+
+> 키보드를 이용해서 Enter/Return 키를 사용해서 컨트롤하고, 활성화 할 수 있으며 위아래로 이동할 수 있습니다.
+
+- `tabindex="0"` 와 같이 `tabindex` 속성을 이용하면 `tab`을 이용해서 포커스를 할 수 있는 요소의 순서를 정할 수 있습니다.
+
+### Describing non-semantic buttons as buttons (의미 없는 버튼을 버튼으로 설정하기)
+
+> 아래의 예제보단 그냥 일반적인 button을 사용하는 것이 더 좋습니다.
+
+```html
+<div data-message="This is from the first button" tabindex="0" role="button">Click me!</div>
+```
+
+### Guiding users through complex widgets (복잡한 위젯을 통해 사용자 안내)
+
+> 시멘틱 태그를 이용해서 구성하는 것도 좋지만, `article`, `section`과 같은 태그들로는 설명이 충분하지 않을 수 있습니다. 그럴 땐 더 많은 내용을 제공하는 것은 항상 좋다고 합니다.
+
+```html
+<ul role="tablist">
+  <li
+    class="active"
+    role="tab"
+    aria-selected="true"
+    aria-setsize="3"
+    aria-posinset="1"
+    tabindex="0"
+  >
+    Tab 1
+  </li>
+  <li role="tab" aria-selected="false" aria-setsize="3" aria-posinset="2" tabindex="0">Tab 2</li>
+  <li role="tab" aria-selected="false" aria-setsize="3" aria-posinset="3" tabindex="0">Tab 3</li>
+</ul>
+<div class="panels">
+  <article class="active-panel" role="tabpanel" aria-hidden="false">...</article>
+  <article role="tabpanel" aria-hidden="true">...</article>
+  <article role="tabpanel" aria-hidden="true">...</article>
+</div>
+```
+
+- `aria-selected`: 현재 선택되어 있는 탭을 정의합니다. 사용자가 다른 탭을 선택하면 자바스크립트에 의해 자동적으로 변합니다.
+- `aria-hidden`: 스크린 리더가 읽지 못하도록 숨깁니다.
+- `tabindex`: 위에서 설명한 것과 똑같습니다. 탭 했을 때의 인덱스를 설정합니다.
+- `aria-setsize`: 이 속성을 사용하면 요소가 시리즈의 일부이고 시리즈에 포함된 항목 수를 스크린리더에 지정할 수 있습니다.
+- `aria-posinset`: 이 속성을 사용하면 요소가 시리즈에서 어떤 위치에 있는지 지정할 수 있습니다.
+
+# 마무리
+
+평소에 개발을 하면 자신의 위주의 시각에서 잘 벗어나지 못합니다. 다른 사람의 입장이 되어서 어떨 때 불편한지, 어떤 것이 부족한 지 지속적으로 생각하고 개선을 해야할 것 같습니다.
+
+`WAI-ARIA`가 이렇게 많은 속성이 있는지도 몰랐고 `CSS`, `HTML`, `JavaScript` 을 이용해서 개선할 수 있는 방향이 이렇게 다양하다는 것도 정말 놀라웠습니다.
+
+위의 내용을 전부 익히고, 전부 적용할 수는 없겠지만 개발하는 매순간 적용할 수 있는 것들은 최대한 적용을 해야할 것 같습니다. 개발할 때 나중은 없으니까요.
+
 # 참고
 
 - [접근성 | MDN](https://developer.mozilla.org/ko/docs/Learn/Accessibility)
 - [HTML: A good basis for accessibility](https://developer.mozilla.org/ko/docs/Learn/Accessibility/HTML#text_alternatives)
 - [CSS and JavaScript accessibility best practices](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/CSS_and_JavaScript)
+- [WAI-ARIA basics](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/WAI-ARIA_basics#practical_wai-aria_implementations)
