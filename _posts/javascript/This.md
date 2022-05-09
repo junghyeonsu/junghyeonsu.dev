@@ -46,7 +46,7 @@ const circle = new Circle(5);
 
 # this는 호출 때 결정된다.
 
-![아니 호출할 때](/assets/blog/javascript/this/1.png)_this는 호출 때 결정된다고!!!_
+![아니 호출할 때](/assets/blog/javascript/This/1.png)_this는 호출 때 결정된다고!!!_
 
 > 자바스크립트의 this는 함수가 호출되는 방식에 따라 this가 달라집니다. 그러니까 동적으로 결정됩니다.
 
