@@ -35,7 +35,7 @@ const PostCard = ({ post }: Props) => {
           css={{
             '&:hover': {
               img: {
-                transform: 'scale(1.15)',
+                transform: 'scale(1.09)',
               },
             },
           }}
