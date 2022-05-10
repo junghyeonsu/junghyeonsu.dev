@@ -1,9 +1,25 @@
 // import { ColorModeScript } from '@chakra-ui/react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { renderStatic } from '../lib/renderer';
 
 // import theme from '../styles/theme';
 
 export default class MyDocument extends Document {
+  static async getInitialProps(ctx: any) {
+    const page = await ctx.renderPage();
+    const { css, ids } = await renderStatic(page.html);
+    const initialProps = await Document.getInitialProps(ctx);
+    return {
+      ...initialProps,
+      styles: [
+        <>
+          {initialProps.styles}
+          <style data-emotion={`css ${ids.join(' ')}`} dangerouslySetInnerHTML={{ __html: css }} />
+        </>,
+      ],
+    };
+  }
+
   render() {
     return (
       <Html lang="ko">
@@ -35,7 +51,6 @@ export default class MyDocument extends Document {
           <meta name="naver-site-verification" content="e7d38efb01c531754d6451648bcf717de8faf98e" />
         </Head>
         <body>
-          {/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
           <Main />
           <NextScript />
         </body>
