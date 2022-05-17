@@ -17,6 +17,7 @@
     "framer-motion": "^6",
     "gray-matter": "^4.0.3",
     "next": "latest",
+    "nextjs-progressbar": "^0.0.14",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-markdown": "^8.0.2",

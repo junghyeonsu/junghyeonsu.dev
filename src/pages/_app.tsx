@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AppProps } from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
 
 import { Layout } from '../components';
 import { Chakra } from '../components/Chakra';
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Chakra cookies={pageProps.cookies}>
         <Layout>
+          <NextNProgress color="#68D391" height={2} />
           <Component {...pageProps} />
         </Layout>
       </Chakra>
