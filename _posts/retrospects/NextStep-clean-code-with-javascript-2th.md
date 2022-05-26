@@ -134,8 +134,6 @@ _그냥 공부하고 적용해보지 뭐._
 
 로컬스토리지를 `getItem` 메서드를 사용할 때는 `key` 값이 없을 때 null에 대한 처리를 해주어야 합니다. 그 때 로컬스토리지를 사용하는 코드에서 예외처리를 하는 것 보다, 로컬스토리지 관련 코드들이 들어있는 유틸 함수들에서 처리를 해주고 사용하는 곳에서는 예외를 신경쓰지 않는 것이 깔끔합니다.
 
----
-
 ![나의 취향은?](/assets/blog/retrospects/NextStep-clean-code-with-javascript-2th/3.png)_나의 취향은?_
 
 사실 변명을 하자면 제가 `onclick` 메서드와 `addEventListener`를 혼용해서 사용한 것은 그냥 아무 이유없이 그런 것은 아닙니다.
@@ -148,8 +146,6 @@ _그냥 공부하고 적용해보지 뭐._
 다음과 같은 이유로 둘을 나누어서 사용하려고 했습니다. 그런데 여러 측면에서 고민해보고 적용할 필요가 있다고 생각합니다. 위의 이유 말고도 [@yujo](https://github.com/yujo11) 멘토님께서 리뷰해주신 부분도 인상깊었습니다.
 
 ![addEventListenr vs inline](/assets/blog/retrospects/NextStep-clean-code-with-javascript-2th/7.png)_addEventListenr vs inline_
-
----
 
 ![else if vs if](/assets/blog/retrospects/NextStep-clean-code-with-javascript-2th/4.png)_else if vs if_
 

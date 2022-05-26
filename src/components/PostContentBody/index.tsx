@@ -136,6 +136,10 @@ const CustomComponents = {
       <code>{children}</code>
     );
   },
+  img({ ...props }) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={props.src} alt={props.alt} loading="lazy" />;
+  },
 };
 
 const PostContentBody = ({ content }: BodyProps) => {
