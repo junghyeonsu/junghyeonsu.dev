@@ -22,6 +22,8 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
   const [currentCategory, setCurrentCategory] = useState('전체');
   const mediaQuery = useMediaQuery();
 
+  if (!mediaQuery) return null;
+
   return (
     <>
       <Head>
@@ -44,7 +46,7 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
           flexWrap="wrap"
           columnGap="10px"
           rowGap="10px"
-          width={mediaQuery?.isLargerThan900 ? '840px' : '90vw'}
+          width={mediaQuery.isLargerThan900 ? '840px' : '90vw'}
           marginTop="20px"
           as="nav"
         >
@@ -62,11 +64,11 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
             />
           ))}
         </Box>
-        <Divider width={mediaQuery?.isLargerThan900 ? '840px' : '90vw'} margin="20px" />
+        <Divider width={mediaQuery.isLargerThan900 ? '840px' : '90vw'} margin="20px" />
         <Box
           as="section"
           marginBottom="50px"
-          width={mediaQuery?.isLargerThan900 ? '880px' : '90vw'}
+          width={mediaQuery.isLargerThan900 ? '880px' : '90vw'}
           display="flex"
           flexWrap="wrap"
         >
