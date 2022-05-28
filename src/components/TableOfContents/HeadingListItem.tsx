@@ -28,7 +28,7 @@ const HeadingListItem = (props: CommonHeadingListItemProps) => {
   switch (nodeName) {
     case 'H1':
       return (
-        <Box as="li" sx={sx} fontSize="14px">
+        <Box as="li" sx={sx} fontSize="12.5px">
           <Text as="a" href={`#${id}`}>
             {text}
           </Text>
@@ -36,7 +36,7 @@ const HeadingListItem = (props: CommonHeadingListItemProps) => {
       );
     case 'H2':
       return (
-        <Box as="li" sx={sx} fontSize="13px" left="20px">
+        <Box as="li" sx={sx} fontSize="12px" left="20px">
           <Text as="a" href={`#${id}`}>
             {text}
           </Text>
@@ -44,7 +44,7 @@ const HeadingListItem = (props: CommonHeadingListItemProps) => {
       );
     case 'H3':
       return (
-        <Box as="li" sx={sx} fontSize="12px" left="40px">
+        <Box as="li" sx={sx} fontSize="11px" left="40px">
           <Text as="a" href={`#${id}`}>
             {text}
           </Text>
