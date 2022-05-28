@@ -27,6 +27,7 @@ const TableOfContents = () => {
       const { nodeName, childNodes, id } = heading;
       return { nodeName, id, text: childNodes[0].textContent };
     });
+    headingElementsTexts.shift();
     setNestedHeadings(headingElementsTexts);
   }, []);
 
