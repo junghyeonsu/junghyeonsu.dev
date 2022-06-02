@@ -14,7 +14,7 @@ import {
 import useMediaQuery from '../../hooks/useMediaQuery';
 import useReadingTime from '../../hooks/useReadingTime';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
-import { CONTENT_ELEMENTS } from '../../constants';
+import { CONTENT_ELEMENTS, DOMAIN } from '../../constants';
 
 import type PostType from '../../types/post';
 
@@ -52,10 +52,10 @@ const Post = ({ post }: Props) => {
             <title>{post.title} | 정현수 기술 블로그</title>
             <meta property="og:site_name" content="정현수 기술 블로그" />
 
-            <meta property="og:image" content={post.coverImage} />
+            <meta property="og:image" content={`${DOMAIN}${post.coverImage}`} />
             <meta property="og:title" content={`${post.title} | 정현수 기술 블로그`} />
 
-            <meta name="og:description" content={post.description} />
+            <meta property="og:description" content={post.description} />
             <meta name="twitter:description" content={post.description} />
 
             <meta name="twitter:label1" content="Category" />
@@ -70,10 +70,7 @@ const Post = ({ post }: Props) => {
             />
 
             <meta name="twitter:card" content="summary_large_image" />
-            <meta
-              name="twitter:image"
-              content={`https://junghyeonsu-dev.vercel.app/posts/${post.slug}`}
-            />
+            <meta name="twitter:image" content={`${DOMAIN}${post.coverImage}`} />
             <meta
               property="og:url"
               content={`https://junghyeonsu-dev.vercel.app/posts/${post.slug}`}

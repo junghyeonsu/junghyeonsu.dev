@@ -1,3 +1,5 @@
+export const DOMAIN = 'https://junghyeonsu-dev.vercel.app';
+
 export const FRAMER_TRANSITION = {
   type: 'spring',
   stiffness: 200,
