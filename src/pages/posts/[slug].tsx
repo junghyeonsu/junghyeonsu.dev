@@ -48,10 +48,30 @@ const Post = ({ post }: Props) => {
         <Section as="section">
           <Head>
             <title>{post.title} | 정현수 기술 블로그</title>
+            <meta property="og:site_name" content="정현수 기술 블로그" />
+
             <meta property="og:image" content={post.coverImage} />
             <meta property="og:title" content={`${post.title} | 정현수 기술 블로그`} />
-            <meta property="og:description" content={post.description} />
-            <meta property="og:type" content="article" />
+
+            <meta name="og:description" content={post.description} />
+            <meta name="twitter:description" content={post.description} />
+
+            <meta name="twitter:label1" content="Category1" />
+            <meta name="twitter:data1" content="개발" />
+
+            <meta name="twitter:label2" content="Category2" />
+            <meta name="twitter:data2" content={post.category} />
+
+            <meta
+              name="article:published_time"
+              content={`${post.date.replace(/[/]/g, '-')}T09:00:00.000Z`}
+            />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta
+              name="twitter:image"
+              content={`https://junghyeonsu-dev.vercel.app/posts/${post.slug}`}
+            />
             <meta
               property="og:url"
               content={`https://junghyeonsu-dev.vercel.app/posts/${post.slug}`}
