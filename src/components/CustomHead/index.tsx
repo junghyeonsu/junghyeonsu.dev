@@ -6,11 +6,10 @@ import type PostType from '../../types/post';
 
 interface CustomHeadInterface {
   post?: PostType;
-  readingTime?: number;
   type: 'posting' | 'main';
 }
 
-const CustomHead = ({ post, readingTime, type }: CustomHeadInterface) => {
+const CustomHead = ({ post, type }: CustomHeadInterface) => {
   return type === 'posting' ? (
     <Head>
       <title>{post?.title} | 정현수 기술 블로그</title>
@@ -24,9 +23,6 @@ const CustomHead = ({ post, readingTime, type }: CustomHeadInterface) => {
 
       <meta name="twitter:label1" content="Category" />
       <meta name="twitter:data1" content={`개발 | ${post?.category}`} />
-
-      <meta name="twitter:label2" content="Time to read" />
-      <meta name="twitter:data2" content={`${readingTime?.toString()} minutes`} />
 
       <meta
         name="article:published_time"

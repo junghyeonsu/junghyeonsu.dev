@@ -40,7 +40,7 @@ const Post = ({ post }: Props) => {
     return <div>statusCode 404</div>; // TODO: 에러 페이지 만들기
   }
 
-  if (!mediaQuery) return <CustomHead post={post} readingTime={readingTime} type="posting" />;
+  if (!mediaQuery) return <CustomHead post={post} type="posting" />;
 
   return (
     <>
@@ -48,7 +48,7 @@ const Post = ({ post }: Props) => {
         <div>Loading…</div> // TODO: 로딩 페이지 만들기
       ) : (
         <Section as="section">
-          <CustomHead post={post} readingTime={readingTime} type="posting" />
+          <CustomHead post={post} type="posting" />
           <PostContentContainer>
             {mediaQuery?.isLargerThan1400 && <TableOfContents />}
             <PostContentTitle
