@@ -5,6 +5,7 @@ interface Props {
   date: string;
   coverImage: string;
   category: string;
+  readingTime: number;
 }
 
 const Img = chakra(Image, {
@@ -13,7 +14,7 @@ const Img = chakra(Image, {
   },
 });
 
-const PostContentTitle = ({ title, date, category, coverImage }: Props) => {
+const PostContentTitle = ({ title, date, category, coverImage, readingTime }: Props) => {
   return (
     <Box
       as="article"
@@ -29,6 +30,7 @@ const PostContentTitle = ({ title, date, category, coverImage }: Props) => {
       <Box display="flex" columnGap="10px">
         <Badge fontSize="14px">{date}</Badge>
         <Badge fontSize="14px">{category}</Badge>
+        <Badge fontSize="14px">{`${readingTime} minutes`}</Badge>
       </Box>
       <Img
         draggable="false"

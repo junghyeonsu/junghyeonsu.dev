@@ -11,11 +11,12 @@ import {
   TableOfContents,
 } from '../../components';
 
-import type PostType from '../../types/post';
-
 import useMediaQuery from '../../hooks/useMediaQuery';
+import useReadingTime from '../../hooks/useReadingTime';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import { CONTENT_ELEMENTS } from '../../constants';
+
+import type PostType from '../../types/post';
 
 interface Props {
   post: PostType;
@@ -33,6 +34,7 @@ const Section = chakra(Box, {
 const Post = ({ post }: Props) => {
   const router = useRouter();
   const mediaQuery = useMediaQuery();
+  const { readingTime } = useReadingTime(post.content);
 
   if (!router.isFallback && !post?.slug) {
     return <div>statusCode 404</div>; // TODO: 에러 페이지 만들기
@@ -56,11 +58,11 @@ const Post = ({ post }: Props) => {
             <meta name="og:description" content={post.description} />
             <meta name="twitter:description" content={post.description} />
 
-            <meta name="twitter:label1" content="Category1" />
-            <meta name="twitter:data1" content="개발" />
+            <meta name="twitter:label1" content="Category" />
+            <meta name="twitter:data1" content={`개발 | ${post.category}`} />
 
-            <meta name="twitter:label2" content="Category2" />
-            <meta name="twitter:data2" content={post.category} />
+            <meta name="twitter:label2" content="Time to read" />
+            <meta name="twitter:data2" content={`${readingTime.toString()} minutes`} />
 
             <meta
               name="article:published_time"
@@ -84,6 +86,7 @@ const Post = ({ post }: Props) => {
               category={post.category}
               date={post.date}
               coverImage={post.coverImage}
+              readingTime={readingTime}
             />
             <PostContentBody content={post.content} />
             <Giscus />
