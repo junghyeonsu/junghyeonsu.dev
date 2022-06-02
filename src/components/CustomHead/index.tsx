@@ -42,8 +42,8 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta name="twitter:title" content="정현수 기술 블로그" />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={`${DOMAIN}/profile.jpeg`} />
-      <meta property="og:image" content={`${DOMAIN}/profile.jpeg`} />
+      <meta name="twitter:image" content="/profile.jpeg" />
+      <meta property="og:image" content="/profile.jpeg" />
 
       <meta property="og:description" content="공부한 것들을 정리해서 올립니다." />
       <meta name="twitter:description" content="공부한 것들을 정리해서 올립니다." />
