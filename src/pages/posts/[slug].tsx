@@ -1,6 +1,5 @@
 import { GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { Box, chakra } from '@chakra-ui/react';
 
 import {
@@ -9,12 +8,13 @@ import {
   PostContentContainer,
   Giscus,
   TableOfContents,
+  CustomHead,
 } from '../../components';
 
 import useMediaQuery from '../../hooks/useMediaQuery';
 import useReadingTime from '../../hooks/useReadingTime';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
-import { CONTENT_ELEMENTS, DOMAIN } from '../../constants';
+import { CONTENT_ELEMENTS } from '../../constants';
 
 import type PostType from '../../types/post';
 
@@ -40,7 +40,7 @@ const Post = ({ post }: Props) => {
     return <div>statusCode 404</div>; // TODO: 에러 페이지 만들기
   }
 
-  if (!mediaQuery) return null;
+  if (!mediaQuery) return <CustomHead post={post} readingTime={readingTime} type="posting" />;
 
   return (
     <>
@@ -48,34 +48,7 @@ const Post = ({ post }: Props) => {
         <div>Loading…</div> // TODO: 로딩 페이지 만들기
       ) : (
         <Section as="section">
-          <Head>
-            <title>{post.title} | 정현수 기술 블로그</title>
-            <meta property="og:site_name" content="정현수 기술 블로그" />
-
-            <meta property="og:image" content={`${DOMAIN}${post.coverImage}`} />
-            <meta property="og:title" content={`${post.title} | 정현수 기술 블로그`} />
-
-            <meta property="og:description" content={post.description} />
-            <meta name="twitter:description" content={post.description} />
-
-            <meta name="twitter:label1" content="Category" />
-            <meta name="twitter:data1" content={`개발 | ${post.category}`} />
-
-            <meta name="twitter:label2" content="Time to read" />
-            <meta name="twitter:data2" content={`${readingTime.toString()} minutes`} />
-
-            <meta
-              name="article:published_time"
-              content={`${post.date.replace(/[/]/g, '-')}T09:00:00.000Z`}
-            />
-
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content={`${DOMAIN}${post.coverImage}`} />
-            <meta
-              property="og:url"
-              content={`https://junghyeonsu-dev.vercel.app/posts/${post.slug}`}
-            />
-          </Head>
+          <CustomHead post={post} readingTime={readingTime} type="posting" />
           <PostContentContainer>
             {mediaQuery?.isLargerThan1400 && <TableOfContents />}
             <PostContentTitle
