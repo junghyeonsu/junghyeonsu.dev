@@ -53,7 +53,7 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta property="og:description" content="공부한 것들을 정리해서 올립니다." />
       <meta
         property="og:image"
-        content="https://github.com/junghyeonsu/junghyeonsu.dev//blob/main/public/profile.jpeg?raw=true"
+        content="https://github.com/junghyeonsu/junghyeonsu.dev/blob/main/public/profile.jpeg?raw=true"
       />
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -63,7 +63,7 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta name="twitter:description" content="공부한 것들을 정리해서 올립니다." />
       <meta
         name="twitter:image"
-        content="https://github.com/junghyeonsu/junghyeonsu.dev//blob/main/public/profile.jpeg?raw=true"
+        content="https://github.com/junghyeonsu/junghyeonsu.dev/blob/main/public/profile.jpeg?raw=true"
       />
       <meta name="twitter:label1" content="Category" />
       <meta name="twitter:data1" content="개발" />
