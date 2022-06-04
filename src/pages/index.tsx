@@ -21,7 +21,7 @@ const IndexPage = ({ allPosts, categoies }: Props) => {
   const [currentCategory, setCurrentCategory] = useState('전체');
   const mediaQuery = useMediaQuery();
 
-  if (!mediaQuery) return null;
+  if (!mediaQuery) return <CustomHead type="main" />;
 
   return (
     <>

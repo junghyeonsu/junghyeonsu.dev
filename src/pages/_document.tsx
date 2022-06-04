@@ -5,6 +5,7 @@ import { renderStatic } from '../lib/renderer';
 // import theme from '../styles/theme';
 
 export default class MyDocument extends Document {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static async getInitialProps(ctx: any) {
     const page = await ctx.renderPage();
     const { css, ids } = await renderStatic(page.html);
