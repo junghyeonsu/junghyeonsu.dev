@@ -63,6 +63,7 @@ export default class MyDocument extends Document {
             content="03tUkcTUQFs2twM6WNUdGdFy78xmlW1U0EfmTfRGCS8"
           />
           <meta name="naver-site-verification" content="e7d38efb01c531754d6451648bcf717de8faf98e" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <body>
           <Main />
