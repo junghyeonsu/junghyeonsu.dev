@@ -40,8 +40,6 @@ const Post = ({ post }: Props) => {
     return <div>statusCode 404</div>; // TODO: 에러 페이지 만들기
   }
 
-  if (!mediaQuery) return <CustomHead post={post} type="posting" />;
-
   return (
     <>
       {router.isFallback ? (
