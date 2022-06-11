@@ -48,7 +48,8 @@ const Content = styled.article<ContentProps>`
     margin-top: 28px;
 
     img {
-      margin-bottom: 10px;
+      width: 100%;
+      margin-bottom: auto 10px;
       pointer-events: none;
     }
 

@@ -14,6 +14,7 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
     <Head>
       {/* HTML Meta Tags */}
       <title>{post?.title} | 정현수 기술 블로그</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {/* Facebook Meta Tags */}
       <meta property="og:url" content={`https://junghyeonsu-dev.vercel.app/posts/${post?.slug}`} />
@@ -45,6 +46,7 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       {/* HTML Meta Tags */}
       <title>정현수 기술 블로그</title>
       <meta name="description" content="공부한 것들을 정리해서 올립니다." />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* Facebook Meta Tags */}
       <meta property="og:url" content="https://junghyeonsu-dev.vercel.app/" />
       <meta property="og:type" content="website" />

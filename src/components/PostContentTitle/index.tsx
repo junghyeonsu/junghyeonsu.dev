@@ -27,7 +27,7 @@ const PostContentTitle = ({ title, date, category, coverImage, readingTime }: Pr
       <Heading as="h1" marginBottom="3">
         {title}
       </Heading>
-      <Box display="flex" columnGap="10px">
+      <Box display="flex" columnGap="10px" rowGap="10px" flexWrap="wrap">
         <Badge fontSize="14px">{date}</Badge>
         <Badge fontSize="14px">{category}</Badge>
         <Badge fontSize="14px">{`${readingTime} minutes`}</Badge>
