@@ -4,13 +4,13 @@ import { Box, Divider } from '@chakra-ui/react';
 
 import { PostCard, CategoryChangeButton, CustomHead } from '../components';
 
-import type Post from '../types/post';
-
 import { CONTENT_ELEMENTS } from '../constants';
 import { getAllPosts } from '../lib/api';
 import { generateRssFeed } from '../scripts/rss';
 import { generateSiteMap } from '../scripts/sitemap';
 import useMediaQuery from '../hooks/useMediaQuery';
+
+import type Post from '../types/post';
 
 interface Props {
   allPosts: Post[];
