@@ -13,6 +13,7 @@ import {
 
 import useMediaQuery from '../../hooks/useMediaQuery';
 import useReadingTime from '../../hooks/useReadingTime';
+import usePageProgress from '../../hooks/usePageProgress';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
 import { CONTENT_ELEMENTS } from '../../constants';
 
@@ -35,6 +36,9 @@ const Post = ({ post }: Props) => {
   const router = useRouter();
   const mediaQuery = useMediaQuery();
   const { readingTime } = useReadingTime(post.content);
+  const { progress } = usePageProgress();
+
+  console.log(progress);
 
   if (!router.isFallback && !post?.slug) {
     return <div>statusCode 404</div>; // TODO: 에러 페이지 만들기
