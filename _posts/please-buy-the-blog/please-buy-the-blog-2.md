@@ -1,5 +1,5 @@
 ---
-title: '블로그는 사드세요... 제발 2편: 내 블로그 검색되게 하기'
+title: '블로그는 사드세요... 제발 2편: 내 블로그 검색되게 하기(서치 콘솔 등록하기)'
 description: '내 블로그가 검색되게 해볼게- 얍!'
 coverImage: '/assets/blog/please-buy-the-blog/2/cover.png'
 category: '블로그는 제발 사드세요'

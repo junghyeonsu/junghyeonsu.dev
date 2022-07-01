@@ -1,5 +1,5 @@
 ---
-title: '블로그는 사드세요... 제발 1편: 블로그 구색 갖추기'
+title: '블로그는 사드세요... 제발 1편: 블로그 구색 갖추기(Next.js로 블로그 포스팅 구현하기)'
 description: '그냥 웹 사이트가 블로그처럼 보이는 마법'
 coverImage: '/assets/blog/please-buy-the-blog/1/cover.png'
 category: '블로그는 제발 사드세요'

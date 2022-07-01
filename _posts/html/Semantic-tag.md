@@ -1,5 +1,5 @@
 ---
-title: '시멘틱 태그에 대해서'
+title: 'HTML 시멘틱 태그에 대해서'
 description: '의미에 맞는 태그를 작성해보자'
 coverImage: '/assets/blog/html/Semantic-tag/cover.png'
 category: 'HTML'

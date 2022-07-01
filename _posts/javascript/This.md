@@ -1,5 +1,5 @@
 ---
-title: 'this는 호출 때 결정된다.'
+title: '자바스크립트 this는 호출 때 결정된다.'
 description: 'javascript의 this는 호출 때 결정된다니까!?'
 coverImage: '/assets/blog/javascript/This/cover.png'
 category: '자바스크립트'

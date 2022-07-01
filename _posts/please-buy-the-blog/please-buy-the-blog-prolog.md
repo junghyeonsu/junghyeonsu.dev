@@ -1,5 +1,5 @@
 ---
-title: '블로그는 사드세요... 제발 프롤로그: 블로그를 만들자'
+title: '블로그는 사드세요... 제발 프롤로그: 블로그 만들기'
 description: '블로그를 만드는 이유와 개발환경에 대해서'
 coverImage: '/assets/blog/please-buy-the-blog/prolog/cover.png'
 category: '블로그는 제발 사드세요'

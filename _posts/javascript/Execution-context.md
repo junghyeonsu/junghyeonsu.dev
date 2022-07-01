@@ -1,5 +1,5 @@
 ---
-title: '실행 컨텍스트 딥다이브'
+title: '자바스크립트 실행 컨텍스트 딥다이브'
 description: '딥다이브 실행 컨텍스트 파트를 읽고'
 coverImage: '/assets/blog/javascript/Execution-context/cover.png'
 category: '자바스크립트'
