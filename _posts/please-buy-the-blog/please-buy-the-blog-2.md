@@ -115,7 +115,7 @@ Sitemap: https://junghyeonsu-dev.vercel.app/sitemap.xml
 
 # 검색해보자
 
-![검색](/assets/blog/please-buy-the-blog/2/5.png)_검색 되어버린 모습_
+![검색](/assets/blog/please-buy-the-blog/2/6.png)_검색 되어버린 모습_
 
 각종 포털 사이트들의 웹 마스터 도구를 적절히 사용해서 우리의 블로그를 검색되도록 했습니다.
 
