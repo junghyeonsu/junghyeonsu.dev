@@ -1,10 +1,10 @@
 ---
-title: '인턴 중간 회고'
-description: '인턴을 하면서 느꼈던 것들과 앞으로의 방향성에 대해서'
-coverImage: '/assets/blog/retrospects/Daangn-intern-middle-retrospect/cover.png'
-category: '회고'
-date: '2022/08/07'
-path: 'retrospects'
+title: "당근마켓 인턴 중간 회고"
+description: "당근마켓 인턴을 하면서 느꼈던 것들과 앞으로의 방향성에 대해서"
+coverImage: "/assets/blog/retrospects/Daangn-intern-middle-retrospect/cover.png"
+category: "회고"
+date: "2022/08/07"
+path: "retrospects"
 ---
 
 # 인턴을 진행하면서 느낀 것들
@@ -64,14 +64,14 @@ path: 'retrospects'
 
 - `command line interface` 라이브러리를 개발해봤다.
 - `commander` 라이브러리를 이용하면 명령어와 같은 설정들을 할 수 있고, `chalk`를 이용하면 텍스트에 색을 입히고 꾸밀 수 있다.
-- 우리가 `cli`로 파일 입출력을 해야됐는데, `create-react-app`과 같은 명령어들이 어떤식으로 동작하는지 대충은 알 것 같다.  
+- 우리가 `cli`로 파일 입출력을 해야됐는데, `create-react-app`과 같은 명령어들이 어떤식으로 동작하는지 대충은 알 것 같다.
 
 ### devops
 
 - docker가 왜 필요한지 조금 더 깊게 이해한 것 같다.
-	- ?: 제가 만든 서버를 동료의 로컬에 실행시켜서 개발하게끔 하고 싶은데 어떻게 해야할까요?
-	- ??: 그거 도커로 감싸서 주면 되지 않을까요?
-	- (귀찮은 세팅들을 안 할 수 있다.)
+  - ?: 제가 만든 서버를 동료의 로컬에 실행시켜서 개발하게끔 하고 싶은데 어떻게 해야할까요?
+  - ??: 그거 도커로 감싸서 주면 되지 않을까요?
+  - (귀찮은 세팅들을 안 할 수 있다.)
 - docker, docker-compose를 조금 더 과감하게 사용할 수 있었다. 근데 로컬에서 개발할 때 docker-compose로 컨테이너 띄워서 mongodb를 사용했는데 이 방식은 영속성을 지켜주지 않아서 개발 서버용 db를 프로비저닝을 해야할 것 같다.
 
 ### common
@@ -143,7 +143,7 @@ path: 'retrospects'
 
 잘하는 사람들의 하이라이트만 보지말자. 잘한다는 것을 인정하고 그들한테서 배우자.
 
-## 공부하자 
+## 공부하자
 
 주말엔 회사 프로젝트보다는 회사 프로젝트와 연관된 기술 공부를 하던가, 새로운 지식 공부를 하자.
 
