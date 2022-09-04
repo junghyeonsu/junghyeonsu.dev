@@ -37,8 +37,9 @@ const TableOfContents = () => {
       flexDirection="column"
       position="fixed"
       width={`calc((100vw - ${STYLE.CONTENT_WIDTH}) / 2 - 50px)`} // NOTE: ((전체 화면 사이즈 - 컨텐츠 사이즈) / 2) - 여분 px)
+      maxWidth="230px"
       height="80vh"
-      right="10px"
+      right="70px"
       top="150px"
       padding="0px 20px"
       as="nav"

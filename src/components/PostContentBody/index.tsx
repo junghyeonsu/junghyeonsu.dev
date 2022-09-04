@@ -19,6 +19,7 @@ const Content = styled.article<ContentProps>`
   position: relative;
   width: 100%;
   margin-bottom: 100px;
+  white-space: pre-line;
 
   h1,
   h2,
@@ -45,7 +46,7 @@ const Content = styled.article<ContentProps>`
 
   p {
     font-size: 16px;
-    margin-top: 28px;
+    /* margin-top: 28px; */
 
     img {
       width: 100%;
@@ -84,7 +85,7 @@ const Content = styled.article<ContentProps>`
     border-radius: 5px;
 
     p {
-      padding: 10px;
+      padding: 0px 25px;
     }
   }
 

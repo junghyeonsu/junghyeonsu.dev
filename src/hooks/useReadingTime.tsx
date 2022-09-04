@@ -15,7 +15,7 @@ const useReadingTime = (post: string): useReadingTimeInterface => {
         ONE_MINUTE_READ_WORD,
     );
 
-    setReadingTime(time);
+    setReadingTime(time + 1);
   }, [post]);
 
   return {
