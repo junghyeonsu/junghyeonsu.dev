@@ -1,7 +1,7 @@
 import { useColorMode } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { Header, Footer } from '../';
+import { Footer, Header } from '../';
 
 interface Props {
   children: React.ReactNode;

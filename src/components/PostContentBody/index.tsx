@@ -1,6 +1,7 @@
-import React from 'react';
-import { ColorMode, useColorMode } from '@chakra-ui/react';
+import { Box, ColorMode, useColorMode } from '@chakra-ui/react';
+import { Tooltip } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
@@ -28,7 +29,7 @@ const Content = styled.article<ContentProps>`
   h5,
   h6 {
     font-weight: bold;
-    margin-top: 45px;
+    margin-top: 30px;
     margin-bottom: 5px;
   }
 
@@ -54,12 +55,13 @@ const Content = styled.article<ContentProps>`
       pointer-events: none;
     }
 
-    img + em {
+    div + em {
       display: block;
       text-align: center;
       font-size: 14px;
       font-style: normal;
       opacity: 0.6;
+      margin-top: 20px;
       margin-bottom: 20px;
     }
 
@@ -102,6 +104,7 @@ const Content = styled.article<ContentProps>`
     position: relative;
     left: 10px;
     padding: 10px;
+    white-space: normal;
   }
 
   pre {
@@ -139,8 +142,21 @@ const CustomComponents = {
     );
   },
   img({ ...props }) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={props.src} alt={props.alt} loading="lazy" />;
+    return (
+      <Box shadow="sm">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={props.src} alt={props.alt} loading="lazy" />
+      </Box>
+    );
+  },
+  a({ ...props }) {
+    return (
+      <Tooltip hasArrow label={props.href}>
+        <a href={props.href} target="_blank" rel="noopener noreferrer">
+          {props.children}
+        </a>
+      </Tooltip>
+    );
   },
 };
 

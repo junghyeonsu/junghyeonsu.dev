@@ -1,21 +1,19 @@
+import { Box, chakra } from '@chakra-ui/react';
 import { GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import { Box, chakra } from '@chakra-ui/react';
 
 import {
-  PostContentBody,
-  PostContentTitle,
-  PostContentContainer,
-  Giscus,
-  TableOfContents,
   CustomHead,
+  Giscus,
+  PostContentBody,
+  PostContentContainer,
+  PostContentTitle,
+  TableOfContents,
 } from '../../components';
-
+import { CONTENT_ELEMENTS } from '../../constants';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import useReadingTime from '../../hooks/useReadingTime';
 import { getAllPosts, getPathBySlug, getPostBySlug } from '../../lib/api';
-import { CONTENT_ELEMENTS } from '../../constants';
-
 import type PostType from '../../types/post';
 
 interface Props {

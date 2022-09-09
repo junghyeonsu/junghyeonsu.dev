@@ -1,16 +1,14 @@
-import { useState } from 'react';
-import { GetStaticProps } from 'next';
 import { Box, Divider } from '@chakra-ui/react';
+import { GetStaticProps } from 'next';
+import { useState } from 'react';
 
-import { PostCard, CategoryChangeButton, CustomHead } from '../components';
-
-import type Post from '../types/post';
-
+import { CategoryChangeButton, CustomHead, PostCard } from '../components';
 import { CONTENT_ELEMENTS } from '../constants';
+import useMediaQuery from '../hooks/useMediaQuery';
 import { getAllPosts } from '../lib/api';
 import { generateRssFeed } from '../scripts/rss';
 import { generateSiteMap } from '../scripts/sitemap';
-import useMediaQuery from '../hooks/useMediaQuery';
+import type Post from '../types/post';
 
 interface Props {
   allPosts: Post[];

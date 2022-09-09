@@ -10,7 +10,7 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
   ],
-  plugins: ['prettier', '@typescript-eslint'],
+  plugins: ['prettier', '@typescript-eslint', 'simple-import-sort'],
   rules: {
     'prettier/prettier': [
       'error',
@@ -25,6 +25,8 @@ module.exports = {
         arrowParens: 'avoid',
       },
     ],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
     'no-unused-vars': 'error',
   },
   parserOptions: {

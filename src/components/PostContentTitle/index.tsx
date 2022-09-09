@@ -1,4 +1,4 @@
-import { Heading, Box, Image, chakra, Badge } from '@chakra-ui/react';
+import { Badge, Box, chakra, Heading, Image } from '@chakra-ui/react';
 
 interface Props {
   title: string;

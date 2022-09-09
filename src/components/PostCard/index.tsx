@@ -1,11 +1,10 @@
-import { useMemo } from 'react';
-import { Box, Heading, Text, Badge, useColorMode } from '@chakra-ui/react';
+import { Badge, Box, Heading, Text, useColorMode } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import type PostType from '../../types/post';
+import { useMemo } from 'react';
 
 import useMediaQuery from '../../hooks/useMediaQuery';
+import type PostType from '../../types/post';
 
 interface Props {
   post: PostType;

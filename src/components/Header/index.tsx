@@ -1,8 +1,9 @@
 import { Box, Spacer, useColorMode } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
+
+import RSS from '../RSS';
 import About from './About';
 import Logo from './Logo';
-import RSS from '../RSS';
 
 const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
   ssr: false,

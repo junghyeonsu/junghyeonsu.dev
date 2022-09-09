@@ -1,10 +1,9 @@
 import { Box, Text, useColorMode } from '@chakra-ui/react';
-import React, { useEffect, useState, memo, useMemo } from 'react';
-
-import useIntersectionObserver from './useIntersectionObserver';
-import HeadingListItem from './HeadingListItem';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 
 import { STYLE } from '../../constants';
+import HeadingListItem from './HeadingListItem';
+import useIntersectionObserver from './useIntersectionObserver';
 
 interface NestedHeadingType {
   nodeName: string;

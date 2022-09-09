@@ -1,7 +1,6 @@
 import Head from 'next/head';
 
 import { DOMAIN } from '../../constants';
-
 import type PostType from '../../types/post';
 
 interface CustomHeadInterface {

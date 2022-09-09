@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Button } from '@chakra-ui/react';
+import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   category: string;

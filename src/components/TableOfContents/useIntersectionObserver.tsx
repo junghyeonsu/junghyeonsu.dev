@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const useIntersectionObserver = (
   setActiveId: React.Dispatch<React.SetStateAction<string | undefined>>,

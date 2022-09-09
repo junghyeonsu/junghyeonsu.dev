@@ -1,13 +1,12 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { AppProps } from 'next/app';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import NextNProgress from 'nextjs-progressbar';
+import { useEffect } from 'react';
 
 import { Layout } from '../components';
 import { Chakra } from '../components/Chakra';
-
 import * as ga from '../lib/ga';
-import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

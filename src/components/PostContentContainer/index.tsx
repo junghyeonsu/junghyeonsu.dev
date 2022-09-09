@@ -1,8 +1,7 @@
 import { Box } from '@chakra-ui/react';
 
-import useMediaQuery from '../../hooks/useMediaQuery';
-
 import { STYLE } from '../../constants';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 interface Props {
   children: React.ReactNode;
