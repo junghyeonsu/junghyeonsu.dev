@@ -33,6 +33,8 @@ const PostContentTitle = ({ title, date, category, coverImage, readingTime }: Pr
         <Badge fontSize="14px">{`${readingTime} minutes`}</Badge>
       </Box>
       <Img
+        placeholder="blur"
+        blurDataURL="https://via.placeholder.com/400x240"
         draggable="false"
         objectFit="contain"
         src={coverImage}
