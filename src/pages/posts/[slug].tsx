@@ -31,7 +31,7 @@ const Section = chakra(Box, {
 
 const Post = ({ post }: Props) => {
   const router = useRouter();
-  const mediaQuery = useMediaQuery();
+  const { mounted, isLargerThan1400 } = useMediaQuery();
   const { readingTime } = useReadingTime(post.content);
 
   if (!router.isFallback && !post?.slug) {
@@ -43,21 +43,25 @@ const Post = ({ post }: Props) => {
       {router.isFallback ? (
         <div>Loading…</div> // TODO: 로딩 페이지 만들기
       ) : (
-        <Section as="section">
+        <>
           <CustomHead post={post} type="posting" />
-          <PostContentContainer>
-            {mediaQuery?.isLargerThan1400 && <TableOfContents />}
-            <PostContentTitle
-              title={post.title}
-              category={post.category}
-              date={post.date}
-              coverImage={post.coverImage}
-              readingTime={readingTime}
-            />
-            <PostContentBody content={post.content} />
-            <Giscus />
-          </PostContentContainer>
-        </Section>
+          {mounted && (
+            <Section as="section">
+              <PostContentContainer>
+                {isLargerThan1400 && <TableOfContents />}
+                <PostContentTitle
+                  title={post.title}
+                  category={post.category}
+                  date={post.date}
+                  coverImage={post.coverImage}
+                  readingTime={readingTime}
+                />
+                <PostContentBody content={post.content} />
+                <Giscus />
+              </PostContentContainer>
+            </Section>
+          )}
+        </>
       )}
     </>
   );
