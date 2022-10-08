@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import CustomHeading from './CustomHeading';
 
@@ -133,8 +133,35 @@ const CustomComponents = {
   },
   code({ className, children, ...props }: SyntaxHighlighterProps) {
     const match = /language-(\w+)/.exec(className || '');
+
+    if (match) {
+      console.log('props', props);
+      console.log('children', children);
+
+      console.log('className', className);
+    }
+
+    const ADDED = [1, 2];
+    const REMOVED = [6];
+
     return match ? (
-      <SyntaxHighlighter style={dracula} language={match[1]} PreTag="div" {...props}>
+      <SyntaxHighlighter
+        style={vscDarkPlus}
+        showLineNumbers
+        wrapLines
+        lineProps={lineNumber => {
+          const style = { display: 'block', backgroundColor: 'transparent' };
+          if (ADDED.includes(lineNumber)) {
+            style.backgroundColor = '#fff01769';
+          } else if (REMOVED.includes(lineNumber)) {
+            style.backgroundColor = '#ffecec';
+          }
+          return { style };
+        }}
+        language={match[1]}
+        PreTag="div"
+        {...props}
+      >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     ) : (
