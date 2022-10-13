@@ -1,4 +1,4 @@
-import { Badge, Box, Heading, Text, useColorMode } from '@chakra-ui/react';
+import { Badge, Box, Heading, Text, Tooltip, useColorMode } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
@@ -34,7 +34,7 @@ const PostCard = ({ post }: Props) => {
           css={{
             '&:hover': {
               img: {
-                transform: 'scale(1.09)',
+                transform: 'scale(1.02)',
               },
             },
           }}
@@ -64,9 +64,15 @@ const PostCard = ({ post }: Props) => {
               </Badge>
             )}
           </Box>
-          <Heading marginTop={2} fontSize={24}>
-            {title}
-          </Heading>
+          <Tooltip label={title} hasArrow>
+            <Heading
+              css={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
+              marginTop={2}
+              fontSize={24}
+            >
+              {title}
+            </Heading>
+          </Tooltip>
           <Text fontSize={16} color={isDarkMode ? 'whiteAlpha.600' : 'gray.600'} isTruncated>
             {description}
           </Text>
