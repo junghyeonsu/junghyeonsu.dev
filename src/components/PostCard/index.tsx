@@ -54,7 +54,7 @@ const PostCard = ({ post }: Props) => {
             layout="responsive"
           />
         </Box>
-        <Box padding={2}>
+        <Box minH={120} padding={2}>
           <Box display="flex" columnGap="10px">
             <Badge fontSize={14}>{date}</Badge>
             <Badge fontSize={14}>{category}</Badge>
@@ -65,15 +65,11 @@ const PostCard = ({ post }: Props) => {
             )}
           </Box>
           <Tooltip label={title} hasArrow>
-            <Heading
-              css={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
-              marginTop={2}
-              fontSize={24}
-            >
+            <Heading marginTop={2} fontSize={24} noOfLines={1}>
               {title}
             </Heading>
           </Tooltip>
-          <Text fontSize={16} color={isDarkMode ? 'whiteAlpha.600' : 'gray.600'} isTruncated>
+          <Text fontSize={16} color={isDarkMode ? 'whiteAlpha.600' : 'gray.600'} noOfLines={2}>
             {description}
           </Text>
         </Box>
