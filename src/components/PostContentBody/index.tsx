@@ -29,7 +29,7 @@ const Content = styled.article<ContentProps>`
   h5,
   h6 {
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 5px;
   }
 
@@ -47,7 +47,6 @@ const Content = styled.article<ContentProps>`
 
   p {
     font-size: 16px;
-    /* margin-top: 28px; */
 
     img {
       width: 100%;
@@ -61,7 +60,7 @@ const Content = styled.article<ContentProps>`
       font-size: 14px;
       font-style: normal;
       opacity: 0.6;
-      margin-top: 20px;
+      margin-top: 10px;
       margin-bottom: 20px;
     }
 
@@ -103,12 +102,12 @@ const Content = styled.article<ContentProps>`
   ol {
     position: relative;
     left: 10px;
-    padding: 10px;
+    padding-left: 10px;
     white-space: normal;
   }
 
   pre {
-    margin: 30px 0px;
+    margin: 10px 0px;
   }
 `;
 
