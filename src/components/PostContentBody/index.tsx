@@ -145,10 +145,12 @@ const CustomComponents = {
   img({ ...props }) {
     return (
       <Link href={props.src} passHref>
-        <Box shadow="sm">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={props.src} alt={props.alt} loading="lazy" />
-        </Box>
+        <a>
+          <Box shadow="sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={props.src} alt={props.alt} loading="lazy" />
+          </Box>
+        </a>
       </Link>
     );
   },
