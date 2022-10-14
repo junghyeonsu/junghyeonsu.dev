@@ -1,6 +1,7 @@
 import { Box, ColorMode, useColorMode } from '@chakra-ui/react';
 import { Tooltip } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
@@ -143,10 +144,12 @@ const CustomComponents = {
   },
   img({ ...props }) {
     return (
-      <Box shadow="sm">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={props.src} alt={props.alt} loading="lazy" />
-      </Box>
+      <Link href={props.src} passHref>
+        <Box shadow="sm">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={props.src} alt={props.alt} loading="lazy" />
+        </Box>
+      </Link>
     );
   },
   a({ ...props }) {
