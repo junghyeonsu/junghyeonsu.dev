@@ -39,6 +39,7 @@ const PostContentTitle = ({ title, date, category, coverImage, readingTime }: Pr
         src={coverImage}
         alt="cover image"
         marginTop="10"
+        marginBottom="10"
       />
     </Box>
   );

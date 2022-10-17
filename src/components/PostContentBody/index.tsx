@@ -26,29 +26,37 @@ const Content = styled.article<ContentProps>`
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: bold;
-    margin-top: 30px;
+  h4 {
     margin-bottom: 5px;
   }
 
   h1 {
     font-size: 30px;
+    font-weight: 900;
+    margin-top: 30px;
   }
 
   h2 {
     font-size: 26px;
+    font-weight: 800;
+    margin-top: 25px;
   }
 
   h3 {
     font-size: 23px;
+    font-weight: 800;
+    margin-top: 20px;
+  }
+
+  h4 {
+    font-size: 21px;
+    font-weight: 800;
+    margin-top: 15px;
   }
 
   p {
     font-size: 16px;
-    /* margin-top: 28px; */
+    line-height: 1.7;
 
     img {
       width: 100%;
@@ -88,7 +96,17 @@ const Content = styled.article<ContentProps>`
     border-radius: 5px;
 
     p {
-      padding: 0px 25px;
+      padding: 0px 20px;
+    }
+
+    ul,
+    ol {
+      padding: 0px 20px;
+    }
+
+    li {
+      list-style-position: inside;
+      margin-bottom: 6px;
     }
   }
 
@@ -104,8 +122,22 @@ const Content = styled.article<ContentProps>`
   ol {
     position: relative;
     left: 10px;
-    padding: 10px;
     white-space: normal;
+  }
+
+  li {
+    list-style-position: inside;
+    margin-bottom: 6px;
+
+    code {
+      font-family: 'Noto Sans KR, sans-serif';
+      font-weight: 700;
+      background: ${props => (props.colorMode === 'dark' ? '' : 'var(--chakra-colors-gray-100)')};
+      border-radius: ${props =>
+        props.colorMode === 'dark' ? 'var(--chakra-radii-md)' : 'var(--chakra-radii-md)'};
+      border-width: 1px 1px 3px;
+      padding: 2px;
+    }
   }
 
   pre {
