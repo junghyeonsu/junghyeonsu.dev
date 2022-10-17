@@ -22,7 +22,7 @@ path: 'computer-science'
 
 그래서 우리는 보통 `example.com`과 같은 기억하기 쉽고, 보다 읽기 좋은 **도메인 혹은 도메인 네임**으로 사용합니다.
 
-![IP와 도메인 이름](/assets/blog/computer-science/What-is-DNS/1.png)_IP와 도메인 이름_
+![IP와 도메인 이름](/assets/blog/computer-science/What-is-DNS/1.png)
 
 # Domain Name Space
 
@@ -30,7 +30,7 @@ path: 'computer-science'
 
 `DNS`는 도메인에 대한 요청이 들어오면 해당 도메인 네임에 맞는 IP주소를 반환합니다. 도메인 네임 - IP 주소 형태로 되어있는 사전입니다.
 
-![간략하게 정리한 DNS 동작 원리](/assets/blog/computer-science/What-is-DNS/2.png)_간략하게 정리한 DNS 동작 원리_
+![간략하게 정리한 DNS 동작 원리](/assets/blog/computer-science/What-is-DNS/2.png)
 
 우선 유저가 브라우저에서 도메인 네임으로 접속을 시도하면, DNS에서 해당 도메인에 대한 IP 주소를 찾습니다.
 
@@ -50,7 +50,7 @@ path: 'computer-science'
 
 위의 구조를 가지고 있습니다.
 
-![도메인 관리 체계](/assets/blog/computer-science/What-is-DNS/3.png)_도메인 관리 체계_
+![도메인 관리 체계](/assets/blog/computer-science/What-is-DNS/3.png)
 
 ## 1. ICANN
 

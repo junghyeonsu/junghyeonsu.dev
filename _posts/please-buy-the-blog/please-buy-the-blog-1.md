@@ -53,12 +53,12 @@ path: 'please-buy-the-blog'
 
 간단히 포스팅이 어떻게 작성되고 보여지는지 흐름을 설명하자면
 
-![마크다운 정보들](/assets/blog/please-buy-the-blog/1/1.png)_마크다운 파일 맨 위에 적는 정보들_
+![마크다운 파일 맨 위에 적는 정보들](/assets/blog/please-buy-the-blog/1/1.png)
 
 저는 블로그 포스트 마크다운 파일 맨 위에 해당 포스팅에 대한 여러 정보들을 적어놓았습니다.
 그리고 해당 정보들은 [gray-matter](https://github.com/jonschlinkert/gray-matter) 라는 파서 라이브러리를 통해서 해당 데이터들만 추출할 수 있습니다.
 
-![gray-matter 데이터](/assets/blog/please-buy-the-blog/1/2.png)_gray-matter 라이브러리로 받아온 데이터_
+![gray-matter 라이브러리로 받아온 데이터](/assets/blog/please-buy-the-blog/1/2.png)
 
 위와 같이 데이터들을 뽑아올 수 있습니다.
 위와 같이 데이터를 뽑기 위해서는 해당 파일의 경로를 알아야 합니다.
@@ -82,7 +82,7 @@ path: 'please-buy-the-blog'
 
 그렇게 넘어온 컨텐츠 데이터들은 아래와 같습니다.
 
-![content 마크다운 데이터](/assets/blog/please-buy-the-blog/1/3.png)_content 마크다운 데이터_
+![content 마크다운 데이터](/assets/blog/please-buy-the-blog/1/3.png)
 
 그러면 해당 마크다운을 잘 보여주는 것이 필요합니다. 저는 [react-markdonw](https://github.com/remarkjs/react-markdown) 라이브러리를 이용해서 마크다운을 `HTML` 태그들로 파싱했습니다. 그리고 `react-markdown`의 장점으로 들어온 태그들을 자신이 직접 커스텀해서 보여줄 수도 있습니다.
 
@@ -128,7 +128,7 @@ const PostContentBody = ({ content }: BodyProps) => {
 
 `Next.JS`에서는 이미지를 `public` 폴더안에 저장을 합니다.
 
-![public 폴더](/assets/blog/please-buy-the-blog/1/4.png)_public 폴더_
+![public 폴더](/assets/blog/please-buy-the-blog/1/4.png)
 
 저는 위와 같이 이미지들을 관리하고 있습니다. 폴더명은 해당 포스팅 URL과 동일하게 작성했고, 썸네일 이미지는 `cover`라는 이름으로, 그 이후에 올라오는 이미지들은 순서대로 번호를 붙여서 관리하고 있습니다. (나름의 컨벤션)
 

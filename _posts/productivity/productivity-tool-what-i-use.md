@@ -34,7 +34,7 @@ path: 'productivity'
 
 ![import-organize keyboard short cut](/assets/blog/productivity/productivity-tool-what-i-use/import-organize.png)
 
-![import-organize gif](/assets/blog/productivity/productivity-tool-what-i-use/import-organize.gif)_동작모습_
+![import-organize gif](/assets/blog/productivity/productivity-tool-what-i-use/import-organize.gif)
 
 ## 한 줄 복사하기
 
@@ -44,7 +44,7 @@ path: 'productivity'
 
 ![copy-line keyboard short cut](/assets/blog/productivity/productivity-tool-what-i-use/copy-line.png)
 
-![copy-line gif](/assets/blog/productivity/productivity-tool-what-i-use/copy-line.gif)_동작모습_
+![copy-line gif](/assets/blog/productivity/productivity-tool-what-i-use/copy-line.gif)
 
 ## 한 줄 이동하기
 
@@ -54,7 +54,7 @@ path: 'productivity'
 
 ![move-line keyboard short cut](/assets/blog/productivity/productivity-tool-what-i-use/move-line.png)
 
-![move-line gif](/assets/blog/productivity/productivity-tool-what-i-use/move-line.gif)_동작모습_
+![move-line gif](/assets/blog/productivity/productivity-tool-what-i-use/move-line.gif)
 
 ## 여러 단어 선택 및 편집
 
@@ -64,7 +64,7 @@ path: 'productivity'
 
 ![select-multi-line keyboard short cut](/assets/blog/productivity/productivity-tool-what-i-use/select-multi-line.png)
 
-![select-multi-line gif](/assets/blog/productivity/productivity-tool-what-i-use/select-multi-line.gif)_동작모습_
+![select-multi-line gif](/assets/blog/productivity/productivity-tool-what-i-use/select-multi-line.gif)
 
 ## 여러 줄 선택 및 편집
 
@@ -75,7 +75,7 @@ path: 'productivity'
 
 ![add-cursor keyboard short cut](/assets/blog/productivity/productivity-tool-what-i-use/add-cursor.png)
 
-![add-cursor gif](/assets/blog/productivity/productivity-tool-what-i-use/add-cursor.gif)_동작모습_
+![add-cursor gif](/assets/blog/productivity/productivity-tool-what-i-use/add-cursor.gif)
 
 
 # Vscode Extensions
@@ -85,14 +85,14 @@ path: 'productivity'
 보통 폴더 구조 같은 걸 보여줘야 할 때가 생기는데, 그럴 때 일일이 타이핑하지말자.
 `file-tree-generator`과 함께라면 당신도 협업 마스터!
 
-![file-tree-generator 1](/assets/blog/productivity/productivity-tool-what-i-use/file-generator-1.png)_file-generator extension_
+![file-tree-generator 1](/assets/blog/productivity/productivity-tool-what-i-use/file-generator-1.png)
 
 ![file-tree-generator 2](/assets/blog/productivity/productivity-tool-what-i-use/file-generator-2.png)
 
 트리를 뽑고자 하는 폴더의 오른쪽을 클릭하면 맨 아래에 `generate to tree` 라는 버튼이 생긴다.
 클릭하면 아래와 같이 텍스트의 형태로 폴더 구조가 나오게 된다.
 
-![file-tree-generator 3](/assets/blog/productivity/productivity-tool-what-i-use/file-generator-3.png)_BOOM_
+![file-tree-generator 3](/assets/blog/productivity/productivity-tool-what-i-use/file-generator-3.png)
 
 그럼 해당 텍스트를 복사해서 자신의 입 맛에 맞게 고칠수도 있고,
 삭제하고 싶은 부분은 삭제해서 사용할 수 있다.
@@ -130,24 +130,24 @@ path: 'productivity'
 그렇게 하지말고 이런 도구들을 이용해서 조금이라도 질문을 받는 입장이 보기 쉽게끔 하면
 질문에 대한 답변을 조금 더 잘 받을 수 있다.
 
-![codesnap 1](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-1.png)_CodeSnap이라고 검색_
+![CodeSnap이라고 검색](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-1.png)
 
 Vscode extension 탭에서 설치 받을 수 있다.
 사용법은 정말 쉽다. 리뷰 받고자 하는 코드 부분을 드래그하고 오른쪽을 누르게 되면 맨 아래에 CodeSnpa 버튼을 찾을 수 있다.
 
-![codesnap 4](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-4.png)_codesnap 버튼_
+![codesnap 버튼](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-4.png)
 
 그리고 해당 버튼을 누르게 되면 아래와 같이 캡쳐된 모습을 볼 수 있고,
 
-![codesnap 2](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-2.png)_BOOM_
+![BOOM](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-2.png)
 
 해당 사진을 오른쪽 클릭해서 복사를 해서 어디서든 붙여넣을 수 있다.
 
-![codesnap 3](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-3.png)_오른쪽을 눌러 복사를 하자._
+![오른쪽을 눌러 복사를 하자.](/assets/blog/productivity/productivity-tool-what-i-use/codesnap-3.png)
 
 ## ESLint
 
-![eslint 1](/assets/blog/productivity/productivity-tool-what-i-use/eslint-1.png)_eslint_
+![eslint](/assets/blog/productivity/productivity-tool-what-i-use/eslint-1.png)
 
 `eslint`는 많은 사람들이 알고, 사용하고 있을거라고 생각한다.
 근데 나는 `eslint`를 **"잘"** 사용하지 못하는 사람들이 많다고 생각한다.
@@ -157,23 +157,23 @@ Vscode extension 탭에서 설치 받을 수 있다.
 
 우선 eslint가 잘 동작하는지, eslint가 어디서 로드됐는지에 대한 확인은 vscode 오른쪽 아래에서 확인할 수 있다.
 
-![eslint 2](/assets/blog/productivity/productivity-tool-what-i-use/eslint-2.png)_vscode 오른쪽 아래에서 확인 가능하다._
+![vscode 오른쪽 아래에서 확인 가능하다.](/assets/blog/productivity/productivity-tool-what-i-use/eslint-2.png)
 
 그리고 `eslint`로 협업을 잘 하기 위해서는 몇가지 설정이 더 필요하다.
 해당 `.vscode` 폴더에서 vscode 에디터에 대한 설정도 프로젝트마다 할 수 있다는 사실은 잘 모르는 것 같다.
 
-![eslint 3](/assets/blog/productivity/productivity-tool-what-i-use/eslint-3.png)_.vscode 폴더에서 vscode 에디터에 대한 설정을 할 수 있다._
+![vscode 폴더에서 vscode 에디터에 대한 설정을 할 수 있다.](/assets/blog/productivity/productivity-tool-what-i-use/eslint-3.png)
 
 나는 보통 저장을 했을 때 eslint가 한 번 잡아주는 것을 선호하기 때문에 이렇게 설정을 사용한다.
 
-![eslint 4](/assets/blog/productivity/productivity-tool-what-i-use/eslint-4.png)_BOOM_
+![BOOM](/assets/blog/productivity/productivity-tool-what-i-use/eslint-4.png)
 
 eslint가 동작하는 방식은 해당 파일의 폴더부터 `.eslintrc` 파일을 찾고 계속 바깥으로 찾아낸다.
 만약 프로젝트 root에서도 적절한 `.eslintrc` 파일을 찾지 못한다면 자신의 컴퓨터에 설정되어 있는 eslint 설정이 협업하는 프로젝트에 적용될 수도 있다.
 
 그래서 eslintrc 파일에는 **"내가 최상위 파일이야! 더 이상 eslintrc 파일을 찾지마!"** 라는 의미로 `root` 옵션을 제공해준다.
 
-![eslint 5](/assets/blog/productivity/productivity-tool-what-i-use/eslint-5.png)_root option을 true로 주자._
+![root option을 true로 주자.](/assets/blog/productivity/productivity-tool-what-i-use/eslint-5.png)
 
 eslint 설정을 조금 더 세심하게 해서 협업할 때 가짜 도움이 아닌 진짜 도움을 받자!
 
@@ -186,13 +186,13 @@ eslint 설정을 조금 더 세심하게 해서 협업할 때 가짜 도움이 �
 내가 블로그 같은 걸 사람들에게 보여주면 썸네일 같은거는 어디서 그리냐? 라는 질문을 제일 많이 받는다.
 그럴 때 마다 피그마로 그린다고하면 고생을 많이 한다, 피그마 한 번도 안써봤다와 같은 반응들이 온다.
 
-![figma-2](/assets/blog/productivity/productivity-tool-what-i-use/figma-2.png)_피그마 사이트_
+![피그마 사이트](/assets/blog/productivity/productivity-tool-what-i-use/figma-2.png)
 
 근데 나는 썸네일 만들 때 이만한 도구를 본 적이 없다.
 그냥 사진 같은 것도 드래그 엔 드랍으로 바로 붙여넣을 수 있고, 여러가지 합성도 할 수 있고
 레이어 시스템도 잘 되어 있기 때문에 썸네일을 만들기 최적이라고 생각한다.
 
-![figma-1](/assets/blog/productivity/productivity-tool-what-i-use/figma-1.png)_썸네일을 만든 흔적들_
+![썸네일을 만든 흔적들](/assets/blog/productivity/productivity-tool-what-i-use/figma-1.png)
 
 ## Giphy Capture
 
@@ -207,7 +207,7 @@ mac용 캡쳐도구를 그대로 사용해도 상관없지만, 나는 맨처음�
 
 단, `Giphy Capture`는 Mac용이기 때문에 윈도우 유저는 사용하지 못한다.
 
-![giphy-1](/assets/blog/productivity/productivity-tool-what-i-use/giphy-1.png)_giphy capture는 mac에서만 다운받을 수 있다._
+![giphy capture는 mac에서만 다운받을 수 있다.](/assets/blog/productivity/productivity-tool-what-i-use/giphy-1.png)
 
 실행하게 되면 아래와 같은 창이 뜨게된다.
 녹화 버튼을 클릭해서 해당 영역을 캡쳐를 뜰 수 있다.
@@ -215,12 +215,12 @@ mac용 캡쳐도구를 그대로 사용해도 상관없지만, 나는 맨처음�
 나는 녹화버튼을 일일이 누르지 않고 키보드 숏컷을 등록해놨다.
 오른쪽 아래 톱니바퀴 설정 버튼으로 키보드 숏컷을 지정할 수 있는데, 나는 `command` + `a`로 영상 시작, 종료를 조절한다.
 
-![giphy-2](/assets/blog/productivity/productivity-tool-what-i-use/giphy-2.png)_해당 영역을 잘 조절하자_
+![해당 영역을 잘 조절하자](/assets/blog/productivity/productivity-tool-what-i-use/giphy-2.png)
 
 그리고 영상을 다 찍게되면 gif로 뽑을 수 있는 창이 뜨는데,
 해당 창에서 자막도 달 수 있고, 영상의 품질, 크기, 제목도 결정할 수 있다.
 
-![giphy-3](/assets/blog/productivity/productivity-tool-what-i-use/giphy-3.png)_설정창_
+![설정창](/assets/blog/productivity/productivity-tool-what-i-use/giphy-3.png)
 
 ## Pinterest
 
@@ -232,7 +232,7 @@ mac용 캡쳐도구를 그대로 사용해도 상관없지만, 나는 맨처음�
 사이드 프로젝트를 하거나 새로운 웹사이트를 만들면 웹 디자인에 대한 생각을 하지 않을 수 없는데,
 그럴 때 핀터레스트에 들어가서 `web`이라고 쳐보자. 다양한 인사이트를 얻을 수 있다.
 
-![pinterest-2](/assets/blog/productivity/productivity-tool-what-i-use/pinterest-2.png)_BOOM_
+![BOOM](/assets/blog/productivity/productivity-tool-what-i-use/pinterest-2.png)
 
 # 마무리
 

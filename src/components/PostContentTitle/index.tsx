@@ -24,7 +24,7 @@ const PostContentTitle = ({ title, date, category, coverImage, readingTime }: Pr
       flexDirection="column"
       alignItems="baseline"
     >
-      <Heading as="h1" marginBottom="3">
+      <Heading as="h1" marginBottom="3" fontWeight={900}>
         {title}
       </Heading>
       <Box display="flex" columnGap="10px" rowGap="10px" flexWrap="wrap">

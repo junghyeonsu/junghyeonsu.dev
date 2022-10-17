@@ -36,7 +36,7 @@ path: 'please-buy-the-blog'
 
 구글서치콘솔을 등록하면 각종 블로그 플랫폼에서 제공해주는 통계 자료들을 제공해줍니다.
 
-![구글 통계](/assets/blog/please-buy-the-blog/2/1.png)_아주 초라한 통계_
+![아주 초라한 통계](/assets/blog/please-buy-the-blog/2/1.png)
 
 이렇게 잘 등록해놓으면 조금이나마 성장하는 모습을 볼 수 있습니다.
 
@@ -46,13 +46,13 @@ path: 'please-buy-the-blog'
 
 우선 [구글서치콘솔](https://developers.google.com/search/docs/beginner/search-console?hl=ko)로 이동하고 **속성**을 추가해야합니다.
 
-![속성 추가하기](/assets/blog/please-buy-the-blog/2/2.png)_속성 추가하기_
+![속성 추가하기](/assets/blog/please-buy-the-blog/2/2.png)
 
 속성 추가하기 버튼을 클릭하게 되면 **도메인** 혹은 **URL 접두어**를 입력하라고 나오는데 저는 **URL 접두어**를 통해서 제 사이트를 등록했습니다.
 
 만약 도메인을 가지고 있다면 해당 도메인을 입력하시면 됩니다.
 
-![URL 등록하기](/assets/blog/please-buy-the-blog/2/3.png)_저는 URL 접두어로 등록했습니다_
+![저는 URL 접두어로 등록했습니다](/assets/blog/please-buy-the-blog/2/3.png)
 
 이렇게 등록하고 하루이틀 지나고 나면 구글서치콘솔에 통계가 뜨기 시작합니다. 등록하자마자는 뜨지 않습니다. (로봇이 우리 블로그를 탐색할 시간이 필요합니다.)
 
@@ -72,7 +72,7 @@ path: 'please-buy-the-blog'
 
 만약 정상적으로 생성되었다면 자신의 블로그 루트 주소에서 `/sitemap.xml`을 붙였을 때 정상적으로 사이트맵이 떠야합니다.
 
-![sitemap이 정상적으로 생성됐을 때](/assets/blog/please-buy-the-blog/2/4.png)_sitemap이 정상적으로 생성됐을 때_
+![sitemap이 정상적으로 생성됐을 때](/assets/blog/please-buy-the-blog/2/4.png)
 
 > [저는 이렇게 구현했습니다!](https://github.com/junghyeonsu/junghyeonsu.dev/blob/main/src/scripts/sitemap.js)
 
@@ -84,7 +84,7 @@ path: 'please-buy-the-blog'
 
 또한 구글서치콘솔에는 `rss` 파일 또한 등록해서 검색엔진에 도움을 줄 수 있습니다.
 
-![sitemap.xml, rss.xml 등록한 모습](/assets/blog/please-buy-the-blog/2/5.png)_sitemap.xml, rss.xml 등록한 모습_
+![sitemap.xml, rss.xml 등록한 모습](/assets/blog/please-buy-the-blog/2/5.png)
 
 한 번만 등록해놓으면 검색엔진이 알아서 주기적으로 들고가서 블로그에 어떤 포스팅이 생겼는지 파악을 합니다.
 
@@ -115,7 +115,7 @@ Sitemap: https://junghyeonsu-dev.vercel.app/sitemap.xml
 
 # 검색해보자
 
-![검색](/assets/blog/please-buy-the-blog/2/6.png)_검색 되어버린 모습_
+![검색 되어버린 모습](/assets/blog/please-buy-the-blog/2/6.png)
 
 각종 포털 사이트들의 웹 마스터 도구를 적절히 사용해서 우리의 블로그를 검색되도록 했습니다.
 

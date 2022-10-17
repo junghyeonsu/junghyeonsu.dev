@@ -1,4 +1,4 @@
-import { Box, ColorMode, useColorMode } from '@chakra-ui/react';
+import { Box, ColorMode, Text, useColorMode } from '@chakra-ui/react';
 import { Tooltip } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
@@ -57,6 +57,7 @@ const Content = styled.article<ContentProps>`
   p {
     font-size: 16px;
     line-height: 1.7;
+    letter-spacing: -0.4px;
 
     img {
       width: 100%;
@@ -176,14 +177,19 @@ const CustomComponents = {
   },
   img({ ...props }) {
     return (
-      <Link href={props.src} passHref>
-        <a>
-          <Box shadow="sm">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={props.src} alt={props.alt} loading="lazy" />
-          </Box>
-        </a>
-      </Link>
+      <>
+        <Link href={props.src} passHref>
+          <a>
+            <Box shadow="sm">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={props.src} alt={props.alt} loading="lazy" />
+            </Box>
+          </a>
+        </Link>
+        <Text textAlign="center" color="gray.500" fontWeight={200}>
+          {props.alt}
+        </Text>
+      </>
     );
   },
   a({ ...props }) {

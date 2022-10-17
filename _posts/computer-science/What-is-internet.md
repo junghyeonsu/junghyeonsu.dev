@@ -27,7 +27,7 @@ path: 'computer-science'
 
 # WWW
 
-![인터넷과 WWW와 email](/assets/blog/computer-science/What-is-internet/1.png '인터넷과 WWW와 email')_internet과 WWW와 email_
+![인터넷과 WWW와 email](/assets/blog/computer-science/What-is-internet/1.png '인터넷과 WWW와 email')
 
 > `WWW`(월드 와이드 웹)은 인터넷에 연결된 컴퓨터를 통해 사람들이 정보를 공유할 수 있는 전 세계적인 정보 공간을 말한다. 간단히 웹이라 부르는 경우가 많다.
 

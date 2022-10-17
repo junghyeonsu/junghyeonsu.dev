@@ -11,19 +11,19 @@ path: 'please-buy-the-blog'
 
 # 얘들아 나 블로그 만들었어!
 
-![얘들아 나 블로그 만들었어 1](/assets/blog/please-buy-the-blog/3/1.png)_?: 얘들아 나 블로그 만들었어, ??: (별로관심없음)_
+![?: 얘들아 나 블로그 만들었어, ??: (별로관심없음)](/assets/blog/please-buy-the-blog/3/1.png)
 
 우리는 인터넷 링크를 복사해서 카카오톡, 슬랙, 디스코드 등등 여기저기 공유를 할 수 있어요
 공유를 했을 때 주소만 띡 간다면 별로 클릭하고 싶지도 않고, 무슨 주소인지도 모를수도 있죠.
 
-![얘들아 나 블로그 만들었어 2](/assets/blog/please-buy-the-blog/3/2.png)_?: 얘들아 나 블로그 만들었어, ??: 와! 멋지다!_
+![?: 얘들아 나 블로그 만들었어, ??: 와! 멋지다!](/assets/blog/please-buy-the-blog/3/2.png)
 
 위 사진처럼 해당 링크에 대한 정보가 이미지로든, 텍스트로든 뜨게 된다면 링크를 받는 입장에서는
 조금 더 클릭해보고 싶고, 더 알아보고 싶고,,, 그래서 나온게 바로 `Open Graph` 입니다.
 
 # Open Graph
 
-![Open Graph logo](/assets/blog/please-buy-the-blog/3/3.png)_Open Graph_
+![Open Graph logo](/assets/blog/please-buy-the-blog/3/3.png)
 
 [open graph](https://ogp.me/)는 페이스북에서 만든 프로토콜(통신 규약)입니다.
 
@@ -51,12 +51,12 @@ Open Graph는 `head` 태그안의 `meta` 태그를 통해서 노출할 수 있�
 어떤 종류의 `property`가 있는지에 대한 설명은 공식문서에 자세하게 나와있기 떄문에 요기서 하나하나 하지 않겠습니다.
 (독자를 강하게 키우는 저자)
 
-![open graph 현재 블로그 예시](/assets/blog/please-buy-the-blog/3/4.png)_현재 블로그 예시_
+![open graph 현재 블로그 예시](/assets/blog/please-buy-the-blog/3/4.png)
 
 만약 블로그를 만들게 된다면 포스트에 대한 open graph를 따로 띄우고 싶을수도 있습니다.
 그래서 저는 `main page`에서의 `head`와 `post page`에서의 `head`를 분리시켜놨습니다.
 
-![open graph 현재 블로그 예시](/assets/blog/please-buy-the-blog/3/5.png)_posting페이지와 main페이지 분리시키기_
+![posting페이지와 main페이지 분리시키기](/assets/blog/please-buy-the-blog/3/5.png)
 
 실제 코드는 아래와 같습니다.
 
@@ -140,7 +140,7 @@ export default CustomHead;
 
 이제 이렇게 해서 배포를 하고 링크를 공유하면 해당 페이지의 `head` 태그안의 `meta` 태그를 읽어서 다양한 정보를 띄워주게 됩니다.
 
-![open graph 현재 블로그 예시](/assets/blog/please-buy-the-blog/3/6.png)_그렇게 나온 결과물들_
+![그렇게 나온 결과물들](/assets/blog/please-buy-the-blog/3/6.png)
 
 # 마무리
 

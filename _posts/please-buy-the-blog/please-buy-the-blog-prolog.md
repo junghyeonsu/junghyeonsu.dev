@@ -13,7 +13,7 @@ path: 'please-buy-the-blog'
 
 > 세상엔 수 많은 블로그 플랫폼들이 있고...
 
-![블로그 플랫폼들](/assets/blog/please-buy-the-blog/prolog/5.png)_블로그 플랫폼들_
+![블로그 플랫폼들](/assets/blog/please-buy-the-blog/prolog/5.png)
 
 위와 같이 블로그를 간단하게 만들고 유지할 수 있는 여러 플랫폼들이 있습니다.
 해당 블로그 플랫폼들은 우리가 당연하게 생각하는 여러 편의 기능들을 제공해줍니다.
@@ -52,26 +52,26 @@ path: 'please-buy-the-blog'
 
 ## GitHub
 
-![github](/assets/blog/please-buy-the-blog/prolog/1.png)_GitHub_
+![github](/assets/blog/please-buy-the-blog/prolog/1.png)
 
 저는 깃허브를 저장소 및 백업용 그리고 `vercel`에 배포를 하기 위해서 사용합니다.
 이 방식을 사용하면 자신이 만든 블로그의 코드가 공개된다는 점(private로 코드를 감출 수 있지만 vercel 배포에 문제가 있습니다.)이 문제가 될 수 있지만, 저는 상관이 없어서 깃허브를 사용했습니다.
 
 ## vercel
 
-![vercel](/assets/blog/please-buy-the-blog/prolog/3.png)_vercel_
+![vercel](/assets/blog/please-buy-the-blog/prolog/3.png)
 
 저는 블로그 배포를 위해서 `vercel`을 사용했습니다. 메인 브랜치에 푸시를 하게 되면 자동적으로 배포를 도와주고, `priview` 배포 사이트 제공, 린트 에러가 있는지 자동적으로 확인과 같은 기능을 제공해주는 `CI/CD`를 제공해주고, 깃허브 레포지토리 한 줄 입력으로 배포를 할 수 있기 때문에 사용했습니다.
 
 ## NextJS
 
-![nextjs](/assets/blog/please-buy-the-blog/prolog/2.png)_NextJS_
+![nextjs](/assets/blog/please-buy-the-blog/prolog/2.png)
 
 저는 `vercel`의 `Next.JS`로 여러 프로젝트 템플릿을 제공해주는 [next.js/examples](https://github.com/vercel/next.js/tree/canary/examples)에서 [next.js/examples/blog-starter-typescript](https://github.com/vercel/next.js/tree/canary/examples/blog-starter-typescript)를 참고해서 블로그의 틀을 잡았습니다.
 
 `Next.JS`는 `React.JS`를 사용해서 개발하는 프레임워크입니다. 블로그에서 제일 중요한 `SEO(Search Engine Optimization)`을 쉽게 이룰 수 있도록 도와주는 프레임워크입니다. SEO를 하기 위해서는 포털 사이트의 크롤러들이 우리의 블로그와 관련된 데이터들을 잘 읽어갈 수 있도록 `SSR(Server Side Rendering)`을 지원해야 하는데 `Next.JS`는 `React.JS`를 사용하며, `SSR` 또는 `SSG(Static Site Generation)`을 지원해주고, 이외에도 페이지 자동 라우팅, 이미지 최적화과 같은 여러가지 기능들을 제공해줍니다.
 
-![whatever](/assets/blog/please-buy-the-blog/prolog/4.png)_whatever_
+![whatever](/assets/blog/please-buy-the-blog/prolog/4.png)
 
 블로그를 만들 때 어떤 기술을 써도 상관 없습니다. 웹을 만들 수 있으면 됩니다. 저는 위에서 언급한 기술들로 블로그를 만들었습니다. 기술이 다르면 신경써야 하는 부분이 조금 다를 수는 있지만 큰 줄기를 기준으로 조금씩만 다르고 결은 비슷하다고 생각합니다.
 

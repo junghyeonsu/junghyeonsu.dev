@@ -11,7 +11,7 @@ path: 'javascript'
 
 # 함수란?
 
-![함수](/assets/blog/javascript/Function/1.png)_[출처: 위키백과](/assets/blog/javascript/Function/cover.png)_
+![출처: 위키백과](/assets/blog/javascript/Function/1.png)
 
 > 자바스크립트에서 가장 중요한 핵심 개념입니다.
 
@@ -19,7 +19,7 @@ path: 'javascript'
 
 수학의 함수는 입력(`input`)과 출력(`output`)을 내보내는 일련의 과정을 의미합니다.
 
-![함수 정의 및 함수 호출](/assets/blog/javascript/Function/2.png)_함수 정의 및 함수 호출_
+![함수 정의 및 함수 호출](/assets/blog/javascript/Function/2.png)
 
 # 함수를 사용하는 이유?
 
