@@ -3555,7 +3555,7 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: 
 type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type IndexPageQuery = { readonly allPosts: { readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly updatedAt: string | null, readonly createdAt: string | null, readonly description: string | null, readonly slug: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null }> }, readonly ogimage: { readonly original: { readonly height: number | null, readonly src: string | null, readonly width: number | null } | null } | null };
+type IndexPageQuery = { readonly allPosts: { readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly updatedAt: string | null, readonly createdAt: string | null, readonly description: string | null, readonly slug: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null }> }, readonly ogimage: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null };
 
 type PostPageQueryVariables = Exact<{
   id: Scalars['String'];
@@ -3575,7 +3575,7 @@ type TagsPageQueryVariables = Exact<{
 }>;
 
 
-type TagsPageQuery = { readonly allMdx: { readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly updatedAt: string | null, readonly createdAt: string | null, readonly description: string | null, readonly slug: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null }> }, readonly ogimage: { readonly original: { readonly height: number | null, readonly src: string | null, readonly width: number | null } | null } | null };
+type TagsPageQuery = { readonly allMdx: { readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly title: string | null, readonly updatedAt: string | null, readonly createdAt: string | null, readonly description: string | null, readonly slug: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null }> }, readonly ogimage: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null };
 
 
 }
