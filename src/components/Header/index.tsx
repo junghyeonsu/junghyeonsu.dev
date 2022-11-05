@@ -1,13 +1,10 @@
-import { Box, Spacer, useColorMode } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
+import { Box, Spacer, useColorMode } from "@chakra-ui/react";
+import React from "react";
 
-import RSS from '../RSS';
-import About from './About';
-import Logo from './Logo';
-
-const ThemeToggler = dynamic(() => import('../ThemeToggler'), {
-  ssr: false,
-});
+import RSS from "../RSS";
+import ThemeToggler from "../ThemeToggler/ThemeToggler";
+import About from "./About";
+import Logo from "./Logo";
 
 const Header = () => {
   const { colorMode } = useColorMode();
@@ -26,7 +23,7 @@ const Header = () => {
       width="100%"
       height="70px"
       shadow="md"
-      backgroundColor={colorMode === 'dark' ? '#202125' : 'gray.50'}
+      backgroundColor={colorMode === "dark" ? "gray.800" : "white"}
     >
       <Logo />
       <Spacer />

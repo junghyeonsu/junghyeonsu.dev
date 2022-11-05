@@ -1,35 +1,50 @@
 module.exports = {
   root: true,
-  env: {
-    browser: true,
-    node: true,
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "./tsconfig.json",
+    tsconfigRootDir: __dirname,
   },
-  extends: [
-    'next/core-web-vitals',
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
+  extends: ["prettier"],
+  plugins: [
+    "@typescript-eslint/eslint-plugin",
+    "react",
+    "prettier",
+    "json-format",
+    "simple-import-sort",
   ],
-  plugins: ['prettier', '@typescript-eslint', 'simple-import-sort'],
+  ignorePatterns: [
+    ".eslintrc.js",
+    "public",
+    "node_modules",
+    ".cache",
+    ".vscode",
+  ],
   rules: {
-    'prettier/prettier': [
-      'error',
+    "no-unused-vars": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
       {
-        singleQuote: true,
-        semi: true,
-        useTabs: false,
-        tabWidth: 2,
-        trailingComma: 'all',
-        printWidth: 100,
-        bracketSpacing: true,
-        arrowParens: 'avoid',
+        prefer: "type-imports",
+        disallowTypeAnnotations: false,
       },
     ],
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
-    'no-unused-vars': 'error',
-  },
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
+    "prettier/prettier": [
+      "error",
+      {
+        singleQuote: false,
+        semi: true,
+        tabWidth: 2,
+        useTabs: false,
+        trailingComma: "all",
+        printWidth: 100,
+        arrowParens: "always",
+      },
+      {
+        usePrettierrc: false,
+      },
+    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
   },
 };
