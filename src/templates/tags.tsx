@@ -7,7 +7,7 @@ import React from "react";
 
 import PostCard from "../components/PostCard";
 import Tags from "../components/Tags";
-import { fadeInFromLeft } from "../framer-motions";
+import { fadeInFromTop } from "../framer-motions";
 
 export const query = graphql`
   query TagsPage($tag: String!) {
@@ -57,14 +57,15 @@ export default function TagsTemplate({ pageContext, data }: TagsProps) {
     >
       <Tags currentTag={pageContext.tag} />
       <Divider orientation="horizontal" marginTop="20px" />
-      <motion.div {...fadeInFromLeft}>
-        <Grid
-          as="section"
-          margin={{ base: "20px", md: "20px 0px" }}
-          templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
-          gap={6}
-        >
-          {data.allMdx.nodes.map((node) => (
+
+      <Grid
+        as="section"
+        margin={{ base: "20px", md: "20px 0px" }}
+        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+        gap={6}
+      >
+        {data.allMdx.nodes.map((node, index) => (
+          <motion.div {...fadeInFromTop} transition={{ delay: 0.2 + 0.1 * index }}>
             <GridItem key={node.frontmatter?.slug} as="article">
               <PostCard
                 title={node.frontmatter?.title!}
@@ -76,9 +77,9 @@ export default function TagsTemplate({ pageContext, data }: TagsProps) {
                 tags={node.frontmatter?.tags!}
               />
             </GridItem>
-          ))}
-        </Grid>
-      </motion.div>
+          </motion.div>
+        ))}
+      </Grid>
     </Box>
   );
 }

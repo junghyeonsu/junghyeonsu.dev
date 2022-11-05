@@ -7,7 +7,7 @@ import React from "react";
 
 import PostCard from "../components/PostCard";
 import Tags from "../components/Tags";
-import { fadeInFromLeft } from "../framer-motions";
+import { fadeInFromTop } from "../framer-motions";
 
 export const query = graphql`
   query IndexPage {
@@ -50,14 +50,14 @@ const IndexPage = ({ data }: IndexPageProps) => {
     >
       <Tags currentTag="all" />
       <Divider orientation="horizontal" marginTop="20px" />
-      <motion.div {...fadeInFromLeft}>
-        <Grid
-          as="section"
-          templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
-          margin={{ base: "20px", md: "20px 0px" }}
-          gap={6}
-        >
-          {data.allPosts.nodes.map((node) => (
+      <Grid
+        as="section"
+        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+        margin={{ base: "20px", md: "20px 0px" }}
+        gap={6}
+      >
+        {data.allPosts.nodes.map((node, index) => (
+          <motion.div {...fadeInFromTop} transition={{ delay: 0.2 + 0.1 * index }}>
             <GridItem key={node.frontmatter?.slug} as="article">
               <PostCard
                 title={node.frontmatter?.title!}
@@ -69,9 +69,9 @@ const IndexPage = ({ data }: IndexPageProps) => {
                 tags={node.frontmatter?.tags!}
               />
             </GridItem>
-          ))}
-        </Grid>
-      </motion.div>
+          </motion.div>
+        ))}
+      </Grid>
     </Box>
   );
 };
