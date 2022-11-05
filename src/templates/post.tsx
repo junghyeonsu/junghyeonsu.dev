@@ -69,7 +69,7 @@ interface PostTemplateProps {
 const PostTemplate: React.FC<PostTemplateProps> = ({ children, data, pageContext }) => {
   return (
     <PostLayout>
-      <motion.article {...fadeInFromLeft}>
+      <motion.article style={{ width: "100%" }} {...fadeInFromLeft}>
         <Flex direction="column" width={{ base: "100%", xl: "800px" }}>
           <PostContentTitle readingTime={pageContext.readingTime.text} post={data.post} />
           <Box marginTop="50px">{children}</Box>

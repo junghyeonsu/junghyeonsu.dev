@@ -1,7 +1,6 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { MDXProvider } from "@mdx-js/react";
 import React from "react";
-import type { SyntaxHighlighterProps } from "react-syntax-highlighter";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
@@ -61,12 +60,9 @@ const customComponents = {
     />
   ),
 
-  img: (props: Object) => (
-    <Box as="img" marginTop="20px" marginBottom="20px" display="block" margin="0 auto" {...props} />
-  ),
-
   // TODO: 배열로 받아서 처리하도록 수정
-  code: ({ children, className, ...props }: SyntaxHighlighterProps) => {
+  code: ({ ...props }) => {
+    const { className, children } = props;
     const match = /language-(\w+)/.exec(className || "");
 
     if (!match) {
@@ -131,6 +127,7 @@ export default function PostLayout({ children }: LayoutProps) {
         style={{
           display: "flex",
           position: "relative",
+          width: "100%",
           margin: "50px auto",
           padding: "20px",
           wordBreak: "keep-all",
