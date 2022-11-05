@@ -1,89 +1,90 @@
-import { Box, Divider } from '@chakra-ui/react';
-import { GetStaticProps } from 'next';
-import { useState } from 'react';
+import { Box, Divider, Grid, GridItem } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import type { HeadFC } from "gatsby";
+import { graphql } from "gatsby";
+import React from "react";
 
-import { CategoryChangeButton, CustomHead, PostCard } from '../components';
-import { CONTENT_ELEMENTS } from '../constants';
-import useMediaQuery from '../hooks/useMediaQuery';
-import { getAllPosts } from '../lib/api';
-import { generateRssFeed } from '../scripts/rss';
-import { generateSiteMap } from '../scripts/sitemap';
-import type Post from '../types/post';
+import PostCard from "../components/PostCard";
+import Tags from "../components/Tags";
+import { fadeInFromLeft } from "../framer-motions";
 
-interface Props {
-  allPosts: Post[];
-  categoies: string[];
+export const query = graphql`
+  query IndexPage {
+    allPosts: allMdx(sort: { fields: frontmatter___createdAt, order: DESC }) {
+      nodes {
+        frontmatter {
+          thumbnail {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+          title
+          updatedAt
+          createdAt
+          description
+          slug
+          tags
+        }
+      }
+    }
+    ogimage: imageSharp(fluid: { originalName: { eq: "og-image.png" } }) {
+      original {
+        height
+        src
+        width
+      }
+    }
+  }
+`;
+
+interface IndexPageProps {
+  data: GatsbyTypes.IndexPageQuery;
 }
 
-const IndexPage = ({ allPosts, categoies }: Props) => {
-  const [currentCategory, setCurrentCategory] = useState('전체');
-  const { isLargerThan900, mounted } = useMediaQuery();
-
+const IndexPage = ({ data }: IndexPageProps) => {
   return (
-    <>
-      <CustomHead type="main" />
-      {mounted && (
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          marginTop="20px"
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      maxWidth={800}
+      margin="auto"
+    >
+      <Tags currentTag="all" />
+      <Divider orientation="horizontal" marginTop="20px" />
+      <motion.div {...fadeInFromLeft}>
+        <Grid
+          as="section"
+          templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+          margin={{ base: "20px", md: "20px 0px" }}
+          gap={6}
         >
-          <Box
-            display="flex"
-            flexWrap="wrap"
-            columnGap="10px"
-            rowGap="10px"
-            width={isLargerThan900 ? '840px' : '90vw'}
-            marginTop="20px"
-            as="nav"
-          >
-            <CategoryChangeButton
-              category="전체"
-              currentCategory={currentCategory}
-              setCurrentCategory={setCurrentCategory}
-            />
-            {categoies.map(category => (
-              <CategoryChangeButton
-                key={category}
-                category={category}
-                currentCategory={currentCategory}
-                setCurrentCategory={setCurrentCategory}
+          {data.allPosts.nodes.map((node) => (
+            <GridItem key={node.frontmatter?.slug} as="article">
+              <PostCard
+                title={node.frontmatter?.title!}
+                description={node.frontmatter?.description!}
+                slug={node.frontmatter?.slug!}
+                thumbnail={node.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
+                createdAt={node.frontmatter?.createdAt!}
+                updatedAt={node.frontmatter?.updatedAt!}
+                tags={node.frontmatter?.tags!}
               />
-            ))}
-          </Box>
-          <Divider width={isLargerThan900 ? '840px' : '90vw'} margin="20px" />
-          <Box
-            as="section"
-            marginBottom="50px"
-            width={isLargerThan900 ? '880px' : '90vw'}
-            display="flex"
-            flexWrap="wrap"
-          >
-            {allPosts.map(
-              (post, index) =>
-                (currentCategory === '전체' || post.category === currentCategory) && (
-                  <PostCard key={`post${index}-${post.title}`} post={post} />
-                ),
-            )}
-          </Box>
-        </Box>
-      )}
-    </>
+            </GridItem>
+          ))}
+        </Grid>
+      </motion.div>
+    </Box>
   );
 };
 
 export default IndexPage;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const allPosts = getAllPosts(CONTENT_ELEMENTS.POST_CARD);
-  const categoies = Array.from(new Set(allPosts.map(post => post.category)));
-
-  generateRssFeed(allPosts);
-  generateSiteMap(allPosts);
-
-  return {
-    props: { allPosts, categoies },
-  };
+export const Head: HeadFC = () => {
+  return (
+    <>
+      <title>Home Page</title>
+    </>
+  );
 };

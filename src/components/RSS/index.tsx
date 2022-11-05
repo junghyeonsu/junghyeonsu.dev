@@ -1,17 +1,19 @@
-import { IconButton, IconButtonProps, useColorMode, useColorModeValue } from '@chakra-ui/react';
-import Link from 'next/link';
+import type { IconButtonProps } from "@chakra-ui/react";
+import { IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Link } from "gatsby";
+import React from "react";
 
-import DarkModeRSS from './DarkModeRSS';
-import LightModeRSS from './LightModeRSS';
+import DarkModeRSS from "./DarkModeRSS";
+import LightModeRSS from "./LightModeRSS";
 
-type ThemeModeTogglerProps = Omit<IconButtonProps, 'aria-label'>;
+type ThemeModeTogglerProps = Omit<IconButtonProps, "aria-label">;
 
-const RSS: React.FC<ThemeModeTogglerProps> = () => {
+const Rss: React.FC<ThemeModeTogglerProps> = () => {
   const { colorMode } = useColorMode();
-  const SwitchIcon = useColorModeValue(LightModeRSS, DarkModeRSS);
+  const SwitchIcon = useColorModeValue(DarkModeRSS, LightModeRSS);
 
   return (
-    <Link href="/rss.xml" passHref>
+    <Link to="/rss.xml">
       <IconButton
         display="flex"
         justifyContent="center"
@@ -20,12 +22,14 @@ const RSS: React.FC<ThemeModeTogglerProps> = () => {
         borderRadius="3xl"
         variant="unstyled"
         icon={<SwitchIcon />}
-        _hover={{ bg: colorMode === 'dark' ? 'whiteAlpha.200' : 'blackAlpha.200' }}
-        _active={{ bg: 'transparent' }}
+        _hover={{
+          bg: colorMode === "dark" ? "whiteAlpha.200" : "blackAlpha.200",
+        }}
+        _active={{ bg: "transparent" }}
         aria-label="darkmode toggle button"
       />
     </Link>
   );
 };
 
-export default RSS;
+export default Rss;

@@ -1,8 +1,12 @@
 // https://medium.com/next-generation-web/create-a-dark-mode-toggle-micro-interaction-like-a-pro-279305e9c2
-import { motion } from 'framer-motion';
-import React from 'react';
+import { motion } from "framer-motion";
+import React from "react";
 
-import { FRAMER_TRANSITION } from '../../constants';
+const FRAMER_TRANSITION = {
+  type: "spring",
+  stiffness: 200,
+  damping: 10,
+};
 
 const SunIcon = () => {
   const raysVariants = {
@@ -27,7 +31,7 @@ const SunIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       whileTap={whileTap}
       // Centers the rotation anchor point vertically & horizontally
-      style={{ originX: '50%', originY: '50%' }}
+      style={{ originX: "50%", originY: "50%" }}
     >
       <motion.circle
         cx="11.9998"

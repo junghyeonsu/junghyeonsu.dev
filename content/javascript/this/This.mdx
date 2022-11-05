@@ -1,0 +1,327 @@
+---
+slug: This
+title: '자바스크립트 this는 호출 때 결정된다.'
+description: 'javascript의 this는 호출 때 결정된다니까!?'
+thumbnail: ./cover.png
+tags: ['자바스크립트']
+createdAt: '2022/05/09'
+updatedAt: ''
+---
+
+# this를 알아봅시다.
+
+> 그거 아니고, 저거도 아니고, 이거!
+
+`this` 키워드는 자신이 속한 객체를 가리키는 식별자를 참조할 수 있는 키워드입니다. 직관적으로 잘 지은 것 같아요. 객체 리터럴 방식으로 생성한 객체는 메서드 내부에서 메서드 자신이 속한 객체를 가리키는 식별자를 재귀적으로 참조할 수 있습니다.
+
+```javascript
+// 객체 내부에서
+const june = {
+  name: 'hyeonsu',
+
+  getName() {
+    return june.name; // 자신이 속한 객체인 june을 재귀적으로 참조 가능합니다.
+    // 하지만 자기 자신이 속한 객체를 재귀적으로 참조하는 방식은 일반적이지 않으며 바람직하지 않다고 합니다.
+  },
+};
+```
+
+```javascript
+function Circle(radius) {
+  // 이 시점에는 생성자 함수 자신이 생성할 인스턴스를 가리키는 식별자를 알 수 없습니다.
+  Circle.radius = radius; // 이런식으로는 불가능 합니다.
+}
+
+Circle.prototype.getDiameter = function () {
+  // 이 시점에는 생성자 함수 자신이 생성할 인스턴스를 가리키는 식별자를 알 수 없습니다.
+  return Circle.radius * 2; // 이런식으로는 불가능 합니다.
+};
+
+// 생성자 함수로 인트턴스를 생성하려면 먼저 생성자 함수를 정의해야 합니다.
+const circle = new Circle(5);
+```
+
+생성자 함수를 정의하는 시점에는 아직 인스턴스를 생성하기 전이기 때문에 생성자 함수가 생성할 인스턴스를 가리키는 식별자를 알 수 없습니다.
+
+그래서 자바스크립트에서는 `this` 키워드를 통해서 자신이 생성할 인스턴스를 가리키는 **자기 참조 변수**를 만들었습니다.
+
+# this는 호출 때 결정된다.
+
+![this는 호출 때 결정된다고!!!](./1.png)
+
+> 자바스크립트의 this는 함수가 호출되는 방식에 따라 this가 달라집니다. 그러니까 동적으로 결정됩니다.
+
+- 일반 함수 호출
+- 메서드 호출
+- 생성자 함수 호출
+- Function.prototype.apply/call/bind 메서드에 의한 간접 호출
+- 화살표 함수 (ES6)
+
+## 일반 함수 호출
+
+> 일반 함수안에서 this는 기본적으로 전역 객체가 바인딩됩니다.
+
+```javascript
+function foo() {
+  console.log(this); // window
+
+  function bar() {
+    console.log(this); // window
+  }
+
+  bar();
+}
+
+foo();
+```
+
+일반적으로 `this`는 자기 참조 변수로, 자기 자신을 참조하기 위한 변수인데 인스턴스를 생성하지 않는 일반 함수에서는 `this`는 의미가 없죠. 그래서 전역 객체를 가리킵니다.
+
+```javascript
+(function () {
+  'use strict';
+
+  console.log(this); // undefined
+
+  function foo() {
+    console.log(this); // undefined
+  }
+
+  foo();
+})();
+```
+
+그리고 위와 같이 `strict mode`가 적용된다면 일반 함수 내부의 `this`는 `undefined`가 바인딩됩니다.
+
+> 어떤 함수라도 일반 함수로 호출되면 this는 전역 객체입니다.
+
+```javascript
+var value = 1;
+
+const obj = {
+  value: 100,
+  foo() {
+    console.log(this); // { value: 100, foo: f }
+
+    setTimeout(function () {
+      console.log(this); // window
+      console.log(this.value); // 1
+    }, 100);
+  },
+};
+```
+
+위의 예시에서 `setTimeout`의 콜백함수로 일반 함수를 넘겼기 때문에, 일반 함수안에서의 `this`는 무조건 전역 객체를 가리키는 것을 볼 수 있습니다.
+
+## 메서드 호출
+
+> 메서드 내부의 this에는 메서드를 호출한 객체, 즉 메서드를 호출할 때 메서드 이름 앞의 마침표(.) 연산자 앞에 기술한 객체가 바인딩됩니다. 주의할 것은 메서드 내부의 this는 **메서드를 소유한 객체**가 아니라 **메서드를 호출한 객체**에 바인딩됩니다.
+
+```javascript
+const anotherStudy = {
+  name: 'TypeScript OOP',
+  getName() {
+    return this.name;
+  },
+};
+
+const currentStudy = {
+  name: 'Modern deep dive JavaScript',
+};
+
+currentStudy.getName = anotherStudy.getName;
+
+// 메서드를 호출한 객체를 참조합니다.
+// (.) 앞에 있는 객체에 집중하세요!
+console.log(currentStudy.getName()); // Modern deep dive JavaScript
+
+const getName = anotherStudy.getName;
+
+// getName 함수를 메서드로 호출한 것이 아니라, 일반 함수로 호출
+console.log(getName()); // ''
+// 일반 함수는 무조건 전역 객체를 바인딩하니까, window.name을 출력하지만 없으니 빈칸 출력
+```
+
+## 생성자 함수 호출
+
+> 생성자 함수 내부의 this에는 생성자 함수가 (미래에) 생성할 인스턴스가 바인딩됩니다.
+
+```javascript
+function Study(name) {
+  // 생성자 함수 내부의 this에는 생성자 함수가 생성할 인스턴스를 가리킵니다.
+  this.name = name;
+  this.getName = function () {
+    return this.name;
+  };
+}
+
+const TypeScriptOOPStudy = new Study('TypeScript OOP');
+
+const ModernDeepDiveJavaScriptStudy = new Study('Modern deep dive JavaScript');
+
+console.log(TypeScriptOOPStudy.getName()); // TypeScript OOP;
+console.log(ModernDeepDiveJavaScriptStudy.getName()); // Modern deep dive JavaScript;
+```
+
+## apply, call, bind 메서드
+
+> 세 가지 메서드는 위의 세 가지 방법과는 달리 강제적으로 this를 바꿉니다.
+
+### apply, call은 함수를 호출한다.
+
+> apply와 call은 호출할 함수에 인수를 전달하는 방식만 다를 뿐 동일하게 동작합니다.
+
+```javascript
+function getThisBinding() {
+  console.log(arguments);
+  return this;
+}
+
+const thisArg = { a: 1 };
+
+// apply의 기본 동작은 함수 호출입니다.
+// getThisBinding을 호출하면서 this를 넘겨줍니다.
+console.log(getThisBinding.apply(thisArg, [1, 2, 3]));
+// Arguments(3) [1, 2, 3, callee: f, Symbol(Symbol.iterator): f]
+// {a : 1}
+
+// call의 기본 동작은 함수 호출입니다
+// getThisBinding을 호출하면서 this를 넘겨줍니다.
+console.log(getThisBinding.call(thisArg, 1, 2, 3));
+// Arguments(3) [1, 2, 3, callee: f, Symbol(Symbol.iterator): f]
+// {a : 1}
+```
+
+apply와 call 메서드는 보통 `arguments`와 같은 유사 배열 객체에 배열 메서드를 사용하고 싶을 때 사용할 수 있습니다. `arguments`는 유사 배열 객체로, 원래는 배열 메서드를 적용할 수 없습니다. 하지만 call과 apply와 함께라면 가능하죠
+
+```javascript
+function convertArgumentsToArray() {
+  console.log(arguments);
+
+  const arr = Array.prototype.slice.call(arguments);
+  // const arr = Array.prototype.slice.apply(arguments);
+  console.log(arr);
+
+  return arr;
+}
+
+convertArgumentsToArray(1, 2, 3); // [1, 2, 3]
+```
+
+### bind는 this로 사용할 객체만 전달한다.
+
+> apply, call과 다르게 bind는 함수를 실행시키지 않고, this 객체만 전달합니다.
+
+```javascript
+function getThisBinding() {
+  return this;
+}
+
+const thisArg = { a: 1 };
+
+// bind는 함수를 호출하지 않는다.
+console.log(getThisBinding.bind(thisArg)); // getThisBinding
+
+// bind는 함수를 호출해야 적용된 것을 볼 수 있다.
+console.log(getThisBinding.bind(thisArg)()); // { a: 1 }
+```
+
+## 화살표 함수 (ES6)
+
+> 화살표 함수에서는 부모의 this를 따라갑니다.
+
+```javascript
+const obj = {
+  name: 'hyeonsu',
+  getName() {
+    console.log(this.name); // hyeonsu
+    const inner = () => {
+      console.log(this.name); // hyeonsu
+    };
+
+    // this는 호출할 때 봐야합니다.
+    // 화살표함수는 부모의 this를 따라갑니다
+    // inner의 부모는 getName
+    // getName의 this는 obj객체
+    // 그러므로 inner의 this는 obj객체
+    inner();
+  },
+};
+
+// getName을 부른 객체는 obj이므로
+// getName의 this는 obj입니다.
+obj.getName();
+```
+
+화살표 함수는 부모의 this를 따라가는데, 그럼 부모가 어떻게 호출되었는지 확인을 해야 최종적으로 화살표 함수의 this를 알 수 있습니다.
+
+# this를 예측할 수 없는 경우
+
+> 외치고 들어갑시다.
+
+> this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다...
+
+```javascript
+const header = document.querySelector('header');
+
+header.addEventListener('click', function () {
+  console.log(this); // 뭐가 될 것 같나요?
+});
+```
+
+위의 예제에서 this가 뭐가 나올 것 같나요?
+저는 위에서 공부한대로라면 `window`가 나올줄 알았습니다. 왜냐하면 일반 함수안의 this니까요.
+
+```javascript
+const header = document.querySelector('header');
+
+// 자세히 살펴보세요. 콜백함수는 "호출"되지 않았어요.
+// 호출된 것은 "addEventListener" 함수입니다.
+header.addEventListener('click', function () {
+  console.log(this); // <header></header>
+});
+```
+
+위의 코드는 `addEventListener` 내부적으로 동작하는 방식에 의해서 `addEventListener`를 호출한 객체가 할당이 됩니다. 하지만 이것은 `addEventListener`가 이렇게 동작한다고 명시되어있는 [문서](https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener#%EC%9D%B4%EB%B2%A4%ED%8A%B8_%EC%88%98%EC%8B%A0%EA%B8%B0_%EB%82%B4%EB%B6%80%EC%9D%98_this_%EA%B0%92)에서 보아서 알 수 있는거지 우리가 분석할 수 있는 것은 아닙니다.
+
+실제로 `addEventListner`는 `c++`로 구현되었다고 합니다. 만약 자바스크립트로 구현한다면 어떤 식으로 구현되어 있을까요?
+
+```javascript
+// X
+const header = {
+  addEventListener: function (eventName, callback) {
+    callback(); // 이 방식은 아닐겁니다. 이 경우에 this는 window니까요.
+  },
+};
+
+// O
+// 이 경우는 단순히 추측을 해본 겁니다. 실제로 이런식으로 동작하지 않습니다.
+const header = {
+  addEventListener: function (eventName, callback) {
+    callback().call(this); // 이 경우에는 header를 잘 가리킵니다.
+    callback().call(header); // 이 경우에는 header를 잘 가리킵니다.
+  },
+};
+```
+
+예측 가능하게 하려면 화살표 함수로 콜백함수를 넘기면 됩니다.
+
+```javascript
+header.addEventListener('click', () => {
+  console.log(this); // window
+});
+```
+
+위의 경우에는 화살표 함수의 "부모" 스코프가 this가 됩니다. 부모 스코프를 결정할 땐 "호출"이 아닌 "선언" 할 때 입니다. 스코프가 결정나는 것은 "호출"이 아니라 "선언"이니까요
+
+화살표 함수를 "선언" 할 때의 부모는 `anonymous`입니다. 그렇기 때문에 `anonymous`의 `this`는 `window`가 되는 것이죠.
+
+# 오늘의 결론
+
+- this는 함수 또는 메서드 또는 생성자가 호출될 때 동적으로 결정된다.
+- 동적으로 결정되는 것이기 때문에 예측하지 못하는 경우도 있다.
+
+# 참고
+
+- [[인간 JS 엔진 되기 1-6]this는 호출 때 결정된다고!!](https://www.youtube.com/watch?v=pgo6URFz8tc)
+- [[인간 JS 엔진 되기 1-7]this를 분석할 수 없는 케이스](https://www.youtube.com/watch?v=3l2yiP0ch3U&list=PLcqDmjxt30Rt9wmSlw1u6sBYr-aZmpNB3&index=7)
