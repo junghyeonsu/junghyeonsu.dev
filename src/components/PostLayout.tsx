@@ -23,23 +23,7 @@ const customComponents = {
 
   h4: (props: Object) => <Heading as="h4" fontSize={24} mt="20px" {...props} />,
 
-  p: (props: Object) => (
-    <Text
-      fontSize={16}
-      mt="16px"
-      {...props}
-      sx={{
-        // NOTE: 백틱안에 감싸진 텍스트 처리
-        code: {
-          color: "gray.900",
-          backgroundColor: "gray.100",
-          borderRadius: "4px",
-          borderWidth: "1px 1px 3px",
-          padding: "2px",
-        },
-      }}
-    />
-  ),
+  p: (props: Object) => <Text fontSize={16} mt="16px" {...props} />,
 
   ol: (props: Object) => <Box as="ol" fontSize={16} mt="16px" listStylePos="inside" {...props} />,
   ul: (props: Object) => <Box as="ul" fontSize={16} mt="16px" listStylePos="inside" {...props} />,
@@ -82,11 +66,29 @@ const customComponents = {
   ),
 
   // TODO: 배열로 받아서 처리하도록 수정
-  pre: ({ ...props }) => {
-    const { children: preChildren } = props;
-    const { children, className } = preChildren.props as SyntaxHighlighterProps;
+  code: ({ children, className, ...props }: SyntaxHighlighterProps) => {
+    const match = /language-(\w+)/.exec(className || "");
 
-    const match = /language-(\w+)/.exec(className || "") || "jsx";
+    if (!match) {
+      return (
+        <Text
+          as="code"
+          sx={{
+            color: "gray.900",
+            backgroundColor: "gray.100",
+            borderRadius: "4px",
+            borderWidth: "1px 1px 3px",
+            padding: "2px",
+            _dark: {
+              backgroundColor: "blue.900",
+              color: "blue.100",
+            },
+          }}
+        >
+          {children}
+        </Text>
+      );
+    }
 
     // NOTE: jsx,1-2,7-8
     const [, addLines, removeLines] = className?.split(",");
@@ -100,6 +102,8 @@ const customComponents = {
       <SyntaxHighlighter
         style={vscDarkPlus}
         showLineNumbers
+        PreTag="div"
+        language={match[1]}
         wrapLines
         lineProps={(lineNumber) => {
           const style = { display: "block", backgroundColor: "transparent" };
@@ -110,7 +114,6 @@ const customComponents = {
           }
           return { style };
         }}
-        language={match[1]}
         {...props}
       >
         {String(children).replace(/\n$/, "")}
