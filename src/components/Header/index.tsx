@@ -1,4 +1,4 @@
-import { Box, Spacer, useColorMode } from "@chakra-ui/react";
+import { Box, Spacer } from "@chakra-ui/react";
 import React from "react";
 
 import RSS from "../RSS";
@@ -7,7 +7,6 @@ import About from "./About";
 import Logo from "./Logo";
 
 const Header = () => {
-  const { colorMode } = useColorMode();
   return (
     <Box
       overflow="hidden"
@@ -23,7 +22,10 @@ const Header = () => {
       width="100%"
       height="70px"
       shadow="md"
-      backgroundColor={colorMode === "dark" ? "gray.800" : "white"}
+      backgroundColor="white"
+      _dark={{
+        backgroundColor: "gray.800",
+      }}
     >
       <Logo />
       <Spacer />
