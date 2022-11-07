@@ -5,9 +5,11 @@ import { graphql } from "gatsby";
 import { getSrc } from "gatsby-plugin-image";
 import React from "react";
 
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import PostCard from "../components/PostCard";
 import Tags from "../components/Tags";
-import { fadeInFromTop } from "../framer-motions";
+import { fadeInFromLeft } from "../framer-motions";
 
 export const query = graphql`
   query TagsPage($tag: String!) {
@@ -47,40 +49,44 @@ interface TagsProps {
 
 export default function TagsTemplate({ pageContext, data }: TagsProps) {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      maxWidth={800}
-      margin="auto"
-    >
-      <Tags currentTag={pageContext.tag} />
-      <Divider orientation="horizontal" marginTop="20px" />
-
-      <Grid
-        as="section"
-        margin={{ base: "20px", md: "20px 0px" }}
-        templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
-        gap={6}
+    <>
+      <Header />
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        maxWidth={800}
+        margin="auto"
       >
-        {data.allMdx.nodes.map((node, index) => (
-          <motion.div {...fadeInFromTop} transition={{ delay: 0.2 + 0.1 * index }}>
-            <GridItem key={node.frontmatter?.slug} as="article">
-              <PostCard
-                title={node.frontmatter?.title!}
-                description={node.frontmatter?.description!}
-                slug={node.frontmatter?.slug!}
-                thumbnail={node.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
-                createdAt={node.frontmatter?.createdAt!}
-                updatedAt={node.frontmatter?.updatedAt!}
-                tags={node.frontmatter?.tags!}
-              />
-            </GridItem>
-          </motion.div>
-        ))}
-      </Grid>
-    </Box>
+        <Tags currentTag={pageContext.tag} />
+        <Divider orientation="horizontal" marginTop="20px" />
+
+        <motion.div {...fadeInFromLeft}>
+          <Grid
+            as="section"
+            margin={{ base: "20px", md: "20px 0px" }}
+            templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+            gap={6}
+          >
+            {data.allMdx.nodes.map((node) => (
+              <GridItem key={node.frontmatter?.slug} as="article">
+                <PostCard
+                  title={node.frontmatter?.title!}
+                  description={node.frontmatter?.description!}
+                  slug={node.frontmatter?.slug!}
+                  thumbnail={node.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
+                  createdAt={node.frontmatter?.createdAt!}
+                  updatedAt={node.frontmatter?.updatedAt!}
+                  tags={node.frontmatter?.tags!}
+                />
+              </GridItem>
+            ))}
+          </Grid>
+        </motion.div>
+      </Box>
+      <Footer />
+    </>
   );
 }
 
