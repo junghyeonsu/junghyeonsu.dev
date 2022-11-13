@@ -1,0 +1,26 @@
+---
+slug: you-might-not-need-an-effect
+title: useEffect가 꼭 필요하지 않을 수 있어요.
+description: 리액트 공식문서의 "You Might Not Need an Effect"를 번역해봤습니다.
+thumbnail: ./cover.png
+tags: ["translation"]
+createdAt: "2022/11/13"
+updatedAt: ""
+---
+
+> 해당 글은 리액트 공식문서의 "[you might not need an effect](https://beta.reactjs.org/learn/you-might-not-need-an-effect)"를 번역한 글입니다.
+
+<br />
+
+---
+
+Effect는 React 패러다임의 탈출구에요. Effect를 사용하면 React의 "밖으로 나가서" 컴포넌트를 React가 아닌 위젯, 네트워크 또는 브라우저 DOM과 같은 일부 외부 시스템과 동기화할 수 있어요. 외부 시스템이 없는 경우에는(예: 일부 props 또는 state가 변경될 때 컴포넌트의 상태를 업데이트하려는 경우) Effect가 필요하지 않아요. 불필요한 Effect를 제거하면 코드를 더 쉽게 따르고 더 빠르게 실행할 수 있으며 발생하기 쉬운 오류를 줄여줘요.
+
+> **이 글에서는 이런 것들을 배워요**
+>
+> - 컴포넌트에서 불필요한 Effect를 제거하는 이유와 방법
+> - Effect없이 값비싼 계산을 캐시하는 방법
+> - Effect없이 컴포넌트 상태를 재설정하고 조정하는 방법
+> - 이벤트 핸들러 간에 로직을 공유하는 방법
+> - 이벤트 핸들러로 이동해야 하는 로직
+> - 변경 사항에 대해 상위 컴포넌트에 알리는 방법
