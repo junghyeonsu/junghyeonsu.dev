@@ -1,5 +1,5 @@
 import { Button, Flex } from "@chakra-ui/react";
-import { graphql, Link, StaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
 
 interface TagsProps {
@@ -7,6 +7,18 @@ interface TagsProps {
 }
 
 export default function Tags({ currentTag }: TagsProps) {
+  const data = useStaticQuery(graphql`
+    query Tags {
+      allMdx {
+        group(field: { frontmatter: { tags: SELECT } }) {
+          tagPostCount: totalCount
+          tag: fieldValue
+        }
+        allPostCount: totalCount
+      }
+    }
+  `);
+
   return (
     <Flex
       as="nav"
@@ -17,50 +29,31 @@ export default function Tags({ currentTag }: TagsProps) {
       padding={{ base: "0 20px", md: "0px" }}
       width="100%"
     >
-      <StaticQuery
-        query={graphql`
-          query Tags {
-            allMdx {
-              group(field: frontmatter___tags) {
-                totalCount
-                tag: fieldValue
-              }
-              totalCount
-            }
-          }
-        `}
-        render={(data) => {
-          return (
-            <>
-              <Link to="/">
-                <Button
-                  backgroundColor={currentTag === "all" ? "blue.400" : "none"}
-                  colorScheme={currentTag === "all" ? "blue" : undefined}
-                >
-                  all ({data.allMdx.totalCount})
-                </Button>
-              </Link>
-              {Object.values(data.allMdx.group).map((group) => {
-                const { tag, totalCount } = group as {
-                  tag: string;
-                  totalCount: number;
-                };
-                return (
-                  <Link key={tag} to={`/tags/${tag}`}>
-                    <Button
-                      backgroundColor={currentTag === tag ? "blue.400" : "none"}
-                      colorScheme={currentTag === tag ? "blue" : undefined}
-                      key={tag}
-                    >
-                      {tag} ({totalCount})
-                    </Button>
-                  </Link>
-                );
-              })}
-            </>
-          );
-        }}
-      />
+      <Link to="/">
+        <Button
+          backgroundColor={currentTag === "all" ? "blue.400" : "none"}
+          colorScheme={currentTag === "all" ? "blue" : undefined}
+        >
+          all ({data.allMdx.allPostCount})
+        </Button>
+      </Link>
+      {Object.values(data.allMdx.group).map((group) => {
+        const { tag, tagPostCount } = group as {
+          tag: string;
+          tagPostCount: number;
+        };
+        return (
+          <Link key={tag} to={`/tags/${tag}`}>
+            <Button
+              backgroundColor={currentTag === tag ? "blue.400" : "none"}
+              colorScheme={currentTag === tag ? "blue" : undefined}
+              key={tag}
+            >
+              {tag} ({tagPostCount})
+            </Button>
+          </Link>
+        );
+      })}
     </Flex>
   );
 }

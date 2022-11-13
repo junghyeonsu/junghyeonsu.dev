@@ -32,7 +32,7 @@ export const query = graphql`
     }
     relatedPosts: allMdx(
       filter: { frontmatter: { tags: { in: $tags } }, id: { ne: $id } }
-      sort: { fields: frontmatter___createdAt, order: DESC }
+      sort: { frontmatter: { createdAt: DESC } }
       limit: 4
     ) {
       nodes {
