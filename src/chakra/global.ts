@@ -1,10 +1,11 @@
 export default {
   html: {
     scrollPaddingTop: "75px",
-    transition: "background-color 0.2s ease, color 0.2s ease",
   },
 
-  body: {},
+  body: {
+    transition: "background-color 0.2s ease, color 0.2s ease",
+  },
 
   "h1:hover .heading-anchor-icon, h2:hover .heading-anchor-icon, h3:hover .heading-anchor-icon": {
     opacity: 1,

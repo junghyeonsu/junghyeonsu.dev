@@ -13,7 +13,7 @@ import { fadeInFromLeft } from "../framer-motions";
 
 export const query = graphql`
   query IndexPage {
-    allPosts: allMdx(sort: { frontmatter: { createdAt: DESC } }) {
+    allPosts: allMdx(sort: { fields: frontmatter___createdAt, order: DESC }) {
       nodes {
         frontmatter {
           thumbnail {
