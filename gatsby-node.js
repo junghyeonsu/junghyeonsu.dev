@@ -22,7 +22,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       }
 
       allTags: allMdx {
-        group(field: { frontmatter: { tags: SELECT } }) {
+        group(field: frontmatter___tags) {
           tag: fieldValue
         }
       }
