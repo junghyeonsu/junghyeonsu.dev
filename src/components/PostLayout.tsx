@@ -1,15 +1,12 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { MDXProvider } from "@mdx-js/react";
 import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
+import { parseSyntaxHighlighterClassName } from "../utils/string";
 import Footer from "./Footer";
 import Header from "./Header";
-
-{
-  /* <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m15.538 18.999-.29 1.259a2.25 2.25 0 0 1-2.02 1.735l-.173.007h-2.111a2.25 2.25 0 0 1-2.147-1.577l-.046-.167-.29-1.257h7.077ZM12 2.001a7.25 7.25 0 0 1 7.25 7.25c0 2.136-.936 4.093-2.765 5.84a.25.25 0 0 0-.071.125l-.528 2.283H8.114l-.526-2.283a.25.25 0 0 0-.071-.124C5.687 13.344 4.75 11.387 4.75 9.25A7.25 7.25 0 0 1 12 2.001Z" fill="#fff"/></svg> */
-}
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -41,29 +38,49 @@ const customComponents = {
     />
   ),
 
-  blockquote: (props: Object) => (
-    <Box
-      as="blockquote"
-      color="blue.800"
-      bg="blue.50"
-      borderLeft="4px solid"
-      _dark={{
-        color: "blue.50",
-        bg: "blue.800",
-      }}
-      sx={{
-        p: {
-          margin: 0,
-        },
-      }}
-      padding="10px"
-      borderRadius="6px"
-      marginTop="20px"
-      {...props}
-    />
-  ),
+  blockquote: ({ ...props }) => {
+    const { children } = props;
 
-  // TODO: 배열로 받아서 처리하도록 수정
+    return (
+      <Flex
+        as="blockquote"
+        color="blue.800"
+        bg="blue.50"
+        columnGap="10px"
+        borderLeft="4px solid"
+        _dark={{
+          color: "blue.50",
+          bg: "blue.800",
+        }}
+        sx={{
+          p: {
+            margin: 0,
+          },
+        }}
+        padding="10px"
+        borderRadius="6px"
+        marginTop="20px"
+        {...props}
+      >
+        <Center>
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m15.538 18.999-.29 1.259a2.25 2.25 0 0 1-2.02 1.735l-.173.007h-2.111a2.25 2.25 0 0 1-2.147-1.577l-.046-.167-.29-1.257h7.077ZM12 2.001a7.25 7.25 0 0 1 7.25 7.25c0 2.136-.936 4.093-2.765 5.84a.25.25 0 0 0-.071.125l-.528 2.283H8.114l-.526-2.283a.25.25 0 0 0-.071-.124C5.687 13.344 4.75 11.387 4.75 9.25A7.25 7.25 0 0 1 12 2.001Z"
+              fill="currentColor"
+            />
+          </svg>
+        </Center>
+        {children}
+      </Flex>
+    );
+  },
+
   code: ({ ...props }) => {
     const { className, children } = props;
     const match = /language-(\w+)/.exec(className || "");
@@ -89,13 +106,8 @@ const customComponents = {
       );
     }
 
-    // NOTE: jsx,1-2,7-8
-    const [, addLines, removeLines] = className?.split(",");
-    const splitedAdded = addLines?.split("-").map(Number);
-    const addedLines = addLines
-      ? Array.from({ length: splitedAdded[1] - splitedAdded[0] + 1 }, (_, i) => i + splitedAdded[0])
-      : [];
-    const removedLines = removeLines ? removeLines.split("-").map(Number) : [];
+    // NOTE: jsx,1-2&4-6,7-8
+    const { addLines, removeLines } = parseSyntaxHighlighterClassName(className);
 
     return (
       <SyntaxHighlighter
@@ -106,11 +118,15 @@ const customComponents = {
         wrapLines
         lineProps={(lineNumber) => {
           const style = { display: "block", backgroundColor: "transparent" };
-          if (addedLines.includes(lineNumber)) {
-            style.backgroundColor = "#afa62d69";
-          } else if (removedLines.includes(lineNumber)) {
-            style.backgroundColor = "#5c3232";
+
+          if (addLines?.includes(lineNumber)) {
+            return { style: { ...style, backgroundColor: "#afa62d69" } };
           }
+
+          if (removeLines?.includes(lineNumber)) {
+            return { style: { ...style, backgroundColor: "#5c3232" } };
+          }
+
           return { style };
         }}
         {...props}
