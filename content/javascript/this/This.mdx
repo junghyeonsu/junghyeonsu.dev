@@ -1,11 +1,11 @@
 ---
 slug: This
-title: '자바스크립트 this는 호출 때 결정된다.'
-description: 'javascript의 this는 호출 때 결정된다니까!?'
+title: "자바스크립트 this는 호출 때 결정된다."
+description: "javascript의 this는 호출 때 결정된다니까!?"
 thumbnail: ./cover.png
-tags: ['자바스크립트']
-createdAt: '2022/05/09'
-updatedAt: ''
+tags: ["javascript"]
+createdAt: "2022/05/09"
+updatedAt: ""
 ---
 
 # this를 알아봅시다.
@@ -17,7 +17,7 @@ updatedAt: ''
 ```javascript
 // 객체 내부에서
 const june = {
-  name: 'hyeonsu',
+  name: "hyeonsu",
 
   getName() {
     return june.name; // 자신이 속한 객체인 june을 재귀적으로 참조 가능합니다.
@@ -79,7 +79,7 @@ foo();
 
 ```javascript
 (function () {
-  'use strict';
+  "use strict";
 
   console.log(this); // undefined
 
@@ -119,14 +119,14 @@ const obj = {
 
 ```javascript
 const anotherStudy = {
-  name: 'TypeScript OOP',
+  name: "TypeScript OOP",
   getName() {
     return this.name;
   },
 };
 
 const currentStudy = {
-  name: 'Modern deep dive JavaScript',
+  name: "Modern deep dive JavaScript",
 };
 
 currentStudy.getName = anotherStudy.getName;
@@ -155,9 +155,9 @@ function Study(name) {
   };
 }
 
-const TypeScriptOOPStudy = new Study('TypeScript OOP');
+const TypeScriptOOPStudy = new Study("TypeScript OOP");
 
-const ModernDeepDiveJavaScriptStudy = new Study('Modern deep dive JavaScript');
+const ModernDeepDiveJavaScriptStudy = new Study("Modern deep dive JavaScript");
 
 console.log(TypeScriptOOPStudy.getName()); // TypeScript OOP;
 console.log(ModernDeepDiveJavaScriptStudy.getName()); // Modern deep dive JavaScript;
@@ -232,7 +232,7 @@ console.log(getThisBinding.bind(thisArg)()); // { a: 1 }
 
 ```javascript
 const obj = {
-  name: 'hyeonsu',
+  name: "hyeonsu",
   getName() {
     console.log(this.name); // hyeonsu
     const inner = () => {
@@ -262,9 +262,9 @@ obj.getName();
 > this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다. this는 함수가 호출될 때 결정된다...
 
 ```javascript
-const header = document.querySelector('header');
+const header = document.querySelector("header");
 
-header.addEventListener('click', function () {
+header.addEventListener("click", function () {
   console.log(this); // 뭐가 될 것 같나요?
 });
 ```
@@ -273,11 +273,11 @@ header.addEventListener('click', function () {
 저는 위에서 공부한대로라면 `window`가 나올줄 알았습니다. 왜냐하면 일반 함수안의 this니까요.
 
 ```javascript
-const header = document.querySelector('header');
+const header = document.querySelector("header");
 
 // 자세히 살펴보세요. 콜백함수는 "호출"되지 않았어요.
 // 호출된 것은 "addEventListener" 함수입니다.
-header.addEventListener('click', function () {
+header.addEventListener("click", function () {
   console.log(this); // <header></header>
 });
 ```
@@ -307,7 +307,7 @@ const header = {
 예측 가능하게 하려면 화살표 함수로 콜백함수를 넘기면 됩니다.
 
 ```javascript
-header.addEventListener('click', () => {
+header.addEventListener("click", () => {
   console.log(this); // window
 });
 ```

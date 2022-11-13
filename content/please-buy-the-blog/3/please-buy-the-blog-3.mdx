@@ -1,11 +1,11 @@
 ---
 slug: please-buy-the-blog-3
-title: '블로그는 사드세요... 제발 3편: 내 블로그 간지나게 자랑하기 (Next.js Open Graph 적용하기)'
-description: '이건 내 블로그고, 이건 내 Open Graph야.'
+title: "블로그는 사드세요... 제발 3편: 내 블로그 간지나게 자랑하기 (Next.js Open Graph 적용하기)"
+description: "이건 내 블로그고, 이건 내 Open Graph야."
 thumbnail: ./cover.png
-tags: ['블로그는 제발 사드세요']
-createdAt: '2022/09/18'
-updatedAt: ''
+tags: ["please-buy-the-blog"]
+createdAt: "2022/09/18"
+updatedAt: ""
 ---
 
 > `블로그는 사드세요... 제발` 시리즈는 제가 블로그를 **직접** 만들었던 과정과 신경썼던 것들을 기록한 것 입니다. 해당 시리즈는 [승우 아빠](https://www.youtube.com/c/%EC%8A%B9%EC%9A%B0%EC%95%84%EB%B9%A0)님의 `사드세요 시리즈`를 패러디 한 것입니다.
@@ -40,11 +40,14 @@ Open Graph는 `head` 태그안의 `meta` 태그를 통해서 노출할 수 있�
 
 ```html
 <head>
-	<meta property="og:title" content="The Rock" />
-	<meta property="og:type" content="video.movie" />
-	<meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
-	<meta property="og:image" content="https://ia.media-imdb.com/images/rock.jpg" />
-	<!-- ... -->
+  <meta property="og:title" content="The Rock" />
+  <meta property="og:type" content="video.movie" />
+  <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
+  <meta
+    property="og:image"
+    content="https://ia.media-imdb.com/images/rock.jpg"
+  />
+  <!-- ... -->
 </head>
 ```
 
@@ -62,28 +65,37 @@ Open Graph는 `head` 태그안의 `meta` 태그를 통해서 노출할 수 있�
 실제 코드는 아래와 같습니다.
 
 ```tsx
-import Head from 'next/head';
+import Head from "next/head";
 
-import { DOMAIN } from '../../constants';
-import type PostType from '../../types/post';
+import { DOMAIN } from "../../constants";
+import type PostType from "../../types/post";
 
 interface CustomHeadInterface {
   post?: PostType;
-  type: 'posting' | 'main';
+  type: "posting" | "main";
 }
 
 const CustomHead = ({ post, type }: CustomHeadInterface) => {
-  return type === 'posting' ? (
+  return type === "posting" ? (
     <Head>
       {/* HTML Meta Tags */}
       <title>{post?.title} | 정현수 기술 블로그</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {/* Facebook Meta Tags */}
-      <meta property="og:url" content={`https://junghyeonsu-dev.vercel.app/posts/${post?.slug}`} />
+      <meta
+        property="og:url"
+        content={`https://junghyeonsu-dev.vercel.app/posts/${post?.slug}`}
+      />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={`${post?.title} | 정현수 기술 블로그`} />
-      <meta property="og:title" content={`${post?.title} | 정현수 기술 블로그`} />
+      <meta
+        property="og:site_name"
+        content={`${post?.title} | 정현수 기술 블로그`}
+      />
+      <meta
+        property="og:title"
+        content={`${post?.title} | 정현수 기술 블로그`}
+      />
       <meta property="og:description" content={post?.description} />
       <meta property="og:image" content={`${DOMAIN}${post?.coverImage}`} />
 
@@ -94,14 +106,20 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
         property="twitter:url"
         content={`https://junghyeonsu-dev.vercel.app/posts/${post?.slug}`}
       />
-      <meta name="twitter:title" content={`${post?.title} | 정현수 기술 블로그`} />
+      <meta
+        name="twitter:title"
+        content={`${post?.title} | 정현수 기술 블로그`}
+      />
       <meta name="twitter:description" content={post?.description} />
-      <meta name="twitter:image" content={`${DOMAIN}${post?.coverImage}`}></meta>
+      <meta
+        name="twitter:image"
+        content={`${DOMAIN}${post?.coverImage}`}
+      ></meta>
       <meta name="twitter:label1" content="Category" />
       <meta name="twitter:data1" content={`개발 | ${post?.category}`} />
       <meta
         name="article:published_time"
-        content={`${post?.date.replace(/[/]/g, '-')}T09:00:00.000Z`}
+        content={`${post?.date.replace(/[/]/g, "-")}T09:00:00.000Z`}
       />
     </Head>
   ) : (
@@ -115,7 +133,10 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="정현수 기술 블로그" />
       <meta property="og:title" content="정현수 기술 블로그" />
-      <meta property="og:description" content="공부한 것들을 정리해서 올립니다." />
+      <meta
+        property="og:description"
+        content="공부한 것들을 정리해서 올립니다."
+      />
       <meta
         property="og:image"
         content="https://github.com/junghyeonsu/junghyeonsu.dev/blob/main/public/profile.jpeg?raw=true"
@@ -123,9 +144,15 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="junghyeonsu-dev.vercel.app" />
-      <meta property="twitter:url" content="https://junghyeonsu-dev.vercel.app/" />
+      <meta
+        property="twitter:url"
+        content="https://junghyeonsu-dev.vercel.app/"
+      />
       <meta name="twitter:title" content="정현수 기술 블로그" />
-      <meta name="twitter:description" content="공부한 것들을 정리해서 올립니다." />
+      <meta
+        name="twitter:description"
+        content="공부한 것들을 정리해서 올립니다."
+      />
       <meta
         name="twitter:image"
         content="https://github.com/junghyeonsu/junghyeonsu.dev/blob/main/public/profile.jpeg?raw=true"

@@ -52,7 +52,7 @@ export default function Tags({ currentTag }: TagsProps) {
                       colorScheme={currentTag === tag ? "blue" : undefined}
                       key={tag}
                     >
-                      {tag} ({totalCount})
+                      {tag.replaceAll("-", " ")} ({totalCount})
                     </Button>
                   </Link>
                 );

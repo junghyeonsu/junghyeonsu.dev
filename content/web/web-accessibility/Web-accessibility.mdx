@@ -1,11 +1,11 @@
 ---
 slug: Web-accessibility
-title: '웹 접근성 (Web Accessibility)'
-description: '접근성이 좋은 웹은 무엇일까'
+title: "웹 접근성 (Web Accessibility)"
+description: "접근성이 좋은 웹은 무엇일까"
 thumbnail: ./cover.png
-tags: ['웹']
-createdAt: '2022/05/06'
-updatedAt: ''
+tags: ["web"]
+createdAt: "2022/05/06"
+updatedAt: ""
 ---
 
 > 혼자 접근성 MDN 문서를 읽으며 정리한 글입니다. 자세한 내용은 MDN을 참고해주세요
@@ -249,7 +249,12 @@ a:active {
 또한 `input` 태그에는 `label` 속성을 부여해서 스크린리더가 읽을 수 있는 설명 레이블을 제공합니다.
 
 ```html
-<input type="search" name="q" placeholder="Search query" aria-label="Search through site content" />
+<input
+  type="search"
+  name="q"
+  placeholder="Search query"
+  aria-label="Search through site content"
+/>
 ```
 
 ### Dynamic content updates (동적 컨텐츠 업데이트)
@@ -294,7 +299,9 @@ a:active {
 > 아래의 예제보단 그냥 일반적인 button을 사용하는 것이 더 좋습니다.
 
 ```html
-<div data-message="This is from the first button" tabindex="0" role="button">Click me!</div>
+<div data-message="This is from the first button" tabindex="0" role="button">
+  Click me!
+</div>
 ```
 
 ### Guiding users through complex widgets (복잡한 위젯을 통해 사용자 안내)
@@ -313,11 +320,29 @@ a:active {
   >
     Tab 1
   </li>
-  <li role="tab" aria-selected="false" aria-setsize="3" aria-posinset="2" tabindex="0">Tab 2</li>
-  <li role="tab" aria-selected="false" aria-setsize="3" aria-posinset="3" tabindex="0">Tab 3</li>
+  <li
+    role="tab"
+    aria-selected="false"
+    aria-setsize="3"
+    aria-posinset="2"
+    tabindex="0"
+  >
+    Tab 2
+  </li>
+  <li
+    role="tab"
+    aria-selected="false"
+    aria-setsize="3"
+    aria-posinset="3"
+    tabindex="0"
+  >
+    Tab 3
+  </li>
 </ul>
 <div class="panels">
-  <article class="active-panel" role="tabpanel" aria-hidden="false">...</article>
+  <article class="active-panel" role="tabpanel" aria-hidden="false">
+    ...
+  </article>
   <article role="tabpanel" aria-hidden="true">...</article>
   <article role="tabpanel" aria-hidden="true">...</article>
 </div>

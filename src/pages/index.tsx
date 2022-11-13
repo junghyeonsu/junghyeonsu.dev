@@ -1,5 +1,4 @@
-import { Box, Divider, Grid, GridItem } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { Box, Divider } from "@chakra-ui/react";
 import type { HeadFC } from "gatsby";
 import { graphql } from "gatsby";
 import { getSrc } from "gatsby-plugin-image";
@@ -7,9 +6,8 @@ import React from "react";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import PostCard from "../components/PostCard";
+import PostGrid from "../components/PostGrid";
 import Tags from "../components/Tags";
-import { fadeInFromLeft } from "../framer-motions";
 
 export const query = graphql`
   query IndexPage {
@@ -54,29 +52,7 @@ const IndexPage = ({ data }: IndexPageProps) => {
       >
         <Tags currentTag="all" />
         <Divider orientation="horizontal" marginTop="20px" />
-
-        <motion.div {...fadeInFromLeft}>
-          <Grid
-            as="section"
-            templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
-            margin={{ base: "20px", md: "20px 0px" }}
-            gap={6}
-          >
-            {data.allPosts.nodes.map((node) => (
-              <GridItem key={node.frontmatter?.slug} as="article">
-                <PostCard
-                  title={node.frontmatter?.title!}
-                  description={node.frontmatter?.description!}
-                  slug={node.frontmatter?.slug!}
-                  thumbnail={node.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
-                  createdAt={node.frontmatter?.createdAt!}
-                  updatedAt={node.frontmatter?.updatedAt!}
-                  tags={node.frontmatter?.tags!}
-                />
-              </GridItem>
-            ))}
-          </Grid>
-        </motion.div>
+        <PostGrid posts={data.allPosts.nodes} />
       </Box>
       <Footer />
     </>

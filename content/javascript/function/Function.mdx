@@ -1,11 +1,11 @@
 ---
 slug: Function
-title: '자바스크립트 함수 딥다이브'
-description: '딥다이브 함수 파트를 읽고'
+title: "자바스크립트 함수 딥다이브"
+description: "딥다이브 함수 파트를 읽고"
 thumbnail: ./cover.png
-tags: ['자바스크립트']
-createdAt: '2022/04/17'
-updatedAt: ''
+tags: ["javascript"]
+createdAt: "2022/04/17"
+updatedAt: ""
 ---
 
 > 해당 글은 모던 자바스크립트 딥다이브 함수 파트를 읽고 개인적인 의견과 합쳐서 정리한 글입니다.
@@ -138,7 +138,7 @@ console.log(foo(2, 5)); // ReferenceError: foo is not defined
 ## Function 생성자 함수
 
 ```typescript
-new Function('x', 'y', 'return x + y + a');
+new Function("x", "y", "return x + y + a");
 ```
 
 Function 생성자 함수는 클로저를 생성하지 않습니다.
@@ -296,7 +296,7 @@ add(2, 5); // undefined
 
 ```javascript
 function add(x, y) {
-  return // 세미콜론 자동 삽입 기능에 의해 세미콜론이 추가됩니다.
+  return; // 세미콜론 자동 삽입 기능에 의해 세미콜론이 추가됩니다.
   x + y; // 무시됩니다.
 }
 
@@ -309,12 +309,12 @@ add(2, 5); // undefined
 // 단순히 인자로 받은 값을 변경하는 함수
 function changeVariable(primitive, object) {
   primitive += 100;
-  object.name = 'Kim';
+  object.name = "Kim";
 }
 
 // 외부 상태
 var num = 100;
-var person = { name: 'Jung' };
+var person = { name: "Jung" };
 
 console.log(num); // 100
 console.log(person); // {name: 'Jung'}
@@ -370,16 +370,16 @@ useEffect(() => {
 기명으로 함수를 선언 및 호출을 할 수는 있습니다만, 재사용은 불가능합니다.
 
 ```javascript
-/* 
- * 그룹 연산자 () 내의 기명 함수는 함수 선언문이 아니라 함수 리터럴로 평가됩니다. 
+/*
+ * 그룹 연산자 () 내의 기명 함수는 함수 선언문이 아니라 함수 리터럴로 평가됩니다.
  * 함수 이름은 함수 몸체에서만 참조할 수 있는 식별자이므로 즉시 실행 함수를
  * 다시 호출할 수 없습니다.
  */
 (function foo() {
-   // 함수 몸체
-}());
+  // 함수 몸체
+})();
 
-foo() // ReferenceError: foo is not defined
+foo(); // ReferenceError: foo is not defined
 ```
 
 즉시 실행 함수는 함수 리터럴을 평가해서 함수 객체를 생성할 수 있으면 아래와 같이 그룹 연산자 `()` 이외의 연산자를 사용해도 괜찮습니다.
@@ -388,21 +388,19 @@ foo() // ReferenceError: foo is not defined
 
 ```javascript
 // 가장 일반적입니다.
-(function (){
-  // ...
-}())
-
 (function () {
   // ...
-})()
-
-!function() {
+})()(function () {
   // ...
-}();
+})();
 
-+function() {
+!(function () {
   // ...
-}();
+})();
+
++(function () {
+  // ...
+})();
 ```
 
 ## 재귀 함수
@@ -419,9 +417,9 @@ function factorial(n) {
   return n * factorial(n - 1);
 }
 
-console.log(2) // 2! = 2 * 1 = 2
-console.log(3) // 3! = 3 * 2 * 1 = 6
-console.log(4) // 4! = 4 * 3 * 2 * 1 = 24
+console.log(2); // 2! = 2 * 1 = 2
+console.log(3); // 3! = 3 * 2 * 1 = 6
+console.log(4); // 4! = 4 * 3 * 2 * 1 = 24
 ```
 
 함수 선언문으로 선언한 함수 이름은 함수 내부에서만 유효하기 때문에 `factorial`을 함수 내부에서 다시 부를 수 있습니다.
@@ -435,10 +433,12 @@ console.log(4) // 4! = 4 * 3 * 2 * 1 = 24
 > 함수 내부에 정의된 함수를 중첩 함수 또는 내부 함수라고 합니다. 그리고 중첩 함수를 포함하는 함수는 외부 함수라고 합니다.
 
 ```javascript
-function outer() { // 외부 함수
+function outer() {
+  // 외부 함수
   var x = 1;
 
-  function inner() { // 중첩 함수 or 내부 함수
+  function inner() {
+    // 중첩 함수 or 내부 함수
     var y = 2;
 
     console.log(x + y); // 3
@@ -497,7 +497,7 @@ repeat(5, logAll); // 0, 1, 2, 3, 4
 
 const logOdds = function (i) {
   if (i % 2) console.log(i);
-}
+};
 
 repeat(5, logOdds); // 1, 3
 ```
@@ -513,7 +513,7 @@ repeat(5, logOdds); // 1, 3
 ```javascript
 // ❌
 // 익명 함수 리터럴은 repeat 함수를 호출할 때마다 평가되어서 함수 객체를 생성합니다.
-repeat(5, function(i) {
+repeat(5, function (i) {
   if (i % 2) console.log(i);
 }); // 1, 3
 ```
@@ -523,7 +523,7 @@ repeat(5, function(i) {
 // logOdds 함수는 단 한 번만 생성됩니다.
 const logOdds = function (i) {
   if (i % 2) console.log(i);
-}
+};
 
 // 고차 함수에 함수 참조를 전달합니다.
 repeat(5, logOdds); // 1, 3
@@ -534,14 +534,14 @@ repeat(5, logOdds); // 1, 3
 ```javascript
 // 콜백 함수를 사용한 이벤트 처리
 // myButton 이라는 ID를 가진 element를 클릭하면 콜백 함수가 실행됩니다.
-document.getElementById('myButton').addEventListener('click', function() {
-  console.log('button clicked');
+document.getElementById("myButton").addEventListener("click", function () {
+  console.log("button clicked");
 });
 
 // 콜백 함수를 이용한 비동기 처리
 // 1초 후에 메세지를 출력합니다.
-setTimeout(function() {
-  console.log('1초 경과');
+setTimeout(function () {
+  console.log("1초 경과");
 }, 1000);
 ```
 
@@ -552,7 +552,7 @@ const twiceResult = [1, 2, 3].map(function (item) {
   return item * 2;
 });
 
-console.log(twiceResult) // 2, 4, 6
+console.log(twiceResult); // 2, 4, 6
 ```
 
 ## 순수 함수와 비순수 함수
@@ -570,8 +570,8 @@ function impureIncrease() {
 
 const returnedOuter = impureIncrease();
 // 외부 상태가 변경되었습니다.
-console.log(outer) // 1
-console.log(returnedOuter) // 1
+console.log(outer); // 1
+console.log(returnedOuter); // 1
 ```
 
 ```javascript
@@ -584,8 +584,8 @@ function pureIncrease(number) {
 }
 
 const returnedOuter = pureIncrease(outer);
-console.log(outer) // 0
-console.log(returnedOuter) // 1
+console.log(outer); // 0
+console.log(returnedOuter); // 1
 ```
 
 함수가 외부 상태를 변경하면 상태 변화를 추적하기가 어려워집니다. 따라서 함수 외부 상태의 변경을 지양하는 순수 함수를 사용하는 것이 좋습니다.

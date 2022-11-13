@@ -23,10 +23,6 @@ const TableOfContentsItem: React.FC<{
   const { url, title, items } = tableOfContentsItem;
   const isActive = url === activeId;
 
-  if (!items || items.length === 0) {
-    return null;
-  }
-
   return (
     <>
       <motion.div transition={{ delay }} {...fadeInFromLeft}>
@@ -63,7 +59,7 @@ export default function TableOfContents({
 }: {
   tableOfContents: TableOfContentsType;
 }) {
-  if (!tableOfContents || !tableOfContents.items) {
+  if (!tableOfContents || tableOfContents.items.length === 0) {
     return null;
   }
 

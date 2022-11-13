@@ -1,11 +1,11 @@
 ---
 slug: please-buy-the-blog-1
-title: '블로그는 사드세요... 제발 1편: 블로그 구색 갖추기(Next.js로 블로그 포스팅 구현하기)'
-description: '그냥 웹 사이트가 블로그처럼 보이는 마법'
+title: "블로그는 사드세요... 제발 1편: 블로그 구색 갖추기(Next.js로 블로그 포스팅 구현하기)"
+description: "그냥 웹 사이트가 블로그처럼 보이는 마법"
 thumbnail: ./cover.png
-tags: ['블로그는 제발 사드세요']
-createdAt: '2022/06/11'
-updatedAt: ''
+tags: ["please-buy-the-blog"]
+createdAt: "2022/06/11"
+updatedAt: ""
 ---
 
 > `블로그는 사드세요... 제발` 시리즈는 제가 블로그를 **직접** 만들었던 과정과 신경썼던 것들을 기록한 것 입니다. 해당 시리즈는 [승우 아빠](https://www.youtube.com/c/%EC%8A%B9%EC%9A%B0%EC%95%84%EB%B9%A0)님의 `사드세요 시리즈`를 패러디 한 것입니다.
@@ -26,7 +26,7 @@ updatedAt: ''
 
 > 포스팅 기능에는 무엇이 필요할까요?
 
-우선 블로그 포스팅을 하려면 여러 가지가 필요할 것 같습니다. 
+우선 블로그 포스팅을 하려면 여러 가지가 필요할 것 같습니다.
 
 - 글을 쓰고, 여러 하이라이팅 기능과 함께 웹 페이지에 잘 보여주기
 - 이미지 또는 움짤 업로드도 필요
@@ -99,17 +99,15 @@ const CustomComponents = {
     // 자신의 커스텀 h3 태그 작성
   },
   code({ className, children, ...props }: SyntaxHighlighterProps) {
-	  // 자신의 커스텀 code 태그 작성
+    // 자신의 커스텀 code 태그 작성
   },
   img({ ...props }) {
-	  // 자신의 커스텀 img 태그 작성
-  }
+    // 자신의 커스텀 img 태그 작성
+  },
 };
 
 const PostContentBody = ({ content }: BodyProps) => {
-  return (
-    <ReactMarkdown components={CustomComponents}>{content}</ReactMarkdown>
-  );
+  return <ReactMarkdown components={CustomComponents}>{content}</ReactMarkdown>;
 };
 ```
 
