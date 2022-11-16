@@ -3,6 +3,8 @@ import { Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 
+import { koreanTagNames } from "../constants";
+
 interface PostContentTitleProps {
   readingTime: string;
   post: GatsbyTypes.PostPageQuery["post"];
@@ -18,7 +20,7 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
         <Badge fontSize="14px">{post?.frontmatter?.createdAt}</Badge>
         {post?.frontmatter?.tags?.map((tag) => (
           <Link key={tag} to={`/tags/${tag}`}>
-            <Badge fontSize="14px">{tag}</Badge>
+            <Badge fontSize="14px">{koreanTagNames[tag!]}</Badge>
           </Link>
         ))}
         <Text fontSize="14px">{readingTime}</Text>

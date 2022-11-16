@@ -4,6 +4,8 @@ import type { IGatsbyImageData } from "gatsby-plugin-image";
 import { GatsbyImage } from "gatsby-plugin-image";
 import React, { useMemo } from "react";
 
+import { koreanTagNames } from "../constants";
+
 interface PostCardProps {
   title: string;
   description: string;
@@ -68,7 +70,7 @@ const PostCard = ({
             <Badge fontSize={14}>{updatedAt ? `${updatedAt} (updated)` : createdAt}</Badge>
             {tags?.map((tag) => (
               <Badge key={tag} fontSize={14}>
-                {tag}
+                {koreanTagNames[tag!]}
               </Badge>
             ))}
             {isNewPost && (

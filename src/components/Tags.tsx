@@ -2,6 +2,8 @@ import { Button, Flex } from "@chakra-ui/react";
 import { graphql, Link, StaticQuery } from "gatsby";
 import React from "react";
 
+import { koreanTagNames } from "../constants";
+
 interface TagsProps {
   currentTag: string;
 }
@@ -52,7 +54,7 @@ export default function Tags({ currentTag }: TagsProps) {
                       colorScheme={currentTag === tag ? "blue" : undefined}
                       key={tag}
                     >
-                      {tag.replaceAll("-", " ")} ({totalCount})
+                      {koreanTagNames[tag]} ({totalCount})
                     </Button>
                   </Link>
                 );
