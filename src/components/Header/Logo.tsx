@@ -15,7 +15,7 @@ const Logo = () => {
         padding={1}
         _active={{ bg: "transparent" }}
       >
-        junghyeonsu.dev
+        junghyeonsu.com
       </Button>
     </Link>
   );
