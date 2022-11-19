@@ -58,7 +58,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["gatsby-plugin-google-analytics", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.0"],\
             ["gatsby-plugin-image", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.0.0"],\
             ["gatsby-plugin-mdx", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.0"],\
-            ["gatsby-plugin-mdx-frontmatter", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.0.4"],\
             ["gatsby-plugin-sharp", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.0"],\
             ["gatsby-plugin-typegen", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.1.0"],\
             ["gatsby-plugin-web-font-loader", "npm:1.0.4"],\
@@ -15026,40 +15025,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["gatsby-plugin-mdx-frontmatter", [\
-        ["npm:0.0.4", {\
-          "packageLocation": "./.yarn/cache/gatsby-plugin-mdx-frontmatter-npm-0.0.4-cd28a0ccd6-77da61c5be.zip/node_modules/gatsby-plugin-mdx-frontmatter/",\
-          "packageDependencies": [\
-            ["gatsby-plugin-mdx-frontmatter", "npm:0.0.4"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.0.4", {\
-          "packageLocation": "./.yarn/__virtual__/gatsby-plugin-mdx-frontmatter-virtual-05efd83cf4/0/cache/gatsby-plugin-mdx-frontmatter-npm-0.0.4-cd28a0ccd6-77da61c5be.zip/node_modules/gatsby-plugin-mdx-frontmatter/",\
-          "packageDependencies": [\
-            ["gatsby-plugin-mdx-frontmatter", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.0.4"],\
-            ["@mdx-js/mdx", "npm:2.1.5"],\
-            ["@mdx-js/react", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:2.1.5"],\
-            ["@types/gatsby", null],\
-            ["@types/gatsby-plugin-mdx", null],\
-            ["@types/mdx-js__mdx", null],\
-            ["@types/mdx-js__react", null],\
-            ["gatsby", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.1"],\
-            ["gatsby-plugin-mdx", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.0"]\
-          ],\
-          "packagePeers": [\
-            "@mdx-js/mdx",\
-            "@mdx-js/react",\
-            "@types/gatsby-plugin-mdx",\
-            "@types/gatsby",\
-            "@types/mdx-js__mdx",\
-            "@types/mdx-js__react",\
-            "gatsby-plugin-mdx",\
-            "gatsby"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["gatsby-plugin-page-creator", [\
         ["npm:5.0.0", {\
           "packageLocation": "./.yarn/cache/gatsby-plugin-page-creator-npm-5.0.0-5d7ab13962-1ac0f7aff7.zip/node_modules/gatsby-plugin-page-creator/",\
@@ -22711,7 +22676,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["gatsby-plugin-google-analytics", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.0"],\
             ["gatsby-plugin-image", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.0.0"],\
             ["gatsby-plugin-mdx", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.0"],\
-            ["gatsby-plugin-mdx-frontmatter", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.0.4"],\
             ["gatsby-plugin-sharp", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:5.0.0"],\
             ["gatsby-plugin-typegen", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:3.1.0"],\
             ["gatsby-plugin-web-font-loader", "npm:1.0.4"],\

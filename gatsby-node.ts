@@ -1,12 +1,13 @@
-const path = require("path");
-const readingTime = require(`reading-time`);
+import type { CreatePagesArgs } from "gatsby";
+import path from "path";
+import readingTime from "reading-time";
 
 const postTemplate = path.resolve(`./src/templates/post.tsx`);
 const tagsTemplate = path.resolve(`./src/templates/tags.tsx`);
 
-exports.createPages = async ({ graphql, actions: { createPage } }) => {
-  const result = await graphql(`
-    query {
+exports.createPages = async ({ graphql, actions: { createPage } }: CreatePagesArgs) => {
+  const result = await graphql<Queries.CreateMdxPostPagesQuery>(`
+    query CreateMdxPostPages {
       allPosts: allMdx {
         nodes {
           id
@@ -30,20 +31,20 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   `);
 
   // 모든 포스트 페이지 생성
-  result.data.allPosts.nodes.forEach((node) => {
+  result?.data?.allPosts.nodes.forEach((node) => {
     createPage({
-      path: `/posts/${node.frontmatter.slug}`,
+      path: `/posts/${node!.frontmatter!.slug}`,
       component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
       context: {
-        tags: node.frontmatter.tags,
+        tags: node!.frontmatter!.tags,
         id: node.id,
-        readingTime: readingTime(node.body),
+        readingTime: readingTime(node!.body!),
       },
     });
   });
 
   // 태그 페이지 생성
-  result.data.allTags.group.forEach(({ tag }) => {
+  result?.data?.allTags.group.forEach(({ tag }) => {
     createPage({
       path: `/tags/${tag}`,
       component: tagsTemplate,

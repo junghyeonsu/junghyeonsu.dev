@@ -9946,18 +9946,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-mdx-frontmatter@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "gatsby-plugin-mdx-frontmatter@npm:0.0.4"
-  peerDependencies:
-    "@mdx-js/mdx": ">=1.6.1"
-    "@mdx-js/react": ">=1.6.1"
-    gatsby: ">=2.21.33"
-    gatsby-plugin-mdx: ">=1.2.7"
-  checksum: 77da61c5bef6624f4daff688e71ff0d9da5c0f14e75719a1efddd8b921ef4302db98bd5addebb6aa26baa9dac8975bf255ee35428bf4f5425c265e88aa05f82c
-  languageName: node
-  linkType: hard
-
 "gatsby-plugin-mdx@npm:^5.0.0":
   version: 5.0.0
   resolution: "gatsby-plugin-mdx@npm:5.0.0"
@@ -16452,7 +16440,6 @@ __metadata:
     gatsby-plugin-google-analytics: ^5.0.0
     gatsby-plugin-image: ^3.0.0
     gatsby-plugin-mdx: ^5.0.0
-    gatsby-plugin-mdx-frontmatter: ^0.0.4
     gatsby-plugin-sharp: ^5.0.0
     gatsby-plugin-typegen: ^3.1.0
     gatsby-plugin-web-font-loader: ^1.0.4

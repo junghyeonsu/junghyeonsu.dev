@@ -1,4 +1,5 @@
-const path = require(`path`);
+import type { GatsbyConfig } from "gatsby";
+import path from "path";
 
 const SITE_METADATA = Object.freeze({
   title: "정현수의 기술 블로그",
@@ -6,18 +7,21 @@ const SITE_METADATA = Object.freeze({
   siteUrl: process.env.URL || "https://junghyeonsu-dev.vercel.app",
 });
 
-const wrapESMPlugin = (name) =>
-  function wrapESM(opts) {
-    return async (...args) => {
+const wrapESMPlugin = (name: string) =>
+  function wrapESM(opts: Object) {
+    return async (...args: Array<any>) => {
       const mod = await import(name);
       const plugin = mod.default(opts);
       return plugin(...args);
     };
   };
 
-module.exports = {
+const config: GatsbyConfig = {
   siteMetadata: SITE_METADATA,
   graphqlTypegen: true,
+  flags: {
+    DEV_SSR: true,
+  },
   trailingSlash: `always`,
   plugins: [
     {
@@ -57,7 +61,6 @@ module.exports = {
         },
       },
     },
-    "gatsby-plugin-mdx-frontmatter",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -119,8 +122,8 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.nodes.map((node) => {
+            serialize: ({ query: { site, allMdx } }: any) => {
+              return allMdx.nodes.map((node: any) => {
                 return Object.assign({}, node.frontmatter, {
                   title: node.frontmatter.title,
                   description: node.frontmatter.description,
@@ -161,3 +164,5 @@ module.exports = {
     },
   ],
 };
+
+export default config;
