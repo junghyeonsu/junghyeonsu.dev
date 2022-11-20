@@ -12,7 +12,7 @@ import Tags from "../components/Tags";
 export const query = graphql`
   query TagsPage($tag: String!) {
     allMdx(
-      sort: { fields: frontmatter___createdAt, order: DESC }
+      sort: { frontmatter: { createdAt: DESC } }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
