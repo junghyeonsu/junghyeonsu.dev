@@ -14,7 +14,7 @@ import { fadeInFromLeft } from "../framer-motions";
 export const query = graphql`
   query TagsPage($tag: String!) {
     allMdx(
-      sort: { frontmatter: { createdAt: DESC } }
+      sort: { fields: frontmatter___createdAt, order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
