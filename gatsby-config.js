@@ -128,8 +128,8 @@ module.exports = {
                   title: node.frontmatter.title,
                   description: node.frontmatter.description,
                   pubDate: node.frontmatter.createdAt,
-                  url: site.siteMetadata.siteUrl + node.frontmatter.slug,
-                  guid: site.siteMetadata.siteUrl + node.frontmatter.slug,
+                  url: `${site.siteMetadata.siteUrl}/posts/${node.frontmatter.slug}`,
+                  guid: `${site.siteMetadata.siteUrl}/posts/${node.frontmatter.slug}`,
                   custom_elements: [{ "content:encoded": node.body }],
                 });
               });
