@@ -1,0 +1,136 @@
+---
+slug: eslint-configs-library
+title: ESLint 설정을 나만의 라이브러리로 만들어보자.
+description: 매번 같은 설정 하기가 너무 귀찮아.
+thumbnail: ./cover.png
+tags: ["development"]
+createdAt: "2022/12/10"
+updatedAt: ""
+---
+
+## 완성된 라이브러리 미리보기
+
+- [junghyoensu/configs](https://github.com/junghyeonsu/configs)
+
+### BEFORE
+
+> 이렇게 긴 `.eslintrc.js` 파일을...
+
+```js
+module.exports = {
+  root: true,
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "./tsconfig.json",
+    tsconfigRootDir: __dirname,
+  },
+  extends: ["prettier"],
+  plugins: [
+    "@typescript-eslint/eslint-plugin",
+    "react",
+    "prettier",
+    "json-format",
+    "simple-import-sort",
+  ],
+  ignorePatterns: [".eslintrc.js", "public", "node_modules", ".cache", ".vscode"],
+  rules: {
+    "no-unused-vars": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        prefer: "type-imports",
+        disallowTypeAnnotations: false,
+      },
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        singleQuote: false,
+        semi: true,
+        tabWidth: 2,
+        useTabs: false,
+        trailingComma: "all",
+        printWidth: 100,
+        arrowParens: "always",
+      },
+      {
+        usePrettierrc: false,
+      },
+    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+  },
+};
+```
+
+### AFTER
+
+> 이런식으로 줄일 수 있어요.
+
+```js
+module.exports = {
+  extends: ["@junghyeonsu/base", "@junghyeonsu/react", "@junghyeonsu/typescript"],
+};
+```
+
+## 프로젝트 환경
+
+> 라이브러리로 만들 저장소를 만들어봐요.
+
+개발환경에 대해서 알려드릴게요.
+
+- **monorepo**
+- **yarn workspace**
+- **package manager**: yarn berry
+  - nodeLinker: node_modules
+- **빌드**: [nanobundle](https://github.com/cometkim/nanobundle)
+- **스크립트 실행**: [ultra-runner](https://github.com/folke/ultra-runner)
+- **버전 관리**: [changesets](https://github.com/changesets/changesets)
+
+해당 기술들이 뭔지를 설명하는 글은 아니지만 간략하게나마 설명을 해볼게요.
+
+### monorepo
+
+### yarn workspace
+
+### yarn berry
+
+> yarn berry는 yarn의 두 번째 버전이예요.
+
+- **nodeLinker: node_modules**
+
+**pnp**는 사용하지 않을게요. 생각해야 되는게 너무 많고 **zero-install**이 생명인 프로젝트는 아니예요.
+**nodeLinker**는 **pnp**가 **default** 옵션이라서 **node_modules**를 다시 사용하고 싶으면 **.yarnrc.yml** 파일에서 **nodeLinker: node_modules**를 명시해줘요.
+
+```yml
+# .yarnrc.yml
+yarnPath: .yarn/releases/yarn-3.3.0.cjs
+
+nodeLinker: node-modules
+```
+
+- [참고: node_modules로부터 우리를 구원해 줄 Yarn Berry | toss tech](https://toss.tech/article/node-modules-and-yarn-berry)
+
+### 빌드 도구: nanobundle
+
+### 스크립트 실행 도구: ultra-runner
+
+### 버전 관리 도구: changesets
+
+## 프로젝트 세팅
+
+### 저장소 생성
+
+### 의존성 설치
+
+```console
+$ yarn add
+```
+
+## 구조 잡기
+
+### monorepo는 packages 폴더를 따라가요
+
+###
+
+##
