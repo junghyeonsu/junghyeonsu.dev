@@ -3,7 +3,7 @@ const path = require(`path`);
 const SITE_METADATA = Object.freeze({
   title: "정현수의 기술 블로그",
   description: "주니어 프론트엔드 개발자 정현수의 기술 블로그입니다.",
-  siteUrl: process.env.URL || "https://junghyeonsu-dev.vercel.app",
+  siteUrl: process.env.URL || "https://junghyeonsu.com",
 });
 
 const wrapESMPlugin = (name) =>
