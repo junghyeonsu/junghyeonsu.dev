@@ -24,6 +24,18 @@ const customComponents = {
 
   p: (props: Object) => <Text fontSize={16} mt="16px" {...props} />,
 
+  li: (props: Object) => (
+    <Box
+      as="li"
+      sx={{
+        p: {
+          display: "inline",
+        },
+      }}
+      fontSize={16}
+      {...props}
+    />
+  ),
   ol: (props: Object) => <Box as="ol" fontSize={16} mt="16px" listStylePos="inside" {...props} />,
   ul: (props: Object) => (
     <Box

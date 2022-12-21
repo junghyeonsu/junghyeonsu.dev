@@ -12,6 +12,9 @@ updatedAt: ""
 
 - [junghyoensu/configs](https://github.com/junghyeonsu/configs)
 
+**eslint**, **prettier**는 우리의 코드를 조금 더 깔끔하고 오류가 없게끔 해줘요.
+프로젝트를 시작할 때 마다 `eslint`와 `prettier` 설정하기가 귀찮지 않으신가요?
+
 ### BEFORE
 
 > 이렇게 긴 `.eslintrc.js` 파일을...
@@ -68,6 +71,7 @@ module.exports = {
 > 이런식으로 줄일 수 있어요.
 
 ```js
+// 여러분들의 이름으로 된 라이브러리를 만들어봐요.
 module.exports = {
   extends: ["@junghyeonsu/base", "@junghyeonsu/react", "@junghyeonsu/typescript"],
 };
@@ -99,7 +103,7 @@ module.exports = {
 
 - **nodeLinker: node_modules**
 
-**pnp**는 사용하지 않을게요. 생각해야 되는게 너무 많고 **zero-install**이 생명인 프로젝트는 아니예요.
+**pnp**는 사용하지 않을게요. **zero-install**이 생명인 프로젝트는 아니예요.
 **nodeLinker**는 **pnp**가 **default** 옵션이라서 **node_modules**를 다시 사용하고 싶으면 **.yarnrc.yml** 파일에서 **nodeLinker: node_modules**를 명시해줘요.
 
 ```yml
@@ -109,28 +113,91 @@ yarnPath: .yarn/releases/yarn-3.3.0.cjs
 nodeLinker: node-modules
 ```
 
-- [참고: node_modules로부터 우리를 구원해 줄 Yarn Berry | toss tech](https://toss.tech/article/node-modules-and-yarn-berry)
+- [[참고] node_modules로부터 우리를 구원해 줄 Yarn Berry | toss tech](https://toss.tech/article/node-modules-and-yarn-berry)
 
 ### 빌드 도구: nanobundle
 
+ㅇㅇ
+
 ### 스크립트 실행 도구: ultra-runner
 
+ㅇㅇ
+
 ### 버전 관리 도구: changesets
+
+ㅇㅇ
 
 ## 프로젝트 세팅
 
 ### 저장소 생성
 
-### 의존성 설치
+ㅇㅇ
+
+### yarn berry로 설정
+
+ㅇㅇ
+
+### 필요한 의존성 설치
+
+ㅇㅇ
 
 ```console
 $ yarn add
 ```
 
-## 구조 잡기
+### 폴더 구조는 이렇게 잡아요
 
-### monorepo는 packages 폴더를 따라가요
+- **monorepo는 packages 폴더를 따라가요.**
 
-###
+ㅇㅇ
 
-##
+- **저는 총 세 개의 패키지로 나눴어요.**
+
+ㅇㅇ
+
+- **yarn workspace에 명시해줘야 해요.**
+
+ㅇㅇ
+
+## 저희 라이브러리의 핵심인 설정들을 작성해볼까요?
+
+> junghyeonsu는 제 이름이니까 여러분들의 이름을 넣어서 라이브러리를 만들어봐요.
+
+- **@junghyeonsu/eslint-config-base**
+
+ㅇㅇ
+
+- **@junghyeonsu/eslint-config-typescript**
+
+ㅇㅇ
+
+- **@junghyeonsu/eslint-config-react**
+
+ㅇㅇ
+
+## 이제 작성했으면 패키지 배포를 해야해요.
+
+- **npm 계정과 로컬에서 npm 로그인이 되어있어야 해요.**
+
+ㅇㅇ
+
+- **changesets로 패키지 버전 명시와 배포를 해봐요.**
+
+ㅇㅇ
+
+- **자동 배포 스크립트를 한 번 짜볼까요?**
+
+**npm**에 자동 배포 스크립트를 짜기 위해서는 **npm publish token**을 발급받아야 해요.
+
+## 완성도 높이기
+
+- **리드미를 작성해봐요**
+
+ㅇㅇ
+
+- **설치를 해보고 테스트해봐요**
+
+## 마무리
+
+오늘 이런식으로 간단하게 **eslint config** 라이브러리를 만들었어요.
+설정 파일뿐만 아니라
