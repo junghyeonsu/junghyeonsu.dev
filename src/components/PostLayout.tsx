@@ -76,7 +76,7 @@ const customComponents = {
             />
           </svg>
         </Center>
-        {children}
+        <Flex direction="column">{children}</Flex>
       </Flex>
     );
   },
