@@ -1,11 +1,8 @@
-import { Box, Divider } from "@chakra-ui/react";
 import type { HeadFC } from "gatsby";
 import { graphql } from "gatsby";
 import { getSrc } from "gatsby-plugin-image";
-import React from "react";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import MainLayout from "../components/MainLayout";
 import PostGrid from "../components/PostGrid";
 import Tags from "../components/Tags";
 
@@ -47,22 +44,10 @@ interface TagsProps {
 
 export default function TagsTemplate({ pageContext, data }: TagsProps) {
   return (
-    <>
-      <Header />
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        maxWidth={800}
-        margin="auto"
-      >
-        <Tags currentTag={pageContext.tag} />
-        <Divider orientation="horizontal" marginTop="20px" />
-        <PostGrid posts={data.allMdx.nodes} />
-      </Box>
-      <Footer />
-    </>
+    <MainLayout>
+      <Tags currentTag={pageContext.tag} />
+      <PostGrid posts={data.allMdx.nodes} />
+    </MainLayout>
   );
 }
 

@@ -1,7 +1,8 @@
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
-import { koreanTagNames } from "../constants";
+import { ALL_POSTS_TAG_NAME, koreanTagNames } from "../constants";
 import { convertSlugToTitle } from "../utils/string";
 
 interface TagsProps {
@@ -28,14 +29,24 @@ export default function Tags({ currentTag }: TagsProps) {
   return (
     <Flex marginTop="80px" direction="column" width="100%" maxWidth="800px">
       {/* Title + Count */}
-      <Flex justifyContent="center" width="100%" margin="auto">
+      <motion.div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+          margin: "auto",
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
         <Heading
           fontStyle="italic"
-          fontSize={{ base: "30px", md: "50px" }}
+          fontSize={{ base: currentTag === ALL_POSTS_TAG_NAME ? "40px" : "30px", md: "60px" }}
           fontWeight="600"
           letterSpacing={-1.5}
         >
-          {currentTag === "all" ? "ALL POSTS." : `${convertSlugToTitle(currentTag)}.`}
+          {convertSlugToTitle(currentTag)}.
         </Heading>
         <Text
           fontSize={{ base: "12px", md: "16px" }}
@@ -43,10 +54,11 @@ export default function Tags({ currentTag }: TagsProps) {
           color="gray.500"
           fontWeight="200"
         >
-          ({currentTag === "all" ? data.allMdx.allPostCount : currentTagPostCount})
+          ({currentTag === ALL_POSTS_TAG_NAME ? data.allMdx.allPostCount : currentTagPostCount})
         </Text>
-      </Flex>
+      </motion.div>
 
+      {/* Tag List */}
       <Flex
         as="nav"
         columnGap="10px"
@@ -58,8 +70,8 @@ export default function Tags({ currentTag }: TagsProps) {
       >
         <Link to="/">
           <Button
-            backgroundColor={currentTag === "all" ? "blue.400" : "none"}
-            colorScheme={currentTag === "all" ? "blue" : undefined}
+            backgroundColor={currentTag === ALL_POSTS_TAG_NAME ? "blue.400" : "none"}
+            colorScheme={currentTag === ALL_POSTS_TAG_NAME ? "blue" : undefined}
           >
             all ({data.allMdx.allPostCount})
           </Button>
