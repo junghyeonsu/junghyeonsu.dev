@@ -1,5 +1,5 @@
 import { Box, Spacer } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import RSS from "../RSS";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
@@ -33,7 +33,7 @@ const Header = () => {
       top="0"
       display="flex"
       paddingLeft={5}
-      paddingRight={10}
+      paddingRight={5}
       columnGap={4}
       zIndex="5"
       alignItems="center"

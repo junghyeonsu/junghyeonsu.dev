@@ -1,13 +1,11 @@
-import { Box, Divider } from "@chakra-ui/react";
 import type { HeadFC } from "gatsby";
 import { graphql } from "gatsby";
 import { getSrc } from "gatsby-plugin-image";
-import React from "react";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import MainLayout from "../components/MainLayout";
 import PostGrid from "../components/PostGrid";
 import Tags from "../components/Tags";
+import { ALL_POSTS_TAG_NAME } from "../constants";
 
 export const query = graphql`
   query IndexPage {
@@ -40,22 +38,10 @@ interface IndexPageProps {
 
 const IndexPage = ({ data }: IndexPageProps) => {
   return (
-    <>
-      <Header />
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        maxWidth={800}
-        margin="auto"
-      >
-        <Tags currentTag="all" />
-        <Divider orientation="horizontal" marginTop="20px" />
-        <PostGrid posts={data.allPosts.nodes} />
-      </Box>
-      <Footer />
-    </>
+    <MainLayout>
+      <Tags currentTag={ALL_POSTS_TAG_NAME} />
+      <PostGrid posts={data.allPosts.nodes} />
+    </MainLayout>
   );
 };
 

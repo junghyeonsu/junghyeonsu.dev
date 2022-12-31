@@ -15,7 +15,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
       <Grid
         as="section"
         templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
-        margin={{ base: "20px", md: "20px 0px" }}
+        margin={{ base: "40px 10px", md: "40px 0px" }}
         gap={6}
       >
         {posts.map((posts) => (
