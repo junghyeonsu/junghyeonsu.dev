@@ -1,21 +1,20 @@
-import { Button, useColorMode } from "@chakra-ui/react";
-import React from "react";
+import { Text } from "@chakra-ui/react";
 
 const Introduction = () => {
-  const { colorMode } = useColorMode();
   return (
     <a href="https://hyeonsu-jung.vercel.app/" target="_blank" rel="noreferrer">
-      <Button
-        variant="unstyled"
+      <Text
         fontSize={14}
+        fontStyle="italic"
+        fontWeight={800}
         _hover={{
-          bg: colorMode === "dark" ? "whiteAlpha.200" : "blackAlpha.200",
+          textDecoration: "underline",
         }}
         padding={1}
         _active={{ bg: "transparent" }}
       >
         About
-      </Button>
+      </Text>
     </a>
   );
 };
