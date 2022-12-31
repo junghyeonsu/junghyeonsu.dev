@@ -4,6 +4,18 @@ const readingTime = require(`reading-time`);
 const postTemplate = path.resolve(`./src/templates/post.tsx`);
 const tagsTemplate = path.resolve(`./src/templates/tags.tsx`);
 
+exports.onCreateWebpackConfig = ({ actions, plugins, reporter }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      plugins.provide({
+        React: "react",
+      }),
+    ],
+  });
+
+  reporter.info(`Provided React in all files`);
+};
+
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(`
     query {
