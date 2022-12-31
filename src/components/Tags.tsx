@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { graphql, Link, useStaticQuery } from "gatsby";
 
@@ -43,7 +43,7 @@ export default function Tags({ currentTag }: TagsProps) {
         <Heading
           fontStyle="italic"
           fontSize={{ base: currentTag === ALL_POSTS_TAG_NAME ? "40px" : "30px", md: "60px" }}
-          fontWeight="600"
+          fontWeight="800"
           letterSpacing={-1.5}
         >
           {convertSlugToTitle(currentTag)}.
@@ -64,17 +64,23 @@ export default function Tags({ currentTag }: TagsProps) {
         columnGap="10px"
         rowGap="10px"
         flexWrap="wrap"
-        marginTop="20px"
+        marginTop="40px"
         padding={{ base: "0 20px", md: "0px" }}
         width="100%"
       >
         <Link to="/">
-          <Button
-            backgroundColor={currentTag === ALL_POSTS_TAG_NAME ? "blue.400" : "none"}
-            colorScheme={currentTag === ALL_POSTS_TAG_NAME ? "blue" : undefined}
-          >
-            all ({data.allMdx.allPostCount})
-          </Button>
+          <Flex justifyContent="center" alignItems="flex-start">
+            <Text
+              fontSize={{ base: "14px", md: "18px" }}
+              fontWeight={currentTag === ALL_POSTS_TAG_NAME ? 700 : 400}
+              _hover={{ textDecoration: "underline" }}
+            >
+              All Posts
+            </Text>
+            <Text fontSize="12px" fontWeight={currentTag === ALL_POSTS_TAG_NAME ? 700 : 300}>
+              ({data.allMdx.allPostCount})
+            </Text>
+          </Flex>
         </Link>
         {Object.values(data.allMdx.group).map((group) => {
           const { tag, tagPostCount } = group as {
@@ -83,13 +89,18 @@ export default function Tags({ currentTag }: TagsProps) {
           };
           return (
             <Link key={tag} to={`/tags/${tag}`}>
-              <Button
-                backgroundColor={currentTag === tag ? "blue.400" : "none"}
-                colorScheme={currentTag === tag ? "blue" : undefined}
-                key={tag}
-              >
-                {koreanTagNames[tag]} ({tagPostCount})
-              </Button>
+              <Flex justifyContent="center" alignItems="flex-start">
+                <Text
+                  fontSize={{ base: "14px", md: "18px" }}
+                  fontWeight={currentTag === tag ? 700 : 400}
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  {koreanTagNames[tag]}
+                </Text>
+                <Text fontSize="12px" fontWeight={currentTag === tag ? 700 : 300}>
+                  ({tagPostCount})
+                </Text>
+              </Flex>
             </Link>
           );
         })}
