@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import React from "react";
 
 import { fadeInFromLeft } from "../framer-motions";
+import MainPostCard from "./MainPostCard";
 import PostCard from "./PostCard";
 
 interface PostGridProps {
-  posts: GatsbyTypes.IndexPageQuery["allPosts"]["nodes"];
+  posts: GatsbyTypes.AllPostPageTemplateQuery["allMdx"]["nodes"];
 }
 
 const PostGrid = ({ posts }: PostGridProps) => {
@@ -18,19 +19,37 @@ const PostGrid = ({ posts }: PostGridProps) => {
         margin={{ base: "40px 10px", md: "40px 0px" }}
         gap={6}
       >
-        {posts.map((posts) => (
-          <GridItem key={posts.frontmatter?.slug} as="article">
-            <PostCard
-              title={posts.frontmatter?.title!}
-              description={posts.frontmatter?.description!}
-              slug={posts.frontmatter?.slug!}
-              thumbnail={posts.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
-              createdAt={posts.frontmatter?.createdAt!}
-              updatedAt={posts.frontmatter?.updatedAt!}
-              tags={posts.frontmatter?.tags!}
-            />
-          </GridItem>
-        ))}
+        {posts.map((posts, index) => {
+          if (index === 0) {
+            return (
+              <GridItem key={posts.frontmatter?.slug} as="article">
+                <MainPostCard
+                  title={posts.frontmatter?.title!}
+                  description={posts.frontmatter?.description!}
+                  slug={posts.frontmatter?.slug!}
+                  thumbnail={posts.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
+                  createdAt={posts.frontmatter?.createdAt!}
+                  updatedAt={posts.frontmatter?.updatedAt!}
+                  tags={posts.frontmatter?.tags!}
+                />
+              </GridItem>
+            );
+          }
+
+          return (
+            <GridItem key={posts.frontmatter?.slug} as="article">
+              <PostCard
+                title={posts.frontmatter?.title!}
+                description={posts.frontmatter?.description!}
+                slug={posts.frontmatter?.slug!}
+                thumbnail={posts.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
+                createdAt={posts.frontmatter?.createdAt!}
+                updatedAt={posts.frontmatter?.updatedAt!}
+                tags={posts.frontmatter?.tags!}
+              />
+            </GridItem>
+          );
+        })}
       </Grid>
     </motion.div>
   );
