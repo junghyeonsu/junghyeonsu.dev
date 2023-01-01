@@ -6,7 +6,7 @@ import { useMemo } from "react";
 
 import { koreanTagNames } from "../constants";
 
-interface PostCardProps {
+interface MainPostCardProps {
   title: string;
   description: string;
   slug: string;
@@ -16,7 +16,7 @@ interface PostCardProps {
   thumbnail: IGatsbyImageData;
 }
 
-const PostCard = ({
+const MainPostCard = ({
   createdAt,
   description,
   slug,
@@ -24,7 +24,7 @@ const PostCard = ({
   thumbnail,
   title,
   updatedAt,
-}: PostCardProps) => {
+}: MainPostCardProps) => {
   const diffMs = useMemo(() => new Date().getTime() - new Date(createdAt).getTime(), [createdAt]);
   const isNewPost = useMemo(() => Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10, [diffMs]);
 
@@ -32,7 +32,7 @@ const PostCard = ({
     <Link to={`/posts/${slug}`}>
       <Box
         as="article"
-        transition="box-shadow 0.25s ease"
+        transition="all 0.25s ease"
         position="relative"
         _hover={{ boxShadow: "lg", cursor: "pointer" }}
         borderRadius="20px"
@@ -49,6 +49,11 @@ const PostCard = ({
           height="100%"
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
+          transition="opacity 0.25s ease"
+          opacity={{ base: 1, md: 0 }}
+          _hover={{
+            opacity: 1,
+          }}
         >
           {/* Title */}
           <Flex
@@ -154,4 +159,4 @@ const PostCard = ({
   );
 };
 
-export default PostCard;
+export default MainPostCard;

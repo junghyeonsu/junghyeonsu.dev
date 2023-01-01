@@ -30,7 +30,7 @@ updatedAt: ""
 
 ### 시멘틱 태그 사용하기
 
-> [시멘틱 태그](https://junghyeonsu-dev.vercel.app/posts/Semantic-tag)를 일관되게 적용시킨다면 많은 이점이 있습니다.
+> [시멘틱 태그](https://junghyeonsu.com/posts/Semantic-tag)를 일관되게 적용시킨다면 많은 이점이 있습니다.
 
 시멘틱 태그는 그냥 `div`와 같은 태그로 도배하지말고, 태그 자체에 의미를 부여해서 알맞은 위치와 알맞은 용도로 사용하자는 의도입니다. 시멘틱 태그를 잘 적용하면 다음과 같은 장점이 있습니다.
 
@@ -249,12 +249,7 @@ a:active {
 또한 `input` 태그에는 `label` 속성을 부여해서 스크린리더가 읽을 수 있는 설명 레이블을 제공합니다.
 
 ```html
-<input
-  type="search"
-  name="q"
-  placeholder="Search query"
-  aria-label="Search through site content"
-/>
+<input type="search" name="q" placeholder="Search query" aria-label="Search through site content" />
 ```
 
 ### Dynamic content updates (동적 컨텐츠 업데이트)
@@ -299,9 +294,7 @@ a:active {
 > 아래의 예제보단 그냥 일반적인 button을 사용하는 것이 더 좋습니다.
 
 ```html
-<div data-message="This is from the first button" tabindex="0" role="button">
-  Click me!
-</div>
+<div data-message="This is from the first button" tabindex="0" role="button">Click me!</div>
 ```
 
 ### Guiding users through complex widgets (복잡한 위젯을 통해 사용자 안내)
@@ -320,29 +313,11 @@ a:active {
   >
     Tab 1
   </li>
-  <li
-    role="tab"
-    aria-selected="false"
-    aria-setsize="3"
-    aria-posinset="2"
-    tabindex="0"
-  >
-    Tab 2
-  </li>
-  <li
-    role="tab"
-    aria-selected="false"
-    aria-setsize="3"
-    aria-posinset="3"
-    tabindex="0"
-  >
-    Tab 3
-  </li>
+  <li role="tab" aria-selected="false" aria-setsize="3" aria-posinset="2" tabindex="0">Tab 2</li>
+  <li role="tab" aria-selected="false" aria-setsize="3" aria-posinset="3" tabindex="0">Tab 3</li>
 </ul>
 <div class="panels">
-  <article class="active-panel" role="tabpanel" aria-hidden="false">
-    ...
-  </article>
+  <article class="active-panel" role="tabpanel" aria-hidden="false">...</article>
   <article role="tabpanel" aria-hidden="true">...</article>
   <article role="tabpanel" aria-hidden="true">...</article>
 </div>
