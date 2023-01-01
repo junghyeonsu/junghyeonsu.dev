@@ -37,7 +37,7 @@ const MainPostCard = ({
         _hover={{ boxShadow: "lg", cursor: "pointer" }}
         borderRadius="20px"
         overflow="hidden"
-        width={{ base: "100%", md: "100%" }}
+        width="100%"
         height={{ base: "100%", sm: "280px", md: "340px" }}
       >
         {/* Overlay */}
@@ -46,7 +46,7 @@ const MainPostCard = ({
           top={0}
           left={0}
           width="100%"
-          height="100%"
+          height={{ base: "100%", sm: "280px", md: "340px" }}
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
           isolation="isolate"
