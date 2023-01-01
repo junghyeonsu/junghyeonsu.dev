@@ -39,6 +39,7 @@ const MainPostCard = ({
         overflow="hidden"
         width="100%"
         height={{ base: "100%", sm: "280px", md: "340px" }}
+        isolation="isolate"
       >
         {/* Overlay */}
         <Box
@@ -49,7 +50,6 @@ const MainPostCard = ({
           height={{ base: "100%", sm: "280px", md: "340px" }}
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
-          isolation="isolate"
           transition="opacity 0.25s ease"
           opacity={{ base: 1, md: 0 }}
           _hover={{
