@@ -49,6 +49,7 @@ const MainPostCard = ({
           height="100%"
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
+          isolation="isolate"
           transition="opacity 0.25s ease"
           opacity={{ base: 1, md: 0 }}
           _hover={{

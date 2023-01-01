@@ -39,6 +39,7 @@ const PostCard = ({
         overflow="hidden"
         width={{ base: "100%", md: "100%" }}
         height={{ base: "100%", sm: "280px", md: "340px" }}
+        isolation="isolate"
       >
         {/* Overlay */}
         <Box

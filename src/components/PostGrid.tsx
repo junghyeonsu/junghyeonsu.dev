@@ -33,7 +33,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
 
           if (index % 4 === 0) {
             return (
-              <GridItem colSpan={{ base: 1, lg: 7 }} key={posts.frontmatter?.slug} as="article">
+              <GridItem colSpan={{ lg: 7 }} key={posts.frontmatter?.slug} as="article">
                 <MainPostCard {...cardData} />
               </GridItem>
             );
@@ -41,7 +41,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
 
           if (index % 4 === 1) {
             return (
-              <GridItem colSpan={{ base: 1, lg: 5 }} key={posts.frontmatter?.slug} as="article">
+              <GridItem colSpan={{ lg: 5 }} key={posts.frontmatter?.slug} as="article">
                 <PostCard {...cardData} />
               </GridItem>
             );
@@ -49,7 +49,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
 
           if (index % 4 === 2) {
             return (
-              <GridItem colSpan={{ base: 1, lg: 5 }} key={posts.frontmatter?.slug} as="article">
+              <GridItem colSpan={{ lg: 5 }} key={posts.frontmatter?.slug} as="article">
                 <PostCard {...cardData} />
               </GridItem>
             );
@@ -57,7 +57,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
 
           if (index % 4 === 3) {
             return (
-              <GridItem colSpan={{ base: 1, lg: 7 }} key={posts.frontmatter?.slug} as="article">
+              <GridItem colSpan={{ lg: 7 }} key={posts.frontmatter?.slug} as="article">
                 <MainPostCard {...cardData} />
               </GridItem>
             );
