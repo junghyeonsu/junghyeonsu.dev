@@ -3,13 +3,15 @@ import { graphql } from "gatsby";
 import { getSrc } from "gatsby-plugin-image";
 
 import MainLayout from "../components/MainLayout";
+import Pagenation from "../components/Pagenation";
 import PostGrid from "../components/PostGrid";
 import Tags from "../components/Tags";
-import { ALL_POSTS_TAG_NAME } from "../constants";
+import { ALL_POSTS_TAG_NAME, DOMAIN } from "../constants";
 
 export const query = graphql`
-  query IndexPage {
-    allPosts: allMdx(sort: { frontmatter: { createdAt: DESC } }) {
+  query AllPostPageTemplate($limit: Int, $skip: Int) {
+    allMdx(sort: { frontmatter: { createdAt: DESC } }, limit: $limit, skip: $skip) {
+      totalCount
       nodes {
         frontmatter {
           thumbnail {
@@ -25,6 +27,11 @@ export const query = graphql`
           tags
         }
       }
+
+      pageInfo {
+        currentPage
+        pageCount
+      }
     }
     ogimage: imageSharp(fluid: { originalName: { eq: "og-image.png" } }) {
       gatsbyImageData
@@ -32,26 +39,26 @@ export const query = graphql`
   }
 `;
 
-interface IndexPageProps {
-  data: GatsbyTypes.IndexPageQuery;
+interface AllPostPageTemplateProps {
+  data: GatsbyTypes.AllPostPageTemplateQuery;
 }
 
-const IndexPage = ({ data }: IndexPageProps) => {
+export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) {
+  const currentPage = data.allMdx.pageInfo.currentPage;
+  const pageCount = data.allMdx.pageInfo.pageCount;
   return (
     <MainLayout>
       <Tags currentTag={ALL_POSTS_TAG_NAME} />
-      <PostGrid posts={data.allPosts.nodes} />
+      <PostGrid posts={data.allMdx.nodes} />
+      {pageCount > 1 && <Pagenation currentPage={currentPage} pageCount={pageCount} />}
     </MainLayout>
   );
-};
+}
 
-export default IndexPage;
-
-export const Head: HeadFC<Queries.IndexPageQuery> = ({ data }) => {
+export const Head: HeadFC<Queries.AllPostPageTemplateQuery> = ({ data }) => {
   const ogimage = data.ogimage?.gatsbyImageData!;
   const description = "웹 프론트엔드 개발자 정현수입니다.";
   const title = "정현수 기술 블로그";
-  const domain = "https://junghyeonsu-dev.vercel.app";
 
   return (
     <>
@@ -60,7 +67,7 @@ export const Head: HeadFC<Queries.IndexPageQuery> = ({ data }) => {
       <meta name="description" content={description} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* Facebook Meta Tags */}
-      <meta property="og:url" content={domain} />
+      <meta property="og:url" content={DOMAIN} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={title} />
       <meta property="og:title" content={title} />
@@ -68,8 +75,8 @@ export const Head: HeadFC<Queries.IndexPageQuery> = ({ data }) => {
       <meta property="og:image" content={getSrc(ogimage)} />
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="junghyeonsu-dev.vercel.app" />
-      <meta property="twitter:url" content={domain} />
+      <meta property="twitter:domain" content="junghyeonsu.com" />
+      <meta property="twitter:url" content={DOMAIN} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={getSrc(ogimage)} />

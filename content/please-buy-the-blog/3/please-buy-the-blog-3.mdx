@@ -43,10 +43,7 @@ Open Graph는 `head` 태그안의 `meta` 태그를 통해서 노출할 수 있�
   <meta property="og:title" content="The Rock" />
   <meta property="og:type" content="video.movie" />
   <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
-  <meta
-    property="og:image"
-    content="https://ia.media-imdb.com/images/rock.jpg"
-  />
+  <meta property="og:image" content="https://ia.media-imdb.com/images/rock.jpg" />
   <!-- ... -->
 </head>
 ```
@@ -83,38 +80,20 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {/* Facebook Meta Tags */}
-      <meta
-        property="og:url"
-        content={`https://junghyeonsu-dev.vercel.app/posts/${post?.slug}`}
-      />
+      <meta property="og:url" content={`https://junghyeonsu.com/posts/${post?.slug}`} />
       <meta property="og:type" content="website" />
-      <meta
-        property="og:site_name"
-        content={`${post?.title} | 정현수 기술 블로그`}
-      />
-      <meta
-        property="og:title"
-        content={`${post?.title} | 정현수 기술 블로그`}
-      />
+      <meta property="og:site_name" content={`${post?.title} | 정현수 기술 블로그`} />
+      <meta property="og:title" content={`${post?.title} | 정현수 기술 블로그`} />
       <meta property="og:description" content={post?.description} />
       <meta property="og:image" content={`${DOMAIN}${post?.coverImage}`} />
 
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="junghyeonsu-dev.vercel.app" />
-      <meta
-        property="twitter:url"
-        content={`https://junghyeonsu-dev.vercel.app/posts/${post?.slug}`}
-      />
-      <meta
-        name="twitter:title"
-        content={`${post?.title} | 정현수 기술 블로그`}
-      />
+      <meta property="twitter:domain" content="junghyeonsu.com" />
+      <meta property="twitter:url" content={`https://junghyeonsu.com/posts/${post?.slug}`} />
+      <meta name="twitter:title" content={`${post?.title} | 정현수 기술 블로그`} />
       <meta name="twitter:description" content={post?.description} />
-      <meta
-        name="twitter:image"
-        content={`${DOMAIN}${post?.coverImage}`}
-      ></meta>
+      <meta name="twitter:image" content={`${DOMAIN}${post?.coverImage}`}></meta>
       <meta name="twitter:label1" content="Category" />
       <meta name="twitter:data1" content={`개발 | ${post?.category}`} />
       <meta
@@ -129,30 +108,21 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta name="description" content="공부한 것들을 정리해서 올립니다." />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* Facebook Meta Tags */}
-      <meta property="og:url" content="https://junghyeonsu-dev.vercel.app/" />
+      <meta property="og:url" content="https://junghyeonsu.com/" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="정현수 기술 블로그" />
       <meta property="og:title" content="정현수 기술 블로그" />
-      <meta
-        property="og:description"
-        content="공부한 것들을 정리해서 올립니다."
-      />
+      <meta property="og:description" content="공부한 것들을 정리해서 올립니다." />
       <meta
         property="og:image"
         content="https://github.com/junghyeonsu/junghyeonsu.dev/blob/main/public/profile.jpeg?raw=true"
       />
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="junghyeonsu-dev.vercel.app" />
-      <meta
-        property="twitter:url"
-        content="https://junghyeonsu-dev.vercel.app/"
-      />
+      <meta property="twitter:domain" content="junghyeonsu.com" />
+      <meta property="twitter:url" content="https://junghyeonsu.com/" />
       <meta name="twitter:title" content="정현수 기술 블로그" />
-      <meta
-        name="twitter:description"
-        content="공부한 것들을 정리해서 올립니다."
-      />
+      <meta name="twitter:description" content="공부한 것들을 정리해서 올립니다." />
       <meta
         name="twitter:image"
         content="https://github.com/junghyeonsu/junghyeonsu.dev/blob/main/public/profile.jpeg?raw=true"
@@ -174,7 +144,7 @@ export default CustomHead;
 
 구글에 `open graph generator`라고 치면 OG를 쉽게 만들 수 있는 사이트도 있고, `open graph test`라고 치게되면 자신의 홈페이지에 잘 적용이 되어있나 확인을 할 수 있는 사이트도 있습니다.
 
-- [open graph test](https://www.opengraph.xyz/url/https%3A%2F%2Fjunghyeonsu-dev.vercel.app%2Fposts%2FAbout-design-system)
+- [open graph test](https://www.opengraph.xyz/url/https%3A%2F%2Fjunghyeonsu.com%2Fposts%2FAbout-design-system)
 - [open graph generator](https://smallseotools.com/open-graph-generator/)
 
 블로그를 직접 만들기 시작하면 정말 신경써야 하는게 한 둘이 아닌 것 같습니다...
