@@ -12,7 +12,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        maxWidth={1200}
+        maxWidth={900}
         margin="auto"
       >
         {children}

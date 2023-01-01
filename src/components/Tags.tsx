@@ -27,7 +27,7 @@ export default function Tags({ currentTag }: TagsProps) {
   )?.tagPostCount;
 
   return (
-    <Flex marginTop="80px" direction="column" width="100%" maxWidth="800px">
+    <Flex marginTop="80px" direction="column" width="100%" maxWidth="600px">
       {/* Title + Count */}
       <motion.div
         style={{
