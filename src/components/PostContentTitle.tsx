@@ -11,7 +11,13 @@ interface PostContentTitleProps {
 
 const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
   return (
-    <Flex width="100%" position="relative" flexDirection="column" alignItems="baseline">
+    <Flex
+      width="100%"
+      position="relative"
+      flexDirection="column"
+      alignItems="baseline"
+      isolation="isolate"
+    >
       <Heading as="h1" fontSize={36} marginBottom="3" fontWeight={900}>
         {post?.frontmatter?.title}
       </Heading>
@@ -47,13 +53,7 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
         <Text fontSize="12px">{readingTime}</Text>
       </Flex>
 
-      <Box
-        display="flex"
-        width="100%"
-        justifyContent="center"
-        alignItems="center"
-        isolation="isolate"
-      >
+      <Box display="flex" width="100%" justifyContent="center" alignItems="center">
         <GatsbyImage
           style={{ marginTop: "20px", borderRadius: "20px" }}
           image={post?.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
