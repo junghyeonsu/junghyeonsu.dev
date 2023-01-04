@@ -9,6 +9,7 @@ export const koreanTagNames: Record<string, string> = {
   productivity: "생산성",
   retrospects: "회고",
   web: "웹",
+  short: "짧.",
 };
 
 export const ALL_POSTS_TAG_NAME = "all posts";

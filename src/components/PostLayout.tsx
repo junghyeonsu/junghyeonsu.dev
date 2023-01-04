@@ -112,6 +112,7 @@ const customComponents = {
     return (
       <SyntaxHighlighter
         style={vscDarkPlus}
+        customStyle={{ margin: "20px 0px" }}
         showLineNumbers
         PreTag="div"
         language={match[1]}
