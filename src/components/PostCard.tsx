@@ -95,6 +95,7 @@ const PostCard = ({
           <Flex position="absolute" direction="column" left={0} top={0} margin="20px" gap="10px">
             <Box
               backgroundColor="white"
+              color="gray.900"
               borderRadius="20px"
               padding="10px"
               fontSize="16px"

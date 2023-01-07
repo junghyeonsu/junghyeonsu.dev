@@ -19,6 +19,7 @@ const Pagenation = ({ pageCount, currentPage }: PagenationProps) => {
             border={i + 1 === currentPage ? "2px solid" : "none"}
             _hover={{
               backgroundColor: "gray.50",
+              color: "gray.900",
             }}
           >
             {i + 1}

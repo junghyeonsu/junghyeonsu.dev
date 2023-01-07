@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, useColorMode } from "@chakra-ui/react";
 import { Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
@@ -10,6 +10,7 @@ interface PostContentTitleProps {
 }
 
 const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
+  const { colorMode } = useColorMode();
   return (
     <Flex
       width="100%"
@@ -23,12 +24,13 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
       </Heading>
       <Flex columnGap="14px" rowGap="10px" alignItems="end" flexWrap="wrap">
         <Box
-          backgroundColor="gray.900"
+          color={colorMode === "dark" ? "gray.50" : "gray.900"}
+          borderColor={colorMode === "dark" ? "gray.50" : "gray.900"}
+          border="2px solid"
           borderRadius="20px"
           padding="6px 10px"
           fontSize="14px"
           fontWeight="800"
-          color="white"
           width="fit-content"
         >
           {post?.frontmatter?.createdAt}
@@ -37,12 +39,12 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
           <Link key={tag} to={`/tags/${tag}`}>
             <Box
               key={tag}
-              borderColor="gray.900"
+              color={colorMode === "dark" ? "gray.50" : "gray.900"}
+              borderColor={colorMode === "dark" ? "gray.50" : "gray.900"}
               border="2px solid"
               borderRadius="20px"
-              color="gray.900"
               padding="6px"
-              fontSize="12px"
+              fontSize="14px"
               fontWeight="800"
               width="fit-content"
             >
