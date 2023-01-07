@@ -3,7 +3,7 @@ const path = require(`path`);
 const SITE_METADATA = Object.freeze({
   title: "정현수의 기술 블로그",
   description: "주니어 프론트엔드 개발자 정현수의 기술 블로그입니다.",
-  siteUrl: process.env.URL || "https://junghyeonsu-dev.vercel.app",
+  siteUrl: process.env.URL || "https://junghyeonsu.com",
 });
 
 const wrapESMPlugin = (name) =>
@@ -31,7 +31,7 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
-              wrapperStyle: `margin: 25px 0px, z-index: 0`,
+              wrapperStyle: `margin: 25px 0px; z-index: 0`,
               showCaptions: true,
             },
           },
@@ -128,8 +128,8 @@ module.exports = {
                   title: node.frontmatter.title,
                   description: node.frontmatter.description,
                   pubDate: node.frontmatter.createdAt,
-                  url: site.siteMetadata.siteUrl + node.frontmatter.slug,
-                  guid: site.siteMetadata.siteUrl + node.frontmatter.slug,
+                  url: `${site.siteMetadata.siteUrl}/posts/${node.frontmatter.slug}`,
+                  guid: `${site.siteMetadata.siteUrl}/posts/${node.frontmatter.slug}`,
                   custom_elements: [{ "content:encoded": node.body }],
                 });
               });
@@ -156,7 +156,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-gtag`,
       options: {
         trackingId: "G-6P098S0HE9",
         head: true,

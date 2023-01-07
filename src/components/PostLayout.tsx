@@ -102,7 +102,7 @@ const customComponents = {
             />
           </svg>
         </Center>
-        {children}
+        <Flex direction="column">{children}</Flex>
       </Flex>
     );
   },
@@ -141,6 +141,7 @@ const customComponents = {
           marginTop: "20px",
         }}
         style={vscDarkPlus}
+        customStyle={{ margin: "20px 0px" }}
         showLineNumbers
         PreTag="div"
         language={match[1]}

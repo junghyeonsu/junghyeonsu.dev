@@ -1,22 +1,23 @@
-import { Button, useColorMode } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { Link } from "gatsby";
 import React from "react";
 
 const Logo = () => {
-  const { colorMode } = useColorMode();
   return (
     <Link to="/">
-      <Button
-        variant="unstyled"
-        fontSize={14}
+      <Text
+        fontSize={24}
+        fontWeight="700"
+        letterSpacing="-0.3px"
+        fontStyle="italic"
         _hover={{
-          bg: colorMode === "dark" ? "whiteAlpha.200" : "blackAlpha.200",
+          textDecoration: "underline",
         }}
         padding={1}
         _active={{ bg: "transparent" }}
       >
-        junghyeonsu.com
-      </Button>
+        June.
+      </Text>
     </Link>
   );
 };

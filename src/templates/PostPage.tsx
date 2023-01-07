@@ -10,6 +10,7 @@ import PostContentTitle from "../components/PostContentTitle";
 import PostLayout from "../components/PostLayout";
 import RelatedPosts from "../components/RelatedPosts";
 import TableOfContents from "../components/TableOfContents";
+import { DOMAIN } from "../constants";
 import { fadeInFromLeft } from "../framer-motions";
 
 export const query = graphql`
@@ -87,7 +88,6 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ children, data, pageContext
 
 export const Head: HeadFC<Queries.PostPageQuery> = ({ data }) => {
   const title = `${data.post?.frontmatter?.title!} - 정현수 기술 블로그`;
-  const domain = "https://junghyeonsu-dev.vercel.app";
   const description = data.post?.frontmatter?.description!;
   const ogimage = data.post?.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!;
 
@@ -98,7 +98,7 @@ export const Head: HeadFC<Queries.PostPageQuery> = ({ data }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {/* Facebook Meta Tags */}
-      <meta property="og:url" content={`${domain}/posts/${data.post?.frontmatter?.tags}`} />
+      <meta property="og:url" content={`${DOMAIN}/posts/${data.post?.frontmatter?.tags}`} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={title} />
       <meta property="og:title" content={title} />
@@ -107,8 +107,8 @@ export const Head: HeadFC<Queries.PostPageQuery> = ({ data }) => {
 
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="junghyeonsu-dev.vercel.app" />
-      <meta property="twitter:url" content={`${domain}/posts/${data.post?.frontmatter?.slug}`} />
+      <meta property="twitter:domain" content="junghyeonsu.com" />
+      <meta property="twitter:url" content={`${DOMAIN}/posts/${data.post?.frontmatter?.slug}`} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={getSrc(ogimage)}></meta>

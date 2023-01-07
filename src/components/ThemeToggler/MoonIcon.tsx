@@ -18,8 +18,8 @@ const MoonIcon = () => {
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
+      width="20px"
+      height="20px"
       viewBox="0 0 50 50"
       key="moon"
     >

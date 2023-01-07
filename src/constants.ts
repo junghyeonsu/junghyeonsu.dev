@@ -10,4 +10,9 @@ export const koreanTagNames: Record<string, string> = {
   retrospects: "회고",
   web: "웹",
   development: "개발",
+  short: "짧.",
 };
+
+export const ALL_POSTS_TAG_NAME = "all posts";
+
+export const DOMAIN = "https://junghyeonsu.com";

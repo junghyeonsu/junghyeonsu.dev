@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import { Link } from "gatsby";
 import React, { useEffect, useState } from "react";
 
-import { fadeInFromLeft } from "../framer-motions";
-
 export type TableOfContentsItemType = {
   url: string;
   title: string;
@@ -25,7 +23,11 @@ const TableOfContentsItem: React.FC<{
 
   return (
     <>
-      <motion.div transition={{ delay }} {...fadeInFromLeft}>
+      <motion.div
+        transition={{ delay }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+      >
         <Box as="li" id={url}>
           <Link to={url}>
             <Text
@@ -59,8 +61,21 @@ export default function TableOfContents({
 }: {
   tableOfContents: TableOfContentsType;
 }) {
-  if (!tableOfContents || tableOfContents.items.length === 0) {
-    return null;
+  if (!tableOfContents || !tableOfContents.items || tableOfContents.items.length === 0) {
+    return (
+      <Box
+        as="nav"
+        position="sticky"
+        display={{ base: "none", xl: "block" }}
+        top="150px"
+        width="250px"
+        marginLeft="100px"
+      >
+        <Heading as="h2" fontSize="20px">
+          ON THIS PAGE
+        </Heading>
+      </Box>
+    );
   }
 
   const [activeId, setActiveId] = useState<string>("");
@@ -96,7 +111,11 @@ export default function TableOfContents({
       width="250px"
       marginLeft="100px"
     >
-      <motion.div transition={{ delay: 0.1 }} {...fadeInFromLeft}>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.1 }}
+      >
         <Heading as="h2" fontSize="20px">
           ON THIS PAGE
         </Heading>

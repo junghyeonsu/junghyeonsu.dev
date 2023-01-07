@@ -9915,18 +9915,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-google-analytics@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "gatsby-plugin-google-analytics@npm:5.0.0"
-  dependencies:
-    "@babel/runtime": ^7.15.4
-    minimatch: 3.0.4
-    web-vitals: ^1.1.2
+"gatsby-plugin-gtag@npm:^1.0.13":
+  version: 1.0.13
+  resolution: "gatsby-plugin-gtag@npm:1.0.13"
   peerDependencies:
-    gatsby: ^5.0.0-next
-    react: ^18.0.0 || ^0.0.0
-    react-dom: ^18.0.0 || ^0.0.0
-  checksum: b2c73886398f35b09b73ddb7de05f28eb51739383b5fe1942235bced511b1d1a9af3fb846dc031b70ae9e0965c2f6a5c84e367144c1c62d719fd52398627416e
+    gatsby: ">2.0.0-alpha"
+  checksum: f3ac5be3600b79946d7f0bd0ce9e9fa02b656fe195ec6969a237955bd31eaca0bc7a8b3bcc2a917d07ecdcf80b36370e1ffb61bcd245a7c5fe8814e0d545b617
   languageName: node
   linkType: hard
 
@@ -16462,7 +16456,7 @@ __metadata:
     gatsby: ^5.0.1
     gatsby-plugin-advanced-sitemap: ^2.1.0
     gatsby-plugin-feed: ^5.0.0
-    gatsby-plugin-google-analytics: ^5.0.0
+    gatsby-plugin-gtag: ^1.0.13
     gatsby-plugin-image: ^3.0.0
     gatsby-plugin-mdx: ^5.0.0
     gatsby-plugin-mdx-frontmatter: ^0.0.4
@@ -18497,13 +18491,6 @@ __metadata:
   version: 1.2.2
   resolution: "weak-lru-cache@npm:1.2.2"
   checksum: 0fbe16839d193ed82ddb4fe331ca8cfaee2ecbd42596aa02366c708956cf41f7258f2d5411c3bc9aa099c26058dc47afbd2593d449718a18e4ef4d870c5ace18
-  languageName: node
-  linkType: hard
-
-"web-vitals@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "web-vitals@npm:1.1.2"
-  checksum: 92071029089277166e11141b735831d9011e85737d32c1360034676db898ab0ca95f19041ee01904f2189ad6e711b9da6b17567e4831290a429a586c98bc573f
   languageName: node
   linkType: hard
 
