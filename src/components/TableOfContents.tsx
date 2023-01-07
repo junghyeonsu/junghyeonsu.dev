@@ -87,7 +87,12 @@ export default function TableOfContents({
       });
     };
 
-    const observer = new IntersectionObserver(callback);
+    const option: IntersectionObserverInit = {
+      rootMargin: "0px 0px -90% 0px",
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver(callback, option);
 
     const observe = (item: TableOfContentsItemType) => {
       // NOTE: itme.url is like "#heading-1", so we need to remove the first character.

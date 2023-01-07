@@ -14,18 +14,44 @@ interface LayoutProps {
 
 /* 커스텀 HTML Elements */
 const customComponents = {
-  h1: (props: Object) => <Heading as="h1" fontSize={36} mt="36px" {...props} />,
+  h1: (props: Object) => <Heading as="h1" fontSize={36} mt="40px" {...props} />,
 
-  h2: (props: Object) => <Heading as="h2" fontSize={32} mt="30px" {...props} />,
+  h2: (props: Object) => <Heading as="h2" fontSize={32} mt="36px" {...props} />,
 
-  h3: (props: Object) => <Heading as="h3" fontSize={28} mt="24px" {...props} />,
+  h3: (props: Object) => <Heading as="h3" fontSize={24} mt="32px" {...props} />,
 
-  h4: (props: Object) => <Heading as="h4" fontSize={24} mt="20px" {...props} />,
+  h4: (props: Object) => <Heading as="h4" fontSize={20} mt="28px" {...props} />,
 
   p: (props: Object) => <Text fontSize={16} mt="16px" {...props} />,
 
+  li: (props: Object) => (
+    <Box
+      as="li"
+      sx={{
+        p: {
+          display: "inline",
+        },
+      }}
+      fontSize={16}
+      {...props}
+    />
+  ),
   ol: (props: Object) => <Box as="ol" fontSize={16} mt="16px" listStylePos="inside" {...props} />,
-  ul: (props: Object) => <Box as="ul" fontSize={16} mt="16px" listStylePos="inside" {...props} />,
+  ul: (props: Object) => (
+    <Box
+      as="ul"
+      sx={{
+        "* > ul": {
+          margin: 0,
+          marginLeft: "20px",
+        },
+      }}
+      fontSize={16}
+      mt="16px"
+      listStylePos="inside"
+      {...props}
+    />
+  ),
 
   a: (props: Object) => (
     <Box
@@ -64,8 +90,8 @@ const customComponents = {
       >
         <Center>
           <svg
-            width="24"
-            height="24"
+            width="18"
+            height="18"
             fill="none"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"

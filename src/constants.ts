@@ -9,6 +9,7 @@ export const koreanTagNames: Record<string, string> = {
   productivity: "생산성",
   retrospects: "회고",
   web: "웹",
+  development: "개발",
   short: "짧.",
 };
 
