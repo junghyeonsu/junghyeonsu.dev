@@ -90,8 +90,8 @@ const customComponents = {
       >
         <Center>
           <svg
-            width="24"
-            height="24"
+            width="18"
+            height="18"
             fill="none"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -137,9 +137,6 @@ const customComponents = {
 
     return (
       <SyntaxHighlighter
-        customStyle={{
-          marginTop: "20px",
-        }}
         style={vscDarkPlus}
         customStyle={{ margin: "20px 0px" }}
         showLineNumbers
