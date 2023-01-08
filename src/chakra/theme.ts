@@ -1,6 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 
 import colors from "./colors";
+import components from "./components";
 import global from "./global";
 import semanticTokens from "./semanticTokens";
 
@@ -20,6 +21,7 @@ const theme = {
     xl: "1200px", // 1200px ~ 1536px
     "2xl": "1536px", // 1536px ~
   },
+  components,
 };
 
 export default extendTheme(theme);

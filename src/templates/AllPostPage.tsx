@@ -5,6 +5,7 @@ import { getSrc } from "gatsby-plugin-image";
 import MainLayout from "../components/MainLayout";
 import Pagenation from "../components/Pagenation";
 import PostGrid from "../components/PostGrid";
+import Profile from "../components/Profile";
 import Tags from "../components/Tags";
 import { ALL_POSTS_TAG_NAME, DOMAIN } from "../constants";
 
@@ -36,6 +37,9 @@ export const query = graphql`
     ogimage: imageSharp(fluid: { originalName: { eq: "og-image.png" } }) {
       gatsbyImageData
     }
+    profileImage: imageSharp(fluid: { originalName: { eq: "profile.png" } }) {
+      gatsbyImageData
+    }
   }
 `;
 
@@ -48,6 +52,7 @@ export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) 
   const pageCount = data.allMdx.pageInfo.pageCount;
   return (
     <MainLayout>
+      <Profile image={data.profileImage?.gatsbyImageData!} />
       <Tags currentTag={ALL_POSTS_TAG_NAME} />
       <PostGrid posts={data.allMdx.nodes} />
       {pageCount > 1 && <Pagenation currentPage={currentPage} pageCount={pageCount} />}
