@@ -136,7 +136,7 @@ module.exports = {
             },
             query: `
               {
-                allMdx(sort: {fields: frontmatter___createdAt, order: DESC}) {
+                allMdx(sort: {frontmatter: {createdAt: DESC}}) {
                   nodes {
                     frontmatter {
                       title
