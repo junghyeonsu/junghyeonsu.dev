@@ -1,0 +1,41 @@
+---
+slug: history-scroll-restoration
+title: 사용자의 스크롤 위치 기억하기 (History.scrollRestoration에 대해서)
+description: 사용자의 스크롤 위치를 기억하기 위해서 사용해야 하는 browser API
+thumbnail: ./cover.png
+tags: ["short"]
+createdAt: "2023/01/15"
+updatedAt: ""
+---
+
+## tl;dr
+
+사용자가 뒤로가기 버튼을 눌렀을 때 페이지가 원래 스크롤 됐던 위치로 돌아갈지 여부를 설정할 수 있어요.
+
+```javascript
+const scrollRestoration = history.scrollRestoration;
+if (scrollRestoration === "manual") {
+  console.log(
+    "옵션을 manual로 설정하면 스크롤 위치가 복원되지 않고 사용자가 직접 수동으로 옮겨야 해요."
+  );
+}
+```
+
+## 스크롤 복원
+
+**Scroll Restoration**, 즉 스크롤 복원에 대한 브라우저 History API에 관한 내용이에요.
+이 API는 사용자가 브라우저의 뒤로가기 버튼을 눌렀을 때, 페이지가 원래 스크롤되었던 위치로 돌아갈지 여부를 설정할 수 있어요.
+
+기본값은 **auto**고, 이 값을 **manual**로 설정하면 스크롤 한 위치를 복원하지 않아요.
+
+```javascript
+// 사용자가 스크롤한 페이지의 위치가 복원돼요.
+history.scrollRestoration = "auto"; // default
+
+// 페이지의 위치는 복원되지 않아요. 사용자는 해당 위치로 수동으로 스크롤해야 해요.
+history.scrollRestoration = "manual";
+```
+
+## 참고
+
+- [MDN Web Docs History API scrollRestoration](https://developer.mozilla.org/en-US/docs/Web/API/History/scrollRestoration)
