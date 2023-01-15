@@ -52,7 +52,7 @@ export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) 
   const pageCount = data.allMdx.pageInfo.pageCount;
   return (
     <MainLayout>
-      <Profile image={data.profileImage?.gatsbyImageData!} />
+      <Profile />
       <Tags currentTag={ALL_POSTS_TAG_NAME} />
       <PostGrid posts={data.allMdx.nodes} />
       {pageCount > 1 && <Pagenation currentPage={currentPage} pageCount={pageCount} />}

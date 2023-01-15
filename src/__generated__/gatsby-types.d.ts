@@ -2591,6 +2591,11 @@ type PostPageQueryVariables = Exact<{
 
 type PostPageQuery = { readonly post: { readonly tableOfContents: any | null, readonly frontmatter: { readonly slug: string | null, readonly title: string | null, readonly description: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly createdAt: string | null, readonly updatedAt: string | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } | null, readonly relatedPosts: { readonly nodes: ReadonlyArray<{ readonly frontmatter: { readonly slug: string | null, readonly title: string | null, readonly description: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly createdAt: string | null, readonly updatedAt: string | null, readonly thumbnail: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null }> } };
 
+type ProfileQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ProfileQueryQuery = { readonly profileImage: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null };
+
 type TagPageTemplateQueryVariables = Exact<{
   tag: Scalars['String'];
   limit: InputMaybe<Scalars['Int']>;

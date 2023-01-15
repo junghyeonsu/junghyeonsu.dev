@@ -1,11 +1,7 @@
 import { Box, Center, Flex, Text, Tooltip } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import type { IGatsbyImageData } from "gatsby-plugin-image";
+import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-
-interface ProfileProps {
-  image: IGatsbyImageData;
-}
 
 interface IconBoxProps {
   children: React.ReactNode;
@@ -44,7 +40,17 @@ const IconBox = ({ children, isManaged = false }: IconBoxProps) => {
   );
 };
 
-const Profile = ({ image }: ProfileProps) => {
+const Profile = () => {
+  const data = useStaticQuery(graphql`
+    query ProfileQuery {
+      profileImage: imageSharp(fluid: { originalName: { eq: "profile.png" } }) {
+        gatsbyImageData
+      }
+    }
+  `);
+
+  const profileImage = data.profileImage.gatsbyImageData;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -70,7 +76,7 @@ const Profile = ({ image }: ProfileProps) => {
           }}
         >
           <Box borderRadius="50%" transform="translateX(10px)" w="100px">
-            <GatsbyImage draggable={false} image={image} alt="profile" />
+            <GatsbyImage draggable={false} image={profileImage} alt="profile" />
           </Box>
         </Flex>
 
@@ -230,6 +236,7 @@ const Profile = ({ image }: ProfileProps) => {
                 <svg
                   focusable="false"
                   aria-hidden="true"
+                  fill="none"
                   viewBox="0 0 24 24"
                   data-testid="YouTubeIcon"
                 >

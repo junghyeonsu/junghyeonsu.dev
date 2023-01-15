@@ -19,7 +19,7 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
       alignItems="baseline"
       isolation="isolate"
     >
-      <Heading as="h1" fontSize={36} marginBottom="3" fontWeight={900}>
+      <Heading as="h1" fontSize={36} marginBottom="3" fontWeight={900} wordBreak="break-word">
         {post?.frontmatter?.title}
       </Heading>
       <Flex columnGap="14px" rowGap="10px" alignItems="end" flexWrap="wrap">

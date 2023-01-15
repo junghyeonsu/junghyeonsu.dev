@@ -8,6 +8,7 @@ import React from "react";
 import Giscus from "../components/Giscus";
 import PostContentTitle from "../components/PostContentTitle";
 import PostLayout from "../components/PostLayout";
+import Profile from "../components/Profile";
 import RelatedPosts from "../components/RelatedPosts";
 import TableOfContents from "../components/TableOfContents";
 import { DOMAIN } from "../constants";
@@ -76,6 +77,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ children, data, pageContext
           <PostContentTitle readingTime={pageContext.readingTime.text} post={data.post} />
           <Box marginTop="50px">{children}</Box>
           <RelatedPosts relatedPosts={data.relatedPosts} />
+          <Profile />
           <Giscus />
         </Flex>
       </motion.article>
