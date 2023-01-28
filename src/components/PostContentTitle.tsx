@@ -55,9 +55,17 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
         <Text fontSize="12px">{readingTime}</Text>
       </Flex>
 
-      <Box display="flex" width="100%" justifyContent="center" alignItems="center">
+      <Box
+        display="flex"
+        width="100%"
+        justifyContent="center"
+        alignItems="center"
+        isolation="isolate"
+        borderRadius="20px"
+        overflow="hidden"
+      >
         <GatsbyImage
-          style={{ marginTop: "20px", borderRadius: "20px" }}
+          style={{ marginTop: "20px" }}
           image={post?.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
           alt={post?.frontmatter?.title!}
         />
