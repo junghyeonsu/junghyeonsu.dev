@@ -127,7 +127,7 @@ module.exports = {
                 return Object.assign({}, node.frontmatter, {
                   title: node.frontmatter.title,
                   description: node.frontmatter.description,
-                  pubDate: node.frontmatter.createdAt,
+                  pubDate: new Date(node.frontmatter.createdAt),
                   url: `${site.siteMetadata.siteUrl}/posts/${node.frontmatter.slug}`,
                   guid: `${site.siteMetadata.siteUrl}/posts/${node.frontmatter.slug}`,
                   custom_elements: [{ "content:encoded": node.body }],
