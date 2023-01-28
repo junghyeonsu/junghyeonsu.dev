@@ -58,9 +58,9 @@ React.useEffect(() => {
   ref.current = "some value";
 });
 
-// then, later in another hook or something
+// 그런 다음, 나중에 다른 hook 또는 무언가에서
 React.useLayoutEffect(() => {
-  console.log(ref.current); // <-- this logs an old value because this runs first!
+  console.log(ref.current); // <-- 이 줄은 먼저 실행되기 때문에 이전 값을 기록합니다!
 });
 ```
 
