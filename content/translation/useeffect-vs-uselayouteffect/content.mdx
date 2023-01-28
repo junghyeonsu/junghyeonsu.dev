@@ -1,0 +1,73 @@
+---
+slug: translation/useeffect-vs-uselayouteffect
+title: useEffect vs useLayoutEffect
+description: 각각을 사용할 때의 규칙
+thumbnail: ./cover.png
+tags: ["translation"]
+createdAt: "2023/01/28"
+updatedAt: ""
+---
+
+> 이 글은 [Kent C. Dodds](https://kentcdodds.com/)가 작성한 [useEffect vs useLayoutEffect](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)의 원본 게시물을 번역한 것입니다.
+
+두 가지는 기본적으로 동일한 일을 할 수 있지만, 약간 다른 사용 사례가 있습니다.
+그래서 [React Hook](https://reactjs.org/docs/hooks-intro.html)을 선택할 때 고려해야 할 규칙들을 알려드립니다.
+
+## useEffect
+
+99%의 경우 `useEffect`가 필요할 겁니다.
+Hooks가 안정적일 때, 클래스 컴포넌트를 Hooks로 수정할 경우
+`componentDidMount`, `componentDidUpdate`, `componentWillUnmount`를 `useEffect`로 이동시킵니다.
+
+**하나의 예외**는 이 useEffect는 React가 컴포넌트를 렌더링 한 후 실행되며,
+effect 콜백이 브라우저 그리기(painting)를 차단하지 않도록 합니다.
+이는 클래스 컴포넌트에서 `componentDidMount`와 `componentDidUpdate`가 렌더링 후 동기적으로 실행되는 것과는 다릅니다.
+이렇게 하면 성능이 더 좋고, 대부분의 경우 이것이 원하는 것입니다.
+
+그러나 effect가 DOM을 변경하는 경우(DOM 노드 ref를 통해)
+**그리고** DOM 변경이 DOM 노드의 모양을 렌더링 시점과 effect가 변경하는 사이에 변경하는 경우
+`useEffect`를 사용하지 **않아야** 합니다. 그렇다면 `useLayoutEffect`를 사용해야 합니다.
+그렇지 않으면 사용자는 DOM 변경이 적용될 때 깜빡임을 볼 수 있습니다.
+**이것은 거의 `useEffect`를 피하고 `useLayoutEffect`를 사용해야할 유일한 상황입니다.**
+
+## useLayoutEffect
+
+`useLayoutEffect`는 리액트가 모든 DOM 변경 작업을 수행한 즉시 동기적으로 실행됩니다.
+DOM 측정(예 : 스크롤 위치 또는 기타 요소의 스타일)을 수행하고 DOM 변경 작업을 수행하거나
+상태를 업데이트하여 동기적으로 다시 렌더링 할 필요가 있을 때 유용합니다.
+
+일정 관리는 `componentDidMount`와 `componentDidUpdate`와 동일하게 작동합니다.
+코드는 DOM이 업데이트된 즉시 실행되지만 브라우저가 "그림(paipaintnt)"을 그릴 시간이 없어지기 전에 실행됩니다.
+(실제로 사용자는 브라우저가 재 그리기를 할 때까지 변경 사항을 볼 수 없습니다).
+
+## 요약
+
+- **useLayoutEffect**: DOM을 변경하거나 측정을 수행해야 할 **경우**
+- **useEffect**: DOM과 전혀 상호 작용할 필요가 없거나 DOM 변경 사항이 관찰되지 않을 경우
+  (진짜로, 대부분의 경우 `useEffect`를 사용해야합니다)
+
+## 특별한 경우
+
+`useLayoutEffect`를 `useEffect` 대신 사용하는 다른 상황에는 값(예를 들어 ref)를
+업데이트하고 다른 코드가 실행되기 전에 최신 상태로 유지하려는 경우가 있습니다.
+예를 들면:
+
+```javascript
+const ref = React.useRef();
+React.useEffect(() => {
+  ref.current = "some value";
+});
+
+// then, later in another hook or something
+React.useLayoutEffect(() => {
+  console.log(ref.current); // <-- this logs an old value because this runs first!
+});
+```
+
+위와 같은 경우에는 `useLayoutEffect`를 사용하는 것이 바람직합니다.
+
+## 결론
+
+기본 설정에 대한 것입니다. 기본 동작은 브라우저가 DOM 업데이트를 기반으로 다시 그리도록(re-paint) 하는 것입니다.
+이는 React가 코드를 실행하기 전에 브라우저를 잠금(block) 없이 실행하는 것을 의미하며, 사용자는 DOM 업데이트를 더 빨리 볼 수 있습니다.
+그래서 대부분의 경우 `useEffect`를 사용하는 것이 좋습니다.

@@ -14,22 +14,27 @@ interface LayoutProps {
 
 /* 커스텀 HTML Elements */
 const customComponents = {
-  h1: (props: Object) => <Heading as="h1" fontSize={36} mt="40px" {...props} />,
+  h1: (props: Object) => <Heading as="h1" fontSize={36} mt="80px" {...props} />,
 
-  h2: (props: Object) => <Heading as="h2" fontSize={32} mt="36px" {...props} />,
+  h2: (props: Object) => <Heading as="h2" fontSize={32} mt="80px" mb="40px" {...props} />,
 
-  h3: (props: Object) => <Heading as="h3" fontSize={24} mt="32px" {...props} />,
+  h3: (props: Object) => <Heading as="h3" fontSize={24} mt="60px" mb="30px" {...props} />,
 
-  h4: (props: Object) => <Heading as="h4" fontSize={20} mt="28px" {...props} />,
+  h4: (props: Object) => <Heading as="h4" fontSize={20} mt="40px" mb="20px" {...props} />,
 
-  p: (props: Object) => <Text fontSize={16} mt="16px" {...props} />,
+  p: (props: Object) => <Text fontSize={16} mt="16px" lineHeight="2" {...props} />,
 
   li: (props: Object) => (
     <Box
       as="li"
       sx={{
-        p: {
-          display: "inline",
+        listStyleType: "none",
+        _before: {
+          content: '"•"',
+          fontSize: "20px",
+          color: "gray.300",
+          width: "20px",
+          display: "inline-block",
         },
       }}
       fontSize={16}
@@ -56,10 +61,11 @@ const customComponents = {
   a: (props: Object) => (
     <Box
       as="a"
+      fontWeight={600}
       _hover={{
         textDecoration: "underline",
       }}
-      color="blue.500"
+      color="blue.400"
       {...props}
     />
   ),
@@ -116,14 +122,17 @@ const customComponents = {
         <Text
           as="code"
           sx={{
+            _after: {
+              content: '"`"',
+            },
+            _before: {
+              content: '"`"',
+            },
             color: "gray.900",
-            backgroundColor: "gray.100",
-            borderRadius: "4px",
-            borderWidth: "1px 1px 3px",
-            padding: "2px",
+            letterSpacing: "-0.04px",
+            fontWeight: "600",
             _dark: {
-              backgroundColor: "blue.900",
-              color: "blue.100",
+              color: "gray.50",
             },
           }}
         >
