@@ -61,10 +61,10 @@ export default function TagsTemplate({ pageContext, data }: TagsProps) {
   const pageCount = data.allMdx.pageInfo.pageCount;
   return (
     <MainLayout>
-      <Profile />
       <Tags currentTag={pageContext.tag} />
       <PostGrid posts={data.allMdx.nodes} />
       {pageCount > 1 && <Pagenation currentPage={currentPage} pageCount={pageCount} />}
+      <Profile />
     </MainLayout>
   );
 }

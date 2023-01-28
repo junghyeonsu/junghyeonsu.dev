@@ -11,6 +11,7 @@ export const koreanTagNames: Record<string, string> = {
   web: "웹",
   development: "개발",
   short: "짧.",
+  translation: "번역",
 };
 
 export const ALL_POSTS_TAG_NAME = "all posts";
