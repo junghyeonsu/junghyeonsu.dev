@@ -32,7 +32,7 @@ const PostCard = ({
     <Link to={`/posts/${slug}`}>
       <Box
         as="article"
-        transition="box-shadow 0.25s ease"
+        transition="all 0.25s ease"
         position="relative"
         _hover={{ boxShadow: "lg", cursor: "pointer" }}
         borderRadius="20px"
@@ -50,6 +50,11 @@ const PostCard = ({
           height={{ base: "100%", sm: "280px", md: "340px" }}
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
+          transition="opacity 0.25s ease"
+          opacity={{ base: 1, md: 0 }}
+          _hover={{
+            opacity: 1,
+          }}
         >
           {/* Title */}
           <Flex
@@ -94,7 +99,7 @@ const PostCard = ({
           {/* Date + Tag */}
           <Flex position="absolute" direction="column" left={0} top={0} margin="20px" gap="10px">
             <Box
-              backgroundColor="white"
+              backgroundColor="gray.50"
               color="gray.900"
               borderRadius="20px"
               padding="10px"

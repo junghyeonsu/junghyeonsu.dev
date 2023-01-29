@@ -1334,6 +1334,7 @@ input MdxFilterListInput {
 type MdxFrontmatter {
   createdAt: String
   description: String
+  featured: Boolean
   slug: String
   tags: [String]
   thumbnail: File
@@ -1344,6 +1345,7 @@ type MdxFrontmatter {
 input MdxFrontmatterFieldSelector {
   createdAt: FieldSelectorEnum
   description: FieldSelectorEnum
+  featured: FieldSelectorEnum
   slug: FieldSelectorEnum
   tags: FieldSelectorEnum
   thumbnail: FileFieldSelector
@@ -1354,6 +1356,7 @@ input MdxFrontmatterFieldSelector {
 input MdxFrontmatterFilterInput {
   createdAt: StringQueryOperatorInput
   description: StringQueryOperatorInput
+  featured: BooleanQueryOperatorInput
   slug: StringQueryOperatorInput
   tags: StringQueryOperatorInput
   thumbnail: FileFilterInput
@@ -1364,6 +1367,7 @@ input MdxFrontmatterFilterInput {
 input MdxFrontmatterSortInput {
   createdAt: SortOrderEnum
   description: SortOrderEnum
+  featured: SortOrderEnum
   slug: SortOrderEnum
   tags: SortOrderEnum
   thumbnail: FileSortInput

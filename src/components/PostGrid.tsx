@@ -2,7 +2,6 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import { fadeInFromLeft } from "../framer-motions";
-import MainPostCard from "./MainPostCard";
 import PostCard from "./PostCard";
 
 interface PostGridProps {
@@ -33,7 +32,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
           if (index % 4 === 0) {
             return (
               <GridItem colSpan={{ lg: 7 }} key={posts.frontmatter?.slug} as="article">
-                <MainPostCard {...cardData} />
+                <PostCard {...cardData} />
               </GridItem>
             );
           }
@@ -57,7 +56,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
           if (index % 4 === 3) {
             return (
               <GridItem colSpan={{ lg: 7 }} key={posts.frontmatter?.slug} as="article">
-                <MainPostCard {...cardData} />
+                <PostCard {...cardData} />
               </GridItem>
             );
           }
