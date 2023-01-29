@@ -63,9 +63,9 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
         isolation="isolate"
         borderRadius="20px"
         overflow="hidden"
+        marginTop="20px"
       >
         <GatsbyImage
-          style={{ marginTop: "20px" }}
           image={post?.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!}
           alt={post?.frontmatter?.title!}
         />
