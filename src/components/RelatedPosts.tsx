@@ -1,4 +1,4 @@
-import { Box, Center, Divider, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { Box, Center, Grid, GridItem, Heading } from "@chakra-ui/react";
 
 import MainPostCard from "./MainPostCard";
 
@@ -11,7 +11,6 @@ const RelatedPosts = ({ relatedPosts }: RelatedPostsProps) => {
 
   return (
     <Box marginTop="100px">
-      <Divider margin="20px 0px" />
       {relatedPostsLength ? (
         <Heading as="h2" fontSize={24}>
           관련 포스트가 {relatedPostsLength}개 있어요.
@@ -52,7 +51,6 @@ const RelatedPosts = ({ relatedPosts }: RelatedPostsProps) => {
           ))}
         </Grid>
       }
-      <Divider margin="20px 0px" />
     </Box>
   );
 };
