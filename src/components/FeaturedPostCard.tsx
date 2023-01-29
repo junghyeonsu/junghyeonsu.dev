@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 
 import { koreanTagNames } from "../constants";
 
-interface PostCardProps {
+interface FeaturedPostCardProps {
   title: string;
   description: string;
   slug: string;
@@ -16,7 +16,7 @@ interface PostCardProps {
   thumbnail: IGatsbyImageData;
 }
 
-const PostCard = ({
+const FeaturedPostCard = ({
   createdAt,
   description,
   slug,
@@ -24,7 +24,7 @@ const PostCard = ({
   thumbnail,
   title,
   updatedAt,
-}: PostCardProps) => {
+}: FeaturedPostCardProps) => {
   const diffMs = useMemo(() => new Date().getTime() - new Date(createdAt).getTime(), [createdAt]);
   const isNewPost = useMemo(() => Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10, [diffMs]);
   const [isHovered, setIsHovered] = useState(false);
@@ -43,7 +43,7 @@ const PostCard = ({
         borderRadius="20px"
         overflow="hidden"
         width="100%"
-        height={{ base: "100%", sm: "280px", md: "340px" }}
+        height={{ base: "100%", sm: "380px", md: "480px" }}
         isolation="isolate"
       >
         {/* Overlay */}
@@ -52,7 +52,7 @@ const PostCard = ({
           top={0}
           left={0}
           width="100%"
-          height={{ base: "100%", sm: "280px", md: "340px" }}
+          height={{ base: "100%", sm: "380px", md: "480px" }}
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
           transition="opacity 0.25s ease"
@@ -123,11 +123,9 @@ const PostCard = ({
             alt={`${slug} cover image`}
           />
         </Box>
-
-        {/* Title */}
       </Box>
 
-      {/* title + tags + new Post */}
+      {/* title + tags */}
       <Flex direction="column" alignItems="start">
         <Flex gap="10px" marginTop="16px">
           <Box
@@ -141,6 +139,18 @@ const PostCard = ({
             width="fit-content"
           >
             {updatedAt ? `${updatedAt} (updated)` : createdAt}
+          </Box>
+          <Box
+            color="black.900"
+            borderColor="black.900"
+            border="3px solid"
+            borderRadius="20px"
+            padding="8px"
+            fontSize="14px"
+            fontWeight="800"
+            width="fit-content"
+          >
+            FEATURED POST
           </Box>
 
           {/* New Tag */}
@@ -168,4 +178,4 @@ const PostCard = ({
   );
 };
 
-export default PostCard;
+export default FeaturedPostCard;

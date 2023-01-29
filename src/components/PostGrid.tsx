@@ -13,12 +13,13 @@ const PostGrid = ({ posts }: PostGridProps) => {
     <motion.div {...fadeInFromLeft}>
       <Grid
         as="section"
-        templateColumns={{ lg: "repeat(12, 1fr)" }}
+        templateColumns={{ lg: "repeat(2, 1fr)" }}
         maxWidth={{ base: "95%", md: "600px", lg: "100%" }}
-        margin={{ base: "40px auto", md: "40px 0px" }}
+        margin={{ base: "120px auto" }}
         gap={6}
+        rowGap={20}
       >
-        {posts.map((posts, index) => {
+        {posts.map((posts) => {
           const cardData = {
             title: posts.frontmatter?.title!,
             description: posts.frontmatter?.description!,
@@ -29,37 +30,11 @@ const PostGrid = ({ posts }: PostGridProps) => {
             tags: posts.frontmatter?.tags!,
           };
 
-          if (index % 4 === 0) {
-            return (
-              <GridItem colSpan={{ lg: 7 }} key={posts.frontmatter?.slug} as="article">
-                <PostCard {...cardData} />
-              </GridItem>
-            );
-          }
-
-          if (index % 4 === 1) {
-            return (
-              <GridItem colSpan={{ lg: 5 }} key={posts.frontmatter?.slug} as="article">
-                <PostCard {...cardData} />
-              </GridItem>
-            );
-          }
-
-          if (index % 4 === 2) {
-            return (
-              <GridItem colSpan={{ lg: 5 }} key={posts.frontmatter?.slug} as="article">
-                <PostCard {...cardData} />
-              </GridItem>
-            );
-          }
-
-          if (index % 4 === 3) {
-            return (
-              <GridItem colSpan={{ lg: 7 }} key={posts.frontmatter?.slug} as="article">
-                <PostCard {...cardData} />
-              </GridItem>
-            );
-          }
+          return (
+            <GridItem colSpan={{ lg: 1 }} key={posts.frontmatter?.slug} as="article">
+              <PostCard {...cardData} />
+            </GridItem>
+          );
         })}
       </Grid>
     </motion.div>
