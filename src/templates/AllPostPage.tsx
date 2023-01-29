@@ -1,32 +1,44 @@
+import { Flex } from "@chakra-ui/react";
 import type { HeadFC } from "gatsby";
 import { graphql } from "gatsby";
 import { getSrc } from "gatsby-plugin-image";
 
+import FeaturedPostSection from "../components/FeaturedPostSection";
 import MainLayout from "../components/MainLayout";
 import Pagenation from "../components/Pagenation";
 import PostGrid from "../components/PostGrid";
 import Profile from "../components/Profile";
+import ShortPostSection from "../components/ShortPostSection";
 import Tags from "../components/Tags";
 import { ALL_POSTS_TAG_NAME, DOMAIN } from "../constants";
 
 export const query = graphql`
+  fragment MdxContent on Mdx {
+    frontmatter {
+      thumbnail {
+        childImageSharp {
+          gatsbyImageData
+        }
+      }
+      title
+      updatedAt
+      createdAt
+      description
+      slug
+      tags
+    }
+  }
+
   query AllPostPageTemplate($limit: Int, $skip: Int) {
-    allMdx(sort: { frontmatter: { createdAt: DESC } }, limit: $limit, skip: $skip) {
+    allMdx(
+      filter: { frontmatter: { tags: { nin: "short" } } }
+      sort: { frontmatter: { createdAt: DESC } }
+      limit: $limit
+      skip: $skip
+    ) {
       totalCount
       nodes {
-        frontmatter {
-          thumbnail {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-          title
-          updatedAt
-          createdAt
-          description
-          slug
-          tags
-        }
+        ...MdxContent
       }
 
       pageInfo {
@@ -34,11 +46,36 @@ export const query = graphql`
         pageCount
       }
     }
+
     ogimage: imageSharp(fluid: { originalName: { eq: "og-image.png" } }) {
       gatsbyImageData
     }
+
     profileImage: imageSharp(fluid: { originalName: { eq: "profile.png" } }) {
       gatsbyImageData
+    }
+
+    shortPosts: allMdx(
+      filter: { frontmatter: { tags: { in: "short" } } }
+      sort: { frontmatter: { createdAt: DESC } }
+    ) {
+      nodes {
+        frontmatter {
+          title
+          updatedAt
+          createdAt
+          slug
+        }
+      }
+    }
+
+    featuredPosts: allMdx(
+      filter: { frontmatter: { featured: { eq: true } } }
+      sort: { frontmatter: { createdAt: DESC } }
+    ) {
+      nodes {
+        ...MdxContent
+      }
     }
   }
 `;
@@ -50,9 +87,24 @@ interface AllPostPageTemplateProps {
 export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) {
   const currentPage = data.allMdx.pageInfo.currentPage;
   const pageCount = data.allMdx.pageInfo.pageCount;
+  const featuredPosts = data.featuredPosts.nodes;
+  const shortPosts = data.shortPosts.nodes;
+
   return (
     <MainLayout>
       <Tags currentTag={ALL_POSTS_TAG_NAME} />
+
+      <Flex
+        width="100%"
+        maxWidth={{ base: "95%", md: "600px", lg: "100%" }}
+        direction={{ base: "column", lg: "row" }}
+        marginTop="40px"
+        gap={{ base: "20px", lg: "60px" }}
+      >
+        <FeaturedPostSection posts={featuredPosts} />
+        <ShortPostSection posts={shortPosts} />
+      </Flex>
+
       <PostGrid posts={data.allMdx.nodes} />
       {pageCount > 1 && <Pagenation currentPage={currentPage} pageCount={pageCount} />}
       <Profile />

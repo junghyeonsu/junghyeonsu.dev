@@ -2,7 +2,7 @@ import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link } from "gatsby";
 import type { IGatsbyImageData } from "gatsby-plugin-image";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { koreanTagNames } from "../constants";
 
@@ -27,12 +27,17 @@ const PostCard = ({
 }: PostCardProps) => {
   const diffMs = useMemo(() => new Date().getTime() - new Date(createdAt).getTime(), [createdAt]);
   const isNewPost = useMemo(() => Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10, [diffMs]);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link to={`/posts/${slug}`}>
+    <Link
+      to={`/posts/${slug}`}
+      onMouseOver={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Box
         as="article"
-        transition="box-shadow 0.25s ease"
+        transition="all 0.25s ease"
         position="relative"
         _hover={{ boxShadow: "lg", cursor: "pointer" }}
         borderRadius="20px"
@@ -50,6 +55,8 @@ const PostCard = ({
           height={{ base: "100%", sm: "280px", md: "340px" }}
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
+          transition="opacity 0.25s ease"
+          opacity={isHovered ? 1 : 0}
         >
           {/* Title */}
           <Flex
@@ -60,9 +67,6 @@ const PostCard = ({
             direction="column"
             alignItems="start"
           >
-            <Heading fontSize={24} fontWeight="800" noOfLines={1} color={"white"}>
-              {title}
-            </Heading>
             <Text fontSize={16} color="white" noOfLines={2}>
               {description}
             </Text>
@@ -91,19 +95,8 @@ const PostCard = ({
             </svg>
           </Center>
 
-          {/* Date + Tag */}
+          {/* Tags */}
           <Flex position="absolute" direction="column" left={0} top={0} margin="20px" gap="10px">
-            <Box
-              backgroundColor="white"
-              color="gray.900"
-              borderRadius="20px"
-              padding="10px"
-              fontSize="16px"
-              fontWeight="800"
-              width="fit-content"
-            >
-              {updatedAt ? `${updatedAt} (updated)` : createdAt}
-            </Box>
             {tags?.map((tag) => (
               <Box
                 key={tag}
@@ -121,27 +114,6 @@ const PostCard = ({
           </Flex>
         </Box>
 
-        {/* New Tag */}
-        {isNewPost && (
-          <Box
-            position="absolute"
-            bottom={0}
-            right={0}
-            color="black.900"
-            borderColor="black.900"
-            border="3px solid"
-            borderRadius="20px"
-            padding="10px"
-            fontSize="14px"
-            fontWeight="800"
-            margin="20px"
-            width="fit-content"
-            zIndex={1}
-          >
-            NEW POST
-          </Box>
-        )}
-
         {/* Image */}
         <Box display="block" as="span" width="100%" height="100%" borderRadius={2}>
           <GatsbyImage
@@ -151,7 +123,47 @@ const PostCard = ({
             alt={`${slug} cover image`}
           />
         </Box>
+
+        {/* Title */}
       </Box>
+
+      {/* title + tags + new Post */}
+      <Flex direction="column" alignItems="start">
+        <Flex gap="10px" marginTop="16px">
+          <Box
+            color="black.900"
+            borderColor="black.900"
+            border="3px solid"
+            borderRadius="20px"
+            padding="8px"
+            fontSize="14px"
+            fontWeight="800"
+            width="fit-content"
+          >
+            {updatedAt ? `${updatedAt} (updated)` : createdAt}
+          </Box>
+
+          {/* New Tag */}
+          {isNewPost && (
+            <Box
+              color="black.900"
+              borderColor="black.900"
+              border="3px solid"
+              borderRadius="20px"
+              padding="8px"
+              fontSize="14px"
+              fontWeight="800"
+              width="fit-content"
+              zIndex={1}
+            >
+              NEW POST
+            </Box>
+          )}
+        </Flex>
+        <Heading marginTop="10px" fontSize="24px" fontWeight="700">
+          {title}
+        </Heading>
+      </Flex>
     </Link>
   );
 };

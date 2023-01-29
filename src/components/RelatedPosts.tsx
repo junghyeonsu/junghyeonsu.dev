@@ -1,6 +1,6 @@
 import { Box, Center, Grid, GridItem, Heading } from "@chakra-ui/react";
 
-import MainPostCard from "./MainPostCard";
+import PostCard from "./PostCard";
 
 interface RelatedPostsProps {
   relatedPosts: GatsbyTypes.PostPageQuery["relatedPosts"];
@@ -38,7 +38,7 @@ const RelatedPosts = ({ relatedPosts }: RelatedPostsProps) => {
         <Grid mt="20px" templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }} gap={6}>
           {relatedPosts.nodes.map((post) => (
             <GridItem as="article" key={post?.frontmatter?.slug}>
-              <MainPostCard
+              <PostCard
                 title={post.frontmatter?.title!}
                 description={post.frontmatter?.description!}
                 slug={post.frontmatter?.slug!}

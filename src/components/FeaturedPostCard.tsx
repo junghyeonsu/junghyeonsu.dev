@@ -2,11 +2,11 @@ import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link } from "gatsby";
 import type { IGatsbyImageData } from "gatsby-plugin-image";
 import { GatsbyImage } from "gatsby-plugin-image";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { koreanTagNames } from "../constants";
 
-interface MainPostCardProps {
+interface FeaturedPostCardProps {
   title: string;
   description: string;
   slug: string;
@@ -16,7 +16,7 @@ interface MainPostCardProps {
   thumbnail: IGatsbyImageData;
 }
 
-const MainPostCard = ({
+const FeaturedPostCard = ({
   createdAt,
   description,
   slug,
@@ -24,12 +24,17 @@ const MainPostCard = ({
   thumbnail,
   title,
   updatedAt,
-}: MainPostCardProps) => {
+}: FeaturedPostCardProps) => {
   const diffMs = useMemo(() => new Date().getTime() - new Date(createdAt).getTime(), [createdAt]);
   const isNewPost = useMemo(() => Math.floor(diffMs / (1000 * 60 * 60 * 24)) <= 10, [diffMs]);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link to={`/posts/${slug}`}>
+    <Link
+      to={`/posts/${slug}`}
+      onMouseOver={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Box
         as="article"
         transition="all 0.25s ease"
@@ -38,7 +43,7 @@ const MainPostCard = ({
         borderRadius="20px"
         overflow="hidden"
         width="100%"
-        height={{ base: "100%", sm: "280px", md: "340px" }}
+        height={{ base: "100%", sm: "380px", md: "480px" }}
         isolation="isolate"
       >
         {/* Overlay */}
@@ -47,14 +52,11 @@ const MainPostCard = ({
           top={0}
           left={0}
           width="100%"
-          height={{ base: "100%", sm: "280px", md: "340px" }}
+          height={{ base: "100%", sm: "380px", md: "480px" }}
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
           transition="opacity 0.25s ease"
-          opacity={{ base: 1, md: 0 }}
-          _hover={{
-            opacity: 1,
-          }}
+          opacity={isHovered ? 1 : 0}
         >
           {/* Title */}
           <Flex
@@ -65,9 +67,6 @@ const MainPostCard = ({
             direction="column"
             alignItems="start"
           >
-            <Heading fontSize={24} fontWeight="800" noOfLines={1} color={"white"}>
-              {title}
-            </Heading>
             <Text fontSize={16} color="white" noOfLines={2}>
               {description}
             </Text>
@@ -96,19 +95,8 @@ const MainPostCard = ({
             </svg>
           </Center>
 
-          {/* Date + Tag */}
+          {/* Tags */}
           <Flex position="absolute" direction="column" left={0} top={0} margin="20px" gap="10px">
-            <Box
-              backgroundColor="gray.50"
-              color="gray.900"
-              borderRadius="20px"
-              padding="10px"
-              fontSize="16px"
-              fontWeight="800"
-              width="fit-content"
-            >
-              {updatedAt ? `${updatedAt} (updated)` : createdAt}
-            </Box>
             {tags?.map((tag) => (
               <Box
                 key={tag}
@@ -126,27 +114,6 @@ const MainPostCard = ({
           </Flex>
         </Box>
 
-        {/* New Tag */}
-        {isNewPost && (
-          <Box
-            position="absolute"
-            bottom={0}
-            right={0}
-            color="black.900"
-            borderColor="black.900"
-            border="3px solid"
-            borderRadius="20px"
-            padding="10px"
-            fontSize="14px"
-            fontWeight="800"
-            margin="20px"
-            width="fit-content"
-            zIndex={1}
-          >
-            NEW POST
-          </Box>
-        )}
-
         {/* Image */}
         <Box display="block" as="span" width="100%" height="100%" borderRadius={2}>
           <GatsbyImage
@@ -157,8 +124,58 @@ const MainPostCard = ({
           />
         </Box>
       </Box>
+
+      {/* title + tags */}
+      <Flex direction="column" alignItems="start">
+        <Flex gap="10px" marginTop="16px">
+          <Box
+            color="black.900"
+            borderColor="black.900"
+            border="3px solid"
+            borderRadius="20px"
+            padding="8px"
+            fontSize="14px"
+            fontWeight="800"
+            width="fit-content"
+          >
+            {updatedAt ? `${updatedAt} (updated)` : createdAt}
+          </Box>
+          <Box
+            color="black.900"
+            borderColor="black.900"
+            border="3px solid"
+            borderRadius="20px"
+            padding="8px"
+            fontSize="14px"
+            fontWeight="800"
+            width="fit-content"
+          >
+            FEATURED POST
+          </Box>
+
+          {/* New Tag */}
+          {isNewPost && (
+            <Box
+              color="black.900"
+              borderColor="black.900"
+              border="3px solid"
+              borderRadius="20px"
+              padding="8px"
+              fontSize="14px"
+              fontWeight="800"
+              width="fit-content"
+              zIndex={1}
+            >
+              NEW POST
+            </Box>
+          )}
+        </Flex>
+        <Heading marginTop="10px" fontSize="24px" fontWeight="700">
+          {title}
+        </Heading>
+      </Flex>
     </Link>
   );
 };
 
-export default MainPostCard;
+export default FeaturedPostCard;
