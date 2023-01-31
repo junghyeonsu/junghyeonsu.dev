@@ -90,7 +90,7 @@ const FeaturedPostSection = ({ posts }: FeaturedPostSectionProps) => {
                   w="8px"
                   h="8px"
                   borderRadius="50%"
-                  bg="gray.900"
+                  bg="currentcolor"
                   cursor="pointer"
                   onClick={() => setFeaturedIndex(index)}
                 />
