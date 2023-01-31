@@ -17,3 +17,5 @@ export const koreanTagNames: Record<string, string> = {
 export const ALL_POSTS_TAG_NAME = "all posts";
 
 export const DOMAIN = "https://junghyeonsu.com";
+
+export const SITE_NAME = "Junghyeon Su";
