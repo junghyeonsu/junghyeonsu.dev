@@ -10,7 +10,7 @@ const RelatedPosts = ({ relatedPosts }: RelatedPostsProps) => {
   const relatedPostsLength = relatedPosts?.nodes.length;
 
   return (
-    <Box marginTop="100px">
+    <Box marginTop="200px">
       {relatedPostsLength ? (
         <Heading as="h2" fontSize={24}>
           관련 포스트가 {relatedPostsLength}개 있어요.

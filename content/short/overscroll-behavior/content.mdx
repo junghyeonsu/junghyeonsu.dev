@@ -1,0 +1,39 @@
+---
+slug: overscroll-behavior
+title: 스크롤을 원하는 곳에만 적용하기 (스크롤 체이닝, overscroll-behavior)
+description: 스크롤 관련 CSS Property 중 하나인 overscroll-behavior에 대해 알아보자.
+thumbnail: ../short-cover.png
+tags: ["short"]
+createdAt: "2023/01/31"
+updatedAt: ""
+---
+
+## 스크롤 체이닝
+
+웹페이지에서 사이드 바 같은 것을 만들 때, 화면에서 사이드 바가 전부 스크롤이 되었을 때 메인 화면이 스크롤 되는 것을 방지하고 싶을 때가 있다.
+이 동작이 일어나는 이유는 스크롤이 되지 않는 부분에서 스크롤을 하면 부모 요소로 스크롤이 전달되기 때문이다.
+
+이런 현상을 스크롤 체이닝(`scroll chaining`) 이라고 한다. 이런 스크롤 체이닝 현상을 관리하기 위해 CSS에서 제공하는 속성이 `overscroll-behavior`이다.
+
+- [참고 MDN - overscroll-behavior](https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior)
+
+## overscroll-behavior
+
+`overscroll-behavior` 속성은 스크롤이 끝까지 갔을 때 스크롤이 전달되는 것을 막는다.
+
+```css
+overscroll-behavior: auto | contain | none;
+```
+
+- `auto` : 기본값으로 스크롤이 부모에게 전달된다.
+- `contain` : sibling element에 대해서는 스크롤 체인이 발생하지 않고, child element에 대해서는 scroll chain이 발생한다.
+- `none` : 스크롤이 전달되지 않는다.
+
+또한 `x`, `y` 방향을 따로 지정해줄 수도 있다.
+
+```css
+/* x, y 따로 지정 */
+overscroll-behavior: auto none;
+overscroll-behavior: contain contain;
+overscroll-behavior: none none;
+```
