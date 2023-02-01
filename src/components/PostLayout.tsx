@@ -156,7 +156,7 @@ const customComponents = {
           const style = { display: "block", backgroundColor: "transparent" };
 
           if (addLines?.includes(lineNumber)) {
-            return { style: { ...style, backgroundColor: "#afa62d69" } };
+            return { style: { ...style, backgroundColor: "#afa62d30" } };
           }
 
           if (removeLines?.includes(lineNumber)) {
