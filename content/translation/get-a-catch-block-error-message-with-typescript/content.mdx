@@ -19,40 +19,33 @@ const reportError = ({ message }) => {
 try {
   throw new Error("Oh no!");
 } catch (error) {
-  // 계속 진행하지만 신고합시다
+  // 계속 진행하지만 report합니다.
   reportError({ message: error.message });
 }
 ```
 
-Good so far? Well, that's because this is JavaScript. Let's throw TypeScript at this:
-이것이 JavaScript이기 때문에 지금까지 잘 되고 있습니다. TypeScript를 써 봅시다.
+아직까지 좋아보이나요? 아마 JavaScript라서 잘되는 것 같네요. TypeScript를 써 봅시다.
 
 ```ts,9-9
-const reportError = ({message}: {message: string}) => {
+const reportError = ({ message }: { message: string }) => {
   // 로깅 서비스에 오류를 보냅니다...
-}
+};
 
 try {
-  throw new Error('Oh no!')
+  throw new Error("Oh no!");
 } catch (error) {
-  // 계속 진행하지만 신고합시다
-  reportError({message: error.message})
+  // 계속 진행하지만 report합니다.
+  reportError({ message: error.message });
 }
 ```
 
-That `reportError` call there isn't happy.
-Specifically it's the `error.message` bit.
-It's because (as of recently) TypeScript defaults our `error` type to `unknown`.
-Which is truly what it is! In the world of errors, there's not much guarantees you can offer about the types of errors that are thrown.
-In fact, this is the same reason you can't provide the type for the .catch(error => {}) of a promise rejection with the promise generic (`Promise<ResolvedValue, NopeYouCantProvideARejectedValueType>`).
-In fact, it might not even be an error that's thrown at all. It could be just about anything:
-
-error.message 부분이 안타깝게 보입니다.
-그 이유는 (최근에) TypeScript에서 오류 타입을 기본적으로 unknown으로 설정하기 때문입니다.
-오류에 대해 당신이 제공할 수 있는 타입은 거의 없습니다.
-사실, 이것이 promise 거부에서의 catch(error => )의 오류 타입을 제공할 수 없는 이유입니다(`Promise<ResolvedValue, NopeYouCantProvideARejectedValueType>`).
-실제로, 던져진 것이 오류일 것이라고 가정할 수도 없습니다.
-그것은 단지 무엇이든지 될 수 있습니다.
+catch문 안에 있는 `reportError` 함수는 행복하지 않아보이네요.
+특히 `error.message` 부분이 안타깝게 보입니다.
+그 이유는 (최근에) TypeScript에서 `오류` 타입을 기본적으로 `unknown`으로 설정하기 때문이에요.
+이게 도대체 뭘까요! 오류의 세계에서는 발생하는 오류 유형에 대해 제공할 수 있는 보장이 많지 않습니다.
+사실, 이것이 promise 거부에서의 `catch(error => {})`의 오류 Generic을 제공할 수 없는 이유입니다(`Promise<ResolvedValue, NopeYouCantProvideARejectedValueType>`).
+실제로, throw된 것이 오류일 것이라고 가정할 수도 없습니다. 그 에러는 무엇이든 될 수 있습니다.
+니다.
 
 ```ts
 throw "뭐야!?";
@@ -63,100 +56,88 @@ throw new Promise(() => {});
 throw undefined;
 ```
 
-Seriously, you can throw anything of any type.
-So that's easy right? We could just add a type annotation for the error to say this code will only throw an error right?
-
-진짜로, 당신은 어떤 타입의 무엇이든지 던져도 됩니다.
-그래서 쉽죠? 오류에 대한 타입 주석을 추가해서 이 코드가 오류만 던지는 것이라고 표시할 수 있지 않을까요?
+진짜로 어떤 타입의 무엇이든지 던져도 됩니다.
+그래서 쉽죠? 오류에 대한 타입 주석(annotation)을 추가해서 이 코드가 오류만 던지는 것이라고 표시할 수 있지 않을까요?
 
 ```ts,3-3
 try {
-  throw new Error('이런!')
+  throw new Error("이런!");
 } catch (error: Error) {
-  // 계속 진행하지만 신고합시다
-  reportError({message: error.message})
+  // 계속 진행하지만 report합니다.
+  reportError({ message: error.message });
 }
 ```
 
-Not so fast! With that you'll get the following TypeScript compilation error:
+그렇게 생각하긴 아직 이릅니다! 그러면 다음과 같은 TypeScript 컴파일 오류가 발생합니다.
 
-그렇게 빠르지 않아! 그러면 다음과 같은 TypeScript 컴파일 오류가 발생합니다.
-
-```
+```shell
 Catch clause variable type annotation must be 'any' or 'unknown' if specified. ts(1196)
 ```
 
-The reason for this is because even though in our code it looks like there's no way anything else could be thrown,
-JavaScript is kinda funny and so its perfectly possible for a third party library to do something funky like monkey-patching the error constructor to throw something different:
-
-이 이유는 코드에서 다른 것이 던져질 가능성이 없다고 보이지만,
-JavaScript는 좀 웃기기 때문에 외부 라이브러리에서 에러 생성자를 몽키 패치하여 다른 것을 던질 수 있습니다.
+이 에러가 나온 이유는 코드에서 다른 것이 던져질 가능성이 없다고 보이지만,
+JavaScript는 좀 웃기기 때문에 외부 라이브러리에서 에러 생성자를 몽키 패치(monkey-patching)하여 다른 것을 던질 수 있습니다.
 
 ```ts
+// 이렇게 말이죠.
 Error = function () {
   throw "Flowers";
 } as any;
 ```
 
 그렇다면 개발자는 무엇을 해야 할까요?
-그들이 할 수 있는 최선! 그렇다면 이것은 어떻습니까?
+우리가 할 수 있는 최선은 아래와 같습니다.
 
 ```ts,4-5&7-7
 try {
   throw new Error('Oh no!')
 } catch (error) {
   let message = 'Unknown Error'
-  if (error instanceof Error) message = error.message
-  // 계속 진행하지만 신고합시다
-  reportError({message})
+  if (error instanceof Error) message = error.message;
+  // 계속 진행하지만 report합니다.
+  reportError({ message });
 }
 ```
 
-우리는 거기에 갈!
-이제 TypeScript는 우리에게 소리를 지르지 않으며 더 중요한 것은 완전히 예상치 못한 일이 발생할 수 있는 경우를 처리하고 있다는 것입니다.
-그래도 다음과 같이 더 잘할 수 있습니다.
+좋네요!
+이제 TypeScript는 우리에게 소리를 지르지 않고, 더 중요한 건 완전히 예상치 못한 일이 발생할 수 있는 경우를 처리하고 있네요.
+아마도 우리는 다음과 같이 더 좋게 할 수 있을 것 같네요.
 
 ```ts,4-4&6-6
 try {
-  throw new Error('Oh no!')
+  throw new Error("Oh no!");
 } catch (error) {
-  let message
-  if (error instanceof Error) message = error.message
-  else message = String(error)
-  // 계속 진행하지만 신고합시다
-  reportError({message})
+  let message;
+  if (error instanceof Error) message = error.message;
+  else message = String(error);
+  // 계속 진행하지만 report합니다.
+  reportError({ message });
 }
 ```
 
 따라서 여기에서 오류가 실제 `Error` 개체가 아닌 경우 오류를 문자열화하면 유용하게 사용할 수 있습니다.
 
-그런 다음 이것을 모든 catch 블록에서 사용할 유틸리티로 바꿀 수 있습니다.
+그런 다음 이걸 모든 catch 블록에서 사용할 유틸리티로 바꿀 수 있습니다.
 
 ```ts,1-4&14-14
 function getErrorMessage(error: unknown) {
-  if (error instanceof Error) return error.message
-  return String(error)
+  if (error instanceof Error) return error.message;
+  return String(error);
 }
 
-const reportError = ({message}: {message: string}) => {
+const reportError = ({ message }: { message: string }) => {
   // 로깅 서비스에 오류를 보냅니다...
-}
+};
 
 try {
-  throw new Error('Oh no!')
+  throw new Error("Oh no!");
 } catch (error) {
-  // 계속 진행하지만 신고합시다
-  reportError({message: getErrorMessage(error)})
+  // 계속 진행하지만 report합니다.
+  reportError({ message: getErrorMessage(error) });
 }
 ```
 
-This has been helpful for me in my projects. Hopefully it helps you as well.
-
-이것은 제 프로젝트에서 저에게 도움이 되었습니다.
-바라건대 그것은 당신에게도 도움이됩니다.
-
-Update: Nicolas had a nice suggestion for handling situations where the error object you're dealing with isn't an actual error.
-And then Jesse had a suggestion to stringify the error object if possible. So all together the combined suggestions looks like this:
+위와 같은 내용들은 제 프로젝트에서 저에게 도움이 되었습니다.
+바라건대 그것은 이 글을 보는 당신에게도 도움이 될 것입니다.
 
 업데이트: [Nicolas](https://github.com/npirotte)는 처리 중인 오류 개체가 실제 오류가 아닌 상황을 처리하기 위한 [좋은 제안](https://github.com/kentcdodds/kentcdodds.com/issues/206)을 했습니다.
 그리고 나서 [Jesse](https://discord.com/channels/@me)는 가능한 경우 오류 개체를 문자열로 만들 것을 [제안](https://discord.com/channels/715220730605731931)했습니다.
@@ -167,6 +148,7 @@ type ErrorWithMessage = {
   message: string;
 };
 
+// 요기서 "is" 키워드는 Type Predicate, 직역하자면 ‘타입 단정’이라 할 수 있어요.
 function isErrorWithMessage(error: unknown): error is ErrorWithMessage {
   return (
     typeof error === "object" &&
@@ -182,10 +164,8 @@ function toErrorWithMessage(maybeError: unknown): ErrorWithMessage {
   try {
     return new Error(JSON.stringify(maybeError));
   } catch {
-    // fallback in case there's an error stringifying the maybeError
-    // like with circular references for example.
-    // MaybeError를 문자열화하는 오류가 있는 경우 대체
-    // 예를 들어 순환 참조와 같습니다.
+    // MaybeError를 문자열화(stringifying)하는 오류가 있는 경우 대체(fallback)코드에요.
+    // 예를 들면 순환 참조같은게 있을 수 있겠네요.
     return new Error(String(maybeError));
   }
 }
@@ -195,15 +175,10 @@ function getErrorMessage(error: unknown) {
 }
 ```
 
-Handy!
-능숙한!
+편리하네요!
 
 ## 결론
 
-I think the key takeaway here is to remember that while TypeScript has its funny bits, don't dismiss a compilation error or warning from TypeScript just because you think it's impossible or whatever.
-Most of the time it absolutely is possible for the unexpected to happen and TypeScript does a pretty good job of forcing you to handle those unlikely cases...
-And you'll probably find they're not as unlikely as you think.
-
-여기서 중요한 점은 TypeScript에 재미있는 부분이 있지만 불가능하다고 생각하기 때문에 TypeScript에서 컴파일 오류나 경고를 무시하지 않는다는 점을 기억하는 것입니다.
-대부분의 경우 예상치 못한 일이 발생할 수 있으며 TypeScript는 이러한 드문 경우를 처리하도록 하는 꽤 좋은 작업을 수행합니다...
-그리고 아마 당신이 생각하는 것만큼 가능성이 낮지 않다는 것을 알게 될 것입니다.
+TypeScript에 재미있는 부분이 있지만 불가능하다고 생각하고 TypeScript에서 컴파일 오류나 경고를 무시하지 않는다는 점을 기억하세요. 그게 가장 중요한 것 같아요.
+대부분의 경우 예상치 못한 일이 발생할 수 있으며 TypeScript는 이러한 드문 경우를 처리하도록 하는 꽤 좋은 작업을 수행하죠.
+그리고 아마 우리가 생각하는 것 만큼 가능성이 낮지 않다는 것을 알게 될 거에요.
