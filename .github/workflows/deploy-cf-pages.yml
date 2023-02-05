@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: '18.12.1'
           cache: yarn
+      
+      - name: Install Dependencies
+        run: yarn install --immutable
 
       - name: Cache Gatsby `.cache` Folder
         uses: actions/cache@v3
