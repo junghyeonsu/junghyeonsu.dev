@@ -100,7 +100,7 @@ export const Head: HeadFC<Queries.PostPageQuery> = ({ data }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {/* Facebook Meta Tags */}
-      <meta property="og:url" content={`${DOMAIN}/posts/${data.post?.frontmatter?.tags}`} />
+      <meta property="og:url" content={`${DOMAIN}/posts/${data.post?.frontmatter?.slug}`} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={title} />
       <meta property="og:title" content={title} />
