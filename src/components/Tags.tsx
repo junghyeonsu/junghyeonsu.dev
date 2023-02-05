@@ -96,7 +96,7 @@ export default function Tags({ currentTag }: TagsProps) {
                   fontWeight={currentTag === tag ? 700 : 400}
                   _hover={{ textDecoration: "underline" }}
                 >
-                  {koreanTagNames[tag]}
+                  {koreanTagNames[tag!] || tag}
                 </Text>
                 <Text fontSize="12px" fontWeight={currentTag === tag ? 700 : 300}>
                   ({tagPostCount})

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Link } from "gatsby";
@@ -31,7 +32,6 @@ const TableOfContentsItem: React.FC<{
         <Box as="li" id={url}>
           <Link to={url}>
             <Text
-              fontWeight={isActive ? "bold" : "normal"}
               transform={isActive ? "scale(1.02)" : "scale(1)"}
               color={isActive ? "blue.500" : "GrayText"}
             >
@@ -105,7 +105,7 @@ export default function TableOfContents({
     tableOfContents.items.forEach(observe);
 
     return () => observer.disconnect();
-  }, [setActiveId]);
+  }, [setActiveId, tableOfContents.items]);
 
   return (
     <Box

@@ -48,7 +48,7 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
               fontWeight="800"
               width="fit-content"
             >
-              {koreanTagNames[tag!]}
+              {koreanTagNames[tag!] || tag}
             </Box>
           </Link>
         ))}

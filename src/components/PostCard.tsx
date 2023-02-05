@@ -108,7 +108,7 @@ const PostCard = ({
                 fontWeight="800"
                 width="fit-content"
               >
-                {koreanTagNames[tag!]}
+                {koreanTagNames[tag!] || tag}
               </Box>
             ))}
           </Flex>
