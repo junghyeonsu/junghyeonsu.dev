@@ -62,6 +62,7 @@ const customComponents = {
     <Box
       as="a"
       fontWeight={600}
+      target="_blank"
       _hover={{
         textDecoration: "underline",
       }}
