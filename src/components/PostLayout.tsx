@@ -109,7 +109,9 @@ const customComponents = {
             />
           </svg>
         </Center>
-        <Flex direction="column">{children}</Flex>
+        <Flex wordBreak="break-word" direction="column">
+          {children}
+        </Flex>
       </Flex>
     );
   },
@@ -154,7 +156,7 @@ const customComponents = {
         language={match[1]}
         wrapLines
         lineProps={(lineNumber) => {
-          const style = { display: "block", backgroundColor: "transparent" };
+          const style = { display: "block", backgroundColor: "transparent", width: "max-content" };
 
           if (addLines?.includes(lineNumber)) {
             return { style: { ...style, backgroundColor: "#afa62d30" } };
