@@ -625,7 +625,7 @@ export default App;
 그 전에 `d.ts` 파일을 뽑아내기 위해서는 라이브러리 코드 자체에서 타입스크립트 설정을 해보자.
 
 다시 `junghyeonsu-utils` 프로젝트로 돌아와서 타입스크립트를 설치해준다.
-타입스크립트는 빌드 결과물에는 영향을 주지 않기 때문에 `devDependencies`에 설치해준다.
+타입스크립트 패키지 자체는 빌드 결과물에는 포함되지 않아도 되기 때문에 `devDependencies`에 설치해준다.
 `@types/node`는 `node`의 타입을 지원해주는 패키지로 같이 설치해주자.
 
 ```bash
@@ -652,7 +652,7 @@ $ yarn add typescript @types/node -D
 ```
 
 요기서 중요한 것은 `declaration`과 `outDir`이다.
-`declaration`은 타입스크립트가 자동으로 타입정의 (d.ts) 파일을 생성해준다는 것이고,
+`declaration`은 타입스크립트가 자동으로 타입정의 (`d.ts`) 파일을 생성해준다는 것이고,
 `outDir`은 컴파일된 결과물을 어디에 저장할지에 대한 것을 명시해준다.
 타입스크립트는 해당 라이브러리가 타입스크립트를 지원해주는지 하지 않는지를 타입정의(`d.ts`) 파일을 찾아서 결정하기 때문에 `declaration`을 `true`로 설정해준다.
 
@@ -802,7 +802,7 @@ $ info New version: 0.1.0
 $ ✨  Done in 0.02s.
 ```
 
-그리고 배포하기 전에 `build` 명령어를 실행하기 위해 `prepack` 스크립트를 `package.json`에 추가해주자.
+그리고 배포하기 전에 확실히 `build` 명령어를 실행하고 배포를 하기 위해 `prepack` 스크립트를 `package.json`에 추가해주자.
 `prepack` 스크립트는 `npm publish`를 실행하기 전에 실행되는 스크립트이다.
 
 ```json,7-7
@@ -896,6 +896,7 @@ $ yarn add esbuild -D
 import esbuild from "esbuild";
 
 // 공통적으로 사용할 옵션들
+// https://esbuild.github.io/api/#build 에서 다양한 옵션들을 확인할 수 있다.
 const baseConfig = {
   entryPoints: ["src/index.ts"], // 컴파일할 파일
   outdir: "dist", // 컴파일된 파일이 저장될 경로
@@ -933,6 +934,8 @@ Promise.all([
 >
 > 현재 esbuild는 타입스크립트 `d.ts` 컴파일을 지원하지 않는다.
 > 그래서 `tsc`와 `esbuild`를 같이 사용해야 한다.
+>
+> https://esbuild.github.io/content-types/#no-type-system
 
 ```json,4-7
 {
