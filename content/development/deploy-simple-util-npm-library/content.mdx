@@ -455,12 +455,12 @@ const { add, divide, multiply, subtract } = require("junghyeonsu-utils"); // cjs
 
 `exports` 필드에서 `import`는 `esm` 환경에서 사용되고, `require`는 `cjs` 환경에서 사용된다.
 현재 `junghyeonsu-utils`는 `esm`을 지원하고 있기 때문에 그냥 `import`를 하게되면 `esm` 파일인 `index.js` 파일을 사용할 것이다.
-하지만 `cjs` 환경에서는 `require`를 사용하기 때문에 `require`를 키로 가지는 객체 안에 `index.cjs` 파일을 바라보게 한다.
+하지만 `cjs` 환경에서는 `require`를 사용하기 때문에 `require`를 키로 가지는 객체 안에 `index.cjs` 파일을 바라보게 해야한다.
 
-그리고 `commonjs`를 사용하는 `index.cjs`를 작성해보자.
-프로그램 파일이 많아지니 소스파일을 `src` 폴더를 만들어 그 안에 넣어주자.
+`commonjs`를 사용하는 `index.cjs`를 작성하고, 프로그램 파일이 많아지니 소스파일을 `src` 폴더를 만들어 그 안에 넣어주자.
 그리고 그에 맞게 `package.json`의 파일도 수정해주자.
-그리고 우리 `junghyeonsu-utils` 폴더 구조는 이렇게 될 것이다.
+
+우리 `junghyeonsu-utils` 폴더 구조는 이렇게 될 것이다.
 
 ```js
 // src/index.cjs
