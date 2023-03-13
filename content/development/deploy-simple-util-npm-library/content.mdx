@@ -5,7 +5,7 @@ description: NPM 배포를 처음 해보는 사람들을 위해서 차근차근 
 thumbnail: ./cover.png
 tags: ["development", "npm"]
 createdAt: "2023/03/12"
-updatedAt: ""
+updatedAt: "2023/03/14"
 featured: true
 ---
 
@@ -981,12 +981,12 @@ $ node build.js
 우리는 `src` 폴더와 `dist` 폴더만 라이브러리에 포함하자.
 (`src` 폴더는 가끔 라이브러리 사용자들이 라이브러리의 소스 코드를 보고 싶을 때가 있을 경우를 대비해서 포함한다.)
 
-```json,3-3
+```json,5-5
 {
   "exports": {
-    "require": "./dist/index.cjs",
+    "types": "./dist/index.d.ts",
     "import": "./dist/index.js",
-    "types": "./dist/index.d.ts"
+    "require": "./dist/index.cjs"
   },
   "files": [
     "dist",
@@ -1019,6 +1019,50 @@ cli 라이브러리, 브라우저 라이브러리, node 라이브러리 등등 �
 해당 글이 반응이 좋다면 더 많은 내용을 추가해 보도록 하겠다.
 [깃허브에도 라이브러리](https://github.com/junghyeonsu/utils-library-starter)를 올려놨으니 참고하면 좋을 것 같다.
 
+## 업데이트
+
+### types 필드는 항상 맨 위에 위치해야 한다. (2023년 3월 14일 추가)
+
+`exports` 필드는 `types` 필드가 항상 맨 위에 위치해야 한다.
+
+패키지가 잘 배포가 되었는지 확인해 주는 [publink](https://publint.dev/)에서 `exports` 필드를 검사해 보면
+`types` 필드가 맨 위에 위치하지 않으면 경고가 발생한다.
+
+![types 필드는 맨 위로 와야 한다..](./9.png)
+
+`exports` 필드가 순서 기반으로 동작하기 때문에 타입스크립트를 사용하는 환경에서는 `d.ts` 파일이 먼저 참조돼서 타입 유형을 제공해야 한다.
+[타입스크립트 공식 문서의 package.json Exports, Imports, and Self-Referencing 문서](https://www.typescriptlang.org/docs/handbook/esm-node.html#packagejson-exports-imports-and-self-referencing)에서도
+`types` 필드가 먼저 발생해야 한다고 설명되어 있다.
+
+![타입스크립트 공식 문서](./8.png)
+
+### 다양한 exports 필드의 conditional 필드에 대해서 (2023년 3월 14일 추가)
+
+[node 공식 홈페이지의 package.json conditional exports 문서](https://nodejs.org/api/packages.html#conditional-exports)를 보면
+`exports` 필드의 `conditional` 필드로 올 수 있는 값들에 대해서 설명이 되어있다.
+
+`node-addons`, `node`, `import`, `require`, `default`의 값들이 사용 가능하다.
+
+![conditional exports](./10.png)
+
+또한 다른 플랫폼에 대해서도 `exports` 필드를 지정할 수 있다.
+[node 공식 홈페이지의 Community Conditions Definitions](https://nodejs.org/api/packages.html#community-conditions-definitions) 문서를 참고하면
+`types` (위에서 설명한 타입스크립트를 위한 필드), `deno`, `browser`, `react-native`, `development`, `production` 등의 값들이 사용 가능하다.
+
+자세한 내용들은 링크된 문서를 참고하면 좋을 것 같다.
+
+### @andrewbranch@fosstodon.org가 쓴 트위터 (2023년 3월 14일 추가)
+
+어떤 다른 분이 exports 필드가 엄청나다면서 올린 트윗을 보고 [@andrewbranch@fosstodon.org가 쓴 트위터 게시물](https://twitter.com/atcb/status/1634653474041503744)에서
+꽤 많은 정보를 얻을 수 있었다. 위의 추가된 두 개의 설명도 해당 트윗을 보고 추가한 내용이다.
+
+핵심은 `module`과 exports 필드밖에 존재하는 `types` 필드는 꼭 존재하지 않아도 되고,
+`require`, `import`를 무조건 둘 다 지원해주어야 하는 것은 아니고 둘의 용도를 잘 파악하고 사용해야 한다는 것이다.
+(`esm`으로 나아가는 것이 올바른 길이라고는 하지만 `cjs`를 지원해야 하는 경우도 있기 때문에 결론은 둘 다 지원하는 게 맞다.)
+
+그러면서 마지막에 추천해 준 [types wrong](https://arethetypeswrong.github.io/)이라는 사이트와
+[publint](https://publint.dev/)와 같은 사이트는 아주 유용했다. 다들 시간이 난다면 한 번씩 들어가서 확인해 보면 좋을 것 같다.
+
 ## 참고
 
-- [토스테크(장호승): CommonJS와 ESM에 모두 대응하는 라이브러리 개발하기: exports field](https://toss.tech/article/commonjs-esm-exports-field)
+- [토스 테크(장호승): CommonJS와 ESM에 모두 대응하는 라이브러리 개발하기: exports field](https://toss.tech/article/commonjs-esm-exports-field)

@@ -33,7 +33,9 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
           fontWeight="800"
           width="fit-content"
         >
-          {post?.frontmatter?.createdAt}
+          {post?.frontmatter?.updatedAt
+            ? `${post?.frontmatter?.updatedAt} updated`
+            : post?.frontmatter?.createdAt}
         </Box>
         {post?.frontmatter?.tags?.map((tag) => (
           <Link key={tag} to={`/tags/${tag}`}>
