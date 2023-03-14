@@ -156,7 +156,11 @@ const customComponents = {
         language={match[1]}
         wrapLines
         lineProps={(lineNumber) => {
-          const style = { display: "block", backgroundColor: "transparent", width: "max-content" };
+          const style = {
+            display: "table",
+            backgroundColor: "transparent",
+            width: "100%",
+          };
 
           if (addLines?.includes(lineNumber)) {
             return { style: { ...style, backgroundColor: "#afa62d30" } };
