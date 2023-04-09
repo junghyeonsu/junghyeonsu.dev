@@ -1,0 +1,62 @@
+---
+slug: react-fragment-vs-null
+title: React Fragment vs Null
+description: React Fragment와 return null의 차이점
+thumbnail: ../short-cover.png
+tags: ["short"]
+createdAt: 2023/04/09
+updatedAt: ""
+---
+
+> 가끔 React Fragment와 return null을 혼동해서 사용하는 경우가 있습니다. 이 둘의 차이점을 알아보겠습니다.
+
+## Fragment
+
+Fragment는 컴포넌트를 렌더링할 때 사용하는 컴포넌트입니다.
+그리고 컴포넌트를 렌더링할 때 불필요한 DOM 요소를 생성하지 않습니다.
+Fragment 조각은 HTML에서 어떠한 출력도 생성하지 않으며 DOM 구조에 영향을 주지 않고 요소를 함께 그룹화하는 데 사용할 수 있습니다.
+
+```jsx
+function ListComponent({ items }) {
+  return (
+    <>
+      {items.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </>
+  );
+}
+```
+
+예를 들어 위와 같이 리스트 컴포넌트를 렌더링 할 때, 리스트 아이템만 렌더링하고 싶을 때가 있습니다.
+이때 Fragment를 사용하면 불필요한 DOM 요소를 생성하지 않고 리스트 아이템만 렌더링할 수 있습니다.
+
+## return null
+
+컴포넌트에서 null을 반환한다는 것은 아무것도 렌더링하지 않겠다는 뜻입니다.
+React는 이 컴포넌트와 그 안에 있을 수 있는 모든 자식 렌더링을 건너뜁니다.
+특정 state나 props에 따라 컴포넌트를 조건부로 렌더링하고 싶을 때 유용할 수 있습니다.
+
+```jsx
+function ListComponent({ items }) {
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      {items.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </>
+  );
+}
+```
+
+위와 같이 리스트 컴포넌트를 렌더링 할 때, 리스트 아이템이 없을 때는 아무것도 렌더링하지 않고 싶을 때가 있습니다.
+이때 return null을 사용하면 렌더링하지 않을 수 있습니다.
+
+## 요약
+
+- return null: 정말 비었다는 것을 의미할 때, 아무것도 렌더링 하고 싶지 않을 때
+- <></>: 여러 엘리먼트를 추가 html 요소없이 묶어서 렌더링하고 싶을 때
