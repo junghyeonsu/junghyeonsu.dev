@@ -9896,6 +9896,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-clarity@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "gatsby-plugin-clarity@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+  checksum: c8724ccc39254be01fd320c822d358c978443e4057e781588a30bca664324a9d7eaa8279934c8364e88a727217a40c7565dc6b33c1c496df41e7e811e6f168b2
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-feed@npm:^5.0.0":
   version: 5.0.0
   resolution: "gatsby-plugin-feed@npm:5.0.0"
@@ -16456,6 +16465,7 @@ __metadata:
     framer-motion: ^7.6.2
     gatsby: ^5.0.1
     gatsby-plugin-advanced-sitemap: ^2.1.0
+    gatsby-plugin-clarity: ^1.0.1
     gatsby-plugin-feed: ^5.0.0
     gatsby-plugin-gtag: ^1.0.13
     gatsby-plugin-image: ^3.0.0
