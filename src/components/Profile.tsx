@@ -119,7 +119,7 @@ const Profile = () => {
         </Tooltip>
 
         {/* Instagram */}
-        <Tooltip label="Instagram">
+        {/* <Tooltip label="Instagram">
           <a href="https://www.instagram.com/front_june/" target="_blank">
             <IconBox isManaged>
               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -130,7 +130,7 @@ const Profile = () => {
               </svg>
             </IconBox>
           </a>
-        </Tooltip>
+        </Tooltip> */}
 
         {/* Linkedin */}
         <Tooltip label="Linkedin">
@@ -147,7 +147,7 @@ const Profile = () => {
         </Tooltip>
 
         {/* Careerly */}
-        <Tooltip label="Careerly">
+        {/* <Tooltip label="Careerly">
           <a
             href="https://careerly.co.kr/profiles/562464?from=newsfeed&location=gnb"
             target="_blank"
@@ -175,7 +175,7 @@ const Profile = () => {
               </svg>
             </IconBox>
           </a>
-        </Tooltip>
+        </Tooltip> */}
 
         {/* Mail */}
         <Tooltip label="jung660317@naver.com">
@@ -229,7 +229,7 @@ const Profile = () => {
         </Tooltip>
 
         {/* Youtube */}
-        <Tooltip label="Youtube">
+        {/* <Tooltip label="Youtube">
           <a href="https://www.youtube.com/channel/UCkC6sYPPSvpnRprmp2GcXZw" target="_blank">
             <IconBox>
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24" data-testid="YouTubeIcon">
@@ -240,7 +240,7 @@ const Profile = () => {
               </svg>
             </IconBox>
           </a>
-        </Tooltip>
+        </Tooltip> */}
       </Flex>
     </Flex>
     // </motion.div>

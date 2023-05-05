@@ -60,6 +60,7 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
       <Box
         display="flex"
         width="100%"
+        maxHeight="700px"
         justifyContent="center"
         alignItems="center"
         isolation="isolate"
