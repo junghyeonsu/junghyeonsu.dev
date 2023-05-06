@@ -83,8 +83,6 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ children, data, pageContext
   const locales = data.otherLocalePost.nodes.map((node) => node.frontmatter?.locale || "ko");
   const currentLocale = data.post?.frontmatter?.locale || "ko";
   const currentSlug = data.post?.frontmatter?.slug!;
-  console.log("locales", locales);
-  console.log("currentLocale", currentLocale);
 
   return (
     <PostLayout>
