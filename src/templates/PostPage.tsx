@@ -6,6 +6,7 @@ import { getSrc } from "gatsby-plugin-image";
 import React from "react";
 
 import Giscus from "../components/Giscus";
+import Locales from "../components/Locales";
 import PostContentTitle from "../components/PostContentTitle";
 import PostLayout from "../components/PostLayout";
 import Profile from "../components/Profile";
@@ -15,11 +16,12 @@ import { DOMAIN } from "../constants";
 import { fadeInFromLeft } from "../framer-motions";
 
 export const query = graphql`
-  query PostPage($id: String!, $tags: [String!]!) {
+  query PostPage($id: String!, $tags: [String!]!, $slug: String!) {
     post: mdx(id: { eq: $id }) {
       frontmatter {
         slug
         title
+        locale
         description
         tags
         createdAt
@@ -32,8 +34,15 @@ export const query = graphql`
       }
       tableOfContents
     }
+    otherLocalePost: allMdx(filter: { frontmatter: { slug: { eq: $slug } } }) {
+      nodes {
+        frontmatter {
+          locale
+        }
+      }
+    }
     relatedPosts: allMdx(
-      filter: { frontmatter: { tags: { in: $tags } }, id: { ne: $id } }
+      filter: { frontmatter: { tags: { in: $tags }, locale: { eq: null } }, id: { ne: $id } }
       sort: { frontmatter: { createdAt: DESC } }
       limit: 4
     ) {
@@ -70,11 +79,21 @@ interface PostTemplateProps {
 }
 
 const PostTemplate: React.FC<PostTemplateProps> = ({ children, data, pageContext }) => {
+  // NOTE: 기본 locale은 Ko
+  const locales = data.otherLocalePost.nodes.map((node) => node.frontmatter?.locale || "ko");
+  const currentLocale = data.post?.frontmatter?.locale || "ko";
+  const currentSlug = data.post?.frontmatter?.slug!;
+  console.log("locales", locales);
+  console.log("currentLocale", currentLocale);
+
   return (
     <PostLayout>
       <motion.article style={{ width: "100%" }} {...fadeInFromLeft}>
         <Flex direction="column" width={{ base: "100%", xl: "800px" }}>
           <PostContentTitle readingTime={pageContext.readingTime.text} post={data.post} />
+          {locales.length > 1 && (
+            <Locales currentSlug={currentSlug} locales={locales} currentLocale={currentLocale} />
+          )}
           <Box marginTop="50px">{children}</Box>
           <RelatedPosts relatedPosts={data.relatedPosts} />
           <Profile />
@@ -89,9 +108,15 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ children, data, pageContext
 };
 
 export const Head: HeadFC<Queries.PostPageQuery> = ({ data }) => {
-  const title = `${data.post?.frontmatter?.title!} - 정현수 기술 블로그`;
+  const locale = data.post?.frontmatter?.locale! || "ko";
+  const title =
+    locale === "ko"
+      ? `${data.post?.frontmatter?.title!} - 정현수 기술 블로그`
+      : `${data.post?.frontmatter?.title!} - Junghyeonsu Tech Blog`;
   const description = data.post?.frontmatter?.description!;
   const ogimage = data.post?.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!;
+  const metaLocale = locale === "ko" ? "ko_KR" : "en_US";
+  const devCategory = locale === "ko" ? "개발" : "Development";
 
   return (
     <>
@@ -106,6 +131,7 @@ export const Head: HeadFC<Queries.PostPageQuery> = ({ data }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={getSrc(ogimage)} />
+      <meta property="og:locale" content={metaLocale} />
 
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -115,7 +141,7 @@ export const Head: HeadFC<Queries.PostPageQuery> = ({ data }) => {
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={getSrc(ogimage)}></meta>
       <meta name="twitter:label1" content="Category" />
-      <meta name="twitter:data1" content={`개발 | ${data.post?.frontmatter?.tags![0]}`} />
+      <meta name="twitter:data1" content={`${devCategory} | ${data.post?.frontmatter?.tags![0]}`} />
       <meta
         name="article:published_time"
         content={`${data.post?.frontmatter?.createdAt?.replace(/[/]/g, "-")}T09:00:00.000Z`}

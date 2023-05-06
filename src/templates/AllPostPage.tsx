@@ -30,8 +30,9 @@ export const query = graphql`
   }
 
   query AllPostPageTemplate($limit: Int, $skip: Int) {
+    # locale은 null인것만 가져옴 (ko)
     allMdx(
-      filter: { frontmatter: { tags: { nin: "short" } } }
+      filter: { frontmatter: { tags: { nin: "short" }, locale: { eq: null } } }
       sort: { frontmatter: { createdAt: DESC } }
       limit: $limit
       skip: $skip
@@ -55,8 +56,9 @@ export const query = graphql`
       gatsbyImageData
     }
 
+    # locale은 null인것만 가져옴 (ko)
     shortPosts: allMdx(
-      filter: { frontmatter: { tags: { in: "short" } } }
+      filter: { frontmatter: { tags: { in: "short" }, locale: { eq: null } } }
       sort: { frontmatter: { createdAt: DESC } }
     ) {
       nodes {
@@ -69,8 +71,9 @@ export const query = graphql`
       }
     }
 
+    # locale은 null인것만 가져옴 (ko)
     featuredPosts: allMdx(
-      filter: { frontmatter: { featured: { eq: true } } }
+      filter: { frontmatter: { featured: { eq: true }, locale: { eq: null } } }
       sort: { frontmatter: { createdAt: DESC } }
     ) {
       nodes {
