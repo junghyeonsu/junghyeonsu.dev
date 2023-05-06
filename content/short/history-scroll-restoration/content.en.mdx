@@ -1,0 +1,44 @@
+---
+slug: history-scroll-restoration
+title: Remembering the user's scroll position (for History.scrollRestoration)
+description: The browser API to use to remember the user's scroll position.
+thumbnail: ./cover.png
+tags: ["short"]
+createdAt: "2023/01/15"
+updatedAt: ""
+locale: en
+---
+
+## tl;dr
+
+You can set whether the page should return to where it was originally scrolled when the user presses the back button.
+
+```javascript
+const scrollRestoration = history.scrollRestoration;
+if (scrollRestoration === "manual") {
+  console.log(
+    "If the option is set to manual, the scroll position will not be restored and the user will have to move it manually."
+  );
+}
+```
+
+## Scroll Restoration
+
+This section is about **Scroll Restoration**, the browser History API for scroll restoration.
+This API allows you to set whether the page should return to the original scroll position when the user presses the browser's back button.
+
+The default is **auto**, and setting this to **manual** will not restore the scrolled position.
+
+```javascript
+// Restore the user's scroll position on the page.
+history.scrollRestoration = "auto"; // default
+
+// The position on the page is not restored and the user must manually scroll to that position.
+history.scrollRestoration = "manual";
+```
+
+## See also.
+
+- [MDN Web Docs History API scrollRestoration](https://developer.mozilla.org/en-US/docs/Web/API/History/scrollRestoration)
+
+Translated with www.DeepL.com/Translator (free version)
