@@ -9,7 +9,7 @@ interface LocalesProps {
 
 const Locales = ({ currentLocale, locales, currentSlug }: LocalesProps) => {
   return (
-    <Flex alignItems="center" gap={2}>
+    <Flex alignItems="center" marginTop={10} gap={2}>
       <Text fontSize={16} fontWeight="800" color="black.900">
         Locales:
       </Text>
@@ -19,14 +19,20 @@ const Locales = ({ currentLocale, locales, currentSlug }: LocalesProps) => {
 
           if (locale === currentLocale) {
             return (
-              <Text fontSize={16} fontWeight="600" textDecoration="underline" color="black.900">
+              <Text
+                key={locale}
+                fontSize={16}
+                fontWeight="600"
+                textDecoration="underline"
+                color="black.900"
+              >
                 {locale}
               </Text>
             );
           }
 
           return (
-            <Link to={to}>
+            <Link key={locale} to={to}>
               <Text fontSize={16} color="black.900">
                 {locale}
               </Text>
