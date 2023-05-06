@@ -1,0 +1,64 @@
+---
+slug: react-fragment-vs-null
+title: React Fragment vs Null
+description: Difference between React Fragment and return null
+thumbnail: ../short-cover.png
+tags: ["short"]
+createdAt: 2023/04/09
+updatedAt: ""
+locale: en
+---
+
+> Sometimes we use React Fragment and return null confusingly. Let's see the difference between the two.
+
+## Fragment
+
+A Fragment is a component that you use to render your component.
+They don't create any unnecessary DOM elements when rendering a component.
+Fragments do not produce any output in HTML and can be used to group elements together without affecting the DOM structure.
+
+```jsx
+function ListComponent({ items }) {
+  return (
+    <>
+      {items.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </>
+  );
+}
+```
+
+For example, when rendering a list component like the one above, you may want to render only the list items.
+You can use Fragments to render just the list items without creating unnecessary DOM elements.
+
+## return null
+
+When a component returns null, it means it doesn't want to render anything.
+React will skip rendering this component and any children it may have.
+This can be useful when you want to conditionally render a component based on certain state or props.
+
+```jsx
+function ListComponent({ items }) {
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      {items.map((item) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </>
+  );
+}
+```
+
+When rendering a list component like the one above, sometimes you don't want to render anything when there are no list items.
+This can be accomplished by using return null.
+
+## Summary
+
+- return null: when it's really empty, and you don't want to render anything.
+- `<></>`: when you want to render a bunch of elements together without any
+  additional HTML elements.

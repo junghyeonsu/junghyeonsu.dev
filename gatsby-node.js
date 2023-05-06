@@ -27,6 +27,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           frontmatter {
             slug
             tags
+            locale
           }
           internal {
             contentFilePath
@@ -54,7 +55,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   // ALL POSTS 페이지네이션 생성
   const posts = result.data.allPosts.nodes;
-  const allPostsNumPages = Math.ceil(posts.length / POST_PER_PAGE);
+  // ko로 작성된 혹은 locale이 없는 포스트만 뽑아서 페이지네이션 해줘야 함
+  const koPosts = posts.filter((post) => !post.frontmatter.locale);
+
+  const allPostsNumPages = Math.ceil(koPosts.length / POST_PER_PAGE);
   Array.from({ length: allPostsNumPages }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/` : `/${i + 1}`,
@@ -91,11 +95,17 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   // 모든 포스트 페이지 생성
   result.data.allPosts.nodes.forEach((node) => {
+    const locale = node.frontmatter.locale;
+    const path = !locale
+      ? `/posts/${node.frontmatter.slug}`
+      : `/${locale}/posts/${node.frontmatter.slug}`;
+
     createPage({
-      path: `/posts/${node.frontmatter.slug}`,
+      path,
       component: `${PostPageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
       context: {
         tags: node.frontmatter.tags,
+        slug: node.frontmatter.slug,
         id: node.id,
         readingTime: readingTime(node.body),
       },

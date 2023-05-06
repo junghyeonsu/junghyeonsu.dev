@@ -77,13 +77,13 @@ const customComponents = {
     return (
       <Flex
         as="blockquote"
-        color="blue.800"
-        bg="blue.50"
+        color="blackAlpha.900"
+        bg="blackAlpha.100"
         columnGap="10px"
         borderLeft="4px solid"
         _dark={{
           color: "blue.50",
-          bg: "blue.800",
+          bg: "blackAlpha.300",
         }}
         sx={{
           p: {
