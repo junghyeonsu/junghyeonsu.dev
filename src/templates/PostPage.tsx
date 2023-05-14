@@ -1,3 +1,4 @@
+// @refresh reset
 import { Box, Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import type { HeadFC } from "gatsby";

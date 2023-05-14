@@ -1,0 +1,544 @@
+---
+slug: using-ajv-and-github-actions-to-ensure-consistent-meta-information-across-json-files
+title: AJV 및 GitHub Action을 사용하여 JSON 파일에서 일관된 메타 정보 보장하기
+description: 일관된 메타 정보로 데이터 무결성을 유지하기 위한 JSON 데이터를 처리할 때 오류를 사전에 방지하는 방법을 알아봅니다.
+thumbnail: ./cover.png
+tags: ["development"]
+createdAt: "2023/05/14"
+updatedAt: ""
+featured: true
+---
+
+## TL;DR
+
+이 글은
+
+- Source of Truth (진실의 원천)을 두고 메타 데이터를 쉽게 관리하고 싶은 분
+- 스크립트를 원하는 시점에 실행 및 검증을 자동화하고 싶은 분
+- JSON 데이터의 검증하는 방법을 알고 싶은 분
+
+들이 읽으면 유용합니다.
+
+또한 이 글을 읽으면
+
+- AJV를 이용해서 JSON 파일 검증하는 방법에 대해서 알게 됩니다.
+- Github Action을 이용해서 검증 스크립트 자동화하는 방법에 대해서 알게 됩니다.
+
+## 들어가기
+
+우선 메타 데이터가 무엇일까요?
+**"어떤 목적을 가진 데이터"**를 메타 데이터라고 합니다.
+우리가 자주 사용하는 메타 데이터의 대표적인 예시는 `package.json`입니다.
+프로젝트의 이름, 버전, 설명, 작성자, 의존성 라이브러리 등등 **프로젝트에 필수적인 정보**라는 목적을 가진 데이터들이 들어있습니다.
+
+제가 맡고 있는 프로젝트인 [Seed Design](https://github.com/daangn/seed-design) 레파지토리에서 문서 프로젝트가 들어가 있는
+`docs` 폴더가 있습니다. 해당 프로젝트는 디자인시스템의 문서 프로젝트입니다. `Avatar` 컴포넌트를 예시로 들어보겠습니다.
+
+만약 `Avatar`에 대한 style 정보, usage 정보, overview 정보 등을 관리하기 위해 따로 mdx 문서를 만들어서 관리하는데
+각 문서에서 `coverImage`를 사용하고 있다고 해보겠습니다. 그렇다면 `overview.mdx`, `style.mdx`, `usage.mdx` 모두 아래와 같이 사용하고 있겠죠.
+
+```mdx,2-2
+{/* coverImage를 직접 부르고 있음 */}
+![coverImage](./coverImage.png)
+```
+
+```sh,4-6
+# AS-IS
+📦avatar
+ ┣ 📜coverImage.png
+ ┣ 📜overview.mdx # coverImage 사용 중
+ ┣ 📜style.mdx # coverImage 사용 중
+ ┗ 📜usage.mdx # coverImage 사용 중
+```
+
+근데 만약에 coverImage의 스펙이 변경되어서 확장자가 `png`에서 `jpeg`로 변경이 됐다고 생각해 보겠습니다.
+그럼 우리는 세 개의 파일을 옮겨가며 coverImage의 확장자를 고쳐주어야 합니다.
+근데 이런 일이 정말 많아지면 하루 종일 데이터만 고치다가 끝날 수도 있겠네요.
+
+그래서 우리는 메타 데이터 파일을 따로 둡니다.
+아래와 같이 말이죠.
+
+```sh,4-4
+# TO-BE
+📦avatar
+ ┣ 📜coverImage.png
+ ┣ 📜component-meta.json # 메타 데이터 파일
+ ┣ 📜overview.mdx
+ ┣ 📜style.mdx
+ ┗ 📜usage.mdx
+```
+
+그리고 해당 JSON 파일에는 이런 식으로 적혀있을 겁니다.
+
+- [Avatar 컴포넌트에 대한 메타데이터 JSON 파일 예시](https://github.com/daangn/seed-design/blob/main/docs/content/component/avatar/component-meta.json)
+
+```json,2-2
+{
+  "coverImage": "./coverImage.jpeg"
+}
+```
+
+`overview.mdx`, `style.mdx`, `usage.mdx` 세 개의 파일에서 `coverImage`를 직접 import 해서 사용하는 것이 아니라
+세 개의 파일에서 메타 데이터 JSON 파일을 바라보게 하고 해당 데이터에 따라서 정보를 보여주게 합니다.
+메타 데이터 JSON 파일을 Source of Truth (진실의 원천)으로 두는 것입니다.
+
+이렇게 하면 무엇이 좋을까요?
+
+- 변경에 유리합니다.
+- 소통하기가 쉬워지고 생산성이 높아집니다.
+- 데이터가 일관되게 설명되어 더 쉽게 해석하고 관리할 수 있도록 합니다.
+- 데이터 정확성, 완전성 및 관련성이 올라가기 때문에 품질이 올라가고 전반적인 퀄리티가 좋아집니다.
+
+하지만 모든 것에 장점이 있다면 단점도 있습니다.
+
+- 메타 데이터도 사람이 생성하는 데이터이기 때문에 관리를 해줄 사람이 필요합니다.
+- 항상 최신 데이터를 유지해야 합니다.
+- 어떤 데이터가 들어갈지 팀원들과 잘 상의해서 넣어야 합니다. (일치 비용)
+
+단점들 대부분이 **관리 비용**입니다.
+이 글에서는 관리 비용을 최대한 낮추기 위한 작업을 해볼 겁니다.
+
+만약 메타 데이터 JSON 파일에 잘못된 값이 들어가면 어떻게 할까요?
+디자인시스템은 수십 개의 컴포넌트로 이루어져 있습니다. 이 모든 컴포넌트의 메타 데이터를
+수동으로 일일이 확인한다는 건 불가능합니다.
+
+**메타 데이터 JSON 파일이 수정될 때** AJV(JSON 스키마 Validator)를 이용하여
+메타 데이터 검증하고 해당 검증하는 로직을 자동화하여서 머지가 되기 전에 자동으로 확인하는 것까지 해보겠습니다.
+
+## AJV로 커스텀 JSON 스키마 작성과 검증 스크립트 작성
+
+[AJV](https://ajv.js.org/)는 `JSON schema validator`입니다.
+JSON에 대한 데이터 형식을 선언적으로 적어두고 JSON 파일이 해당 데이터 형식에 부합하는지 검증할 수 있습니다.
+
+AJV의 사용 예시를 간단히 살펴보겠습니다.
+
+```js
+const Ajv = require("ajv");
+
+// JSON schema 선언하기
+const schema = {
+  type: "object",
+  properties: {
+    name: { type: "string" },
+    age: { type: "number" },
+  },
+  required: ["name", "age"],
+};
+
+// schema를 사용하여 유효성 validator 인스턴스를 만듭니다.
+const ajv = new Ajv();
+const validate = ajv.compile(schema);
+
+// schema에 대해 일부 JSON 데이터의 유효성을 검사합니다.
+const data = {
+  name: "Alice",
+  age: 30,
+};
+const isValid = validate(data);
+
+if (isValid) {
+  console.log("Data is valid!");
+} else {
+  console.log("Data is invalid:");
+  console.log(validate.errors);
+}
+```
+
+이게 끝입니다. 그럼 우리가 해야 할 일은 다음과 같습니다.
+
+- JSON schema 선언하기
+- 유효성을 검사하는 스크립트 만들기
+
+### JSON schema 선언하기
+
+저는 schema를 선언하기 위한 파일을 따로 작성했습니다.
+파일이 조금 길지만 전부 읽지 않아도 됩니다.
+아래 코드에서 중요한 것은 여러 가지 패턴을 전부 검증할 수 있다는 것입니다.
+**정규표현식을 통해서 특정 문자를 검사**할 수도, **필수적인지 옵션으로 들어갈 수 있는지도** 검증할 수 있습니다.
+그리고 정해진 프로퍼티만 들어갈 수 있는지 혹은 추가적인 프로퍼티가 들어가도 되는지도 정할 수 있습니다.
+
+[공식문서](https://ajv.js.org/json-schema.html)를 참고하세요
+
+```js
+const statusSchema = {
+  type: "string",
+  pattern: "^(todo|in-progress|done)$",
+};
+
+const stringSchema = {
+  type: "string",
+};
+
+const storybookSchema = {
+  type: "object",
+  properties: {
+    path: stringSchema,
+    height: { type: ["string"] },
+  },
+  required: ["path"],
+  additionalProperties: false,
+};
+
+const mdxSchema = {
+  type: "string",
+  pattern: "^.*.mdx$",
+};
+
+const jsonSchema = {
+  type: "string",
+  pattern: "^.*.json$",
+};
+
+const pngSchema = {
+  type: "string",
+  pattern: "^.*.png$",
+};
+
+const platformSchema = {
+  type: "object",
+  properties: {
+    ios: {
+      type: "object",
+      properties: {
+        status: statusSchema,
+        alias: { type: "string" },
+        path: { type: "string" },
+      },
+      required: ["status", "alias", "path"],
+      additionalProperties: false,
+    },
+    android: {
+      type: "object",
+      properties: {
+        status: statusSchema,
+        path: { type: "string" },
+      },
+      required: ["status", "path"],
+      additionalProperties: false,
+    },
+    react: {
+      type: "object",
+      properties: {
+        status: statusSchema,
+        path: { type: "string" },
+      },
+      required: ["status", "path"],
+      additionalProperties: false,
+    },
+    figma: {
+      type: "object",
+      properties: {
+        status: statusSchema,
+        path: { type: "string" },
+      },
+      required: ["status", "path"],
+      additionalProperties: false,
+    },
+    docs: {
+      type: "object",
+      properties: {
+        overview: {
+          type: "object",
+          properties: {
+            status: statusSchema,
+            storybook: storybookSchema,
+            mdx: mdxSchema,
+          },
+          additionalProperties: false,
+        },
+        usage: {
+          type: "object",
+          properties: {
+            status: statusSchema,
+            mdx: mdxSchema,
+          },
+          additionalProperties: false,
+        },
+        style: {
+          type: "object",
+          properties: {
+            status: statusSchema,
+            mdx: mdxSchema,
+            additionalProperties: false,
+          },
+        },
+      },
+      required: ["usage", "style", "overview"],
+      additionalProperties: true,
+    },
+  },
+  required: ["ios", "android", "react", "figma", "docs"],
+  additionalProperties: false,
+};
+
+export const componentMetaSchema = {
+  type: "object",
+  properties: {
+    name: stringSchema,
+    description: stringSchema,
+    thumbnail: pngSchema,
+    primitive: jsonSchema,
+    group: stringSchema,
+    platform: platformSchema,
+  },
+  required: ["name", "description", "thumbnail", "platform"],
+};
+
+export const primitiveMetaSchema = {
+  type: "object",
+  properties: {
+    name: stringSchema,
+    description: stringSchema,
+    thumbnail: pngSchema,
+    primitivie: mdxSchema,
+  },
+  required: ["name", "description", "thumbnail", "primitive"],
+};
+```
+
+### 유효성을 검사하는 스크립트 만들기
+
+그리고 해당 Schema를 통해서 검증 해줄 스크립트가 필요합니다. 제 요구사항은 다음과 같았습니다.
+
+```sh,4-4&6-6&8-8&12-12&14-14&16-16
+📦content
+ ┣ 📂component
+ ┃ ┣ 📂action-sheet
+ ┃ ┃ ┣ 📜component-meta.json
+ ┃ ┣ 📂actionable-callout
+ ┃ ┃ ┣ 📜component-meta.json
+ ┃ ┣ 📂alert-dialog
+ ┃ ┃ ┣ 📜component-meta.json
+ ┃ ┃ ...
+ ┣ 📂primitive
+ ┃ ┣ 📂avatar
+ ┃ ┃ ┣ 📜primitive-meta.json
+ ┃ ┣ 📂button
+ ┃ ┃ ┣ 📜primitive-meta.json
+ ┃ ┣ 📂checkbox
+ ┃ ┃ ┣ 📜primitive-meta.json
+ ┃ ┣ ...
+```
+
+- 루트에서 `./content/component` 폴더에 있는 모든 폴더 안의 `component-meta.json` 파일만 읽어서 component schema 검증
+- 루트에서 `./content/primitive` 폴더에 있는 모든 폴더 안의 `primitive-meta.json` 파일만 읽어서 primitive schema 검증
+- 검증에 실패하면 **실패한 파일명과 어떤 이유에서 실패했는지 출력**하기
+
+코드로 표현하면 다음과 같습니다.
+
+```js
+import Ajv from "ajv";
+import { prettify } from "awesome-ajv-errors";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+import {
+  componentMetaSchema,
+  primitiveMetaSchema,
+} from "./meta-data-schemas.mjs";
+
+const ajv = new Ajv();
+
+// ---------실행 부분 시작--------- //
+
+console.log("Validating meta.json files...");
+
+validateJsonInDir({
+  dir: path.resolve("./content/component"),
+  validate: ajv.compile(componentMetaSchema),
+  type: "component",
+});
+validateJsonInDir({
+  dir: path.resolve("./content/primitive"),
+  validate: ajv.compile(primitiveMetaSchema),
+  type: "primitive",
+});
+
+console.log("Finished validating meta.json files");
+
+// ---------구현 부분 시작--------- //
+
+async function validateJsonInDir({ dir, validate, type }) {
+  try {
+    // NOTE: dir에 해당하는 폴더의 파일과 폴더들을 읽습니다.
+    const filesOrFolders = await fs.readdir(dir);
+
+    for (const fileOrFolder of filesOrFolders) {
+      const filePath = path.join(dir, fileOrFolder);
+
+      const stats = await fs.stat(filePath);
+
+      // NOTE: 폴더만 찾습니다.
+      if (!stats.isDirectory()) {
+        continue;
+      }
+
+      const subfiles = await fs.readdir(filePath);
+
+      // NOTE: 각 컴포넌트에 대한 폴더에서 json 파일만 찾습니다.
+      for (const subfile of subfiles) {
+        if (path.extname(subfile) !== ".json") {
+          continue;
+        }
+
+        const data = await fs.readFile(path.join(filePath, subfile), "utf8");
+
+        const json = JSON.parse(data);
+        const isValid = validate(json);
+        const fileName = `${json.name.replaceAll(" ", "-").toLowerCase()}.json`;
+
+        if (!isValid) {
+          // NOTE: 검증에 통과하지 못했을 때 실행됩니다.
+          console.log(`${type}/${fileName} is invalid`);
+          console.error(prettify(validate, { data: json }));
+
+          process.exit(1);
+        } else {
+          // NOTE: 통과했을 땐 굳이 출력하지 않아도 됩니다.
+          // console.log(`${type}/${fileName} is valid`);
+        }
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+```
+
+이렇게 스크립트를 작성했으면 `package.json`에 스크립트에 명령어를 작성해줍니다.
+
+```json,3-3
+{
+  "scripts": {
+    "validate:meta-data": "node scripts/validate-meta-data.mjs"
+  }
+}
+```
+
+한 번 실행해 볼까요?
+
+![CLI에서 실행해보기](./script-success-in-cli.png)
+
+잘 되는 것 같네요!
+
+만약 데이터 형식이 맞지 않으면 어떻게 될까요?
+저는 컴포넌트의 메타 데이터 JSON 파일에 `description`이 `string` 형식으로 들어가도록 했습니다.
+
+```js,5-5&11-11
+export const componentMetaSchema = {
+  type: "object",
+  properties: {
+    name: stringSchema,
+    description: stringSchema,
+    thumbnail: pngSchema,
+    primitive: jsonSchema,
+    group: stringSchema,
+    platform: platformSchema,
+  },
+  required: ["name", "description", "thumbnail", "platform"],
+};
+```
+
+그리고 `component`의 `action-sheet` 컴포넌트에서 `description`을 잠시 빼보겠습니다.
+그러곤 다시 스크립트를 실행한다면?
+
+```json,,3-3
+{
+  "name": "Action Sheet",
+  "description": "OS 시스템 액션시트를 대체하는 커스텀 액션시트입니다.",
+  ...
+}
+```
+
+![스크립트 다시 실행](./script-fail-in-cli.png)
+
+- 어느 컴포넌트에서 실패했는지
+- 어느 프로퍼티가 잘못됐는지
+
+잘 확인하는 것 같네요!
+
+> 오류 메시지를 예쁘게 보이는 것은 [awesome-ajv-errors](https://github.com/grantila/awesome-ajv-errors#readme) 라이브러리를 참고해 주세요.
+
+## 자동 검증을 위해 AJV를 GitHub Actions와 통합
+
+요기까지 오셨다면 `AJV`를 통해서 원하는 검증 스크립트를 만드는 것까지 된 것 같습니다.
+근데 일일이 메타 데이터가 변경될 때마다 수동으로 스크립트를 실행시켜 확인할 수 있지만 사람들은 너무 바쁩니다.
+PR을 올리고 해당 Pull Request가 메타 데이터를 바꿨다면 자동으로 스크립트를 실행하는 Action이 있으면 좋을 것 같습니다.
+
+`Github Action`은 위와 같은 요구사항을 만족하기에 완벽한 도구입니다.
+원하는 폴더에서 변경사항이 있을 때만 실행하기, 원하는 브랜치에서, 원하는 동작에서만(on push, on pull request, ...etc)
+등등 원하는 동작들을 다 할 수 있습니다.
+
+바로 Action을 작성해 봅시다.
+
+```yml,1-7&27-30
+on:
+  push: # push 될 때마다
+    branches: # 모든 브랜치를 검사
+      - '**'
+    paths: # 원하는 경로의 json 파일들이 변경됐을 때만 action이 실행됨
+      - 'docs/content/component/**/component-meta.json'
+      - 'docs/content/primitive/**/primitive-meta.json'
+
+name: Validate Seed Docs meta data files
+
+jobs:
+  build:
+    name: Validate meta data files
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18.12.1
+        cache: yarn
+
+    - name: Install Dependencies
+      run: yarn install --immutable
+
+    # 검증 스크립트 실행
+    - name: Validate meta data files
+      working-directory: ./docs
+      run: |
+        yarn validate:meta-data
+
+    - name: Report success
+      run: echo "Script ran successfully!"
+```
+
+그리고 PR을 만들고 push를 해봅시다.
+
+![PR에서 성공했을 때의 모습](./script-success-in-github.png)
+
+![액션 탭에서 성공했을 때의 모습](./script-success-in-action.png)
+
+잘 되는 것 같네요!
+
+만약 실패한다면 어떻게 보일까요?
+
+![PR에서 실패했을 때의 모습](./script-fail-in-github.png)
+
+![액션 탭에서 실패했을 때의 모습](./script-fail-in-action.png)
+
+아까 작성한 스크립트에서 실패하면 프로세스를 나가는 코드가 있었습니다.
+해당 코드가 없으면 스크립트가 실패해도 Action이 성공한 것처럼 보이기 때문에 꼭 넣어주어야 합니다.
+
+```js,5-5
+if (!isValid) {
+  // NOTE: 검증에 통과하지 못했을 때 실행됩니다.
+  console.log(`${type}/${fileName} is invalid`);
+  console.error(prettify(validate, { data: json }));
+  process.exit(1); // 실패한다면 Github Action의 프로세스를 끝내야 합니다.
+} else {
+  // console.log(`${type}/${fileName} is valid`);
+}
+```
+
+## 결론
+
+AJV와 GitHub Actions를 함께 사용하면 프로젝트의 JSON 파일 전체에서 일관된 메타 정보를 보장하는 데 도움이 될 수 있습니다.
+스키마에 대해 데이터의 유효성을 검사하면 조기에 오류를 발견하고 후속 문제를 방지할 수 있습니다.
+GitHub Actions로 자동화된 유효성 검사를 설정하면 워크플로우를 더욱 간소화하고 사람이 실수할 가능성을 줄일 수 있습니다.
+이 포스팅이 이러한 도구를 함께 사용하여 데이터의 품질과 일관성을 개선하는 방법에 도움이 되었다면 좋겠습니다.
