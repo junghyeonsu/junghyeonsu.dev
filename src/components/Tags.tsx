@@ -12,7 +12,7 @@ interface TagsProps {
 export default function Tags({ currentTag }: TagsProps) {
   const data = useStaticQuery(graphql`
     query Tags {
-      allMdx {
+      allMdx(filter: { frontmatter: { title: { nin: "정현수 포트폴리오" } } }) {
         group(field: { frontmatter: { tags: SELECT } }) {
           tagPostCount: totalCount
           tag: fieldValue

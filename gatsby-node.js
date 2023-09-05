@@ -3,6 +3,7 @@ const readingTime = require(`reading-time`);
 
 const PostPageTemplate = path.resolve(`./src/templates/PostPage.tsx`);
 const TagPageTemplate = path.resolve(`./src/templates/TagPage.tsx`);
+const PortfolioPageTemplate = path.resolve(`./src/templates/PortfolioPage.tsx`);
 const AllPostPageTemplate = path.resolve(`./src/templates/AllPostPage.tsx`);
 
 exports.onCreateWebpackConfig = ({ actions, plugins, reporter }) => {
@@ -20,7 +21,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins, reporter }) => {
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(`
     query {
-      allPosts: allMdx {
+      allPosts: allMdx(filter: { frontmatter: { title: { nin: "정현수 포트폴리오" } } }) {
         nodes {
           id
           body
@@ -41,6 +42,17 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           nodes {
             id
           }
+        }
+      }
+
+      portfolio: mdx(frontmatter: { title: { eq: "정현수 포트폴리오" } }) {
+        id
+        body
+        frontmatter {
+          slug
+        }
+        internal {
+          contentFilePath
         }
       }
     }
@@ -110,5 +122,18 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         readingTime: readingTime(node.body),
       },
     });
+  });
+
+  // 포트폴리오 페이지 생성
+  const portfolio = result.data.portfolio;
+
+  createPage({
+    path: `/portfolio`,
+    component: `${PortfolioPageTemplate}?__contentFilePath=${portfolio.internal.contentFilePath}`,
+    context: {
+      slug: portfolio.frontmatter.slug,
+      id: portfolio.id,
+      readingTime: readingTime(result.data.portfolio.body),
+    },
   });
 };

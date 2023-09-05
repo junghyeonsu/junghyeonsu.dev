@@ -64,6 +64,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `portfolio`,
+        path: path.resolve(__dirname, "./portfolio"),
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `content`,
         path: path.resolve(__dirname, "./content"),
       },
@@ -173,6 +180,12 @@ module.exports = {
         // true will enable clarity tracking code on both development and production environments
         // false will enable clarity tracking code on production environment only
         enable_on_dev_env: false,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        icon: "src/assets/favicon.png",
       },
     },
   ],

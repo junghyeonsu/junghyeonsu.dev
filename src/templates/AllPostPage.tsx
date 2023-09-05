@@ -32,7 +32,13 @@ export const query = graphql`
   query AllPostPageTemplate($limit: Int, $skip: Int) {
     # locale은 null인것만 가져옴 (ko)
     allMdx(
-      filter: { frontmatter: { tags: { nin: "short" }, locale: { eq: null } } }
+      filter: {
+        frontmatter: {
+          title: { nin: "정현수 포트폴리오" }
+          tags: { nin: "short" }
+          locale: { eq: null }
+        }
+      }
       sort: { frontmatter: { createdAt: DESC } }
       limit: $limit
       skip: $skip

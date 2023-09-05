@@ -5,6 +5,7 @@ import RSS from "../RSS";
 import ThemeToggler from "../ThemeToggler/ThemeToggler";
 import About from "./About";
 import Logo from "./Logo";
+import Portfoilo from "./Portfolio";
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -48,6 +49,7 @@ const Header = () => {
     >
       <Logo />
       <Spacer />
+      <Portfoilo />
       <About />
       <RSS />
       <ThemeToggler />
