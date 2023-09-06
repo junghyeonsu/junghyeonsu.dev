@@ -81,7 +81,7 @@ export const Head: HeadFC<GatsbyTypes.PortfolioPageQuery> = ({ data }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {/* Facebook Meta Tags */}
-      <meta property="og:url" content={`${DOMAIN}/posts/${data.post?.frontmatter?.slug}`} />
+      <meta property="og:url" content={`${DOMAIN}/${data.post?.frontmatter?.slug}`} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={title} />
       <meta property="og:title" content={title} />
@@ -92,7 +92,7 @@ export const Head: HeadFC<GatsbyTypes.PortfolioPageQuery> = ({ data }) => {
       {/*  Twitter Meta Tags  */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="junghyeonsu.com" />
-      <meta property="twitter:url" content={`${DOMAIN}/posts/${data.post?.frontmatter?.slug}`} />
+      <meta property="twitter:url" content={`${DOMAIN}/${data.post?.frontmatter?.slug}`} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={getSrc(ogimage)}></meta>
