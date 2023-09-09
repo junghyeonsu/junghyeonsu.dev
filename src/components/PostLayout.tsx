@@ -1,3 +1,4 @@
+import type { BoxProps, ComponentDefaultProps, HeadingProps, TextProps } from "@chakra-ui/react";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { MDXProvider } from "@mdx-js/react";
 import React from "react";
@@ -15,17 +16,17 @@ interface LayoutProps {
 
 /* 커스텀 HTML Elements */
 const customComponents = {
-  h1: (props: Object) => <Heading as="h1" fontSize={36} mt="80px" {...props} />,
+  h1: (props: HeadingProps) => <Heading as="h1" fontSize={36} mt="80px" {...props} />,
 
-  h2: (props: Object) => <Heading as="h2" fontSize={32} mt="80px" mb="40px" {...props} />,
+  h2: (props: HeadingProps) => <Heading as="h2" fontSize={32} mt="80px" mb="40px" {...props} />,
 
-  h3: (props: Object) => <Heading as="h3" fontSize={24} mt="60px" mb="30px" {...props} />,
+  h3: (props: HeadingProps) => <Heading as="h3" fontSize={24} mt="60px" mb="30px" {...props} />,
 
-  h4: (props: Object) => <Heading as="h4" fontSize={20} mt="40px" mb="20px" {...props} />,
+  h4: (props: HeadingProps) => <Heading as="h4" fontSize={20} mt="40px" mb="20px" {...props} />,
 
-  p: (props: Object) => <Text fontSize={16} mt="16px" lineHeight="2" {...props} />,
+  p: (props: TextProps) => <Text fontSize={16} mt="16px" lineHeight="2" {...props} />,
 
-  li: (props: Object) => (
+  li: (props: BoxProps) => (
     <Box
       as="li"
       sx={{
@@ -42,8 +43,8 @@ const customComponents = {
       {...props}
     />
   ),
-  ol: (props: Object) => <Box as="ol" fontSize={16} mt="16px" listStylePos="inside" {...props} />,
-  ul: (props: Object) => (
+  ol: (props: BoxProps) => <Box as="ol" fontSize={16} mt="16px" listStylePos="inside" {...props} />,
+  ul: (props: BoxProps) => (
     <Box
       as="ul"
       sx={{
@@ -59,25 +60,30 @@ const customComponents = {
     />
   ),
 
-  a: (props: Object) => (
-    <Box
-      as="a"
-      fontWeight={600}
-      target="_blank"
-      _hover={{
-        textDecoration: "underline",
-      }}
-      color="blue.400"
-      {...props}
-    />
-  ),
+  a: (props: BoxProps) => {
+    const ariaHidden = props["aria-hidden"];
 
-  blockquote: ({ ...props }) => {
+    return (
+      <Box
+        as="a"
+        fontWeight={600}
+        target={!ariaHidden && "_blank"}
+        _hover={{
+          textDecoration: "underline",
+        }}
+        color="blue.400"
+        {...props}
+      />
+    );
+  },
+
+  blockquote: (props: ComponentDefaultProps) => {
     const children = props.children;
     return <Callout>{children}</Callout>;
   },
 
-  code: ({ ...props }) => {
+  // NOTE: match하면 code block, match하지 않으면 inline code
+  code: (props: ComponentDefaultProps) => {
     const { className, children } = props;
     const match = /language-(\w+)/.exec(className || "");
 
@@ -145,7 +151,7 @@ const customComponents = {
 
 export default function PostLayout({ children }: LayoutProps) {
   return (
-    <MDXProvider components={customComponents}>
+    <MDXProvider components={customComponents as any}>
       <Header />
       <Box
         as="main"

@@ -14,7 +14,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mdx-js/mdx": "^2.1.5",
-    "@mdx-js/react": "^2.1.5",
+    "@mdx-js/react": "^2.3.0",
     "add": "^2.0.6",
     "framer-motion": "^7.6.2",
     "gatsby": "^5.0.1",

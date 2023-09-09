@@ -6,6 +6,8 @@ const TagPageTemplate = path.resolve(`./src/templates/TagPage.tsx`);
 const PortfolioPageTemplate = path.resolve(`./src/templates/PortfolioPage.tsx`);
 const AllPostPageTemplate = path.resolve(`./src/templates/AllPostPage.tsx`);
 
+const WORDS_PER_MINUTE = 500;
+
 exports.onCreateWebpackConfig = ({ actions, plugins, reporter }) => {
   actions.setWebpackConfig({
     plugins: [
@@ -119,7 +121,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         tags: node.frontmatter.tags,
         slug: node.frontmatter.slug,
         id: node.id,
-        readingTime: readingTime(node.body),
+        readingTime: readingTime(node.body, { wordsPerMinute: WORDS_PER_MINUTE }),
       },
     });
   });
@@ -133,7 +135,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     context: {
       slug: portfolio.frontmatter.slug,
       id: portfolio.id,
-      readingTime: readingTime(result.data.portfolio.body),
+      readingTime: readingTime(result.data.portfolio.body, { wordsPerMinute: WORDS_PER_MINUTE }),
     },
   });
 };
