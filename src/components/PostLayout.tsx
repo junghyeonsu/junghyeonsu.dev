@@ -6,9 +6,9 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import { parseSyntaxHighlighterClassName } from "../utils/string";
-import Callout from "./Callout";
 import Footer from "./Footer";
-import Header from "./Header";
+import Header from "./header/Header";
+import Callout from "./mdx/Callout";
 
 interface LayoutProps {
   children: React.ReactNode;

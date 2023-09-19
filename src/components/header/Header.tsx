@@ -1,8 +1,8 @@
 import { Box, Spacer } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import RSS from "../RSS";
-import ThemeToggler from "../ThemeToggler/ThemeToggler";
+import RSS from "../rss";
+import ThemeToggler from "../theme-toggle/ThemeToggler";
 import About from "./About";
 import Logo from "./Logo";
 import Portfoilo from "./Portfolio";
