@@ -66,6 +66,7 @@ export const query = graphql`
     shortPosts: allMdx(
       filter: { frontmatter: { tags: { in: "short" }, locale: { eq: null } } }
       sort: { frontmatter: { createdAt: DESC } }
+      limit: 15
     ) {
       nodes {
         frontmatter {

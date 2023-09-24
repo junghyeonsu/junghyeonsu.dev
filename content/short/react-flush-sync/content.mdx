@@ -1,0 +1,38 @@
+---
+slug: react-flush-sync
+title: React flushSync가 무엇이고 주의사항에 대해서
+description: React 18.0.0 react-dom의 flushSync에 대해서 알아보자.
+thumbnail: ./cover.png
+tags: ["short"]
+createdAt: 2023/09/24
+updatedAt: ""
+---
+
+## flushSync
+
+```tsx
+import { flushSync } from "react-dom";
+
+// flushSync를 사용하여 동기적으로 업데이트를 처리
+flushSync(() => {
+  doSomething(); // 업데이트할 작업 수행
+});
+
+// 이 라인에서는 Dom이 업데이트 됐습니다.
+```
+
+`react-dom` 패키지의 `flushSync` 함수는 React의 동기적 업데이트를 수행하는 데 사용되는 메서드입니다. React에서 일반적으로 업데이트는 비동기적으로 처리되며, 업데이트 큐에 있는 변경 사항은 다음 렌더 사이클에서 처리됩니다. 그러나 `flushSync` 함수를 사용하면 해당 메서드 내부의 콜백의 업데이트를 즉시 처리하고 렌더링을 동기적으로 진행할 수 있습니다.
+
+`flushSync`의 역할과 사용 사례는 다음과 같습니다:
+
+1. **동기적 렌더링**: `flushSync`를 사용하면 React의 일반적인 비동기 업데이트 프로세스를 우회하고 업데이트를 즉시 처리하여 동기적으로 렌더링할 수 있습니다.
+2. **유저 경험:** 특정 상황에서 렌더링이 비동기적으로 처리될 때 발생하는 렌더링 지연을 최소화하기 위해 사용됩니다. 예를 들어, 사용자 입력에 반응하여 변경 사항을 즉시 화면에 반영해야 하는 경우에 유용합니다.
+
+## 주의사항
+
+`flushSync`는 주의해서 사용해야 합니다.
+
+1. **동기적 렌더링은 위험합니다:** 동기적 렌더링은 성능에 영향을 줄 수 있으며, 잘못 사용하면 애플리케이션의 응답성을 저하시킬 수 있습니다. 따라서 신중하게 사용해야 합니다.
+2. **React 18버전:** `flushSync` 함수는 **React 18**부터 도입되었으며, 이전 버전에서는 사용할 수 없을 수 있으므로 React 버전과 함께 사용 가능 여부를 확인해야 합니다.
+3. **꼭 필요할까?:** `flushSync`를 사용하는 경우는 흔하지 않습니다. 앱이 React API만 사용하고 타사 라이브러리와 통합하지 않는 경우 `flushSync`는 필요하지 않을 것입니다.
+4. **Suspense와 사용한다면 주의**: 만약 `Suspense` 를 사용한다면 `flushSync` 가 강제로 fallback state를 표시할 수 있습니다.

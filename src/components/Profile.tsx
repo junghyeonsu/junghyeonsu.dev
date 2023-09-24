@@ -119,8 +119,8 @@ const Profile = () => {
         </Tooltip>
 
         {/* Instagram */}
-        {/* <Tooltip label="Instagram">
-          <a href="https://www.instagram.com/front_june/" target="_blank">
+        <Tooltip label="Instagram">
+          <a href="https://www.instagram.com/rendev_official/" target="_blank">
             <IconBox isManaged>
               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                 <path
@@ -130,7 +130,7 @@ const Profile = () => {
               </svg>
             </IconBox>
           </a>
-        </Tooltip> */}
+        </Tooltip>
 
         {/* Linkedin */}
         <Tooltip label="Linkedin">

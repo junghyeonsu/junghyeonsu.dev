@@ -1,0 +1,39 @@
+---
+slug: react-flush-sync
+title: What is React flushSync and what are the caveats?
+description: Let's learn about flushSync in React 18.0.0 react-dom.
+thumbnail: ./cover.png
+tags: ["short"]
+createdAt: 2023/09/24
+updatedAt: ""
+locale: en
+---
+
+## flushSync
+
+```tsx
+import { flushSync } from "react-dom";
+
+// Handle updates synchronously using flushSync
+flushSync(() => {
+  doSomething(); // Do something to update
+});
+
+// On this line, the Dom has been updated.
+```
+
+The `flushSync` function in the `react-dom` package is the method used to perform synchronous updates in React. Normally, updates in React are handled asynchronously, with changes in the update queue being processed in the next render cycle. However, the `flushSync` function allows you to immediately process updates in callbacks inside that method and proceed with rendering synchronously.
+
+The roles and use cases for `flushSync` are as follows
+
+1. **Synchronous rendering**: `flushSync` allows you to bypass React's normal asynchronous update process and process updates immediately to render synchronously.
+2. **User Experience:** Used to minimize rendering delays that occur when rendering is handled asynchronously in certain situations. For example, this is useful when changes need to be reflected on screen immediately in response to user input.
+
+## Caution.
+
+`flushSync` should be used with caution.
+
+1. **Synchronous rendering is risky:** Synchronous rendering can impact performance and, if used incorrectly, can make your application less responsive, so it should be used with caution.
+2. **React 18:** The `flushSync` function was introduced in **React 18** and may not be available in earlier versions, so you should check its availability with your React version.
+3. **Do I need it?:** It's not common to use `flushSync`. If your app only uses the React API and doesn't integrate with third-party libraries, you probably don't need `flushSync`.
+4. Be careful if you use it with `Suspense`: If you use `Suspense`, `flushSync` can force a fallback state to be displayed.

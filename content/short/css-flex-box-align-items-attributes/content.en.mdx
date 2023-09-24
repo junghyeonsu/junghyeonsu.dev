@@ -1,0 +1,21 @@
+---
+slug: css-flex-box-align-items-attributes
+title: Difference between flex-start and baseline for align-items in CSS
+description: The difference between flex-start and baseline for align-items in a CSS flex box.
+thumbnail: ./cover.png
+tags: ["short"]
+createdAt: 2023/09/24
+updatedAt: ""
+locale: en
+---
+
+## flex-start vs baseline
+
+![Source: https://stackoverflow.com/questions/34606879/whats-the-difference-between-flex-start-and-baseline](./1.png)
+
+## Summary
+
+- align-items: flex-start aligns the child elements at the start of the flex box's cross axis.
+- align-items: baseline` aligns the child elements to the text baseline of the flex box's cross axis.
+  - Use this when you need to list the text of the children in a flex box based on their text.
+  - Somehow, I think it might be harder to debug the CSS because it creates one more deps. (parent - child - child's text)
