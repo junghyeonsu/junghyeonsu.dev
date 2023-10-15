@@ -1,0 +1,192 @@
+---
+slug: react-use-sync-external-store
+title: React 18 useSyncExternalStore에 대해서
+description: useSyncExternalStore가 무엇이고 어떻게 구현되어 있는지 알아보자.
+thumbnail: ./cover.png
+tags: ["short"]
+createdAt: 2023/10/15
+updatedAt: ""
+---
+
+## tl;dr
+
+시중에는 리액트 내부의 훅들, 예를들어 `useState`, `useReducer`와 같은 것들을 사용하지 않고 상태관리를 도와주는 라이브러리들이 여럿 있습니다.
+대표적으로 redux, recoil, jotai, xtsate, zustand, rect query... 정도가 있습니다.
+
+`useSyncExternalStore`는 단순하게 생각해서 `React`에 의존되어 있지 않은 스토어(위에서 나열한 라이브러리들)를 `useState`와 `useEffect`를 통해서 변경사항을 추적하고,
+`useState`의 setter를 통해서 리액트의 리렌더링과 동기화를 해준다고 생각하면 됩니다.
+
+## useSyncExternalStore
+
+[공식문서](https://react.dev/reference/react/useSyncExternalStore#usesyncexternalstore)는 이곳에 위치하고 있습니다.
+직관적으로 단어들을 분해해서 살펴보면 use + sync external store, 외부 스토어(external store)와 싱크(sync)를 맞추는 훅(use) 입니다.
+
+```tsx
+const snapshot = useSyncExternalStore(
+  subscribe,
+  getSnapshot,
+  getServerSnapshot
+);
+```
+
+그러니까 리액트에 디펜던시가 없는 상태관리 라이브러리 혹은 리액트 디펜던시가 없어서 렌더링 로직에
+조금 문제가 있을 수 있는 외부 스토어를 연결시켜서 리액트의 리렌더링 시스템에 올라탈 수 있도록 해주는 훅입니다.
+
+내부는 어떻게 구현되어있을까요? 구현체 코드는 [이곳](https://github.com/facebook/react/blob/dddfe688206dafa5646550d351eb9a8e9c53654a/packages/use-sync-external-store/src/useSyncExternalStoreShimClient.js)에 위치하고 있습니다.
+
+```tsx
+// 이 훅에서 사용되는 꼼수(clever hacks)가 일반적으로 작동한다고 가정하지 마세요.
+// 이 쉼(hook)의 목적은 다른 라이브러리의 꼼수 대신 필요를 대체하는 것입니다.
+export function useSyncExternalStore<T>(
+  subscribe: (() => void) => () => void,
+  getSnapshot: () => T,
+  // 참고: 이 쉼(shim)은 `getServerSnapshot`을 사용하지 않습니다.
+  // 왜냐하면 React의 18버전 이전의 버전에서는 수화(hydrating) 중인지 확인하는 방법이 노출되지 않기 때문입니다.
+  // 따라서 쉼을 사용하는 사람들은 이를 직접 추적하고 `getSnapshot`에서 올바른 값을 반환해야 합니다.
+  getServerSnapshot?: () => T,
+): T {
+  if (__DEV__) {
+    if (!didWarnOld18Alpha) {
+      if (React.startTransition !== undefined) {
+        didWarnOld18Alpha = true;
+        console.error(
+          'React 18의 이전 릴리스, 사전 릴리스 알파 버전을 사용하고 있으며 ' +
+            'useSyncExternalStore를 지원하지 않습니다. ' +
+            'use-sync-external-store 쉼이 제대로 작동하지 않을 것입니다. ' +
+            '더 최신 사전 릴리스로 업그레이드하세요.',
+        );
+      }
+    }
+  }
+
+  // 매 렌더링 시점에 저장소(store)에서 현재 스냅샷(snapshot)을 읽습니다.
+  // 다시 한번 말하지만, 이는 React의 규칙을 어긴 것이며 특정 구현 세부 사항 때문에만 작동합니다.
+  const value = getSnapshot();
+  if (__DEV__) {
+    if (!didWarnUncachedGetSnapshot) {
+      const cachedValue = getSnapshot();
+      if (!is(value, cachedValue)) {
+        console.error(
+          'getSnapshot의 결과는 무한 루프를 피하기 위해 캐시해야 합니다.',
+        );
+        didWarnUncachedGetSnapshot = true;
+      }
+    }
+  }
+
+  // 업데이트가 동기적으로 발생하기 때문에 업데이트를 큐에 넣지 않습니다.
+  // 대신 구독된 상태가 변경될 때마다 임의의 useState 훅을 업데이트함으로써 강제로 리렌더링합니다.
+  // 그런 다음 렌더링 중에 현재 값을 읽기 위해 getSnapshot을 호출합니다.
+  //
+  // 실제로 useState 훅에서 반환한 상태를 사용하지 않기 때문에 해당 슬롯(slot)에 다른 정보를 저장하여 메모리를 절약할 수 있습니다.
+  //
+  // 일찍 종료(bailout)를 구현하려면 변경 가능한 객체에 일부 내용을 추적해야 합니다.
+  // 보통 useRef 훅에 넣을 것이지만 useState 훅 대신에 이를 저장할 수 있습니다.
+  //
+  // 강제 리렌더링을 위해 forceUpdate({inst})를 호출합니다. 이 작업은 항상 동등성 검사를 통과하지 못하기 때문에 작동합니다.
+  const [{inst}, forceUpdate] = useState({inst: {value, getSnapshot}});
+
+  // 최신 getSnapshot 함수를 ref를 사용하여 추적합니다. 이 ref는 레이아웃(phase) 단계에서 업데이트해야 하므로
+  // 구독(subscribe) 중에 발생하는 티어링(tearing) 확인을 수행할 때 액세스할 수 있어야 합니다.
+  useLayoutEffect(() => {
+    inst.value = value;
+    inst.getSnapshot = getSnapshot;
+
+    // getSnapshot 또는 subscribe가 변경될 때마다 변경이 있었는지 확인하기 위해 커밋(commit) 단계에서 체크해야 합니다.
+    if (checkIfSnapshotChanged(inst)) {
+      // 강제로 리렌더링합니다.
+      forceUpdate({inst});
+    }
+  }, [subscribe, value, getSnapshot]);
+
+  useEffect(() => {
+    // 구독하기 전에 변경을 확인합니다. 그 후에는 변경 사항은 구독 핸들러에서 감지됩니다.
+    if (checkIfSnapshotChanged(inst)) {
+      // 강제로 리렌더링합니다.
+      forceUpdate({inst});
+    }
+    const handleStoreChange = () => {
+      // TODO: 배치 업데이트를 위한 크로스 렌더러 API가 없으므로 unstable_batchedUpdates로 래핑하는 것은 이 라이브러리의 사용자에게 달려 있습니다.
+      // 개발 단계에서 이게 아닌 경우 감지하고 경고 메시지를 출력해야 할까요?
+
+      // 저장소가 변경되었습니다. 마지막으로 저장소에서 읽었던 스냅샷이 마지막으로 읽은 후 변경되었는지 확인합니다.
+      if (checkIfSnapshotChanged(inst)) {
+        // 강제로 리렌더링합니다.
+        forceUpdate({inst});
+      }
+    };
+    // 저장소를 구독하고 정리 함수를 반환합니다.
+    return subscribe(handleStoreChange);
+  }, [subscribe]);
+
+  useDebugValue(value);
+  return value;
+}
+```
+
+코드가 조금 길어보이는데,, **DEV** 환경일 때의 코드 없애고, 주석을 다 없애면 코드가 그렇게 길지 않습니다.
+
+```ts
+export function useSyncExternalStore<T>(
+  subscribe: (() => void) => () => void,
+  getSnapshot: () => T,
+  getServerSnapshot?: () => T,
+): T {
+  const value = getSnapshot();
+  const [{inst}, forceUpdate] = useState({inst: {value, getSnapshot}});
+
+  useLayoutEffect(() => {
+    inst.value = value;
+    inst.getSnapshot = getSnapshot;
+
+    if (checkIfSnapshotChanged(inst)) {
+      forceUpdate({inst});
+    }
+  }, [subscribe, value, getSnapshot]);
+
+  useEffect(() => {
+    if (checkIfSnapshotChanged(inst)) {
+      forceUpdate({inst});
+    }
+    const handleStoreChange = () => {
+      if (checkIfSnapshotChanged(inst)) {
+        forceUpdate({inst});
+      }
+    };
+    return subscribe(handleStoreChange);
+  }, [subscribe]);
+
+  useDebugValue(value);
+  return value;
+}
+```
+
+어떤가요? 그렇게 길지 않죠?
+
+주요 로직은 사용자로부터 받은 `getSnapshot` 함수를 통해서 snapshot value를 얻고,
+해당 snapshot이 변경되었다면 강제 업데이트(forceUpdate)를 해서 리렌더링을 해주는 로직밖에 없습니다.
+
+`checkIfSnapshotChanged` 함수는 아래와 같이 구현되어 있습니다.
+
+```tsx
+function checkIfSnapshotChanged<T>(inst: {
+  value: T;
+  getSnapshot: () => T;
+}): boolean {
+  const latestGetSnapshot = inst.getSnapshot;
+  const prevValue = inst.value;
+  try {
+    const nextValue = latestGetSnapshot();
+    return !is(prevValue, nextValue);
+  } catch (error) {
+    return true;
+  }
+}
+```
+
+이 함수는 `useSyncExternalStore` 훅에서 스냅샷의 변경 여부를 확인하고,
+스냅샷이 변경되었을 때 강제로 리렌더링을 유발하기 위해 사용됩니다.
+변경이 감지되면 `forceUpdate`를 통해 리렌더링이 강제됩니다.
+
+이렇게 `useSyncExternalStore`는 리액트 내부 훅을 사용하지 않고 구현한 외부 스토어에 대해서
+리액트의 내부 훅들을 사용해서 리액트의 렌더링 시스템에 올라타게 해줍니다.
