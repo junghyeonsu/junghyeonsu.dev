@@ -1,11 +1,11 @@
 ---
 slug: react-use-sync-external-store
 title: React 18 useSyncExternalStore에 대해서
-description: useSyncExternalStore가 무엇이고 어떻게 구현되어 있는지 알아보자.
+description: useSyncExternalStore가 무엇일까?
 thumbnail: ./cover.png
 tags: ["short"]
 createdAt: 2023/10/15
-updatedAt: ""
+updatedAt: 2023/10/23
 ---
 
 ## tl;dr
@@ -32,7 +32,15 @@ const snapshot = useSyncExternalStore(
 그러니까 리액트에 디펜던시가 없는 상태관리 라이브러리 혹은 리액트 디펜던시가 없어서 렌더링 로직에
 조금 문제가 있을 수 있는 외부 스토어를 연결시켜서 리액트의 리렌더링 시스템에 올라탈 수 있도록 해주는 훅입니다.
 
-내부는 어떻게 구현되어있을까요? 구현체 코드는 [이곳](https://github.com/facebook/react/blob/dddfe688206dafa5646550d351eb9a8e9c53654a/packages/use-sync-external-store/src/useSyncExternalStoreShimClient.js)에 위치하고 있습니다.
+<Callout type="danger">
+  아래 코드는 shim code로 18버전의 useSyncExternalStore를 리액트 16, 17버전에서
+  사용하기 위해서 구현해놓은 코드입니다. 만약 18버전의 useSyncExternalStore
+  코드를 보고 싶으시면 [이 곳의 블로그를
+  참고해주세요](https://jser.dev/2023-08-02-usesyncexternalstore/)
+</Callout>
+
+shim 코드 내부는 어떻게 구현되어있을까요?
+구현체 코드는 [이곳](https://github.com/facebook/react/blob/dddfe688206dafa5646550d351eb9a8e9c53654a/packages/use-sync-external-store/src/useSyncExternalStoreShimClient.js)에 위치하고 있습니다.
 
 ```tsx
 // 이 훅에서 사용되는 꼼수(clever hacks)가 일반적으로 작동한다고 가정하지 마세요.
