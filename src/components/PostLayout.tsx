@@ -154,6 +154,7 @@ export default function PostLayout({ children }: LayoutProps) {
     <MDXProvider components={customComponents as any}>
       <Header />
       <Box
+        key={`${children}`}
         as="main"
         maxWidth={{ base: "800px", xl: "1100px" }}
         style={{
