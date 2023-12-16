@@ -1,4 +1,6 @@
 {
+  "name": "junghyeonsu-dev",
+  "private": true,
   "scripts": {
     "build": "gatsby build --log-pages",
     "clean": "gatsby clean",
@@ -15,7 +17,6 @@
     "@emotion/styled": "^11.10.4",
     "@mdx-js/mdx": "^2.1.5",
     "@mdx-js/react": "^2.3.0",
-    "add": "^2.0.6",
     "framer-motion": "^7.6.2",
     "gatsby": "^5.0.1",
     "gatsby-plugin-advanced-sitemap": "^2.1.0",
@@ -37,8 +38,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^6.1.1",
-    "rehype-slug": "^5.0.1",
-    "yarn": "^1.22.19"
+    "rehype-slug": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",

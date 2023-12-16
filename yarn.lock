@@ -5121,13 +5121,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"add@npm:^2.0.6":
-  version: 2.0.6
-  resolution: "add@npm:2.0.6"
-  checksum: e2d23d40494565dfed4acd65e478570c444db5ac6c053551ed429c39ea0f2c99d83df63e7befec936df601827d2254d06a2fb6f7dcfd2022e810b25eab818b8c
-  languageName: node
-  linkType: hard
-
 "address@npm:1.1.2":
   version: 1.1.2
   resolution: "address@npm:1.1.2"
@@ -11558,6 +11551,59 @@ __metadata:
   languageName: node
   linkType: hard
 
+"junghyeonsu-dev@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "junghyeonsu-dev@workspace:."
+  dependencies:
+    "@chakra-ui/gatsby-plugin": ^3.0.6
+    "@chakra-ui/react": ^2.3.7
+    "@emotion/react": ^11.10.4
+    "@emotion/styled": ^11.10.4
+    "@mdx-js/mdx": ^2.1.5
+    "@mdx-js/react": ^2.3.0
+    "@types/node": ^17.0.45
+    "@types/react": ^18.0.21
+    "@types/react-dom": ^18.0.6
+    "@types/react-syntax-highlighter": ^15.5.5
+    "@typescript-eslint/eslint-plugin": ^5.39.0
+    "@typescript-eslint/parser": ^5.39.0
+    eslint: ^8.24.0
+    eslint-config-airbnb: ^19.0.4
+    eslint-config-airbnb-typescript: ^17.0.0
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-json-format: ^2.0.1
+    eslint-plugin-jsx-a11y: ^6.6.1
+    eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-react: ^7.31.8
+    eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-simple-import-sort: ^7.0.0
+    framer-motion: ^7.6.2
+    gatsby: ^5.0.1
+    gatsby-plugin-advanced-sitemap: ^2.1.0
+    gatsby-plugin-clarity: ^1.0.1
+    gatsby-plugin-feed: ^5.0.0
+    gatsby-plugin-gtag: ^1.0.13
+    gatsby-plugin-image: ^3.0.0
+    gatsby-plugin-manifest: ^5.12.0
+    gatsby-plugin-mdx: ^5.0.0
+    gatsby-plugin-mdx-frontmatter: ^0.0.4
+    gatsby-plugin-sharp: ^5.0.0
+    gatsby-plugin-typegen: ^3.1.0
+    gatsby-plugin-web-font-loader: ^1.0.4
+    gatsby-remark-images: ^7.0.0
+    gatsby-source-filesystem: ^5.0.0
+    gatsby-transformer-sharp: ^5.0.0
+    prettier: ^2.7.1
+    react: ^18.1.0
+    react-dom: ^18.1.0
+    react-syntax-highlighter: ^15.5.0
+    reading-time: ^1.5.0
+    rehype-autolink-headings: ^6.1.1
+    rehype-slug: ^5.0.1
+    typescript: ^4.8.4
+  languageName: unknown
+  linkType: soft
+
 "keyv@npm:^4.0.0":
   version: 4.5.0
   resolution: "keyv@npm:4.5.0"
@@ -15381,61 +15427,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"root-workspace-0b6124@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "root-workspace-0b6124@workspace:."
-  dependencies:
-    "@chakra-ui/gatsby-plugin": ^3.0.6
-    "@chakra-ui/react": ^2.3.7
-    "@emotion/react": ^11.10.4
-    "@emotion/styled": ^11.10.4
-    "@mdx-js/mdx": ^2.1.5
-    "@mdx-js/react": ^2.3.0
-    "@types/node": ^17.0.45
-    "@types/react": ^18.0.21
-    "@types/react-dom": ^18.0.6
-    "@types/react-syntax-highlighter": ^15.5.5
-    "@typescript-eslint/eslint-plugin": ^5.39.0
-    "@typescript-eslint/parser": ^5.39.0
-    add: ^2.0.6
-    eslint: ^8.24.0
-    eslint-config-airbnb: ^19.0.4
-    eslint-config-airbnb-typescript: ^17.0.0
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-json-format: ^2.0.1
-    eslint-plugin-jsx-a11y: ^6.6.1
-    eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-react: ^7.31.8
-    eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-simple-import-sort: ^7.0.0
-    framer-motion: ^7.6.2
-    gatsby: ^5.0.1
-    gatsby-plugin-advanced-sitemap: ^2.1.0
-    gatsby-plugin-clarity: ^1.0.1
-    gatsby-plugin-feed: ^5.0.0
-    gatsby-plugin-gtag: ^1.0.13
-    gatsby-plugin-image: ^3.0.0
-    gatsby-plugin-manifest: ^5.12.0
-    gatsby-plugin-mdx: ^5.0.0
-    gatsby-plugin-mdx-frontmatter: ^0.0.4
-    gatsby-plugin-sharp: ^5.0.0
-    gatsby-plugin-typegen: ^3.1.0
-    gatsby-plugin-web-font-loader: ^1.0.4
-    gatsby-remark-images: ^7.0.0
-    gatsby-source-filesystem: ^5.0.0
-    gatsby-transformer-sharp: ^5.0.0
-    prettier: ^2.7.1
-    react: ^18.1.0
-    react-dom: ^18.1.0
-    react-syntax-highlighter: ^15.5.0
-    reading-time: ^1.5.0
-    rehype-autolink-headings: ^6.1.1
-    rehype-slug: ^5.0.1
-    typescript: ^4.8.4
-    yarn: ^1.22.19
-  languageName: unknown
-  linkType: soft
-
 "rss@npm:^1.2.2":
   version: 1.2.2
   resolution: "rss@npm:1.2.2"
@@ -17759,16 +17750,6 @@ __metadata:
     y18n: ^4.0.0
     yargs-parser: ^18.1.2
   checksum: 40b974f508d8aed28598087720e086ecd32a5fd3e945e95ea4457da04ee9bdb8bdd17fd91acff36dc5b7f0595a735929c514c40c402416bbb87c03f6fb782373
-  languageName: node
-  linkType: hard
-
-"yarn@npm:^1.22.19":
-  version: 1.22.19
-  resolution: "yarn@npm:1.22.19"
-  bin:
-    yarn: bin/yarn.js
-    yarnpkg: bin/yarn.js
-  checksum: b43d2cc5fee7e933beb12a8aee7dfceca9e9ef2dd17c5d04d15a12ab7bec5f5744ea34a07b86e013da7f291a18c4e1ad8f70e150f5ed2f4666e6723c7f0a8452
   languageName: node
   linkType: hard
 
