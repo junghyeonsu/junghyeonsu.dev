@@ -9594,6 +9594,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-remark-gifs@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "gatsby-remark-gifs@npm:1.2.0"
+  dependencies:
+    is-relative-url: ^3.0.0
+    unist-util-visit: ^2.0.3
+  checksum: 99e4131c7ee4bb5e8903e812a85065cafac691d52cf911d28331d6de70f4fa61d23e362ce6f73de8255f98e31bd3620df32483d2163cd1f8104aadad834736fd
+  languageName: node
+  linkType: hard
+
 "gatsby-remark-images@npm:^7.0.0":
   version: 7.0.0
   resolution: "gatsby-remark-images@npm:7.0.0"
@@ -11590,6 +11600,7 @@ __metadata:
     gatsby-plugin-sharp: ^5.0.0
     gatsby-plugin-typegen: ^3.1.0
     gatsby-plugin-web-font-loader: ^1.0.4
+    gatsby-remark-gifs: ^1.2.0
     gatsby-remark-images: ^7.0.0
     gatsby-source-filesystem: ^5.0.0
     gatsby-transformer-sharp: ^5.0.0
@@ -17114,7 +17125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-visit@npm:^2.0.0":
+"unist-util-visit@npm:^2.0.0, unist-util-visit@npm:^2.0.3":
   version: 2.0.3
   resolution: "unist-util-visit@npm:2.0.3"
   dependencies:

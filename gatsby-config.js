@@ -28,10 +28,13 @@ module.exports = {
       options: {
         gatsbyRemarkPlugins: [
           {
+            resolve: "gatsby-remark-gifs",
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
-              wrapperStyle: `margin: 25px 0px; z-index: 0`,
+              wrapperStyle: `margin: 25px 0px; z-index: 0;`,
               showCaptions: true,
             },
           },

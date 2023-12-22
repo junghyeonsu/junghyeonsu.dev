@@ -77,6 +77,27 @@ const customComponents = {
     );
   },
 
+  img: (props: { src: string; alt: string }) => {
+    const isGif = props.src?.includes(".gif");
+    const { src, alt } = props;
+    if (isGif) {
+      return (
+        <Box margin="25px 0px" maxWidth="800px">
+          <img src={src} alt={alt} />
+          <Text
+            as="figcaption"
+            fontSize="14px"
+            textAlign="center"
+            marginTop="16px"
+            color="gray.500"
+          >
+            {alt}
+          </Text>
+        </Box>
+      );
+    }
+  },
+
   blockquote: (props: ComponentDefaultProps) => {
     const children = props.children;
     return <Callout>{children}</Callout>;
