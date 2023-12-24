@@ -14,3 +14,6 @@ public
 #/.pnp.*
 
 .DS_Store
+
+gatsby-types.d.ts
+gatsby-schema.graphql
