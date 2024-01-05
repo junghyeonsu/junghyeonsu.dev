@@ -1486,7 +1486,7 @@ type Query {
   file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childImageSharp: ImageSharpFilterInput, childMdx: MdxFilterInput, children: NodeFilterListInput, childrenImageSharp: ImageSharpFilterListInput, childrenMdx: MdxFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
   imageSharp(children: NodeFilterListInput, fixed: ImageSharpFixedFilterInput, fluid: ImageSharpFluidFilterInput, gatsbyImageData: GatsbyImageDataQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, original: ImageSharpOriginalFilterInput, parent: NodeFilterInput, resize: ImageSharpResizeFilterInput): ImageSharp
   mdx(body: StringQueryOperatorInput, children: NodeFilterListInput, excerpt: StringQueryOperatorInput, frontmatter: MdxFrontmatterFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, tableOfContents: JSONQueryOperatorInput): Mdx
-  site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, flags: SiteFlagsFilterInput, graphqlTypegen: BooleanQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, siteMetadata: SiteSiteMetadataFilterInput, trailingSlash: StringQueryOperatorInput): Site
+  site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, flags: SiteFlagsFilterInput, graphqlTypegen: SiteGraphqlTypegenFilterInput, id: StringQueryOperatorInput, internal: InternalFilterInput, jsxRuntime: StringQueryOperatorInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput, trailingSlash: StringQueryOperatorInput): Site
   siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
   siteFunction(absoluteCompiledFilePath: StringQueryOperatorInput, children: NodeFilterListInput, functionRoute: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, matchPath: StringQueryOperatorInput, originalAbsoluteFilePath: StringQueryOperatorInput, originalRelativeFilePath: StringQueryOperatorInput, parent: NodeFilterInput, pluginName: StringQueryOperatorInput, relativeCompiledFilePath: StringQueryOperatorInput): SiteFunction
   sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, matchPath: StringQueryOperatorInput, pageContext: JSONQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput): SitePage
@@ -1512,10 +1512,13 @@ type Site implements Node {
   ): Date
   children: [Node!]!
   flags: SiteFlags
-  graphqlTypegen: Boolean
+  graphqlTypegen: SiteGraphqlTypegen
   id: ID!
   internal: Internal!
+  jsxRuntime: String
   parent: Node
+  pathPrefix: String
+  polyfill: Boolean
   siteMetadata: SiteSiteMetadata
   trailingSlash: String
 }
@@ -1622,11 +1625,14 @@ input SiteFieldSelector {
   buildTime: FieldSelectorEnum
   children: NodeFieldSelector
   flags: SiteFlagsFieldSelector
-  graphqlTypegen: FieldSelectorEnum
+  graphqlTypegen: SiteGraphqlTypegenFieldSelector
   host: FieldSelectorEnum
   id: FieldSelectorEnum
   internal: InternalFieldSelector
+  jsxRuntime: FieldSelectorEnum
   parent: NodeFieldSelector
+  pathPrefix: FieldSelectorEnum
+  polyfill: FieldSelectorEnum
   port: FieldSelectorEnum
   siteMetadata: SiteSiteMetadataFieldSelector
   trailingSlash: FieldSelectorEnum
@@ -1636,10 +1642,13 @@ input SiteFilterInput {
   buildTime: DateQueryOperatorInput
   children: NodeFilterListInput
   flags: SiteFlagsFilterInput
-  graphqlTypegen: BooleanQueryOperatorInput
+  graphqlTypegen: SiteGraphqlTypegenFilterInput
   id: StringQueryOperatorInput
   internal: InternalFilterInput
+  jsxRuntime: StringQueryOperatorInput
   parent: NodeFilterInput
+  pathPrefix: StringQueryOperatorInput
+  polyfill: BooleanQueryOperatorInput
   siteMetadata: SiteSiteMetadataFilterInput
   trailingSlash: StringQueryOperatorInput
 }
@@ -1746,6 +1755,26 @@ input SiteFunctionSortInput {
   parent: NodeSortInput
   pluginName: SortOrderEnum
   relativeCompiledFilePath: SortOrderEnum
+}
+
+type SiteGraphqlTypegen {
+  generateOnBuild: Boolean
+  typesOutputPath: String
+}
+
+input SiteGraphqlTypegenFieldSelector {
+  generateOnBuild: FieldSelectorEnum
+  typesOutputPath: FieldSelectorEnum
+}
+
+input SiteGraphqlTypegenFilterInput {
+  generateOnBuild: BooleanQueryOperatorInput
+  typesOutputPath: StringQueryOperatorInput
+}
+
+input SiteGraphqlTypegenSortInput {
+  generateOnBuild: SortOrderEnum
+  typesOutputPath: SortOrderEnum
 }
 
 type SiteGroupConnection {
@@ -1874,11 +1903,14 @@ input SiteSortInput {
   buildTime: SortOrderEnum
   children: NodeSortInput
   flags: SiteFlagsSortInput
-  graphqlTypegen: SortOrderEnum
+  graphqlTypegen: SiteGraphqlTypegenSortInput
   host: SortOrderEnum
   id: SortOrderEnum
   internal: InternalSortInput
+  jsxRuntime: SortOrderEnum
   parent: NodeSortInput
+  pathPrefix: SortOrderEnum
+  polyfill: SortOrderEnum
   port: SortOrderEnum
   siteMetadata: SiteSiteMetadataSortInput
   trailingSlash: SortOrderEnum

@@ -70,11 +70,10 @@ const Profile = () => {
         borderRadius="50%"
         isolation="isolate"
         _dark={{
-          backgroundColor: "blue.100",
           boxShadow: "0 0 0 5px #ffffff",
         }}
       >
-        <Box borderRadius="50%" transform="translateX(10px)" w="100px">
+        <Box borderRadius="50%" w="100px" transform="scale(2)">
           <GatsbyImage draggable={false} image={profileImage} alt="profile" />
         </Box>
       </Flex>
