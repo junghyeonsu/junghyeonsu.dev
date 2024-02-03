@@ -17,7 +17,7 @@ const PostGrid = ({ posts }: PostGridProps) => {
         maxWidth={{ base: "95%", md: "600px", lg: "100%" }}
         margin={{ base: "120px auto" }}
         gap={6}
-        rowGap={20}
+        rowGap={10}
       >
         {posts.map((posts) => {
           const cardData = {

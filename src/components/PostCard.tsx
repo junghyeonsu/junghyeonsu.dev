@@ -43,7 +43,7 @@ const PostCard = ({
         borderRadius="20px"
         overflow="hidden"
         width="100%"
-        height={{ base: "100%", sm: "280px", md: "340px" }}
+        height={{ base: "100%", sm: "280px", md: "316px" }}
         isolation="isolate"
       >
         {/* Overlay */}
@@ -52,7 +52,7 @@ const PostCard = ({
           top={0}
           left={0}
           width="100%"
-          height={{ base: "100%", sm: "280px", md: "340px" }}
+          height={{ base: "100%", sm: "280px", md: "316px" }}
           backgroundColor={"blackAlpha.600"}
           zIndex={2}
           transition="opacity 0.25s ease"
