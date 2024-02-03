@@ -13,6 +13,7 @@ export const koreanTagNames: Record<string, string> = {
   short: "짧.",
   translation: "번역",
   plan: "계획",
+  "asset-town": "에셋타운",
 };
 
 export const ALL_POSTS_TAG_NAME = "all posts";
