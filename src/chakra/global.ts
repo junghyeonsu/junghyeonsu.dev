@@ -32,15 +32,4 @@ export default {
 
     marginTop: "16px",
   },
-
-  "article img": {
-    borderRadius: "20px",
-    border: "1px solid transparent",
-
-    transition: "all 0.3s ease",
-
-    ":hover": {
-      border: "1px solid var(--chakra-colors-blackAlpha-50)",
-    },
-  },
 };

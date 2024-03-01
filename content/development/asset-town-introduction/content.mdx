@@ -78,7 +78,7 @@ Sanity는 정말 많은 **장점**을 가지고 있습니다. 그 중에서 몇 
 
 장점도 있지만 `GROQ` 쿼리를 사용하는 것이 처음에 살짝 어색했고,
 무료 플랜에서는 웹훅이 **2**개밖에 제공되지 않는다는 점이 아쉬웠습니다.
-그리고 제일 중요한 CDN 요청이 한 달에 `10,000,000` (천만회)까지 무료이지만, 사내에서 사용하기엔 부족했습니다. (아래의 Cloudflare를 사용해서 아키텍처를 구성한 이유)
+그리고 제일 중요한 CDN 요청이 한 달에 `1,000,000` (백만)까지 무료이지만, 사내에서 사용하기엔 부족했습니다. (아래의 Cloudflare를 사용해서 아키텍처를 구성한 이유)
 
 ![CDN Requests 무료 범위](./1.png)
 
@@ -87,7 +87,7 @@ Sanity는 정말 많은 **장점**을 가지고 있습니다. 그 중에서 몇 
 > 웹훅 처리와 CDN 캐싱을 위한 클라우드 서비스로 [Cloudflare](https://www.cloudflare.com/ko-kr/)의
 [workers](https://workers.cloudflare.com/)와 [R2](https://www.cloudflare.com/ko-kr/developer-platform/r2/)를 사용합니다.
 
-위에서 언급한 것처럼, CDN 요청이 한 달에 `10,000,000` (천만회)까지 무료이지만, 사내에서 사용하기엔 부족했습니다.
+위에서 언급한 것처럼, CDN 요청이 한 달에 `1,000,000` (백만)까지 무료이지만, 사내에서 사용하기엔 부족했습니다.
 [Cloudflare의 CDN](https://www.cloudflare.com/ko-kr/application-services/products/cdn/#CDN-Page-Pricing-AS)은 Sanity와 다르게 요청수에 따라서 요금이 부과되지 않습니다.
 그래서 Cloudflare의 Workers와 R2를 사용해서 웹훅 처리와 CDN 캐싱을 구성하였습니다.
 
