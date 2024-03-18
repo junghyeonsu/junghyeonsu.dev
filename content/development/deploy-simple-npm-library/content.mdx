@@ -1,0 +1,212 @@
+---
+slug: deploy-simple-npm-library
+title: 간단한 NPM 라이브러리 배포해보기 2탄 (CLI 간단한 라이브러리 만들기 & 모든 환경 지원, ESM, CJS, TS)
+description: ESM, CJS, TS를 모두 지원하는 라이브러리를 만들어보고, CLI를 간단하게 만들어보겠습니다.
+thumbnail: ./cover.png
+tags: ["development", "npm"]
+createdAt: 2024/03/18
+updatedAt:
+---
+
+## 개요
+
+이전에 [간단한 NPM 라이브러리 배포해보기](https://junghyeonsu.com/posts/deploy-simple-util-npm-library/) 글에서는 간단한 라이브러리를 만들고 배포하는 방법에 대해 알아보았습니다.
+해당 발표를 하고 1년이 지나고 다시 한번 발표 요청을 주셔서 내용 고칠 것이 있으면 고치고, 추가적으로 CLI 라이브러리를 만들어보는 내용을 추가하면 좋지 않을까 해서 이 글을 작성하게 되었습니다.
+
+<Callout type="danger">
+해당 내용은 발표 대본 용도로 작성된 글이라서 상세한 설명이 부족할 수 있습니다.
+</Callout>
+
+<Callout type="warn">
+조금 더 적극적으로 참여하고 싶으시다면 [해당 레파지토리 (npm-deploy-step-by-step)](https://github.com/junghyeonsu/npm-deploy-step-by-step/pulls)의 PR을 하나씩 확인하면서 직접 따라해보시는 것을 추천드립니다.
+</Callout>
+
+<Callout type="info">
+해당 글의 목표는 다음과 같습니다.
+
+- ESM, CJS, TS를 모두 지원하는 라이브러리를 만들어보자.
+- CLI를 간단하게 만들어보자.
+</Callout>
+
+## ESM, CJS, TS를 모두 지원하는 라이브러리를 만들어보기
+
+### ESM vs CJS
+
+해당 내용은 이전 글에서 상세하게 다뤘습니다.
+
+**핵심은 사용하는 측의 환경이 ESM 이라면 CJS, ESM 무엇이든 사용할 수 있지만 CJS 환경에서는 ESM을 사용할 수 없다는 것입니다.**
+
+Node 생태계에서 ESM이라는 새로운 기술이 나왔지만, CJS가 없어지는 것은 아니기 때문에
+우리는 ESM, CJS 모두 지원하는 라이브러리를 만들어야 합니다. (더이상 지원하지 않는 것과 라이브러리 제공자가 지원해야 한다는 것은 다릅니다.)
+
+![https://github.com/nodejs/node/issues/33954](./1.png)
+
+[CJS(CommonJS) vs ESM(ECMAScript Module)](https://toss.tech/article/commonjs-esm-exports-field)에 대해서는 이전 글에도 링크를 걸어두었지만
+토스 블로그가 정리를 잘해놨습니다. 핵심만 꼽아보자면
+
+- ES6 ECMAScript `2015` vs CommonJS by Mozilla engineer Kevin Dangoor in `2009`.
+- ESM에서 CJS를 import 할 수는 있지만, CJS에서 ESM을 require 할 수는 없습니다. 왜냐하면 CJS는 Top-level Await을 지원하지 않기 때문입니다.
+- ESM은 모듈간의 의존성을 정적으로 분석이 쉽기 때문에 (top-level exports) Tree Shaking이 용이합니다.
+- CJS는 동적으로 모듈을 로딩할 수 있기 때문에 Tree Shaking이 어렵습니다. (정적 분석이 어렵기 때문입니다.)
+- ESM은 import, export를 사용하고, CJS는 require, module.exports를 사용합니다.
+- Server Side Rendering을 위한 Node 환경에서는 CJS를 사용합니다.
+
+위와 같은 이유로 ESM, CJS 모두 지원하는 라이브러리를 만들어야 합니다.
+어느 한 기술만 사용하는게 아니라 환경에 따라서 사용하는 모듈 시스템이 다릅니다.
+
+### STEP 1: 프로젝트 생성
+
+<Callout>
+프로젝트 생성
+
+[브랜치에서 확인하기](https://github.com/junghyeonsu/npm-deploy-step-by-step/pull/1/files)
+</Callout>
+
+```bash
+yarn init -y
+```
+
+- 린터 설정
+- .gitignore
+
+(실습)
+
+### STEP 2: CJS만 지원하는 라이브러리 만들어보기
+
+<Callout>
+CJS으로 라이브러리를 배포해보고 ESM, CJS 환경에서 사용해보고 차이점 느껴보기: 라이브 코딩 (이전 포스트 참고)
+
+[브랜치에서 확인하기](https://github.com/junghyeonsu/npm-deploy-step-by-step/pull/2/files)
+</Callout>
+
+- src/index.js 작성하기
+- `0.0.0-onlyCJS`로 배포하기
+- esm, cjs에서 테스트 해보기
+- 전부 잘 되는거 확인하기
+
+![esm, cjs에서 잘 동작하는 것 확인](./2.png)
+
+(실습)
+
+### STEP 3: ESM으로 라이브러리를 배포해보고 차이점 느끼기
+
+<Callout>
+ESM으로 라이브러리를 배포해보고 ESM, CJS 환경에서 사용해보고 차이점 느껴보기: 라이브 코딩 (이전 포스트 참고)
+
+[브랜치에서 확인하기](https://github.com/junghyeonsu/npm-deploy-step-by-step/pull/3/files)
+</Callout>
+
+- `type: module`, src/index.js ESM으로 변경
+- `0.0.0-onlyESM`로 배포하기
+- esm, cjs에서 테스트 해보기
+- cjs에서 안되는 거 확인하기
+
+![cjs에서 안되는 거 확인하기](./3.png)
+
+(실습)
+
+요기까지는 방대한 Node 환경에서 ESM, CJS 모두 지원해야 하는 명분에 대해서 알아보았습니다.
+그럼 오픈소스 개발자는 항상 ESM, CJS 코드를 작성해야 하는걸까요?
+그렇지 않습니다. 오픈소스 개발자는 단 하나의 코드를 작성하고 빌드 과정을 통해서 ESM, CJS 모두 지원하는 라이브러리를 만들어야 합니다.
+
+### STEP 4: 하나의 코드로 ESM, CJS 모두 지원하는 라이브러리 만들어보기
+
+<Callout>
+**코딩은 한 번, 결과물은 두 개**
+
+esbuild 빌드 결과물로 나온 걸 배포하고 테스트 환경에서 console.log 찍어가면서 확인해보기
+
+[브랜치에서 확인하기](https://github.com/junghyeonsu/npm-deploy-step-by-step/pull/4/files)
+</Callout>
+
+- `lib`에서 esbuild 설치
+- package.json 수정 (exports, main, name, files, scripts)
+
+### STEP 5: TypeScript 지원하기
+
+<Callout>
+**코딩은 한 번, 결과물은 세 개**
+
+TypeScript로 코드 작성하고 tsc, esbuild로 빌드해서 ESM, CJS, TS 모두 지원하는 라이브러리 만들기
+
+[브랜치에서 확인하기](https://github.com/junghyeonsu/npm-deploy-step-by-step/pull/5/files)
+</Callout>
+
+- 테스트 환경에서 `TypeScript`, `ts-node` (TypeScript 코드를 Node에서 바로 실행할 수 있는 라이브러리) 설치 후 테스트해보기
+- 안되는거 확인하고 라이브러리에 `index.d.ts` 파일을 만들어서 타입 지원하기
+- 배포 후 확인해보기 (ts-node, typescript, type: module, test:ts script 추가)
+- 라이브러리에도 타입스크립트로 개발 후 배포 (typescript, build:dts 명령어 추가)
+- 각각 파일이 어떤 형식을 사용하고 있는지 콘솔 찍어보기
+
+![TypeScript 잘 되는거 확인하고 각각 어떤 모듈 사용하는지 확인](./4.png)
+
+### 마무리
+
+- ESM, CJS, TS를 모두 지원하는 라이브러리를 만들었습니다.
+- 오픈소스 개발자는 TypeScript 코드 하나로 ESM, CJS, TS 모두 지원하는 라이브러리를 만들 수 있습니다.
+- 빌드 도구 (esbuild, webpack, ...etc)와 같은 개발 도구들은 취향것 사용하시면 됩니다.
+
+## CLI 라이브러리 만들기
+
+```bash
+npm install --save-dev commander
+```
+
+```typescript
+// src/cli.ts
+import { Command } from 'commander';
+import { add } from './index';
+
+const program = new Command();
+
+program
+  .version('0.0.1')
+  .description('간단한 덧셈 계산기')
+  .option('-a, --a <number>', '첫 번째 숫자', parseInt)
+  .option('-b, --b <number>', '두 번째 숫자', parseInt)
+  .action((options) => {
+    console.log(add(options.a, options.b));
+  });
+
+program.parse(process.argv);
+```
+
+```json
+// package.json
+{
+  "bin": "dist/cli.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:cli": "tsc -p tsconfig.cli.json"
+  }
+}
+```
+
+```json
+// tsconfig.cli.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src/cli.ts"]
+}
+```
+
+```bash
+npm run build:cli
+```
+
+```bash
+node dist/cli.js -a 1 -b 2
+3
+```
+
+## 결론
+
+간단한 라이브러리를 만들고 배포하는 방법에 대해 알아보았습니다.
+이제 여러분들도 간단한 라이브러리를 만들어 배포해보세요!
