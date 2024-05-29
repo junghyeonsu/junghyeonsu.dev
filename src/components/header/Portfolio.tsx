@@ -14,7 +14,7 @@ const Portfoilo = () => {
           fontSize={10}
           fontWeight={800}
         >
-          2024년 1분기 안에는 꼭...
+          2024년 2분기 안에는 꼭...
         </Text>
         <Tooltip label="Coming Soon!">
           <Text
