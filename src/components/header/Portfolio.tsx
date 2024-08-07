@@ -14,7 +14,8 @@ const Portfoilo = () => {
           fontSize={10}
           fontWeight={800}
         >
-          2024년 2분기 안에는 꼭...
+          {/* 내일까지는 꼭 */}
+          {`${new Date().getMonth() + 1}월 안에는 꼭...`}
         </Text>
         <Tooltip label="Coming Soon!">
           <Text

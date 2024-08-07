@@ -1339,7 +1339,6 @@ type MdxFilterListInput = {
 type MdxFrontmatter = {
   readonly createdAt: Maybe<Scalars['String']>;
   readonly description: Maybe<Scalars['String']>;
-  readonly feature: Maybe<Scalars['Boolean']>;
   readonly featured: Maybe<Scalars['Boolean']>;
   readonly locale: Maybe<Scalars['String']>;
   readonly slug: Maybe<Scalars['String']>;
@@ -1352,7 +1351,6 @@ type MdxFrontmatter = {
 type MdxFrontmatterFieldSelector = {
   readonly createdAt: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
-  readonly feature: InputMaybe<FieldSelectorEnum>;
   readonly featured: InputMaybe<FieldSelectorEnum>;
   readonly locale: InputMaybe<FieldSelectorEnum>;
   readonly slug: InputMaybe<FieldSelectorEnum>;
@@ -1365,7 +1363,6 @@ type MdxFrontmatterFieldSelector = {
 type MdxFrontmatterFilterInput = {
   readonly createdAt: InputMaybe<StringQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
-  readonly feature: InputMaybe<BooleanQueryOperatorInput>;
   readonly featured: InputMaybe<BooleanQueryOperatorInput>;
   readonly locale: InputMaybe<StringQueryOperatorInput>;
   readonly slug: InputMaybe<StringQueryOperatorInput>;
@@ -1378,7 +1375,6 @@ type MdxFrontmatterFilterInput = {
 type MdxFrontmatterSortInput = {
   readonly createdAt: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
-  readonly feature: InputMaybe<SortOrderEnum>;
   readonly featured: InputMaybe<SortOrderEnum>;
   readonly locale: InputMaybe<SortOrderEnum>;
   readonly slug: InputMaybe<SortOrderEnum>;
