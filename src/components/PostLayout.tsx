@@ -9,6 +9,7 @@ import { parseSyntaxHighlighterClassName } from "../utils/string";
 import Footer from "./Footer";
 import Header from "./header/Header";
 import Callout from "./mdx/Callout";
+import { InternalLink } from "./mdx/InternalLink";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -168,6 +169,7 @@ const customComponents = {
   },
 
   Callout,
+  InternalLink,
 };
 
 export default function PostLayout({ children }: LayoutProps) {
