@@ -10,11 +10,12 @@ export const InternalLink: React.FC<InternalLinkProps> = ({ to, children }) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const [ogImage, setOgImage] = React.useState<string | null | undefined>(null);
   const [title, setTitle] = React.useState<string | null | undefined>(null);
+  const [fullUrl, setFullUrl] = React.useState<string>("");
 
   React.useEffect(() => {
     (async () => {
-      // fetch page data and get og:image
-      const response = await fetch(`${document.location.origin}${to}`);
+      const fullUrl = `${document.location.origin}${to}`;
+      const response = await fetch(fullUrl);
       const html = await response.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
@@ -23,21 +24,7 @@ export const InternalLink: React.FC<InternalLinkProps> = ({ to, children }) => {
       const title = doc.querySelector("title")?.textContent;
       setOgImage(content);
       setTitle(title);
-    })();
-  }, [to]);
-
-  React.useEffect(() => {
-    (async () => {
-      // fetch page data and get og:image
-      const response = await fetch("https://github.com/daangn/icona");
-      const html = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-      const ogImage = doc.querySelector("meta[property='og:image']");
-      const content = ogImage?.getAttribute("content");
-      const title = doc.querySelector("title")?.textContent;
-      console.log(content);
-      console.log(title);
+      setFullUrl(fullUrl);
     })();
   }, [to]);
 
@@ -62,7 +49,7 @@ export const InternalLink: React.FC<InternalLinkProps> = ({ to, children }) => {
           color="blue.400"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          href={`${document.location.origin}${to}`}
+          href={fullUrl}
           target="_blank"
         >
           {children}
