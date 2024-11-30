@@ -66,7 +66,6 @@ const Profile = () => {
         overflow="hidden"
         backgroundColor="blue.50"
         objectFit="cover"
-        boxShadow="0 0 0 5px #1A365D"
         borderRadius="50%"
         isolation="isolate"
         _dark={{
@@ -118,7 +117,7 @@ const Profile = () => {
         </Tooltip>
 
         {/* Instagram */}
-        <Tooltip label="Instagram">
+        {/* <Tooltip label="Instagram">
           <a href="https://www.instagram.com/rendev_official/" target="_blank">
             <IconBox isManaged>
               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -129,7 +128,7 @@ const Profile = () => {
               </svg>
             </IconBox>
           </a>
-        </Tooltip>
+        </Tooltip> */}
 
         {/* Linkedin */}
         <Tooltip label="Linkedin">
@@ -146,7 +145,7 @@ const Profile = () => {
         </Tooltip>
 
         {/* Careerly */}
-        {/* <Tooltip label="Careerly">
+        <Tooltip label="Careerly">
           <a
             href="https://careerly.co.kr/profiles/562464?from=newsfeed&location=gnb"
             target="_blank"
@@ -174,7 +173,7 @@ const Profile = () => {
               </svg>
             </IconBox>
           </a>
-        </Tooltip> */}
+        </Tooltip>
 
         {/* Mail */}
         <Tooltip label="jung660317@naver.com">
