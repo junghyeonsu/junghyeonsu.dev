@@ -27,6 +27,7 @@ export const query = graphql`
         tags
         createdAt
         updatedAt
+        thumbnailSource
         thumbnail {
           childImageSharp {
             gatsbyImageData

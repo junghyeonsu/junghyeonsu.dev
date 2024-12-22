@@ -59,6 +59,7 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
 
       <Box
         display="flex"
+        flexDirection="column"
         width="100%"
         maxHeight="700px"
         justifyContent="center"
@@ -73,6 +74,9 @@ const PostContentTitle = ({ post, readingTime }: PostContentTitleProps) => {
           alt={post?.frontmatter?.title!}
         />
       </Box>
+      <Text fontSize="12px" textAlign="center" width="100%">
+        이미지 출처: {post?.frontmatter?.thumbnailSource!}
+      </Text>
     </Flex>
   );
 };

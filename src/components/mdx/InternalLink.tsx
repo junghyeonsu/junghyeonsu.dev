@@ -6,6 +6,8 @@ interface InternalLinkProps {
   children: React.ReactNode;
 }
 
+const URL = "https://junghyeonsu.com";
+
 export const InternalLink: React.FC<InternalLinkProps> = ({ to, children }) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const [ogImage, setOgImage] = React.useState<string | null | undefined>(null);
@@ -14,7 +16,7 @@ export const InternalLink: React.FC<InternalLinkProps> = ({ to, children }) => {
 
   React.useEffect(() => {
     (async () => {
-      const fullUrl = `${document.location.origin}${to}`;
+      const fullUrl = `${URL}${to}`;
       const response = await fetch(fullUrl);
       const html = await response.text();
       const parser = new DOMParser();

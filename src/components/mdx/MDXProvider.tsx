@@ -1,8 +1,7 @@
 import type { BoxProps, ComponentDefaultProps, HeadingProps, TextProps } from "@chakra-ui/react";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { MDXProvider } from "@mdx-js/react";
-import type { PropsWithChildren } from "react";
-import React from "react";
+import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
@@ -57,20 +56,33 @@ const customComponents = {
     />
   ),
 
-  a: (props: BoxProps) => {
+  a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => {
     const ariaHidden = props["aria-hidden"];
+    const isInternalLink = props.href?.startsWith("/");
+    const href = props.href;
+
+    if (!href) return <a {...props} />;
+
+    if (isInternalLink) {
+      return <InternalLink to={href}>{props.children}</InternalLink>;
+    }
 
     return (
       <Box
-        as="a"
-        fontWeight={600}
-        target={!ariaHidden && "_blank"}
+        as="span"
         _hover={{
           textDecoration: "underline",
         }}
-        color="blue.400"
-        {...props}
-      />
+      >
+        <a
+          style={{
+            fontWeight: 600,
+            color: "var(--chakra-colors-blue-400)",
+          }}
+          target={!ariaHidden ? "_blank" : undefined}
+          {...props}
+        />
+      </Box>
     );
   },
 
@@ -165,7 +177,6 @@ const customComponents = {
   },
 
   Callout,
-  InternalLink,
   YouTubePlayer,
 };
 

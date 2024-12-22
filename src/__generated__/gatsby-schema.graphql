@@ -1339,6 +1339,7 @@ type MdxFrontmatter {
   slug: String
   tags: [String]
   thumbnail: File
+  thumbnailSource: String
   title: String
   updatedAt: String
 }
@@ -1351,6 +1352,7 @@ input MdxFrontmatterFieldSelector {
   slug: FieldSelectorEnum
   tags: FieldSelectorEnum
   thumbnail: FileFieldSelector
+  thumbnailSource: FieldSelectorEnum
   title: FieldSelectorEnum
   updatedAt: FieldSelectorEnum
 }
@@ -1363,6 +1365,7 @@ input MdxFrontmatterFilterInput {
   slug: StringQueryOperatorInput
   tags: StringQueryOperatorInput
   thumbnail: FileFilterInput
+  thumbnailSource: StringQueryOperatorInput
   title: StringQueryOperatorInput
   updatedAt: StringQueryOperatorInput
 }
@@ -1375,6 +1378,7 @@ input MdxFrontmatterSortInput {
   slug: SortOrderEnum
   tags: SortOrderEnum
   thumbnail: FileSortInput
+  thumbnailSource: SortOrderEnum
   title: SortOrderEnum
   updatedAt: SortOrderEnum
 }
