@@ -6,9 +6,9 @@ import { getSrc } from "gatsby-plugin-image";
 import FeaturedPostSection from "../components/FeaturedPostSection";
 import MainLayout from "../components/MainLayout";
 import Pagenation from "../components/Pagenation";
+import PkngDevlogPostSection from "../components/PkngDevlogPostSection";
 import PostGrid from "../components/PostGrid";
 import Profile from "../components/Profile";
-import ShortPostSection from "../components/ShortPostSection";
 import Tags from "../components/Tags";
 import { ALL_POSTS_TAG_NAME, DOMAIN } from "../constants";
 
@@ -35,7 +35,7 @@ export const query = graphql`
       filter: {
         frontmatter: {
           title: { nin: "정현수 포트폴리오" }
-          tags: { nin: "short" }
+          tags: { nin: ["short", "pack-and-go-devlog"] }
           locale: { eq: null }
         }
       }
@@ -62,18 +62,18 @@ export const query = graphql`
       gatsbyImageData
     }
 
-    # locale은 null인것만 가져옴 (ko)
-    shortPosts: allMdx(
-      filter: { frontmatter: { tags: { in: "short" }, locale: { eq: null } } }
+    # pack and go devlog
+    packAndGoDevlogPosts: allMdx(
+      filter: { frontmatter: { tags: { in: "pack-and-go-devlog" } } }
       sort: { frontmatter: { createdAt: DESC } }
-      limit: 15
+      limit: 10
     ) {
       nodes {
         frontmatter {
           title
-          updatedAt
-          createdAt
           slug
+          createdAt
+          updatedAt
         }
       }
     }
@@ -98,8 +98,7 @@ export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) 
   const currentPage = data.allMdx.pageInfo.currentPage;
   const pageCount = data.allMdx.pageInfo.pageCount;
   const featuredPosts = data.featuredPosts.nodes;
-  const shortPosts = data.shortPosts.nodes;
-
+  const packAndGoDevlogPosts = data.packAndGoDevlogPosts.nodes;
   return (
     <MainLayout>
       <Tags currentTag={ALL_POSTS_TAG_NAME} />
@@ -112,7 +111,7 @@ export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) 
         gap={{ base: "20px", lg: "60px" }}
       >
         <FeaturedPostSection posts={featuredPosts} />
-        <ShortPostSection posts={shortPosts} />
+        <PkngDevlogPostSection posts={packAndGoDevlogPosts} />
       </Flex>
 
       <PostGrid posts={data.allMdx.nodes} />

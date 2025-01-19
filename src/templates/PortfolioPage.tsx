@@ -79,6 +79,10 @@ export const Head: HeadFC<GatsbyTypes.PortfolioPageQuery> = ({ data }) => {
       {/* HTML Meta Tags */}
       <title>{title}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta
+        name="keywords"
+        content="프론트엔드, 프론트엔드 포트폴리오, 개발자 포트폴리오, 포트폴리오"
+      />
 
       {/* Facebook Meta Tags */}
       <meta property="og:url" content={`${DOMAIN}/${data.post?.frontmatter?.slug}`} />
