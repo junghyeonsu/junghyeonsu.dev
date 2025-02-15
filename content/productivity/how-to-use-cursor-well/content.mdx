@@ -4,8 +4,8 @@ title: Cursor 잘 사용하기
 description: Cursor 에디터 잘 우려먹기 위해 고민한 것들 그리고 제가 사용하는 방법을 소개합니다.
 thumbnail: ./cover.png
 tags: ["productivity"]
-createdAt: "2025/02/01"
-updatedAt: ""
+createdAt: 2025/02/01
+updatedAt: 2025/02/15
 featured: true
 ---
 
@@ -27,6 +27,28 @@ Mac기준으로 `Cursor` -> `Preferences` -> `Cursor Settings` 에 들어가서
 그리고 마지막에 `Always respond in 한국어` 라고 해놓으면 한국어로 답변을 잘 해준다.
 
 또한 프로젝트 루트에 `.cursorrules` 파일을 만들어놓으면 프로젝트 협업 팀원들과 함께 프롬프트 세팅을 공유할 수 있다.
+
+## Project Rules
+
+<Callout>
+  2월 15일에 새롭게 추가된 내용입니다.
+</Callout>
+
+Cursor 자차에서 프로젝트에 대한 규칙을 추가할 수 있는 기능이 따로 생겼다.
+
+mac 기준으로 좌측 상단에 `Cursor` -> `Preferences` -> `Cursor Settings` 에 들어가서
+`Rules for AI` 영역에 자신이 넣고 싶은 컨텍스트를 주입시킬 수 있다.
+
+![Cursor -> Preferences -> Cursor Settings -> Project Rules](./6png)
+
+추가하기 버튼을 누르면 `mdc` 확장자로 된 파일이 `.cursor/rules` 폴더에 생성된다.
+
+![.cursor/rules](./8.png)
+
+`Description`과 말그대로 룰에 대한 설명을 적고 `Globs` 필드로 적용할 파일에 대한 패턴을 적는다.
+그리고 룰 파일안에서 프로젝트 안의 파일이나 다른 맥락을 `@`로 붙여서 넣어둘 수 있다.
+
+![Rule File](./7.png)
 
 ## 프로젝트에 대한 맥락
 
