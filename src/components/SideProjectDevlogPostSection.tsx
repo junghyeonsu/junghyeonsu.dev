@@ -1,11 +1,11 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import { Link } from "gatsby";
 
-interface PkngDevlogPostSectionProps {
-  posts: GatsbyTypes.AllPostPageTemplateQuery["packAndGoDevlogPosts"]["nodes"];
+interface SideProjectDevlogPostSectionProps {
+  posts: GatsbyTypes.AllPostPageTemplateQuery["sideProjectDevlogPosts"]["nodes"];
 }
 
-const PkngDevlogPostSection = ({ posts }: PkngDevlogPostSectionProps) => {
+const SideProjectDevlogPostSection = ({ posts }: SideProjectDevlogPostSectionProps) => {
   return (
     <Flex
       marginTop={{ base: "100px", lg: "0px" }}
@@ -13,7 +13,7 @@ const PkngDevlogPostSection = ({ posts }: PkngDevlogPostSectionProps) => {
       direction="column"
     >
       <Heading fontStyle="italic" _hover={{ textDecoration: "underline" }}>
-        <Link to="/tags/pack-and-go-devlog">Devlog.</Link>
+        <Link to="/tags/side-project-devlog">Devlog.</Link>
       </Heading>
       <Flex
         direction="column"
@@ -39,4 +39,4 @@ const PkngDevlogPostSection = ({ posts }: PkngDevlogPostSectionProps) => {
   );
 };
 
-export default PkngDevlogPostSection;
+export default SideProjectDevlogPostSection;
