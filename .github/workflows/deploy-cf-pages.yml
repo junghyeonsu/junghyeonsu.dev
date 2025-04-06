@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20.12.1"
+          node-version: 22
           cache: yarn
 
       - name: Install Dependencies
@@ -57,4 +57,4 @@ jobs:
         uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: pages publish ./public --project-name=junghyeonsu-dev
+          command: yarn pages publish ./public --project-name=junghyeonsu-dev
