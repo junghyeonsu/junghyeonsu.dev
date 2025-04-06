@@ -19,7 +19,7 @@ jobs:
           cache: yarn
 
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: yarn install --frozen-lockfile
 
       - name: Cache Gatsby `.cache` Folder
         uses: actions/cache@v3
@@ -59,4 +59,4 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           command: yarn pages publish ./public --project-name=junghyeonsu-dev
           preCommands: |
-            npm config set legacy-peer-deps true
+            yarn config set legacy-peer-deps true
