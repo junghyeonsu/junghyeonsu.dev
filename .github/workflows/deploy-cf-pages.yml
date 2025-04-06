@@ -54,9 +54,8 @@ jobs:
           GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
 
       - name: 서비스를 Cloudflare pages에 배포해요
-        uses: cloudflare/wrangler-action@3.0.0
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: yarn pages publish ./public --project-name=junghyeonsu-dev
-          preCommands: |
-            yarn config set legacy-peer-deps true
+        run: |
+          yarn add --dev wrangler
+          yarn wrangler pages publish ./public --project-name=junghyeonsu-dev
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
