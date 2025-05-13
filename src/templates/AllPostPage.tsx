@@ -8,7 +8,7 @@ import MainLayout from "../components/MainLayout";
 import Pagenation from "../components/Pagenation";
 import PostGrid from "../components/PostGrid";
 import Profile from "../components/Profile";
-import SideProjectDevlogPostSection from "../components/SideProjectDevlogPostSection";
+// import SideProjectDevlogPostSection from "../components/SideProjectDevlogPostSection";
 import Tags from "../components/Tags";
 import { ALL_POSTS_TAG_NAME, DOMAIN } from "../constants";
 
@@ -98,7 +98,7 @@ export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) 
   const currentPage = data.allMdx.pageInfo.currentPage;
   const pageCount = data.allMdx.pageInfo.pageCount;
   const featuredPosts = data.featuredPosts.nodes;
-  const sideProjectDevlogPosts = data.sideProjectDevlogPosts.nodes;
+  // const sideProjectDevlogPosts = data.sideProjectDevlogPosts.nodes;
   return (
     <MainLayout>
       <Tags currentTag={ALL_POSTS_TAG_NAME} />
@@ -111,7 +111,7 @@ export default function AllPostPageTemplate({ data }: AllPostPageTemplateProps) 
         gap={{ base: "20px", lg: "60px" }}
       >
         <FeaturedPostSection posts={featuredPosts} />
-        <SideProjectDevlogPostSection posts={sideProjectDevlogPosts} />
+        {/* <SideProjectDevlogPostSection posts={sideProjectDevlogPosts} /> */}
       </Flex>
 
       <PostGrid posts={data.allMdx.nodes} />
