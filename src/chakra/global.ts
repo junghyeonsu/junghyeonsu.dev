@@ -17,6 +17,11 @@ export default {
     },
   },
 
+  img: {
+    borderRadius: "10px",
+    objectFit: "contain",
+  },
+
   ".heading-anchor-icon": {
     marginLeft: "10px",
     opacity: 0,

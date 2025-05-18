@@ -38,7 +38,7 @@ const FeaturedPostSection = ({ posts }: FeaturedPostSectionProps) => {
   }, [intervalCallback, isPaused]);
 
   return (
-    <Box width="100%" maxWidth={{ base: "100%", md: "600px", lg: "100%" }}>
+    <Box width="100%">
       <Flex width="100%" justifyContent="space-between" alignItems="flex-end">
         <Heading fontStyle="italic">Featured.</Heading>
         <Flex direction="column" justifyContent="center" alignItems="center" gap="8px">
