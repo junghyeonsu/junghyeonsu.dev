@@ -75,7 +75,7 @@ export const Head: HeadFC<Queries.TagPageTemplateQuery, TagsProps["pageContext"]
 }) => {
   const ogimage = data.ogimage?.gatsbyImageData!;
   const description = "웹 프론트엔드 개발자 정현수입니다.";
-  const title = "정현수 기술 블로그";
+  const title = "정현수 블로그";
   const tag = pageContext.tag;
 
   return (

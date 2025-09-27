@@ -83,7 +83,7 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
   return type === "posting" ? (
     <Head>
       {/* HTML Meta Tags */}
-      <title>{post?.title} | 정현수 기술 블로그</title>
+      <title>{post?.title} | 정현수 블로그</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       {/* Facebook Meta Tags */}
@@ -94,11 +94,11 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta property="og:type" content="website" />
       <meta
         property="og:site_name"
-        content={`${post?.title} | 정현수 기술 블로그`}
+        content={`${post?.title} | 정현수 블로그`}
       />
       <meta
         property="og:title"
-        content={`${post?.title} | 정현수 기술 블로그`}
+        content={`${post?.title} | 정현수 블로그`}
       />
       <meta property="og:description" content={post?.description} />
       <meta property="og:image" content={`${DOMAIN}${post?.coverImage}`} />
@@ -112,7 +112,7 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       />
       <meta
         name="twitter:title"
-        content={`${post?.title} | 정현수 기술 블로그`}
+        content={`${post?.title} | 정현수 블로그`}
       />
       <meta name="twitter:description" content={post?.description} />
       <meta
@@ -129,14 +129,14 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
   ) : (
     <Head>
       {/* HTML Meta Tags */}
-      <title>정현수 기술 블로그</title>
+      <title>정현수 블로그</title>
       <meta name="description" content="공부한 것들을 정리해서 올립니다." />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* Facebook Meta Tags */}
       <meta property="og:url" content="https://junghyeonsu.com/" />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="정현수 기술 블로그" />
-      <meta property="og:title" content="정현수 기술 블로그" />
+      <meta property="og:site_name" content="정현수 블로그" />
+      <meta property="og:title" content="정현수 블로그" />
       <meta
         property="og:description"
         content="공부한 것들을 정리해서 올립니다."
@@ -149,7 +149,7 @@ const CustomHead = ({ post, type }: CustomHeadInterface) => {
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="junghyeonsu.com" />
       <meta property="twitter:url" content="https://junghyeonsu.com/" />
-      <meta name="twitter:title" content="정현수 기술 블로그" />
+      <meta name="twitter:title" content="정현수 블로그" />
       <meta
         name="twitter:description"
         content="공부한 것들을 정리해서 올립니다."

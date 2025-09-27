@@ -68,7 +68,7 @@ const PostTemplate: React.FC<PortfolioTemplateProps> = ({ children, data, pageCo
 };
 
 export const Head: HeadFC<GatsbyTypes.PortfolioPageQuery> = ({ data }) => {
-  const title = `${data.post?.frontmatter?.title!} - 정현수 기술 블로그`;
+  const title = `${data.post?.frontmatter?.title!} - 정현수 블로그`;
   const description = data.post?.frontmatter?.description!;
   const ogimage = data.post?.frontmatter?.thumbnail?.childImageSharp?.gatsbyImageData!;
   const metaLocale = "ko_KR";
