@@ -1,22 +1,20 @@
 #!/usr/bin/env bun
 
-/**
- * PNG 이미지를 WebP 포맷으로 변환하는 스크립트입니다.
- * ffmpeg를 사용하여 이미지를 변환하며, 다양한 옵션을 지원합니다.
- *
- * 사용법:
- * 1. 미리보기 (dry-run): bun scripts/convert-images-to-webp.ts --dry-run
- * 2. 기본 변환: bun scripts/convert-images-to-webp.ts
- * 3. 품질 지정: bun scripts/convert-images-to-webp.ts --quality 90
- * 4. 경로 지정: bun scripts/convert-images-to-webp.ts --path "docs/public/docs/..."
- * 5. 원본 삭제: bun scripts/convert-images-to-webp.ts --delete-original
- *
- * 옵션:
- * --dry-run: 실제 변환 없이 변환될 파일 목록만 출력
- * --quality: WebP 품질 설정 (0-100, 기본값: 80)
- * --path: 변환할 파일 경로 지정 (glob 패턴 지원)
- * --delete-original: 변환 후 원본 PNG 파일 삭제
- */
+// PNG/JPG/JPEG 이미지를 WebP 포맷으로 변환하는 스크립트입니다.
+// ffmpeg를 사용하여 이미지를 변환하며, 다양한 옵션을 지원합니다.
+//
+// 사용법:
+// 1. 미리보기 (dry-run): bun scripts/convert-images-to-webp.ts --dry-run
+// 2. 기본 변환: bun scripts/convert-images-to-webp.ts
+// 3. 품질 지정: bun scripts/convert-images-to-webp.ts --quality 90
+// 4. 경로 지정: bun scripts/convert-images-to-webp.ts --path "content/**/*.png"
+// 5. 원본 삭제: bun scripts/convert-images-to-webp.ts --delete-original
+//
+// 옵션:
+// --dry-run: 실제 변환 없이 변환될 파일 목록만 출력
+// --quality: WebP 품질 설정 (0-100, 기본값: 80)
+// --path: 변환할 파일 경로 지정 (glob 패턴 지원)
+// --delete-original: 변환 후 원본 파일 삭제
 
 import { $ } from "bun";
 import fs from "fs/promises";
@@ -36,7 +34,7 @@ function parseOptions(): Options {
 	const options: Options = {
 		dryRun: false,
 		quality: 80,
-		pathPattern: "docs/public/**/*.png",
+		pathPattern: "content/**/*.{png,jpg,jpeg}",
 		deleteOriginal: false,
 	};
 
@@ -90,28 +88,28 @@ async function checkFfmpeg(): Promise<boolean> {
 }
 
 /**
- * PNG 파일을 WebP로 변환
+ * 이미지 파일을 WebP로 변환
  */
 async function convertToWebp(
-	pngPath: string,
+	imagePath: string,
 	quality: number,
 	dryRun: boolean,
 ): Promise<{ success: boolean; webpPath: string }> {
-	const webpPath = pngPath.replace(/\.png$/i, ".webp");
+	const webpPath = imagePath.replace(/\.(png|jpe?g)$/i, ".webp");
 
 	if (dryRun) {
 		return { success: true, webpPath };
 	}
 
 	try {
-		// ffmpeg를 사용하여 PNG를 WebP로 변환
+		// ffmpeg를 사용하여 이미지를 WebP로 변환
 		// -y: 기존 파일 덮어쓰기
 		// -i: 입력 파일
 		// -quality: WebP 품질 설정
-		await $`ffmpeg -y -i ${pngPath} -quality ${quality} ${webpPath}`.quiet();
+		await $`ffmpeg -y -i ${imagePath} -quality ${quality} ${webpPath}`.quiet();
 		return { success: true, webpPath };
 	} catch (error) {
-		console.error(`❌ 변환 실패: ${pngPath}`, error);
+		console.error(`❌ 변환 실패: ${imagePath}`, error);
 		return { success: false, webpPath };
 	}
 }
@@ -141,7 +139,7 @@ async function getFileSize(filePath: string): Promise<number> {
  * 메인 실행 함수
  */
 async function main() {
-	console.log("🖼️  PNG → WebP 변환 스크립트\n");
+	console.log("🖼️  이미지 → WebP 변환 스크립트\n");
 
 	// 옵션 파싱
 	const options = parseOptions();
@@ -162,31 +160,31 @@ async function main() {
 	}
 	console.log("✅ ffmpeg 설치 확인 완료\n");
 
-	// PNG 파일 검색
-	console.log(`🔎 PNG 파일 검색 중... (${options.pathPattern})`);
-	const pngFiles: string[] = [];
+	// 이미지 파일 검색
+	console.log(`🔎 이미지 파일 검색 중... (${options.pathPattern})`);
+	const imageFiles: string[] = [];
 
 	const globber = new Bun.Glob(options.pathPattern);
 	for await (const file of globber.scan(".")) {
-		pngFiles.push(file);
+		imageFiles.push(file);
 	}
 
-	if (pngFiles.length === 0) {
-		console.log("📝 변환할 PNG 파일이 없습니다.");
+	if (imageFiles.length === 0) {
+		console.log("📝 변환할 이미지 파일이 없습니다.");
 		return;
 	}
 
-	console.log(`📊 ${pngFiles.length}개의 PNG 파일을 찾았습니다.\n`);
+	console.log(`📊 ${imageFiles.length}개의 이미지 파일을 찾았습니다.\n`);
 
 	if (options.dryRun) {
 		console.log("🔍 [DRY RUN] 변환될 파일 목록:\n");
-		for (const pngFile of pngFiles) {
-			const webpFile = pngFile.replace(/\.png$/i, ".webp");
-			const pngSize = await getFileSize(pngFile);
-			console.log(`  ${pngFile} (${formatFileSize(pngSize)})`);
+		for (const imageFile of imageFiles) {
+			const webpFile = imageFile.replace(/\.(png|jpe?g)$/i, ".webp");
+			const imageSize = await getFileSize(imageFile);
+			console.log(`  ${imageFile} (${formatFileSize(imageSize)})`);
 			console.log(`  → ${webpFile}\n`);
 		}
-		console.log(`✅ [DRY RUN] 총 ${pngFiles.length}개의 파일이 변환될 예정입니다.`);
+		console.log(`✅ [DRY RUN] 총 ${imageFiles.length}개의 파일이 변환될 예정입니다.`);
 		return;
 	}
 
@@ -198,19 +196,19 @@ async function main() {
 	let totalOriginalSize = 0;
 	let totalWebpSize = 0;
 
-	for (const pngFile of pngFiles) {
-		const pngSize = await getFileSize(pngFile);
-		totalOriginalSize += pngSize;
+	for (const imageFile of imageFiles) {
+		const imageSize = await getFileSize(imageFile);
+		totalOriginalSize += imageSize;
 
-		console.log(`  🔄 ${pngFile} (${formatFileSize(pngSize)})`);
+		console.log(`  🔄 ${imageFile} (${formatFileSize(imageSize)})`);
 
-		const { success, webpPath } = await convertToWebp(pngFile, options.quality, false);
+		const { success, webpPath } = await convertToWebp(imageFile, options.quality, false);
 
 		if (success) {
 			const webpSize = await getFileSize(webpPath);
 			totalWebpSize += webpSize;
-			const savings = pngSize - webpSize;
-			const savingsPercent = ((savings / pngSize) * 100).toFixed(1);
+			const savings = imageSize - webpSize;
+			const savingsPercent = ((savings / imageSize) * 100).toFixed(1);
 
 			console.log(
 				`  ✅ ${webpPath} (${formatFileSize(webpSize)}) - ${formatFileSize(savings)} 절약 (${savingsPercent}%)\n`,
@@ -221,10 +219,10 @@ async function main() {
 			// 원본 삭제 옵션이 활성화된 경우
 			if (options.deleteOriginal) {
 				try {
-					await fs.unlink(pngFile);
-					console.log(`  🗑️  원본 파일 삭제: ${pngFile}\n`);
+					await fs.unlink(imageFile);
+					console.log(`  🗑️  원본 파일 삭제: ${imageFile}\n`);
 				} catch (error) {
-					console.error(`  ⚠️  원본 파일 삭제 실패: ${pngFile}`, error);
+					console.error(`  ⚠️  원본 파일 삭제 실패: ${imageFile}`, error);
 				}
 			}
 		} else {
