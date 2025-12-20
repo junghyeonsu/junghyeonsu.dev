@@ -1,0 +1,24 @@
+---
+interface Props {
+	pageCount: number;
+	currentPage: number;
+}
+
+const { pageCount, currentPage } = Astro.props;
+---
+
+<div class="flex gap-2.5">
+  {
+    Array.from({ length: pageCount }).map((_, i) => (
+      <a href={i === 0 ? "/" : `/${i + 1}`}>
+        <div
+          class={`w-[30px] h-[30px] rounded-full font-bold flex items-center justify-center hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 ${
+            i + 1 === currentPage ? "border-2 border-current" : ""
+          }`}
+        >
+          {i + 1}
+        </div>
+      </a>
+    ))
+  }
+</div>

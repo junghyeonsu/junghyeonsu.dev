@@ -1,0 +1,38 @@
+---
+import PostCard from "@/components/react/PostCard";
+
+interface Post {
+	slug: string;
+	title: string;
+	description: string;
+	createdAt: string;
+	updatedAt?: string | null;
+	tags: string[];
+	thumbnail?: string;
+}
+
+interface Props {
+	posts: Post[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section class="grid lg:grid-cols-2 max-w-[95%] md:max-w-[600px] lg:max-w-full mx-auto my-[120px] gap-6 gap-y-10">
+  {
+    posts.map((post) => (
+      <article>
+        <PostCard
+          client:visible
+          title={post.title}
+          description={post.description}
+          slug={post.slug}
+          thumbnail={post.thumbnail}
+          createdAt={post.createdAt}
+          updatedAt={post.updatedAt}
+          tags={post.tags}
+        />
+      </article>
+    ))
+  }
+</section>

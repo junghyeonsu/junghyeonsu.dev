@@ -2,7 +2,7 @@
 slug: using-ajv-and-github-actions-to-ensure-consistent-meta-information-across-json-files
 title: AJV 및 GitHub Action을 사용하여 JSON 파일에서 일관된 메타 정보 보장하기
 description: 일관된 메타 정보로 데이터 무결성을 유지하기 위한 JSON 데이터를 처리할 때 오류를 사전에 방지하는 방법을 알아봅니다.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development"]
 createdAt: "2023/05/14"
 updatedAt: ""
@@ -36,15 +36,15 @@ updatedAt: ""
 만약 `Avatar`에 대한 style 정보, usage 정보, overview 정보 등을 관리하기 위해 따로 mdx 문서를 만들어서 관리하는데
 각 문서에서 `coverImage`를 사용하고 있다고 해보겠습니다. 그렇다면 `overview.mdx`, `style.mdx`, `usage.mdx` 모두 아래와 같이 사용하고 있겠죠.
 
-```mdx,2-2
+```mdx
 {/* coverImage를 직접 부르고 있음 */}
-![coverImage](./coverImage.png)
+![coverImage](./coverImage.webp)
 ```
 
-```sh,4-6
+```sh
 # AS-IS
 📦avatar
- ┣ 📜coverImage.png
+ ┣ 📜coverImage.webp
  ┣ 📜overview.mdx # coverImage 사용 중
  ┣ 📜style.mdx # coverImage 사용 중
  ┗ 📜usage.mdx # coverImage 사용 중
@@ -57,10 +57,10 @@ updatedAt: ""
 그래서 우리는 메타 데이터 파일을 따로 둡니다.
 아래와 같이 말이죠.
 
-```sh,4-4
+```sh
 # TO-BE
 📦avatar
- ┣ 📜coverImage.png
+ ┣ 📜coverImage.webp
  ┣ 📜component-meta.json # 메타 데이터 파일
  ┣ 📜overview.mdx
  ┣ 📜style.mdx
@@ -71,9 +71,9 @@ updatedAt: ""
 
 - [Avatar 컴포넌트에 대한 메타데이터 JSON 파일 예시](https://github.com/daangn/seed-design/blob/main/docs/content/component/avatar/component-meta.json)
 
-```json,2-2
+```json
 {
-  "coverImage": "./coverImage.jpeg"
+  "coverImage": "./coverImage.webp"
 }
 ```
 
@@ -190,7 +190,7 @@ const jsonSchema = {
 
 const pngSchema = {
   type: "string",
-  pattern: "^.*.png$",
+  pattern: "^.*.webp$",
 };
 
 const platformSchema = {
@@ -299,7 +299,7 @@ export const primitiveMetaSchema = {
 
 그리고 해당 Schema를 통해서 검증 해줄 스크립트가 필요합니다. 제 요구사항은 다음과 같았습니다.
 
-```sh,4-4&6-6&8-8&12-12&14-14&16-16
+```sh
 📦content
  ┣ 📂component
  ┃ ┣ 📂action-sheet
@@ -406,7 +406,7 @@ async function validateJsonInDir({ dir, validate, type }) {
 
 이렇게 스크립트를 작성했으면 `package.json`에 스크립트에 명령어를 작성해줍니다.
 
-```json,3-3
+```json
 {
   "scripts": {
     "validate:meta-data": "node scripts/validate-meta-data.mjs"
@@ -416,14 +416,14 @@ async function validateJsonInDir({ dir, validate, type }) {
 
 한 번 실행해 볼까요?
 
-![CLI에서 실행해보기](./script-success-in-cli.png)
+![CLI에서 실행해보기](./script-success-in-cli.webp)
 
 잘 되는 것 같네요!
 
 만약 데이터 형식이 맞지 않으면 어떻게 될까요?
 저는 컴포넌트의 메타 데이터 JSON 파일에 `description`이 `string` 형식으로 들어가도록 했습니다.
 
-```js,5-5&11-11
+```js
 export const componentMetaSchema = {
   type: "object",
   properties: {
@@ -449,7 +449,7 @@ export const componentMetaSchema = {
 }
 ```
 
-![스크립트 다시 실행](./script-fail-in-cli.png)
+![스크립트 다시 실행](./script-fail-in-cli.webp)
 
 - 어느 컴포넌트에서 실패했는지
 - 어느 프로퍼티가 잘못됐는지
@@ -470,7 +470,7 @@ PR을 올리고 해당 Pull Request가 메타 데이터를 바꿨다면 자동�
 
 바로 Action을 작성해 봅시다.
 
-```yml,1-7&27-30
+```yml
 on:
   push: # push 될 때마다
     branches: # 모든 브랜치를 검사
@@ -509,22 +509,22 @@ jobs:
 
 그리고 PR을 만들고 push를 해봅시다.
 
-![PR에서 성공했을 때의 모습](./script-success-in-github.png)
+![PR에서 성공했을 때의 모습](./script-success-in-github.webp)
 
-![액션 탭에서 성공했을 때의 모습](./script-success-in-action.png)
+![액션 탭에서 성공했을 때의 모습](./script-success-in-action.webp)
 
 잘 되는 것 같네요!
 
 만약 실패한다면 어떻게 보일까요?
 
-![PR에서 실패했을 때의 모습](./script-fail-in-github.png)
+![PR에서 실패했을 때의 모습](./script-fail-in-github.webp)
 
-![액션 탭에서 실패했을 때의 모습](./script-fail-in-action.png)
+![액션 탭에서 실패했을 때의 모습](./script-fail-in-action.webp)
 
 아까 작성한 스크립트에서 실패하면 프로세스를 나가는 코드가 있었습니다.
 해당 코드가 없으면 스크립트가 실패해도 Action이 성공한 것처럼 보이기 때문에 꼭 넣어주어야 합니다.
 
-```js,5-5
+```js
 if (!isValid) {
   // NOTE: 검증에 통과하지 못했을 때 실행됩니다.
   console.log(`${type}/${fileName} is invalid`);

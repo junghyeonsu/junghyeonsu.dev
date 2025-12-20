@@ -2,7 +2,7 @@
 slug: when-use-react-node-outside
 title: ReactNode를 컴포넌트 외부에서 선언해서 사용할 때 꿀팁 (render 메소드로 감싸기)
 description: ReactNode를 외부에서 사용할 땐 render 메소드로 사용하면 좋아요.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["short"]
 createdAt: "2023/01/16"
 updatedAt: ""
@@ -12,11 +12,11 @@ updatedAt: ""
 
 ### AS-IS
 
-![as-is](./1.png)
+![as-is](./1.webp)
 
 ### TO-BE
 
-![to-be](./2.png)
+![to-be](./2.webp)
 
 ## ReactNode를 외부에서 사용할 땐...
 
@@ -69,7 +69,7 @@ const Select = () => {
 그냥 단순 텍스트로 이루어진 데이터인지 알 수가 없어요.
 **그래서 render 메소드로 한 번 감싸주면 조금 더 명확하게 알 수 있어요.**
 
-```typescript,4-4&12-12&20-20
+```typescript
 // TO-BE
 const OptionItem = {
   light: {
@@ -102,7 +102,7 @@ const OptionItem = {
 위와 같이 선언을 해주고, 사용하는 곳에서는 확실하게
 **이건 리액트 컴포넌트를 렌더링 하는거야** 라고 얘기할 수 있죠.
 
-```tsx,5-7
+```tsx
 // 조금 더 컴포넌트 같지 않나요?
 const Select = () => {
   return (

@@ -2,7 +2,7 @@
 slug: deploy-simple-util-npm-library
 title: 간단한 유틸 함수 NPM 라이브러리 배포해보기 (feat. TypeScript 지원, ESM 지원)
 description: NPM 배포를 처음 해보는 사람들을 위해서 차근차근 가이드를 작성해 봤습니다.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development", "npm"]
 createdAt: "2023/03/12"
 updatedAt: "2023/03/14"
@@ -153,7 +153,7 @@ $ yarn init -y
 $ yarn add junghyeonsu-utils
 ```
 
-```json,7-7
+```json
 {
   "name": "test",
   "version": "1.0.0",
@@ -169,7 +169,7 @@ $ yarn add junghyeonsu-utils
 `junghyeonsu-utils` 폴더가 생성되었고, `index.js` 파일이 있다.
 이 파일이 우리가 작성한 `index.js` 파일이다.
 
-![우리가 작성한 index.js파일이 node_modules안에 잘 들어가 있다.](./1.png)
+![우리가 작성한 index.js파일이 node_modules안에 잘 들어가 있다.](./1.webp)
 
 라이브러리를 한 번 사용해 보자.
 `test` 프로젝트에서 `index.js` 파일을 생성하고 아래와 같이 작성한다.
@@ -191,7 +191,7 @@ console.log(divide(1, 2));
 $ node index.js
 ```
 
-![결과](./2.png)
+![결과](./2.webp)
 
 흐음... 잘 작동하는 것 같다!
 벌써 우리는 라이브러리를 만들고 배포하고 사용하는 것까지 성공했다.
@@ -216,7 +216,7 @@ $ node index.js
 
 우선 사용하는 측에서 `esm`을 작성해서 코드를 작성해 보자.
 
-```js,2-2
+```js
 // -> junghyeonsu-utils에서 정의한 함수들을 가져온다.
 import { add, divide, multiply, subtract } from "junghyeonsu-utils";
 
@@ -244,7 +244,7 @@ $ SyntaxError: Cannot use import statement outside a module
 
 `esm`을 사용하기 위해서는 `package.json`에 `"type": "module"`을 추가해야 한다.
 
-```json,4-4
+```json
 {
   "name": "test",
   "version": "1.0.0",
@@ -264,13 +264,13 @@ $ SyntaxError: Cannot use import statement outside a module
 $ node index.js
 ```
 
-![결과](./5.png)
+![결과](./5.webp)
 
 다행히 잘 되는 것 같다!
 그러면 이제 우리가 만든 라이브러리도 `esm`을 지원하도록 만들어보자.
 `module.exports` 를 `export` 문으로 바꿔주자.
 
-```js,18-18
+```js
 function add(a, b) {
   return a + b;
 }
@@ -294,7 +294,7 @@ export { add, subtract, multiply, divide };
 `type` 필드는 `commonjs`, `module` 이렇게 두 개의 옵션이 있고,
 `commonjs`는 `require`를 사용하는 `cjs`, `module`은 `import`를 사용하는 `esm`이다.
 
-```json,4-4
+```json
 {
   "name": "junghyeonsu-utils",
   "version": "0.0.1",
@@ -353,7 +353,7 @@ $ node index.js
 
 아마 잘 될 것이다.
 
-![결과](./5.png)
+![결과](./5.webp)
 
 근데 항상 이렇게 `esm`만을 사용하는 것은 아니다.
 `cjs`를 사용하는 프로젝트와 `esm`을 사용하는 프로젝트가 같이 존재할 수도 있다.
@@ -365,7 +365,7 @@ $ node index.js
 그러면 `package.json`에 `"type": "module"`을 `type: "commonjs"`로 바꾸고 다시 실행시켜 보자.
 (default가 `commonjs`라서 그냥 지워도 된다.)
 
-```json,,4-4
+```json
 {
   "name": "test",
   "version": "1.0.0",
@@ -405,7 +405,7 @@ $ SyntaxError: Cannot use import statement outside a module
 
 `junghyeonsu-utils`의 `package.json`에 `exports` 넣어보자.
 
-```json,6-11
+```json
 {
   "name": "junghyeonsu-utils",
   "version": "0.0.2",
@@ -487,7 +487,7 @@ module.exports = {
 };
 ```
 
-```json,5-5&8-9
+```json
 {
   "name": "junghyeonsu-utils",
   "version": "0.0.2",
@@ -579,7 +579,7 @@ $ yarn add junghyeonsu-utils
 (지금은 단순 더하기, 빼기 등의 연산만 가능한 라이브러리지만 더 많은 기능들이 있다고 상상해 보자.)
 아마 에러가 날 것이다.
 
-```tsx,,4-4
+```tsx
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -609,7 +609,7 @@ function App() {
 export default App;
 ```
 
-![정말 많은 개발자들이 만나는 에러](./3.png)
+![정말 많은 개발자들이 만나는 에러](./3.webp)
 
 이 에러는 `junghyeonsu-utils` 라이브러리가 타입스크립트 지원을 하지 않기 때문에 발생하는 에러다.
 요즘 라이브러리들은 웬만하면 타입스크립트 지원을 잘해주지만, 옛날 라이브러리 같은 경우에는 타입스크립트를 지원하지 않는 경우가 많다.
@@ -658,7 +658,7 @@ $ yarn add typescript @types/node -D
 기존의 `src/index.js` 파일의 내용을 `src/index.ts` 파일로 바꿔주고,
 타입 에러가 발생하는 부분을 모두 수정해 주자.
 
-```typescript,2-2&6-6&10-10&14-14
+```typescript
 // src/index.ts
 function add(a: number, b: number) {
   return a + b;
@@ -686,7 +686,7 @@ module.exports = {
 
 그리고 `tsconfig.json`에 `include` 필드를 추가해 준다.
 
-```json,10-10
+```json
 {
   "compilerOptions": {
     "target": "es6" /* 최신 브라우저는 es6을 대부분 지원한다. */,
@@ -702,7 +702,7 @@ module.exports = {
 
 그리고 터미널에서 `yarn tsc`로 컴파일을 해도 되지만, 우리는 `package.json`에 `build script`를 작성해 보자.
 
-```json,6-9
+```json
 {
   "name": "junghyeonsu-utils",
   "version": "0.0.3",
@@ -761,7 +761,7 @@ export { add, subtract, multiply, divide };
 그리고 추가로 `exports` 필드 안에 `types` 필드를 추가할 수 있다. 생성된 `d.ts` 파일을 명시해 주자.
 그리고 마지막으로 `exports` 필드의 `import`에는 컴파일 결과물인 `dist/index.js`을 넣어주자. (`require`는 우선 가만히 놔둬도 된다.)
 
-```json,5-5&12-12&14-14
+```json
 {
   "name": "junghyeonsu-utils",
   "version": "0.0.3",
@@ -804,7 +804,7 @@ $ ✨  Done in 0.02s.
 그리고 배포하기 전에 확실히 `build` 명령어를 실행하고 배포하기 위해 `prepack` 스크립트를 `package.json`에 추가해 주자.
 `prepack` 스크립트는 `npm publish`를 실행하기 전에 실행되는 스크립트이다.
 
-```json,7-7
+```json
 {
   "name": "junghyeonsu-utils",
   "version": "0.1.0",
@@ -870,7 +870,7 @@ $ yarn add junghyeonsu-utils@0.1.0
 
 그리고 다시 `test`(vite 프로젝트)에서 `import`를 해 보자.
 
-![타입 지원이 잘된 모습](./6.png)
+![타입 지원이 잘된 모습](./6.webp)
 
 ## DX(개발자 경험) 향상시키기
 
@@ -936,7 +936,7 @@ Promise.all([
 >
 > [https://esbuild.github.io/content-types/#no-type-system](https://esbuild.github.io/content-types/#no-type-system)
 
-```json,4-7
+```json
 {
   "scripts": {
     "prepack": "yarn build",
@@ -980,7 +980,7 @@ $ node build.js
 우리는 `src` 폴더와 `dist` 폴더만 라이브러리에 포함하자.
 (`src` 폴더는 가끔 라이브러리 사용자들이 라이브러리의 소스 코드를 보고 싶을 때가 있을 경우를 대비해서 포함한다.)
 
-```json,5-5
+```json
 {
   "exports": {
     "types": "./dist/index.d.ts",
@@ -1005,7 +1005,7 @@ $ npm publish
 그리고 `test` 프로젝트에서 `junghyeonsu-utils`를 설치해서
 `node_modules`를 확인해 보면 `dist` 폴더와 `src` 폴더 그리고 `package.json(default)` 만 포함된 것을 확인할 수 있다.
 
-![junghyeonsu-utils를 설치하고 node_modules를 확인](./7.png)
+![junghyeonsu-utils를 설치하고 node_modules를 확인](./7.webp)
 
 ## 마무리
 
@@ -1027,13 +1027,13 @@ cli 라이브러리, 브라우저 라이브러리, node 라이브러리 등등 �
 패키지가 잘 배포가 되었는지 확인해 주는 [publink](https://publint.dev/)에서 `exports` 필드를 검사해 보면
 `types` 필드가 맨 위에 위치하지 않으면 경고가 발생한다.
 
-![types 필드는 맨 위로 와야 한다..](./9.png)
+![types 필드는 맨 위로 와야 한다..](./9.webp)
 
 `exports` 필드가 순서 기반으로 동작하기 때문에 타입스크립트를 사용하는 환경에서는 `d.ts` 파일이 먼저 참조돼서 타입 유형을 제공해야 한다.
 [타입스크립트 공식 문서의 package.json Exports, Imports, and Self-Referencing 문서](https://www.typescriptlang.org/docs/handbook/esm-node.html#packagejson-exports-imports-and-self-referencing)에서도
 `types` 필드가 먼저 발생해야 한다고 설명되어 있다.
 
-![타입스크립트 공식 문서](./8.png)
+![타입스크립트 공식 문서](./8.webp)
 
 ### 다양한 exports 필드의 conditional 필드에 대해서 (2023년 3월 14일 추가)
 
@@ -1042,7 +1042,7 @@ cli 라이브러리, 브라우저 라이브러리, node 라이브러리 등등 �
 
 `node-addons`, `node`, `import`, `require`, `default`의 값들이 사용 가능하다.
 
-![conditional exports](./10.png)
+![conditional exports](./10.webp)
 
 또한 다른 플랫폼에 대해서도 `exports` 필드를 지정할 수 있다.
 [node 공식 홈페이지의 Community Conditions Definitions](https://nodejs.org/api/packages.html#community-conditions-definitions) 문서를 참고하면
@@ -1055,7 +1055,7 @@ cli 라이브러리, 브라우저 라이브러리, node 라이브러리 등등 �
 어떤 다른 분이 exports 필드가 엄청나다면서 올린 트윗을 보고 [@andrewbranch@fosstodon.org가 쓴 트위터 게시물](https://twitter.com/atcb/status/1634653474041503744)에서
 꽤 많은 정보를 얻을 수 있었다. 위의 추가된 두 개의 설명도 해당 트윗을 보고 추가한 내용이다.
 
-![트위터 게시물](./11.png)
+![트위터 게시물](./11.webp)
 
 핵심은 `module`과 exports 필드밖에 존재하는 `types` 필드는 꼭 존재하지 않아도 되고,
 `require`, `import`를 무조건 둘 다 지원해주어야 하는 것은 아니고 둘의 용도를 잘 파악하고 사용해야 한다는 것이다.

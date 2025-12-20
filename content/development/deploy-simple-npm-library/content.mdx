@@ -2,7 +2,7 @@
 slug: deploy-simple-npm-library
 title: 간단한 NPM 라이브러리 배포해보기 2탄 (CLI 간단한 라이브러리 만들기 & 모든 환경 지원, ESM, CJS, TS)
 description: ESM, CJS, TS를 모두 지원하는 라이브러리를 만들어보고, CLI를 간단하게 만들어보겠습니다.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development", "npm"]
 createdAt: 2024/03/18
 updatedAt: 2024/03/19
@@ -52,7 +52,7 @@ featured: false
 Node 생태계에서 ESM이라는 새로운 기술이 나왔지만, CJS가 없어지는 것은 아니기 때문에
 우리는 ESM, CJS 모두 지원하는 라이브러리를 만들어야 합니다. (더이상 지원하지 않는 것과 라이브러리 제공자가 지원해야 한다는 것은 다릅니다.)
 
-![https://github.com/nodejs/node/issues/33954](./1.png)
+![https://github.com/nodejs/node/issues/33954](./1.webp)
 
 [CJS(CommonJS) vs ESM(ECMAScript Module)](https://toss.tech/article/commonjs-esm-exports-field)에 대해서는 이전 글에도 링크를 걸어두었지만
 토스 블로그가 정리를 잘해놨습니다. 핵심만 꼽아보자면
@@ -106,7 +106,7 @@ CJS으로 라이브러리를 배포해보고 ESM, CJS 환경에서 사용해보�
 - esm, cjs에서 테스트 해보기
 - 전부 잘 되는거 확인하기
 
-![esm, cjs에서 잘 동작하는 것 확인](./2.png)
+![esm, cjs에서 잘 동작하는 것 확인](./2.webp)
 
 (실습)
 
@@ -124,7 +124,7 @@ ESM으로 라이브러리를 배포해보고 ESM, CJS 환경에서 사용해보�
 - esm, cjs에서 테스트 해보기
 - cjs에서 안되는 거 확인하기
 
-![cjs에서 안되는 거 확인하기](./3.png)
+![cjs에서 안되는 거 확인하기](./3.webp)
 
 (실습)
 
@@ -163,7 +163,7 @@ TypeScript로 코드 작성하고 tsc, esbuild로 빌드해서 ESM, CJS, TS 모�
 - 라이브러리에도 타입스크립트로 개발 후 배포 (typescript, build:dts 명령어 추가)
 - 각각 파일이 어떤 형식을 사용하고 있는지 콘솔 찍어보기
 
-![TypeScript 잘 되는거 확인하고 각각 어떤 모듈 사용하는지 확인](./4.png)
+![TypeScript 잘 되는거 확인하고 각각 어떤 모듈 사용하는지 확인](./4.webp)
 
 ### 마무리
 
@@ -191,7 +191,7 @@ CLI 도구는 일반적인 유틸성 자바스크립트 라이브러리와는 �
 `.bin` 디렉토리에는 해당 CLI 도구의 실행 파일이 들어있습니다.
 최종적으로는 `.bin` 폴더에서 실행될 실행 파일만 있으면 CLI 도구를 만들 수 있습니다.
 
-![프로젝트에서 node_modules 폴더에 .bin 폴더를 확인해보세요.](./5.png)
+![프로젝트에서 node_modules 폴더에 .bin 폴더를 확인해보세요.](./5.webp)
 
 ```js
 #!/usr/bin/env node
@@ -206,7 +206,7 @@ CLI 도구는 일반적인 유틸성 자바스크립트 라이브러리와는 �
 
 단지 실행되는 것이 아니라 다양한 `args` (인자들)을 받아서 실행되는 것이죠.
 
-![쉽게 생각해서 .bin에서 node 환경에서 동작하는 파일입니다.](./6.png)
+![쉽게 생각해서 .bin에서 node 환경에서 동작하는 파일입니다.](./6.webp)
 
 ### 만들어보기
 
@@ -242,7 +242,7 @@ program.parse(process.argv);
 정말 단순하게 `-a` 인자와 `-b` 인자를 받아서 덧셈을 하는 CLI 도구를 만들었습니다.
 우리가 위에서 만들었던 라이브러리를 사용해서 덧셈을 하고 있습니다.
 
-```json,9-11
+```json
 // package.json
 {
   "name": "calculate-utils-test-cli",
@@ -276,7 +276,7 @@ node src/cli.js -a 1 -b 2
 
 배포를 하기 전에 테스트 하고 싶다면 그냥 해당 파일을 `node`로 실행시켜서 테스트 해보면 됩니다.
 
-![결과](./7.png)
+![결과](./7.webp)
 
 그 다음엔 `publish` 명령어를 통해서 라이브러리를 배포하고 다른 패키지에서 설치하고 확인해봅시다.
 
@@ -294,7 +294,7 @@ yarn add calculate-utils-test-cli
 yarn calculate -a 1 -b 2
 ```
 
-![결과](./8.png)
+![결과](./8.webp)
 
 정말 간략한 예제지만, CLI 도구를 만드는 방법은 이렇게 간단합니다.
 

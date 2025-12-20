@@ -17,3 +17,6 @@ public
 
 gatsby-types.d.ts
 gatsby-schema.graphql
+
+dist/
+.astro/

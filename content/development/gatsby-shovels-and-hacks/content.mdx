@@ -2,7 +2,7 @@
 slug: gatsby-shovels-and-hacks
 title: Gatsby 잘 사용하기 (지금까지 내가 Gatsby를 사용하며 겪은 삽질과 꿀팁들, Gatsby로 블로그 만들기, React)
 description: Gatsby를 사용하며 겪은 삽질과 꿀팁들을 공유합니다.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development", "gatsby"]
 createdAt: "2023/02/05"
 updatedAt: ""
@@ -78,7 +78,7 @@ UI와 데이터를 분리해서 볼 수 있는 시각을 가질 수 있어요.
 혹은 블로그를 만들고 `markdown`으로 이미지를 넣을 때 `gatsby-remark-images` 플러그인을 사용하면
 `markdown`에서 이미지 경로를 입력하면 자동으로 최적화된 이미지를 불러올 수 있어요.
 
-![gatsby-plugin-image는 귀찮은 것들을 해결해 준다.](./image-plugin-is-good.png)
+![gatsby-plugin-image는 귀찮은 것들을 해결해 준다.](./image-plugin-is-good.webp)
 
 `srcset`이라는 것을 알고 계신가요? `srcset`은 이미지를 최적화할 때 사용하는 것인데,
 이미지를 불러올 때 사용자의 디바이스에 맞는 이미지를 불러오는 것이에요.
@@ -107,7 +107,7 @@ query MyQuery {
 이렇게 하면, 이미지가 로딩되기 전에 `blur`된 이미지를 보여주게 돼요.
 또한 `placeholder`에 대한 여러 옵션을 제공해 줘서 사용자가 선택적으로 사용할 수 있게 해 줘요.
 
-![placeholder에 대한 여러 옵션들](./placeholder-option.png)
+![placeholder에 대한 여러 옵션들](./placeholder-option.webp)
 
 정말 마법같죠?
 
@@ -172,7 +172,7 @@ export const query = graphql`
 만약 타입스크립트를 이용해서 `query`에 대한 결괏값을 사용하려고 하면 원래라면 일일이 타입을 지정해줘야 했지만,
 `gatsby-plugin-typegen`을 사용하면 `query`에 대한 결괏값의 타입을 자동으로 생성해 줘요.
 
-![자동 생성된 타입은 GatsbyTypes에 담겨있어요.](./typegen-1.png)
+![자동 생성된 타입은 GatsbyTypes에 담겨있어요.](./typegen-1.webp)
 
 자동 생성된 타입은 `GatsbyTypes`에 담겨있고 `query`의 이름과 뒤에 `Query` 접미사가 붙어있어요.
 그래서 위 코드에서 `query`의 이름이 `PostPage`이기 때문에 `GatsbyTypes.PostPageQuery`라는 타입이 생성되었어요.
@@ -211,7 +211,7 @@ Gatsby는 `yarn build` 명령어로 빌드를 하게 되면 `public` 폴더와 `
 잘 캐싱해주지 않으면 빌드 속도가 엄청 느려요. 제 블로그도 이미지가 점점 늘어나서 캐싱을 해주지 않았을 때 9분 걸리던 빌드 속도를
 캐싱을 해주니 평균 2-3분 정도 걸리는 것 같네요. **(약 4배 정도 빨라졌어요.)**
 
-![캐시만 제대로 해줘도 많이 빨라진 모습](./ci-time.png)
+![캐시만 제대로 해줘도 많이 빨라진 모습](./ci-time.webp)
 
 두 프로젝트가 개선된 정도가 다른 이유는 블로그는 이미지 파일이 많고, 기존에 이미지 처리하는데 빌드 시간이 많이 걸렸어요.
 하지만 캐싱 처리를 해준 덕분에 불필요한 이미지 처리가 줄어들어서 시간이 눈에 띄게 줄어들었어요.
@@ -220,7 +220,7 @@ Gatsby는 `yarn build` 명령어로 빌드를 하게 되면 `public` 폴더와 `
 
 그래서 제가 작성한 github action workflow 파일을 조금 공유하자면 다음과 같아요.
 
-```yaml,3-3&7-7&15-15&19-19
+```yaml
 - name: 의존성 설치 과정...
 
 - name: Cache Gatsby `.cache` Folder
@@ -253,7 +253,7 @@ Gatsby는 `yarn build` 명령어로 빌드를 하게 되면 `public` 폴더와 `
 
 혹은 아래와 같이 `public`, `.cache` 폴더들을 한꺼번에 캐싱할 수도 있어요.
 
-```yaml,8-9
+```yaml
 - name: 이전 과정들...
 
 - name: Caching Gatsby
@@ -289,18 +289,18 @@ Gatsby는 `yarn build` 명령어로 빌드를 하게 되면 `public` 폴더와 `
 조금 더 자세한 내용은 [공식문서](https://www.gatsbyjs.com/docs/reference/release-notes/v5.0/#slice-api)를 참고해 주세요.
 그리고 [slice API가 나오게 된 배경](https://github.com/gatsbyjs/gatsby/discussions/36339)의 링크도 첨부할게요.
 
-![slice 과정을 도식화 [출처 Gatsby 공식문서]](./using-slices-build.png)
+![slice 과정을 도식화 [출처 Gatsby 공식문서]](./using-slices-build.webp)
 
 근데 며칠 전에 `slice` API를 한 번 사용해 보려고 시도를 했는데 에러를 만나게 됐어요.
 단순하게 `slice` API를 간단하게 사용하는 코드였는데 에러가 났고, 나온 지 별로 되지 않은 따끈한 API였어서 해당 오류를 참고할 레퍼런스도 거의 없었어요.
 제가 개발하는 Gatsby 환경은 `DEV_SSR` flag를 사용해서 개발 환경에서도 SSR을 사용하고 있어요.
 
-![slice API 에러 발생](./slice-ssr-error.png)
+![slice API 에러 발생](./slice-ssr-error.webp)
 
 그래서 그냥 Gatsby [공식 레파지토리에 issue를 올렸어요.](https://github.com/gatsbyjs/gatsby/issues/37537)
 그리고 다음 날 바로 [핫픽스해서 올려주셨어요.](https://github.com/gatsbyjs/gatsby/pull/37542)
 
-![slice API 핫픽스](./resolve-error.png)
+![slice API 핫픽스](./resolve-error.webp)
 
 그래서 지금은 `gatsby@5.6.0-next.2` 버전에서 사용하면 `DEV_SSR` flag와 함께 사용할 수 있어요.
 
@@ -321,11 +321,11 @@ Gatsby는 `yarn build` 명령어로 빌드를 하게 되면 `public` 폴더와 `
 이것과 관련해서 문제들이 조금 생길 수 있는 게, 저는 `cloudflare` 혹은 `vercel`을 이용해서 배포를 하고 있었어요.
 하지만 [cloudflare의 CI 머신은 node 18 버전을 지원하지 않아요. (현재 글을 작성하는 2023년 2월 5일 기준)](https://developers.cloudflare.com/pages/platform/build-configuration/#language-support-and-tools)
 
-![cloudflare는 node 18 버전을 지원하지 않아요](./cloudflare-ci-node-version.png)
+![cloudflare는 node 18 버전을 지원하지 않아요](./cloudflare-ci-node-version.webp)
 
 [`vercel`은 작년 2022년 12월에 지원을 시작](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/node-js#node.js-version)했어요.
 
-![vercel은 작년 2022년 12월에 node 18 버전을 지원해요](./vercel-ci-node-version.png)
+![vercel은 작년 2022년 12월에 node 18 버전을 지원해요](./vercel-ci-node-version.webp)
 
 그렇기 때문에 `cloudflare`를 이용해서 배포를 하려면 추가적으로 자동 배포 코드를 작성해야 해요.
 (그냥 `vercel`을 사용하면 되는 거 아니냐고 생각할 수 있지만, 비용 이슈로 `cloudflare`를 사용하고 있어요.)
@@ -333,7 +333,7 @@ Gatsby는 `yarn build` 명령어로 빌드를 하게 되면 `public` 폴더와 `
 그래서 `cloudflare`에 Gatsby 5 버전 프로젝트를 배포하려면 `cloudflare`에서 제공하는 `wrangler`를 이용해서 배포를 해야 해요.
 github actions와 `wrangler cli`를 이용하면 자동 배포를 할 수 있어요.
 
-```yaml,3-3&12-12
+```yaml
 - uses: actions/setup-node@v3
   with:
     node-version: 18.12.1
@@ -357,7 +357,7 @@ github actions와 `wrangler cli`를 이용하면 자동 배포를 할 수 있어
 지금까지 그래도 Gatsby를 사용하면서 겪었던 문제들을 간단하게라도 노션에 정리를 해놨지만,
 너무 간단한 것들과 제가 멍청하게 실수한 부분들이 대부분이었어서 글을 쓰기가 애매했어요.
 
-![삽질 기록들...](./errors.png)
+![삽질 기록들...](./errors.webp)
 
 그래도 이 글을 보고 Gatsby를 사용하시는 분들이 조금이라도 도움이 되었으면 좋겠어요.
 저도 Gatsby를 사용한 지 4개월 정도 된 것 같은데 아직 많이 부족하지만 확실한 건... Gatsby는 정말 좋은 프레임워크라는 거예요.

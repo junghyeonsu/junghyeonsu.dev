@@ -1,0 +1,120 @@
+---
+import { getCollection, render } from "astro:content";
+import PostContentTitle from "@/components/astro/PostContentTitle.astro";
+import Profile from "@/components/astro/Profile.astro";
+import RelatedPosts from "@/components/astro/RelatedPosts.astro";
+import { mdxComponents } from "@/components/mdx";
+import Giscus from "@/components/react/Giscus";
+import TableOfContents from "@/components/react/TableOfContents";
+import { WORDS_PER_MINUTE } from "@/constants";
+import PostLayout from "@/layouts/PostLayout.astro";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("blog", ({ data }) => !data.locale);
+	return posts.map((post) => ({
+		params: { slug: post.data.slug },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+// Calculate reading time
+const wordsPerMinute = WORDS_PER_MINUTE;
+const wordCount = post.body?.split(/\s+/).length || 0;
+const readingTime = Math.ceil(wordCount / wordsPerMinute);
+const readingTimeText = `${readingTime} min read`;
+
+// Get related posts (same tags, different slug)
+const allPosts = await getCollection("blog", ({ data }) => !data.locale);
+const relatedPosts = allPosts
+	.filter(
+		(p) =>
+			p.data.slug !== post.data.slug && p.data.tags.some((tag) => post.data.tags.includes(tag)),
+	)
+	.sort((a, b) => {
+		const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
+		const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
+		return dateB.getTime() - dateA.getTime();
+	})
+	.slice(0, 4)
+	.map((p) => ({
+		slug: p.data.slug,
+		title: p.data.title,
+		description: p.data.description,
+		createdAt: p.data.createdAt,
+		updatedAt: p.data.updatedAt,
+		tags: p.data.tags,
+		thumbnail: p.data.thumbnail?.src,
+	}));
+
+// Transform headings to table of contents format
+type TocItem = {
+	url: string;
+	title: string;
+	items?: TocItem[];
+};
+
+function buildTableOfContents(headings: { depth: number; slug: string; text: string }[]): {
+	items: TocItem[];
+} {
+	const toc: TocItem[] = [];
+	const stack: { depth: number; item: TocItem }[] = [];
+
+	for (const heading of headings) {
+		const item: TocItem = {
+			url: `#${heading.slug}`,
+			title: heading.text,
+		};
+
+		while (stack.length > 0 && stack[stack.length - 1].depth >= heading.depth) {
+			stack.pop();
+		}
+
+		if (stack.length === 0) {
+			toc.push(item);
+		} else {
+			const parent = stack[stack.length - 1].item;
+			if (!parent.items) {
+				parent.items = [];
+			}
+			parent.items.push(item);
+		}
+
+		stack.push({ depth: heading.depth, item });
+	}
+
+	return { items: toc };
+}
+
+const tableOfContents = buildTableOfContents(headings);
+---
+
+<PostLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.thumbnail?.src}
+>
+  <article class="w-full xl:w-[800px]">
+    <PostContentTitle
+      title={post.data.title}
+      createdAt={post.data.createdAt}
+      updatedAt={post.data.updatedAt}
+      tags={post.data.tags}
+      readingTime={readingTimeText}
+      thumbnail={post.data.thumbnail?.src}
+      thumbnailSource={post.data.thumbnailSource}
+    />
+
+    <div class="mt-12 prose max-w-none">
+      <Content components={mdxComponents} />
+    </div>
+
+    <RelatedPosts relatedPosts={relatedPosts} />
+    <Profile />
+    <Giscus client:idle />
+  </article>
+
+  <TableOfContents client:idle tableOfContents={tableOfContents} />
+</PostLayout>

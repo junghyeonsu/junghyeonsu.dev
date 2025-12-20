@@ -1,0 +1,131 @@
+---
+import { getCollection } from "astro:content";
+import Pagination from "@/components/astro/Pagination.astro";
+import PostGrid from "@/components/astro/PostGrid.astro";
+import Profile from "@/components/astro/Profile.astro";
+import Tags from "@/components/react/Tags";
+import { koreanTagNames, POSTS_PER_PAGE } from "@/constants";
+import MainLayout from "@/layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+	const allPosts = await getCollection("blog", ({ data }) => {
+		return !data.locale && data.title !== "정현수 포트폴리오";
+	});
+
+	const posts = allPosts.sort((a, b) => {
+		const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
+		const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
+		return dateB.getTime() - dateA.getTime();
+	});
+
+	// Get all unique tags
+	const tagsSet = new Set<string>();
+	posts.forEach((post) => {
+		post.data.tags.forEach((tag) => tagsSet.add(tag));
+	});
+	const tags = Array.from(tagsSet);
+
+	// Get tag groups for all posts
+	const tagGroupsMap = new Map<string, number>();
+	for (const post of posts) {
+		for (const tag of post.data.tags) {
+			tagGroupsMap.set(tag, (tagGroupsMap.get(tag) || 0) + 1);
+		}
+	}
+	const tagGroups = Array.from(tagGroupsMap.entries()).map(([tag, tagPostCount]) => ({
+		tag,
+		tagPostCount,
+	}));
+
+	const paths: any[] = [];
+
+	for (const tag of tags) {
+		const tagPosts = posts.filter((post) => post.data.tags.includes(tag));
+		const totalPages = Math.ceil(tagPosts.length / POSTS_PER_PAGE);
+
+		// First page (no page number in URL)
+		paths.push({
+			params: { tag, page: undefined },
+			props: {
+				posts: tagPosts,
+				allPosts: posts,
+				currentTag: tag,
+				currentPage: 1,
+				totalPages,
+				tagGroups,
+			},
+		});
+
+		// Additional pages
+		for (let i = 2; i <= totalPages; i++) {
+			paths.push({
+				params: { tag, page: String(i) },
+				props: {
+					posts: tagPosts,
+					allPosts: posts,
+					currentTag: tag,
+					currentPage: i,
+					totalPages,
+					tagGroups,
+				},
+			});
+		}
+	}
+
+	return paths;
+}
+
+const { posts, allPosts, currentTag, currentPage, totalPages, tagGroups } = Astro.props;
+
+// Paginate posts
+const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+const paginatedPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
+// Transform posts for components
+const transformedPosts = paginatedPosts.map((post: any) => ({
+	slug: post.data.slug,
+	title: post.data.title,
+	description: post.data.description,
+	createdAt: post.data.createdAt,
+	updatedAt: post.data.updatedAt,
+	tags: post.data.tags,
+	thumbnail: post.data.thumbnail?.src,
+}));
+
+const tagTitle = koreanTagNames[currentTag] || currentTag;
+---
+
+<MainLayout title={tagTitle}>
+  <!-- Tags -->
+  <Tags
+    client:load
+    currentTag={currentTag}
+    tagGroups={tagGroups}
+    allPostCount={allPosts.length}
+  />
+
+  <!-- Post Grid -->
+  <PostGrid posts={transformedPosts} />
+
+  <!-- Pagination -->
+  {
+    totalPages > 1 && (
+      <div class="flex gap-2.5">
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <a href={i === 0 ? `/tags/${currentTag}` : `/tags/${currentTag}/${i + 1}`}>
+            <div
+              class={`w-[30px] h-[30px] rounded-full font-bold flex items-center justify-center hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100 ${
+                i + 1 === currentPage ? "border-2 border-current" : ""
+              }`}
+            >
+              {i + 1}
+            </div>
+          </a>
+        ))}
+      </div>
+    )
+  }
+
+  <!-- Profile -->
+  <Profile />
+</MainLayout>

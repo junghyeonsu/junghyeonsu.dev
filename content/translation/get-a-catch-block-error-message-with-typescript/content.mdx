@@ -2,7 +2,7 @@
 slug: get-a-catch-block-error-message-with-typescript
 title: Get a catch block error message with TypeScript (TypeScript로 catch 블록 오류 메시지 받기)
 description: TypeScript로 catch 블록 오류 메시지 받기
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["translation"]
 createdAt: "2023/02/02"
 updatedAt: ""
@@ -28,7 +28,7 @@ try {
 
 아직까지 좋아보이나요? 아마 JavaScript라서 잘되는 것 같네요. TypeScript를 써 봅시다.
 
-```ts,9-9
+```ts
 const reportError = ({ message }: { message: string }) => {
   // 로깅 서비스에 오류를 보냅니다...
 };
@@ -61,7 +61,7 @@ throw undefined;
 진짜로 어떤 타입의 무엇이든지 던져도 됩니다.
 그래서 쉽죠? 오류에 대한 타입 주석(annotation)을 추가해서 이 코드가 오류만 던지는 것이라고 표시할 수 있지 않을까요?
 
-```ts,3-3
+```ts
 try {
   throw new Error("이런!");
 } catch (error: Error) {
@@ -89,7 +89,7 @@ Error = function () {
 그렇다면 개발자는 무엇을 해야 할까요?
 우리가 할 수 있는 최선은 아래와 같습니다.
 
-```ts,4-5&7-7
+```ts
 try {
   throw new Error('Oh no!')
 } catch (error) {
@@ -104,7 +104,7 @@ try {
 이제 TypeScript는 우리에게 소리를 지르지 않고, 더 중요한 건 완전히 예상치 못한 일이 발생할 수 있는 경우를 처리하고 있네요.
 아마도 우리는 다음과 같이 더 좋게 할 수 있을 것 같네요.
 
-```ts,4-4&6-6
+```ts
 try {
   throw new Error("Oh no!");
 } catch (error) {
@@ -120,7 +120,7 @@ try {
 
 그런 다음 이걸 모든 catch 블록에서 사용할 유틸리티로 바꿀 수 있습니다.
 
-```ts,1-4&14-14
+```ts
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;
   return String(error);
