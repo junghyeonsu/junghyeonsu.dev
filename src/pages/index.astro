@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import Pagination from "@/components/astro/Pagination.astro";
+import PostGrid from "@/components/astro/PostGrid.astro";
+import Profile from "@/components/astro/Profile.astro";
+import FeaturedPostSection from "@/components/react/FeaturedPostSection";
+import Tags from "@/components/react/Tags";
+import { ALL_POSTS_TAG_NAME, POSTS_PER_PAGE } from "@/constants";
+import MainLayout from "@/layouts/MainLayout.astro";
+
+// Get all Korean posts (no locale field), excluding portfolio, short, and side-project-devlog
+const allPosts = await getCollection("blog", ({ data }) => {
+	return (
+		!data.locale &&
+		data.title !== "정현수 포트폴리오" &&
+		!data.tags.includes("short") &&
+		!data.tags.includes("side-project-devlog")
+	);
+});
+
+// Sort by date
+const posts = allPosts.sort((a, b) => {
+	const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
+	const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
+	return dateB.getTime() - dateA.getTime();
+});
+
+// Get featured posts
+const featuredPosts = posts.filter((post) => post.data.featured);
+
+// Get tag groups for Tags component
+const tagGroupsMap = new Map<string, number>();
+for (const post of posts) {
+	for (const tag of post.data.tags) {
+		tagGroupsMap.set(tag, (tagGroupsMap.get(tag) || 0) + 1);
+	}
+}
+const tagGroups = Array.from(tagGroupsMap.entries()).map(([tag, tagPostCount]) => ({
+	tag,
+	tagPostCount,
+}));
+
+// Pagination
+const totalPosts = posts.length;
+const pageCount = Math.ceil(totalPosts / POSTS_PER_PAGE);
+const currentPage = 1;
+const paginatedPosts = posts.slice(0, POSTS_PER_PAGE);
+
+// Transform posts for components
+const transformedPosts = paginatedPosts.map((post) => ({
+	slug: post.data.slug,
+	title: post.data.title,
+	description: post.data.description,
+	createdAt: post.data.createdAt,
+	updatedAt: post.data.updatedAt,
+	tags: post.data.tags,
+	thumbnail: post.data.thumbnail?.src,
+}));
+
+const transformedFeaturedPosts = featuredPosts.map((post) => ({
+	slug: post.data.slug,
+	title: post.data.title,
+	description: post.data.description,
+	createdAt: post.data.createdAt,
+	updatedAt: post.data.updatedAt,
+	tags: post.data.tags,
+	thumbnail: post.data.thumbnail?.src,
+}));
+---
+
+<MainLayout>
+  <!-- Tags -->
+  <Tags
+    client:load
+    currentTag={ALL_POSTS_TAG_NAME}
+    tagGroups={tagGroups}
+    allPostCount={totalPosts}
+  />
+
+  <!-- Featured Posts Section -->
+  {
+    transformedFeaturedPosts.length > 0 && (
+      <div class="w-full max-w-[95%] md:max-w-[600px] lg:max-w-full flex flex-col lg:flex-row mt-10 gap-5 lg:gap-[60px]">
+        <FeaturedPostSection client:visible posts={transformedFeaturedPosts} />
+      </div>
+    )
+  }
+
+  <!-- Post Grid -->
+  <PostGrid posts={transformedPosts} />
+
+  <!-- Pagination -->
+  {
+    pageCount > 1 && (
+      <Pagination currentPage={currentPage} pageCount={pageCount} />
+    )
+  }
+
+  <!-- Profile -->
+  <Profile />
+</MainLayout>

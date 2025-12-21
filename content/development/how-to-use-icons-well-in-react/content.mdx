@@ -2,7 +2,7 @@
 slug: how-to-use-icons-well-in-react
 title: 리액트에서 아이콘을 잘 사용하는 방법(이라 쓰고 잘 쓰기 위한 몸부림을 써보았다.) (React Icon)
 description: 리액트에서 어떻게 아이콘을 잘 쓰기 위한 과정과 내 삽질 과정
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development", "icon"]
 createdAt: "2023/02/26"
 updatedAt: ""
@@ -72,7 +72,7 @@ featured: false
 
 그리고 사용할 때는 `use` 태그를 사용해서 `href`에 `sprite.svg`의 `id`를 넣어주면 된다.
 
-```jsx,1-1&6-6
+```jsx
 const icons = ["icon-1", "icon-2"];
 
 function Icon({ id, ...props }) {
@@ -109,7 +109,7 @@ fancy 한 방법을 사용하는 라이브러리를 상상했지만, 현실은 �
 
 위에 상상했던 것을 빠르게 검증하기 위해서 `@seed-design/icon` 라이브러리를 만들었다.
 
-![첫 릴리즈 노트](./release.png)
+![첫 릴리즈 노트](./release.webp)
 
 특징은 요약하자면 다음과 같다.
 
@@ -139,7 +139,7 @@ spritePath: src/assets/sprite.svg
 
 추후에 블로그 포스팅을 쓸 예정이지만, yaml schema를 이용해서 config 파일의 형식을 검증 및 자동 완성도 제공할 수 있다.
 
-![yaml schema를 통해서 아이콘의 이름 자동 완성도 제공 해준다.](./yml-schema.png)
+![yaml schema를 통해서 아이콘의 이름 자동 완성도 제공 해준다.](./yml-schema.webp)
 
 그리고 `yarn seed-icon generate`로 `config.yml`에 정의한 아이콘을 이용해서 `sprite.svg`와 `use` 태그를 이용한 아이콘 컴포넌트를 생성해 준다.
 생성된 컴포넌트와 `sprite.svg`는 다음과 같다.
@@ -278,7 +278,7 @@ const App = () => {
 그래서 `icona`라는 이름으로 npm 패키지를 먹어놓고, 지금은 우선 사내의 디자인시스템에 의존성이 걸려있으니 `@seed-design/icon`으로 이름을 짓고
 추후에 의존성을 떼면서 다른 사람들도 사용할 수 있도록 `icona`로 이름을 바꾸면서 나가려고 했다.
 
-![내가 먹어놓은 npm icona 패키지](./icona.png)
+![내가 먹어놓은 npm icona 패키지](./icona.webp)
 
 이때까지는 괜찮았다. 사내 동료분들이 내가 만든 라이브러리를 사용하기 시작하고 조금씩 문제가 나오기 시작했다.
 그리고 그 문제들을 몇몇은 해결했는데 몇몇은 해결하지 못했고 기술적인 한계들이 발견되기 시작했다.
@@ -290,7 +290,7 @@ const App = () => {
 
 생성된 아이콘 컴포넌트를 잘 보면 아래와 같이 `sprite.svg` 경로를 직접 입력해주고 있다.
 
-```tsx,3-3
+```tsx
 /* eslint-disable */
 import { forwardRef, type ForwardRefRenderFunction } from "react";
 import svg from "../assets/sprite.svg";
@@ -316,7 +316,7 @@ const SeedIcon: ForwardRefRenderFunction<HTMLSpanElement, SeedIconProps> = (
 
 만약 `contextPath`를 입력하게 되면 다음과 같이 컴포넌트가 만들어진다.
 
-```tsx,3-3&15-15&25-25
+```tsx
 /* eslint-disable */
 import { forwardRef, useContext, type ForwardRefRenderFunction } from "react";
 import { SeedIconContext } from "../contexts/SeedIconContext";
@@ -388,7 +388,7 @@ export const SeedIconProvider = ({
 그럼 `use` 태그에서 `href` 속성에 CDN에 올라가 있는 `all-sprite.svg`를 입력하면 되지 않겠느냐?라고 생각했다.
 그건 불가능했다. [`use` 태그에서 `href` 속성에 외부 경로를 입력하면 브라우저 정책에서 막혀서 사용을 하지 못한다.](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/use#usage_notes)
 
-![use 태그 href 속성에 외부 경로는 브라우저 정책에 막힌다.](./use-external.png)
+![use 태그 href 속성에 외부 경로는 브라우저 정책에 막힌다.](./use-external.webp)
 
 이거는 내가 몰랐던 부분이었고, 어떻게 해결할 수 있는 방법이 없었다.
 
@@ -400,23 +400,23 @@ inline SVG는 critical rendering path에 포함이 되어서 첫 로딩 시 아�
 아, 그럼 preload를 해서 해결하면 되지 않겠느냐,,, 요기서부터 문제가 발생했다.
 `vite` 환경에서 preload를 해도 preload를 한 SVG를 사용하는 게 아니라 sprite.svg를 한 번 더 불러오는 현상이 발생했다.
 
-![vite 환경에서 preload 테스트했을 때 크롬 네트워크 탭을 살펴보자](./preload-1.png)
+![vite 환경에서 preload 테스트했을 때 크롬 네트워크 탭을 살펴보자](./preload-1.webp)
 
 위의 사진을 잘 보면 `sprite.svg`를 두 번 불러오는 것을 볼 수 있다.
 첫 번째 `sprite.svg`는 preload를 한 것이고, 두 번째 `sprite.svg`는 아이콘 컴포넌트에서 `use` 태그를 사용해서 불러오는 것이다.
 **원래는 preload를 한 `sprite.svg`를 사용해야 하는데, preload를 한 `sprite.svg`를 사용하지 않고 또다시 불러오는 것이다.**
 
-![그래서 크롬 콘솔에 preload를 했지만 사용하지 않았다고 warning이 떴다.](./preload-2.png)
+![그래서 크롬 콘솔에 preload를 했지만 사용하지 않았다고 warning이 떴다.](./preload-2.webp)
 
 나도 검색을 정말 열심히 했다. 대부분 preload를 한 URL과 사용하는 URL이 달라서 preload가 제대로 동작하지 않는다고 하는데,
 나는 **분명히** preload한 URL과 사용하는 URL이 똑같은데 preload가 제대로 동작하지 않는다.
 
-![아...](ah.png)
+![아...](ah.webp)
 
 웃기는 게 `<img />`를 사용해서 href에 preload URL을 넣어주면 **warning은** 없앨 수 있다.
 하지만 근본적인 문제는 해결하지 못한다. 똑같이 preload가 동작하지 않는다.
 
-![preload를 한 URL과 사용하는 URL이 똑같다.](./preload-3.png)
+![preload를 한 URL과 사용하는 URL이 똑같다.](./preload-3.webp)
 
 **컴포넌트에서 뒤에 `#`을 붙여서 아이콘 `id` 값을 적어주는 저것 때문에 브라우저가 `URL`이 다르다고 인식을 하는 것이 아니냐**는
 동료의 의견이 있었다. 하지만 그것도 아니었다.
@@ -449,7 +449,7 @@ inline SVG는 critical rendering path에 포함이 되어서 첫 로딩 시 아�
 해당 글을 읽고 나서 다른 사이트에서는 어떤 방식으로 사용하고 있나 궁금해졌다.
 사실 이 과정이 먼저 선행되고 나서 프로젝트를 진행했어야 했는데, 그렇게 하지 않았다.
 
-![google, facebook, airbnb, github...](./others.png)
+![google, facebook, airbnb, github...](./others.webp)
 
 이미 많은 회사에서 시도가 없진 않았을 텐데, 조금 더 조심스럽게 접근했어야 했나 하는 생각을 했다.
 사실 내가 추구하는 그것이 성공하려면 지금 현존하는 프레임워크에 대응을 다 해주어야 한다.
@@ -463,7 +463,7 @@ inline SVG는 critical rendering path에 포함이 되어서 첫 로딩 시 아�
 혹은 그냥 생성된 `sprite.svg`를 html에 직접 넣어주는 방식을 제공해 줄까,
 아니면 `inline svg`만 제공해 줄까 고민이 정말 많았다.
 
-![나 인라인으로 돌아갈래~~~](./inline.png)
+![나 인라인으로 돌아갈래~~~](./inline.webp)
 
 사실 이 모든 게 이번 2주 동안 일어난 일이다.
 
@@ -480,7 +480,7 @@ inline SVG는 critical rendering path에 포함이 되어서 첫 로딩 시 아�
 저번 목요일에 내 팀원분이 **“그래도 얻은 건 있죠?”** 라고 물었는데 살짝 몽글한 느낌이 들었다.
 성과적으로는 제자리로 돌아왔지만, 해당 문제들을 삽질하면서 얻은 인사이트들은 너무나도 값진 경험이었다.
 
-![지금까지 나간 릴리즈 노트들](./releases.png)
+![지금까지 나간 릴리즈 노트들](./releases.webp)
 
 또한 한국에서 이런 기술적인 한계적인 돌파가 많이 나왔으면 좋겠다는 그런 생각을 했다.
 정말 정말 이런 자료들이 없더라. 리액트에서 아이콘을 어떻게 쓰면 되는지에 대한 간단한 포스팅들은 정말 차고 넘친다.

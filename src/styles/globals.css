@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Enable class-based dark mode for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+/* Custom breakpoints matching existing Chakra UI breakpoints */
+@theme {
+  --breakpoint-sm: 320px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 960px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1536px;
+
+  /* Border radius */
+  --radius-lg: 0.5rem;
+  --radius-md: calc(var(--radius-lg) - 2px);
+  --radius-sm: calc(var(--radius-lg) - 4px);
+
+  /* Custom colors using CSS variables for dark mode support */
+  --color-background: var(--bg-color);
+  --color-foreground: var(--fg-color);
+  --color-border: var(--border-color);
+  --color-gray-800: #202125;
+}
+
+/* Light mode (default) */
+:root {
+  --bg-color: #ffffff;
+  --fg-color: hsl(222.2 84% 4.9%);
+  --border-color: hsl(214.3 31.8% 91.4%);
+}
+
+/* Dark mode */
+.dark {
+  --bg-color: #202125;
+  --fg-color: hsl(210 40% 98%);
+  --border-color: hsl(217.2 32.6% 17.5%);
+}
+
+/* Base styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-padding-top: 75px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Pretendard Variable", Pretendard, -apple-system,
+      BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+      "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  }
+
+  /* Heading anchor styles */
+  .heading-anchor {
+    @apply opacity-0 transition-opacity duration-200;
+  }
+
+  h1:hover .heading-anchor,
+  h2:hover .heading-anchor,
+  h3:hover .heading-anchor,
+  h4:hover .heading-anchor {
+    @apply opacity-100;
+  }
+}
+
+/* Prose customizations */
+.prose {
+  --tw-prose-body: var(--fg-color);
+  --tw-prose-headings: var(--fg-color);
+  --tw-prose-links: #3182ce;
+  --tw-prose-bold: var(--fg-color);
+  --tw-prose-counters: var(--fg-color);
+  --tw-prose-bullets: #9ca3af;
+  --tw-prose-hr: var(--border-color);
+  --tw-prose-quotes: var(--fg-color);
+  --tw-prose-quote-borders: var(--border-color);
+  --tw-prose-code: var(--fg-color);
+  --tw-prose-pre-code: #e5e7eb;
+  --tw-prose-pre-bg: #1e1e1e;
+  --tw-prose-th-borders: var(--border-color);
+  --tw-prose-td-borders: var(--border-color);
+}
+
+.dark .prose {
+  --tw-prose-body: var(--fg-color);
+  --tw-prose-headings: var(--fg-color);
+  --tw-prose-links: #63b3ed;
+  --tw-prose-bold: var(--fg-color);
+  --tw-prose-counters: var(--fg-color);
+  --tw-prose-bullets: #6b7280;
+  --tw-prose-hr: var(--border-color);
+  --tw-prose-quotes: var(--fg-color);
+  --tw-prose-quote-borders: var(--border-color);
+  --tw-prose-code: var(--fg-color);
+  --tw-prose-pre-code: #e5e7eb;
+  --tw-prose-pre-bg: #1e1e1e;
+  --tw-prose-th-borders: var(--border-color);
+  --tw-prose-td-borders: var(--border-color);
+}
+
+/* Shiki code block styling */
+.prose pre {
+  margin: 20px 0;
+  border-radius: 20px;
+  padding: 1rem;
+  overflow-x: auto;
+  counter-reset: line;
+}
+
+/* Shiki line numbers */
+.prose pre code .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: rgba(115, 138, 148, 0.4);
+}
+
+/* Shiki highlighted lines */
+.prose pre .highlighted {
+  background-color: #afa62d30;
+  display: block;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+/* Shiki diff lines */
+.prose pre .diff.add {
+  background-color: #afa62d30;
+}
+
+.prose pre .diff.remove {
+  background-color: #5c3232;
+}
+
+/* Inline code styling (not inside pre) */
+.prose :not(pre) > code {
+  color: var(--fg-color);
+  font-weight: 600;
+  letter-spacing: -0.04px;
+  background-color: transparent;
+  padding: 0;
+}
+
+.prose :not(pre) > code::before {
+  content: "`";
+}
+
+.prose :not(pre) > code::after {
+  content: "`";
+}
+
+/* Utility for hiding scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

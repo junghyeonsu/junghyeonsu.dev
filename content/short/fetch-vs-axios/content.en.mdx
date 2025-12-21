@@ -2,7 +2,7 @@
 slug: fetch-vs-axios
 title: Differences between fetch and axios
 description: Things you can do in fetch but not in axios
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["short"]
 createdAt: "2023/01/06"
 updatedAt: ""
@@ -49,19 +49,19 @@ fetch provides an Abort Controller, an object that can abort a request.
 fetch has its own API (Promise-based interface, AbortController, etc.),
 axios (XHR) tends to have a heavier bundle size because it needs to implement features that fetch provides natively.
 
-![axios has a bundle size of about 29kb](./axios.png)
+![axios has a bundle size of about 29kb](./axios.webp)
 
 An alternative is the [redaxios](https://www.npmjs.com/package/redaxios) library.
 It has a fetch-based implementation and is minimally compatible with the axios API. (fetch-based axios API minimal compat)
 
-![redaxios has a bundle size of about 2kb](./redaxios.png)
+![redaxios has a bundle size of about 2kb](./redaxios.webp)
 
 ### Supported since Node.js version 18
 
 Originally, fetch was part of the web API, so it was a simple way to use JavaScript in a non-web runtime environment.
 fetch was not available in the Node.js environment. [However, with the update to Node.js version 18, fetch is now available](https://nodejs.org/de/blog/announcements/v18-release-announce/#fetch-experimental)
 
-![fetch was added in node 18](./node18.png)
+![fetch was added in node 18](./node18.webp)
 
 So you don't need the `node-fetch` or `isomorphic-fetch` libraries to use fetch in the node environment.
 You can now use fetch in the Browser, Node.js, Bun, and Cloudflare Worker environments.

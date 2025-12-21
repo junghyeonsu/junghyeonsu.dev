@@ -2,7 +2,7 @@
 slug: html-input-max-length
 title: HTML `<input />`의 maxLength 동작이 safari에서 다른 이슈
 description: maxLength를 넣고 이모지를 넣으면 브라우저마다 계산되는 것이 다르다.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["short"]
 createdAt: 2023/09/15
 updatedAt: ""
@@ -25,13 +25,13 @@ HTML input과 textarea의 maxLength 계산 방식은 UTF-8 기준으로 계산�
 
 이모지의 길이는 보통 2로 계산되기 때문에 2 \* 5 = 10해서 5개까지 밖에 못넣습니다.
 
-![chrome](./4.png)
+![chrome](./4.webp)
 
 ### 사파리
 
 그런데 사파리는 input과 textarea에서 이모지 계산 방식이 조금 달라서 10개를 넣을 수 있습니다.
 
-![safari](./5.png)
+![safari](./5.webp)
 
 ### 관련 글
 
@@ -41,7 +41,7 @@ HTML input과 textarea의 maxLength 계산 방식은 UTF-8 기준으로 계산�
 
 사파리에서 maxLength 프로퍼티가 조금 이상하게 동작한다고 얘기를 하고 있습니다.
 
-![safari에서 이모지 계산](./6.png)
+![safari에서 이모지 계산](./6.webp)
 
 ```jsx
 // 2 * 10 = 20,,, but maxLength was 10!!!!

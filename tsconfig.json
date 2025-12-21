@@ -1,12 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "jsx": "preserve",
-    "module": "CommonJS",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-  }
+	"extends": "astro/tsconfigs/base",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
+		"moduleResolution": "bundler",
+		"types": ["astro/client"]
+	},
+	"include": ["src/**/*", "content/**/*", "portfolio/**/*", ".astro/**/*"],
+	"exclude": ["node_modules", "dist"]
 }

@@ -2,7 +2,7 @@
 slug: using-ajv-and-github-actions-to-ensure-consistent-meta-information-across-json-files
 title: Using AJV and GitHub Actions to Ensure Consistent Meta Information Across JSON Files
 description: Learn how to proactively prevent errors when processing JSON data to maintain data integrity with consistent meta information.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development"]
 createdAt: "2023/05/14"
 updatedAt: ""
@@ -37,15 +37,15 @@ In my project, [Seed Design] (https://github.com/daangn/seed-design) repository,
 You create separate mdx documents to manage style information, usage information, overview information, etc. for `Avatar`.
 Let's say you're using a `coverImage` in each of these documents, then you'd have `overview.mdx`, `style.mdx`, and `usage.mdx` all looking like this.
 
-```mdx,2-2
+```mdx
 {/* We're calling coverImage directly */}
-![coverImage](./coverImage.png)
+![coverImage](./coverImage.webp)
 ```
 
-```sh,4-6
+```sh
 # AS-IS
 📦avatar
- ┣ 📜coverImage.png
+ ┣ 📜coverImage.webp
  ┣ 📜overview.mdx # coverImage in use
  ┣ 📜style.mdx # coverImage in use
  ┗ 📜usage.mdx # coverImage in use
@@ -58,10 +58,10 @@ But if this happens a lot, we could end up spending all day just fixing data.
 So we set aside a metadata file.
 Like this
 
-```sh,4-4
+```sh
 # TO-BE
 📦avatar
- ┣ 📜coverImage.png
+ ┣ 📜coverImage.webp
  ┣ 📜component-meta.json # Metadata file
  ┣ 📜overview.mdx
  ┣ 📜style.mdx
@@ -72,9 +72,9 @@ And in that JSON file, it should look like this.
 
 - [Example of a metadata JSON file for an Avatar component](https://github.com/daangn/seed-design/blob/main/docs/content/component/avatar/component-meta.json)
 
-```json,2-2
+```json
 {
-  "coverImage": "./coverImage.jpeg"
+  "coverImage": "./coverImage.webp"
 }
 ```
 
@@ -191,7 +191,7 @@ const jsonSchema = {
 
 const pngSchema = {
   type: "string",
-  pattern: "^.*.png$",
+  pattern: "^.*.webp$",
 };
 
 const platformSchema = {
@@ -300,7 +300,7 @@ export const primitiveMetaSchema = {
 
 I need a script that will validate through that Schema. My requirements were as follows
 
-```sh,4-4&6-6&8-8&12-12&14-14&16-16
+```sh
 📦content
  ┣ 📂component
  ┃ ┣ 📂action-sheet
@@ -407,7 +407,7 @@ async function validateJsonInDir({ dir, validate, type }) {
 
 Once you've written the script like this, write the commands to the script in `package.json`.
 
-```json,3-3
+```json
 {
   "scripts": {
     "validate:meta-data": "node scripts/validate-meta-data.mjs"
@@ -417,14 +417,14 @@ Once you've written the script like this, write the commands to the script in `p
 
 Let's run it once, shall we?
 
-![Try it in CLI](./script-success-in-cli.png)
+![Try it in CLI](./script-success-in-cli.webp)
 
 Looks like it works!
 
 But what if the data format isn't right?
 In my component's metadata JSON file, I made sure that the `description` was in the form of a `string`.
 
-```js,5-5&11-11
+```js
 export const componentMetaSchema = {
   type: "object",
   properties: {
@@ -450,7 +450,7 @@ And then if we run the script again?
 }
 ```
 
-![Rerun script](./script-fail-in-cli.png)
+![Rerun script](./script-fail-in-cli.webp)
 
 - Which component failed
 - Which property is wrong
@@ -471,7 +471,7 @@ and so on.
 
 Let's go ahead and write an Action
 
-```yml,1-7&27-30
+```yml
 on:
   # every time a push is made
     branches: # check all branches
@@ -510,22 +510,22 @@ jobs:
 
 And let's create a PR and push it.
 
-![What success looks like in PR](./script-success-in-github.png)
+![What success looks like in PR](./script-success-in-github.webp)
 
-![What success looks like in the action tab](./script-success-in-action.png)
+![What success looks like in the action tab](./script-success-in-action.webp)
 
 Looks like it's working!
 
 But what does it look like if it fails?
 
-![What it looks like when it fails in PR](./script-fail-in-github.png)
+![What it looks like when it fails in PR](./script-fail-in-github.webp)
 
-![What it looks like when it fails in the Action tab](./script-fail-in-action.png)
+![What it looks like when it fails in the Action tab](./script-fail-in-action.webp)
 
 In the script we wrote earlier, we had code to exit the process if it failed.
 Without that code, the Action will look like it succeeded even though the script failed, so it's important to put it in.
 
-```js,5-5
+```js
 if (!isValid) {
   // NOTE: This is executed when validation fails.
   console.log(`${type}/${fileName} is invalid`);

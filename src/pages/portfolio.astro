@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from "astro:content";
+import { mdxComponents } from "@/components/mdx";
+import PostLayout from "@/layouts/PostLayout.astro";
+
+// Get portfolio content
+const portfolioEntries = await getCollection("portfolio");
+const portfolio = portfolioEntries[0];
+
+// biome-ignore lint/suspicious/noImplicitAnyLet: Content type is inferred from render
+let Content;
+if (portfolio) {
+	const rendered = await render(portfolio);
+	Content = rendered.Content;
+}
+---
+
+<PostLayout
+  title="포트폴리오"
+  description="정현수 포트폴리오"
+>
+  <article class="w-full xl:w-[800px]">
+    <h1 class="text-4xl font-black mb-8">포트폴리오</h1>
+
+    {
+      Content ? (
+        <div class="prose max-w-none">
+          <Content components={mdxComponents} />
+        </div>
+      ) : (
+        <p>포트폴리오를 불러올 수 없습니다.</p>
+      )
+    }
+  </article>
+</PostLayout>

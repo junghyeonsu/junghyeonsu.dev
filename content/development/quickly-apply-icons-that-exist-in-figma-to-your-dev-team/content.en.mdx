@@ -2,7 +2,7 @@
 slug: quickly-apply-icons-that-exist-in-figma-to-your-dev-team
 title: Quickly apply icons that exist in Figma to Dev (Figma Plugin, Icon Library)
 description: Share experience deploying icons to GitHub via the Figma plugin and making them available to the dev team.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development", "icon"]
 createdAt: "2023/07/16"
 updatedAt: ""
@@ -121,7 +121,7 @@ rather than a carrot-only plugin, there were a number of things we had to consid
 First, we needed to send APIs from the Figma plugin to GitHub.
 We needed a UI to get a GitHub address and a GitHub API key.
 
-![Setting Tab UI](./1.png)
+![Setting Tab UI](./1.webp)
 
 Next, we needed a UI to export the icons to GitHub.
 This was a bit tricky to design, because the main problem was where and how the icons were located.
@@ -130,12 +130,12 @@ In other words, in order to export the icons, I needed to know where they existe
 So I decided to make the `Icona` plugin conditional on placing the icons in a frame called `icona-frame`.
 in a frame called `icona-frame`.
 
-![The icons must exist in a frame with the name icona-frame.](./2.png)
+![The icons must exist in a frame with the name icona-frame.](./2.webp)
 
 And you want to make sure that these conditions are well represented in the plugin. We've made sure that they're well documented in the
 documentation, as well as in the plugin's internal UI.
 
-![README on the left and inside the Figma plugin on the right](./3.png)
+![README on the left and inside the Figma plugin on the right](./3.webp)
 
 And a UI for how well it recognized the icons in the `icona-frame`,
 how many icons will be sent to GitHub in total.
@@ -166,7 +166,7 @@ object with the name and `svg`.
 }
 ```
 
-![What icons.json actually looks like](./4.png)
+![What icons.json actually looks like](./4.webp)
 The idea is to just minify and send the above shapes, and generate the various assets from the information above.
 the idea is to let the developer do it locally.
 
@@ -223,7 +223,7 @@ active, which determines whether each asset should be created or not,
 and the option to include the options from each conversion library as is.
 These options carry over the option types from each conversion library so that the user experience doesn't suffer.
 
-![Pass the option type of the conversion library as is](./5.png)
+![Pass the option type of the conversion library as is](./5.webp)
 
 And [seed-icon](https://github.com/daangn/seed-icon), which currently uses `icona`, uses
 I'm using it like this Create an `icona.js` file and use the `generate` function in it to add the options you want
@@ -232,12 +232,12 @@ with the `generate` function.
 Then, in `scripts` of `package.json`, add the `generate:icona` command to the previously created
 In `scripts` of `package.json`, enter `node icona.js`, which is the command to run `icona.js`.
 
-![In order, the icona.js file, the icona.js file implementation, the package.json scripts](./6.png)
+![In order, the icona.js file, the icona.js file implementation, the package.json scripts](./6.webp)
 
 If you run `yarn generate:icona` or `npm run generate:icona`, it will create assets in a folder structure like this
 assets in the following folder structure.
 
-![Asset Creation Complete!](./7.png)
+![Asset Creation Complete!](./7.webp)
 
 The generated assets are now available to native developers via GitHub raw URLs,
 web developers just need to build the React component and deploy it with NPM to make it available to people.
@@ -328,7 +328,7 @@ Instead of just thinking about my own product, I was able to take a step back an
 and develop plugins and libraries from a third-party perspective, and then become a user myself and use those plugins and libraries
 I used those plugins and libraries to manage my icons.
 
-![Icona plugin on the Figma community](./8.png)
+![Icona plugin on the Figma community](./8.webp)
 
 It's been out for about 16 days now (as of 7/16/2023), and about 650 people have `tried it out`.
 I've gotten about 6 hearts, which doesn't really matter, but I just wanted to show it off.

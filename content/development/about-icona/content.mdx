@@ -2,7 +2,7 @@
 slug: about-icona-remaining-tasks
 title: 아이콘 피그마 배포 시스템, Icona의 남은 과제들 (부제. 테크밋업 발표에서 하지 못한 얘기들)
 description: 테크밋업 발표에서 하지 못한 Icona의 남은 과제들에 대한 이야기에 대해서 적어보았다.
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development", "icon"]
 createdAt: 2024/10/26
 updatedAt:
@@ -18,7 +18,7 @@ featured: true
 피그마 플러그인과 제네레이터 패키지를 만들어서 피그마에서 아이콘을 추출하고,
 개발단으로 옮기는 과정을 자동화 했다. 이 시스템을 `Icona(이코나)`라고 이름 지었고, 해당 내용을 발표했다.
 
-![발표 자료의 한 장면, 대충 요구사항들을 위의 세가지를 이용해서 해결했다는 내용](./1.png)
+![발표 자료의 한 장면, 대충 요구사항들을 위의 세가지를 이용해서 해결했다는 내용](./1.webp)
 
 사실 나는 아이콘이랑 되게 인연이 길고 깊다. 정말 깊은지는 아이콘의 얘기를 들어봐야 하지만
 
@@ -61,7 +61,7 @@ featured: true
 
 해당 아이콘 정보를 저장하는 파일의 경로도 따로 지정할 수 있고, 파일명도 커스텀 할 수 있게되면 좋을 것 같다.
 
-![현재는 배포 버튼을 누르면 아이콘 데이터 파일의 경로가 `.icona/icons.json`으로 고정 돼 있다.](./2.png)
+![현재는 배포 버튼을 누르면 아이콘 데이터 파일의 경로가 `.icona/icons.json`으로 고정 돼 있다.](./2.webp)
 
 ### 메타데이터 시스템
 
@@ -76,13 +76,13 @@ featured: true
 [phosphoricons](https://phosphoricons.com/?q=%22person%22)에서 `person` 이라고 검색하면 사람 모양의 아이콘들이 나온다.
 하지만 이 아이콘들의 이름을 자세히보면 `person` 을 포함하고 있지 않다.
 
-![이름에 person이 포함되어 있지 않다.](./3.png)
+![이름에 person이 포함되어 있지 않다.](./3.webp)
 
 어떻게 이런 검색 시스템을 구축할 수 있을까? 바로 아이콘 이름 이외에, 아이콘에 대한 **메타데이터**를 저장하면 된다.
 
 보통 `메뉴`를 의미하는 아이콘 중에 선 3개로 이뤄진 아이콘들이 많이 사용되고 있다.
 
-![list? menu? hamburger?](./4.png)
+![list? menu? hamburger?](./4.webp)
 
 보통 아이콘의 이름을 정할 때는 무조건 형상을 기준으로 이름을 짓는다고 한다면
 위 아이콘의 이름은 **가로 라인 3개가 세로로 배치된 모양**이라고 할 수 있을 것이다.
@@ -145,7 +145,7 @@ generate({
 이거는 위 `Figma Plugin`의 `.icona/icons.json` 파일의 얘기와 연관이 있다.
 `.icona/icons.json` 파일의 경로를 커스텀할 수 있게 되면, `generator`에서도 아이콘 파일 경로를 커스텀할 수 있게 해야한다.
 
-```ts,6-7
+```ts
 // icona.config.ts
 import { generate } from '@icona/generator';
 import type { IconData } from '@icona/generator';
@@ -236,7 +236,7 @@ function App() {
 피그마에서 SVG 데이터를 이용해서 리액트 아이콘을 만들 때 `svgr` 라이브러리를 사용하고 있다.
 `svgr` 라이브러리에서는 `template` 옵션을 이용해서 커스텀 템플릿을 사용할 수 있다.
 
-```ts,6-19
+```ts
 // icona.config.ts
 import { generate, type ReactConfig } from '@icona/generator';
 
@@ -274,7 +274,7 @@ const reactConfig: ReactConfig = {
 그래서 `svgr`의 `template` 함수를 한번 더 감싸서 커스텀 템플릿을 만들었다.
 그리고 더이상은 `svgr`의 `template`이 아니기 때문에 `svgrConfig`에서 빼내서 최상위 `prop`으로 빼냈다.
 
-```ts,6-34
+```ts
 // icona.config.ts
 import { generate, type ReactConfig } from '@icona/generator';
 
@@ -295,7 +295,7 @@ const reactConfig: ReactConfig = {
 
       return tpl`
         ${variables.imports};
-        
+
         const Icon = (
           { size = 24, ...props }: SVGProps<SVGSVGElement> & { size?: number | string },
           ref: Ref<SVGSVGElement>

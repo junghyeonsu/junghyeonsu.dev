@@ -2,7 +2,7 @@
 slug: asset-town-admin-with-sanity
 title: 에셋 관리 시스템을 만들어보자 (에셋타운 2편 - 어드민 페이지 with Sanity)
 description: 에셋타운의 어드민 페이지 Sanity를 이용해서 만들어보기
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["development", "asset-town"]
 createdAt: 2024/02/17
 updatedAt:
@@ -56,7 +56,7 @@ npm -y create sanity@latest
 위 명령어를 실행하면 프로젝트 생성을 위한 몇 가지 질문이 나옵니다.
 질문에 대답하면 프로젝트가 생성됩니다. 프로젝트명이나 여러 가지 설정들은 자신의 프로젝트에 맞게 설정하면 됩니다.
 
-![질문들](./1.png)
+![질문들](./1.webp)
 
 프로젝트를 생성하면 아래와 같은 폴더 구조가 생성됩니다.
 기본적인 linter(eslint)와 formatter(prettier) 설정,
@@ -89,7 +89,7 @@ dataset은 데이터베이스의 개념으로 생각하면 됩니다. 기본적�
 
 Sanity 어드민 화면을 개발할 때는 `development` `dataset`을 사용하고, 배포할 때는 `production` `dataset`을 사용하면 됩니다.
 
-![development와 production으로 된 dataset이 있어야 환경 분리가 됩니다.](./3.png)
+![development와 production으로 된 dataset이 있어야 환경 분리가 됩니다.](./3.webp)
 
 <Callout type="info">
 환경 분리는 개발 환경에서의 테스트와 배포 환경에서의 테스트를 분리하기 위함입니다.
@@ -102,7 +102,7 @@ Sanity 어드민 화면을 개발할 때는 `development` `dataset`을 사용하
 위와 같이 프로젝트를 생성하고 `yarn dev` 명령어로 프로젝트를 실행하면
 아래와 같은 화면을 맨 처음 보게 됩니다.
 
-![텅 빈 화면](./2.png)
+![텅 빈 화면](./2.webp)
 
 만약 기본 템플릿이 아니라 미리 정의된 스키마를 가진 템플릿으로 프로젝트를 생성했다면
 위와 같은 화면이 아닐 수도 있습니다. 하지만 기본적으로는 위와 같은 화면이 나옵니다.
@@ -166,7 +166,7 @@ export const schemaTypes = [lottie]
 
 위와 같이 스키마를 정의하면 어드민 페이지에 아래와 같이 나옵니다.
 
-![스키마를 정의했을 때 어드민 페이지 화면](./4.png)
+![스키마를 정의했을 때 어드민 페이지 화면](./4.webp)
 
 제일 왼쪽부터 총 세 개의 패널이 있는데 차례대로 살짝씩 설명을 하고 넘어가겠습니다.
 (이미지에 적힌 용어들은 공식적인 용어는 아니고 이해를 위한 용어입니다.)
@@ -181,13 +181,13 @@ export const schemaTypes = [lottie]
 
 위에서 보여드렸던 것처럼 `Document List` 패널에서 플러스 버튼을 누르고 데이터를 추가할 수 있습니다.
 
-![데이터 추가하기](./5.png)
+![데이터 추가하기](./5.webp)
 
 위에 스키마에서 정의한 것처럼 `lottie` 필드에는 `.json` 파일만 올릴 수 있도록 설정했기 때문에 `.json` 파일만 올릴 수 있습니다.
 
 스키마에서 정의한 필드들을 다 채우고 오른쪽 아래에 있는 `Publish` 버튼을 누르면 데이터가 실제로 저장됩니다.
 
-![Publish 버튼을 통해서 데이터를 배포할 수 있습니다.](./6.png)
+![Publish 버튼을 통해서 데이터를 배포할 수 있습니다.](./6.webp)
 
 배포하는 이유는 어드민 화면에서 `title`을 입력하고 `description`을 입력하고 `lottie` 파일을 올렸다고 해서 바로 데이터베이스에 저장되는 것이 아니라
 `draft` 상태로 저장이 되기 때문입니다. `draft` 상태의 데이터들은 같이 어드민을 조작하는 사람들은 볼 수 있지만, 실제로 사용자들이 접근할 수 있는 데이터가 아닙니다.
@@ -205,21 +205,21 @@ Sanity는 `GraphQl`과 `GROQ` 쿼리 언어를 지원합니다.
 어드민 화면 상단에 `Structure`라는 탭은 데이터를 확인하는 탭이고,
 `Vision` 탭을 클릭해서 데이터베이스에 쿼리를 날려볼 수 있습니다.
 
-![Vision 탭](./7.png)
+![Vision 탭](./7.webp)
 
 GROQ 쿼리를 통해 데이터를 가져와 보겠습니다.
 
-```groq,2-2
+```groq
 // document type이 lottie인 데이터를 모두 가져옵니다.
 *[_type == "lottie"]
 ```
 
-![GROQ 쿼리 결과](./8.png)
+![GROQ 쿼리 결과](./8.webp)
 
 `_type == "lottie"` 조건에 해당하는 데이터들이 나오는 것을 확인할 수 있습니다.
 해당 필드는 아까 위에서 정의한 스키마에서 정의한 필드에서 확인할 수 있습니다.
 
-```typescript,5-5
+```typescript
 // schemaTypes/lottie.ts
 import { defineField, defineType } from "sanity";
 
@@ -246,7 +246,7 @@ export const lottie = defineType({
 }
 ```
 
-![GROQ 쿼리 결과](./9.png)
+![GROQ 쿼리 결과](./9.webp)
 
 위처럼 필요한 필드만 가져올 수 있습니다.
 
@@ -258,7 +258,7 @@ export const lottie = defineType({
 하지만 우리가 보고 싶은 데이터는 `file` 데이터의 `ref`가 아니라 실제 데이터를 보고 싶을 것입니다.
 그럼, 아래와 같이 쿼리하면 됩니다.
 
-```groq,7-7
+```groq
 *[_type == "lottie"] {
   title,
   description,
@@ -272,11 +272,11 @@ export const lottie = defineType({
 문법의 형태가 조금 특이한데, 위와 같이 쿼리를 날리면 아래와 같은 결과를 얻을 수 있습니다.
 저장된 로띠 파일에 대한 메타데이터들을 전부 볼 수 있습니다.
 
-![GROQ 쿼리 결과](./10.png)
+![GROQ 쿼리 결과](./10.webp)
 
 저기서도 선택적으로 필요한 필드를 가져오려면 아래와 같이 쿼리하면 됩니다.
 
-```groq,4-7
+```groq
 *[_type == "lottie"] {
   title,
   description,
@@ -306,7 +306,7 @@ export const lottie = defineType({
 데이터 스키마를 통해서 어드민 화면을 만들면 Sanity에서 제공해 주는 기본적인 컴포넌트들로 화면이 구성되게 됩니다.
 근데 그게 아니라 커스텀 컴포넌트를 만들어서 화면을 구성하고 싶다면 어떻게 해야 할까요?
 
-![현재는 Sanity에서 제공하는 기본적인 컴포넌트들로 구성되어 있습니다.](./11.png)
+![현재는 Sanity에서 제공하는 기본적인 컴포넌트들로 구성되어 있습니다.](./11.webp)
 
 현재는 로띠 파일을 올리면 파일 이름과 파일의 크기에 대한 정보만 보이는데,
 만약 로띠 파일과 같은 `json` 파일을 올렸을 때,
@@ -369,7 +369,7 @@ export const CustomLottiePlayerInput: ComponentType<
 
 이렇게 커스텀 컴포넌트를 만들었으면 스키마 파일에서 해당 커스텀 컴포넌트를 사용하겠다고 선언해 주어야 합니다.
 
-```tsx,4-4&29-31
+```tsx
 // schemaTypes/lottie.ts
 import { defineField, defineType } from "sanity";
 
@@ -431,10 +431,10 @@ export const lottie = defineType({
  ┣ 📂static
  ┃ ┣ 📜.gitkeep
  ┃ ┣ 📜SanityVision-9R-J5NEI-e929e34e.js
- ┃ ┣ 📜apple-touch-icon.png
+ ┃ ┣ 📜apple-touch-icon.webp
  ┃ ┣ 📜browser-6f831660.js
- ┃ ┣ 📜favicon-192.png
- ┃ ┣ 📜favicon-512.png
+ ┃ ┣ 📜favicon-192.webp
+ ┃ ┣ 📜favicon-512.webp
  ┃ ┣ 📜favicon.ico
 ┃ ┣ 📜favicon.svg
 ┃ ┣ 📜index-0LpTAOhF-3116ac06.js

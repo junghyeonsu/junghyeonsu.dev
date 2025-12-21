@@ -2,7 +2,7 @@
 slug: fetch-vs-axios
 title: fetch와 axios의 차이점
 description: fetch에선 되지만 axios에서는 안되는 것들
-thumbnail: ./cover.png
+thumbnail: ./cover.webp
 tags: ["short"]
 createdAt: "2023/01/06"
 updatedAt: ""
@@ -48,19 +48,19 @@ fetch는 요청을 중단할 수 있는 객체인 Abort Controller를 제공한�
 fetch는 자체적으로 API(Promise 기반 인터페이스, AbortController 등등)들이 구현되어있지만,
 axios(XHR)은 fetch에서 기본적으로 제공해주는 기능들을 구현해야 하기 때문에 번들 사이즈가 무거워지는 경향이 있다.
 
-![axios는 29kb 정도의 번들 사이즈를 가지고 있다.](./axios.png)
+![axios는 29kb 정도의 번들 사이즈를 가지고 있다.](./axios.webp)
 
 그 대체재로 [redaxios](https://www.npmjs.com/package/redaxios) 라이브러리가 있는데
 fetch 기반으로 구현이 되어있고, axios 최소한으로 호환되게 만들어놨다. (fetch 기반 axios API minimal compat)
 
-![redaxios는 2kb 정도의 번들 사이즈를 가지고 있다.](./redaxios.png)
+![redaxios는 2kb 정도의 번들 사이즈를 가지고 있다.](./redaxios.webp)
 
 ### Node.js 18버전부터 지원 가능
 
 원래 fetch는 웹 API에 속해있었기 때문에 웹이 아닌 단순 런타임 환경에서 자바스크립트를 이용하기 위한
 Node.js 환경에서는 fetch를 사용할 수 없었다. [하지만 Node.js 18버전으로 업데이트 되면서 fetch를 사용할 수 있게 되었다.](https://nodejs.org/de/blog/announcements/v18-release-announce/#fetch-experimental)
 
-![node 18버전에서 fetch가 추가되었다.](./node18.png)
+![node 18버전에서 fetch가 추가되었다.](./node18.webp)
 
 그래서 node 환경에서 fetch를 사용하기 위한 `node-fetch` 라이브러리나 `isomorphic-fetch` 라이브러리가 없이도
 Browser, Node.js, Bun, Cloudflare Worker 환경에서 fetch를 사용할 수 있게 되었다.
