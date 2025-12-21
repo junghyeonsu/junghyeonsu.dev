@@ -2,13 +2,13 @@
 import { koreanTagNames } from "@/constants";
 
 interface Props {
-	title: string;
-	createdAt: string;
-	updatedAt?: string | null;
-	tags: string[];
-	readingTime: string;
-	thumbnail?: string;
-	thumbnailSource?: string | null;
+  title: string;
+  createdAt: string;
+  updatedAt?: string | null;
+  tags: string[];
+  readingTime: string;
+  thumbnail?: string;
+  thumbnailSource?: string | null;
 }
 
 const { title, createdAt, updatedAt, tags, readingTime, thumbnail, thumbnailSource } = Astro.props;

@@ -10,12 +10,12 @@ import { WORDS_PER_MINUTE } from "@/constants";
 import PostLayout from "@/layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
-	// Get English posts (locale === 'en')
-	const posts = await getCollection("blog", ({ data }) => data.locale === "en");
-	return posts.map((post) => ({
-		params: { slug: post.data.slug },
-		props: { post },
-	}));
+  // Get English posts (locale === 'en')
+  const posts = await getCollection("blog", ({ data }) => data.locale === "en");
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
 }
 
 const { post } = Astro.props;
@@ -30,63 +30,63 @@ const readingTimeText = `${readingTime} min read`;
 // Get related posts (same tags, different slug, English only)
 const allPosts = await getCollection("blog", ({ data }) => data.locale === "en");
 const relatedPosts = allPosts
-	.filter(
-		(p) =>
-			p.data.slug !== post.data.slug && p.data.tags.some((tag) => post.data.tags.includes(tag)),
-	)
-	.sort((a, b) => {
-		const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
-		const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
-		return dateB.getTime() - dateA.getTime();
-	})
-	.slice(0, 4)
-	.map((p) => ({
-		slug: p.data.slug,
-		title: p.data.title,
-		description: p.data.description,
-		createdAt: p.data.createdAt,
-		updatedAt: p.data.updatedAt,
-		tags: p.data.tags,
-		thumbnail: p.data.thumbnail?.src,
-	}));
+  .filter(
+    (p) =>
+      p.data.slug !== post.data.slug && p.data.tags.some((tag) => post.data.tags.includes(tag)),
+  )
+  .sort((a, b) => {
+    const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
+    const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
+    return dateB.getTime() - dateA.getTime();
+  })
+  .slice(0, 4)
+  .map((p) => ({
+    slug: p.data.slug,
+    title: p.data.title,
+    description: p.data.description,
+    createdAt: p.data.createdAt,
+    updatedAt: p.data.updatedAt,
+    tags: p.data.tags,
+    thumbnail: p.data.thumbnail?.src,
+  }));
 
 // Transform headings to table of contents format
 type TocItem = {
-	url: string;
-	title: string;
-	items?: TocItem[];
+  url: string;
+  title: string;
+  items?: TocItem[];
 };
 
 function buildTableOfContents(headings: { depth: number; slug: string; text: string }[]): {
-	items: TocItem[];
+  items: TocItem[];
 } {
-	const toc: TocItem[] = [];
-	const stack: { depth: number; item: TocItem }[] = [];
+  const toc: TocItem[] = [];
+  const stack: { depth: number; item: TocItem }[] = [];
 
-	for (const heading of headings) {
-		const item: TocItem = {
-			url: `#${heading.slug}`,
-			title: heading.text,
-		};
+  for (const heading of headings) {
+    const item: TocItem = {
+      url: `#${heading.slug}`,
+      title: heading.text,
+    };
 
-		while (stack.length > 0 && stack[stack.length - 1].depth >= heading.depth) {
-			stack.pop();
-		}
+    while (stack.length > 0 && stack[stack.length - 1].depth >= heading.depth) {
+      stack.pop();
+    }
 
-		if (stack.length === 0) {
-			toc.push(item);
-		} else {
-			const parent = stack[stack.length - 1].item;
-			if (!parent.items) {
-				parent.items = [];
-			}
-			parent.items.push(item);
-		}
+    if (stack.length === 0) {
+      toc.push(item);
+    } else {
+      const parent = stack[stack.length - 1].item;
+      if (!parent.items) {
+        parent.items = [];
+      }
+      parent.items.push(item);
+    }
 
-		stack.push({ depth: heading.depth, item });
-	}
+    stack.push({ depth: heading.depth, item });
+  }
 
-	return { items: toc };
+  return { items: toc };
 }
 
 const tableOfContents = buildTableOfContents(headings);

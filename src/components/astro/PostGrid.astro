@@ -2,17 +2,17 @@
 import PostCard from "@/components/react/PostCard";
 
 interface Post {
-	slug: string;
-	title: string;
-	description: string;
-	createdAt: string;
-	updatedAt?: string | null;
-	tags: string[];
-	thumbnail?: string;
+  slug: string;
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt?: string | null;
+  tags: string[];
+  thumbnail?: string;
 }
 
 interface Props {
-	posts: Post[];
+  posts: Post[];
 }
 
 const { posts } = Astro.props;

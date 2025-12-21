@@ -2,17 +2,17 @@
 import "@/styles/globals.css";
 
 interface Props {
-	title: string;
-	description?: string;
-	image?: string;
-	canonicalURL?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
 const {
-	title,
-	description = "프론트엔드 엔지니어 정현수입니다.",
-	image = "/og-image.webp",
-	canonicalURL = Astro.url.href,
+  title,
+  description = "프론트엔드 엔지니어 정현수입니다.",
+  image = "/og-image.webp",
+  canonicalURL = Astro.url.href,
 } = Astro.props;
 
 const siteTitle = title ? `${title} | 정현수 블로그` : "정현수 블로그";

@@ -8,71 +8,71 @@ import { koreanTagNames, POSTS_PER_PAGE } from "@/constants";
 import MainLayout from "@/layouts/MainLayout.astro";
 
 export async function getStaticPaths() {
-	const allPosts = await getCollection("blog", ({ data }) => {
-		return !data.locale && data.title !== "정현수 포트폴리오";
-	});
+  const allPosts = await getCollection("blog", ({ data }) => {
+    return !data.locale && data.title !== "정현수 포트폴리오";
+  });
 
-	const posts = allPosts.sort((a, b) => {
-		const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
-		const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
-		return dateB.getTime() - dateA.getTime();
-	});
+  const posts = allPosts.sort((a, b) => {
+    const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
+    const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
+    return dateB.getTime() - dateA.getTime();
+  });
 
-	// Get all unique tags
-	const tagsSet = new Set<string>();
-	posts.forEach((post) => {
-		post.data.tags.forEach((tag) => tagsSet.add(tag));
-	});
-	const tags = Array.from(tagsSet);
+  // Get all unique tags
+  const tagsSet = new Set<string>();
+  posts.forEach((post) => {
+    post.data.tags.forEach((tag) => tagsSet.add(tag));
+  });
+  const tags = Array.from(tagsSet);
 
-	// Get tag groups for all posts
-	const tagGroupsMap = new Map<string, number>();
-	for (const post of posts) {
-		for (const tag of post.data.tags) {
-			tagGroupsMap.set(tag, (tagGroupsMap.get(tag) || 0) + 1);
-		}
-	}
-	const tagGroups = Array.from(tagGroupsMap.entries()).map(([tag, tagPostCount]) => ({
-		tag,
-		tagPostCount,
-	}));
+  // Get tag groups for all posts
+  const tagGroupsMap = new Map<string, number>();
+  for (const post of posts) {
+    for (const tag of post.data.tags) {
+      tagGroupsMap.set(tag, (tagGroupsMap.get(tag) || 0) + 1);
+    }
+  }
+  const tagGroups = Array.from(tagGroupsMap.entries()).map(([tag, tagPostCount]) => ({
+    tag,
+    tagPostCount,
+  }));
 
-	const paths: any[] = [];
+  const paths: any[] = [];
 
-	for (const tag of tags) {
-		const tagPosts = posts.filter((post) => post.data.tags.includes(tag));
-		const totalPages = Math.ceil(tagPosts.length / POSTS_PER_PAGE);
+  for (const tag of tags) {
+    const tagPosts = posts.filter((post) => post.data.tags.includes(tag));
+    const totalPages = Math.ceil(tagPosts.length / POSTS_PER_PAGE);
 
-		// First page (no page number in URL)
-		paths.push({
-			params: { tag, page: undefined },
-			props: {
-				posts: tagPosts,
-				allPosts: posts,
-				currentTag: tag,
-				currentPage: 1,
-				totalPages,
-				tagGroups,
-			},
-		});
+    // First page (no page number in URL)
+    paths.push({
+      params: { tag, page: undefined },
+      props: {
+        posts: tagPosts,
+        allPosts: posts,
+        currentTag: tag,
+        currentPage: 1,
+        totalPages,
+        tagGroups,
+      },
+    });
 
-		// Additional pages
-		for (let i = 2; i <= totalPages; i++) {
-			paths.push({
-				params: { tag, page: String(i) },
-				props: {
-					posts: tagPosts,
-					allPosts: posts,
-					currentTag: tag,
-					currentPage: i,
-					totalPages,
-					tagGroups,
-				},
-			});
-		}
-	}
+    // Additional pages
+    for (let i = 2; i <= totalPages; i++) {
+      paths.push({
+        params: { tag, page: String(i) },
+        props: {
+          posts: tagPosts,
+          allPosts: posts,
+          currentTag: tag,
+          currentPage: i,
+          totalPages,
+          tagGroups,
+        },
+      });
+    }
+  }
 
-	return paths;
+  return paths;
 }
 
 const { posts, allPosts, currentTag, currentPage, totalPages, tagGroups } = Astro.props;
@@ -83,13 +83,13 @@ const paginatedPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
 // Transform posts for components
 const transformedPosts = paginatedPosts.map((post: any) => ({
-	slug: post.data.slug,
-	title: post.data.title,
-	description: post.data.description,
-	createdAt: post.data.createdAt,
-	updatedAt: post.data.updatedAt,
-	tags: post.data.tags,
-	thumbnail: post.data.thumbnail?.src,
+  slug: post.data.slug,
+  title: post.data.title,
+  description: post.data.description,
+  createdAt: post.data.createdAt,
+  updatedAt: post.data.updatedAt,
+  tags: post.data.tags,
+  thumbnail: post.data.thumbnail?.src,
 }));
 
 const tagTitle = koreanTagNames[currentTag] || currentTag;

@@ -1,15 +1,15 @@
 {
-	"extends": "astro/tsconfigs/base",
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"]
-		},
-		"jsx": "react-jsx",
-		"jsxImportSource": "react",
-		"moduleResolution": "bundler",
-		"types": ["astro/client"]
-	},
-	"include": ["src/**/*", "content/**/*", "portfolio/**/*", ".astro/**/*"],
-	"exclude": ["node_modules", "dist"]
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "moduleResolution": "bundler",
+    "types": ["astro/client"]
+  },
+  "include": ["src/**/*", "content/**/*", "portfolio/**/*", ".astro/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

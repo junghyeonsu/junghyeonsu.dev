@@ -10,19 +10,19 @@ import MainLayout from "@/layouts/MainLayout.astro";
 
 // Get all Korean posts (no locale field), excluding portfolio, short, and side-project-devlog
 const allPosts = await getCollection("blog", ({ data }) => {
-	return (
-		!data.locale &&
-		data.title !== "정현수 포트폴리오" &&
-		!data.tags.includes("short") &&
-		!data.tags.includes("side-project-devlog")
-	);
+  return (
+    !data.locale &&
+    data.title !== "정현수 포트폴리오" &&
+    !data.tags.includes("short") &&
+    !data.tags.includes("side-project-devlog")
+  );
 });
 
 // Sort by date
 const posts = allPosts.sort((a, b) => {
-	const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
-	const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
-	return dateB.getTime() - dateA.getTime();
+  const dateA = new Date(a.data.createdAt.replace(/\//g, "-"));
+  const dateB = new Date(b.data.createdAt.replace(/\//g, "-"));
+  return dateB.getTime() - dateA.getTime();
 });
 
 // Get featured posts
@@ -31,13 +31,13 @@ const featuredPosts = posts.filter((post) => post.data.featured);
 // Get tag groups for Tags component
 const tagGroupsMap = new Map<string, number>();
 for (const post of posts) {
-	for (const tag of post.data.tags) {
-		tagGroupsMap.set(tag, (tagGroupsMap.get(tag) || 0) + 1);
-	}
+  for (const tag of post.data.tags) {
+    tagGroupsMap.set(tag, (tagGroupsMap.get(tag) || 0) + 1);
+  }
 }
 const tagGroups = Array.from(tagGroupsMap.entries()).map(([tag, tagPostCount]) => ({
-	tag,
-	tagPostCount,
+  tag,
+  tagPostCount,
 }));
 
 // Pagination
@@ -48,23 +48,23 @@ const paginatedPosts = posts.slice(0, POSTS_PER_PAGE);
 
 // Transform posts for components
 const transformedPosts = paginatedPosts.map((post) => ({
-	slug: post.data.slug,
-	title: post.data.title,
-	description: post.data.description,
-	createdAt: post.data.createdAt,
-	updatedAt: post.data.updatedAt,
-	tags: post.data.tags,
-	thumbnail: post.data.thumbnail?.src,
+  slug: post.data.slug,
+  title: post.data.title,
+  description: post.data.description,
+  createdAt: post.data.createdAt,
+  updatedAt: post.data.updatedAt,
+  tags: post.data.tags,
+  thumbnail: post.data.thumbnail?.src,
 }));
 
 const transformedFeaturedPosts = featuredPosts.map((post) => ({
-	slug: post.data.slug,
-	title: post.data.title,
-	description: post.data.description,
-	createdAt: post.data.createdAt,
-	updatedAt: post.data.updatedAt,
-	tags: post.data.tags,
-	thumbnail: post.data.thumbnail?.src,
+  slug: post.data.slug,
+  title: post.data.title,
+  description: post.data.description,
+  createdAt: post.data.createdAt,
+  updatedAt: post.data.updatedAt,
+  tags: post.data.tags,
+  thumbnail: post.data.thumbnail?.src,
 }));
 ---
 
