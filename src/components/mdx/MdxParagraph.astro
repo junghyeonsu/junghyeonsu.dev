@@ -1,0 +1,31 @@
+---
+const html = await Astro.slots.render('default');
+const imgMatch = html.match(/^<img\s+([^>]*)>$/);
+const linkedImgMatch = html.match(/^<a\s+[^>]*>(\s*<img\s+([^>]*)>\s*)<\/a>$/);
+
+let isStandaloneImage = false;
+let alt = '';
+
+if (imgMatch) {
+  isStandaloneImage = true;
+  const altMatch = imgMatch[1].match(/alt="([^"]*)"/);
+  alt = altMatch ? altMatch[1] : '';
+} else if (linkedImgMatch) {
+  isStandaloneImage = true;
+  const altMatch = linkedImgMatch[2].match(/alt="([^"]*)"/);
+  alt = altMatch ? altMatch[1] : '';
+}
+---
+
+{isStandaloneImage ? (
+  <figure class="my-8">
+    <Fragment set:html={html} />
+    {alt && (
+      <figcaption class="text-sm text-gray-500 dark:text-gray-400 text-center mt-2">
+        {alt}
+      </figcaption>
+    )}
+  </figure>
+) : (
+  <p><Fragment set:html={html} /></p>
+)}

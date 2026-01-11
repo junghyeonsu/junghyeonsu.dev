@@ -1,10 +1,11 @@
 import Callout from "./Callout";
+import MdxParagraph from "./MdxParagraph.astro";
 import YouTubePlayer from "./YouTubePlayer";
 
 export const mdxComponents = {
-  // Custom MDX components
   Callout,
   YouTubePlayer,
+  p: MdxParagraph,
 };
 
-export { Callout, YouTubePlayer };
+export { Callout, MdxParagraph, YouTubePlayer };
