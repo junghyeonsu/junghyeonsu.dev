@@ -1,0 +1,35 @@
+---
+
+---
+
+<div class="evidence-rail my-6 w-screen relative left-1/2 -translate-x-1/2">
+  <div class="evidence-rail__viewport overflow-hidden cursor-grab active:cursor-grabbing">
+    <div class="evidence-rail__container flex gap-3" style="padding-left: max(1.25rem, calc((100vw - 800px) / 2 + 1.25rem)); padding-right: max(1.25rem, calc((100vw - 800px) / 2 + 1.25rem));">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script>
+  import EmblaCarousel from "embla-carousel";
+
+  function initCarousels() {
+    const viewports = document.querySelectorAll<HTMLElement>(
+      ".evidence-rail__viewport"
+    );
+
+    viewports.forEach((viewport) => {
+      if (viewport.dataset.emblaInitialized) return;
+      viewport.dataset.emblaInitialized = "true";
+
+      EmblaCarousel(viewport, {
+        dragFree: true,
+        containScroll: "trimSnaps",
+        align: "start",
+      });
+    });
+  }
+
+  initCarousels();
+  document.addEventListener("astro:page-load", initCarousels);
+</script>

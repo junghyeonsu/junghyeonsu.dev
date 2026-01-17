@@ -25,16 +25,6 @@ import ThemeToggler from "@/components/react/ThemeToggler";
     Portfolio
   </a>
 
-  <!-- About -->
-  <a
-    href="https://hyeonsu-jung.vercel.app/"
-    target="_blank"
-    rel="noreferrer"
-    class="text-sm font-extrabold italic hover:underline p-1"
-  >
-    About
-  </a>
-
   <!-- RSS -->
   <a
     href="/rss.xml"
@@ -62,14 +52,4 @@ import ThemeToggler from "@/components/react/ThemeToggler";
   <ThemeToggler client:load />
 </header>
 
-<script>
-  const header = document.getElementById("header");
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 0) {
-      header?.classList.add("shadow-sm");
-    } else {
-      header?.classList.remove("shadow-sm");
-    }
-  });
-</script>

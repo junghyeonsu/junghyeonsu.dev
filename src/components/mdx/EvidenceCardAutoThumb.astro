@@ -1,0 +1,24 @@
+---
+import type { EvidenceCardProps } from "./EvidenceCard";
+import EvidenceCard from "./EvidenceCard";
+import { parseInternalPostLink } from "@/lib/utils";
+import { getPostThumbnailBySlug } from "@/lib/postThumbnails";
+
+interface Props extends EvidenceCardProps {}
+
+const { id, type, title, href, thumb } = Astro.props;
+
+let resolvedThumb = thumb;
+
+if (!resolvedThumb && href) {
+  const parsed = parseInternalPostLink(href);
+  if (parsed) {
+    const autoThumb = await getPostThumbnailBySlug(parsed.slug, parsed.locale);
+    if (autoThumb) {
+      resolvedThumb = autoThumb;
+    }
+  }
+}
+---
+
+<EvidenceCard id={id} type={type} title={title} href={href} thumb={resolvedThumb} />

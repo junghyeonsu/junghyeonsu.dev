@@ -54,7 +54,7 @@ const FeaturedPostSection = ({ posts }: FeaturedPostSectionProps) => {
             <button
               type="button"
               onClick={movePrevFeatured}
-              className="cursor-pointer hover:text-blue-500"
+              className="cursor-pointer hover:text-stone-500"
             >
               <LeftArrowIcon />
             </button>
@@ -63,7 +63,7 @@ const FeaturedPostSection = ({ posts }: FeaturedPostSectionProps) => {
               <button
                 type="button"
                 onClick={() => setIsPaused(false)}
-                className="cursor-pointer hover:text-blue-500"
+                className="cursor-pointer hover:text-stone-500"
               >
                 <PlayIcon />
               </button>
@@ -71,7 +71,7 @@ const FeaturedPostSection = ({ posts }: FeaturedPostSectionProps) => {
               <button
                 type="button"
                 onClick={() => setIsPaused(true)}
-                className="cursor-pointer hover:text-blue-500"
+                className="cursor-pointer hover:text-stone-500"
               >
                 <PauseIcon />
               </button>
@@ -80,7 +80,7 @@ const FeaturedPostSection = ({ posts }: FeaturedPostSectionProps) => {
             <button
               type="button"
               onClick={moveNextFeatured}
-              className="cursor-pointer hover:text-blue-500"
+              className="cursor-pointer hover:text-stone-500"
             >
               <RightArrowIcon />
             </button>

@@ -1,39 +1,183 @@
 ---
-slug: portfoilo
-title: "정현수 포트폴리오"
-description: "개발자 정현수를 소개합니다."
+slug: portfolio
+title: 정현수
+description: 정현수를 소개합니다.
 thumbnail: "./cover.webp"
 createdAt: "2023/09/05"
 updatedAt: ""
 featured: false
 ---
 
-### Contact
+<h1 className="text-2xl md:text-4xl font-bold leading-snug mb-6">
+  정현수 <span className="text-gray-400 text-base font-normal">June.jung</span>
+</h1>
+
+만드는 것을 좋아합니다. 복잡한 문제를 단순하게 풀고, 그 과정을 글로 남기는 것을 좋아합니다.<br />
+디자인시스템을 만들고, 확장하고, 생산성 폭발을 위한 일을 하고 있습니다.
+
+<br />
+<br />
+
+## Work Experience
+
+<WorkTimeline
+  items={[
+    { id: "intern", company: "Daangn", team: "Frontend Core", role: "Intern", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2022, startMonth: 6, endYear: 2022, endMonth: 10, color: "#5A9CB5" },
+    { id: "ds", company: "Daangn", team: "Design System", role: "Frontend Engineer", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2022, startMonth: 10, color: "#FA8112" },
+    { id: "growthx", company: "Daangn", team: "Growth X TF", role: "Frontend Engineer", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2025, startMonth: 6, color: "#FACE68" },
+  ]}
+/>
+
+## Selected Work
+
+<ProjectSection title="당근 디자인시스템 관측 도구 및 확장된 디자인시스템 구축" startYear={2026}>
+
+- Seed Observability Platform — 디자인시스템 관측 도구 제작중
+- 웹, Lynx 디자인시스템 확장 예정
+
+</ProjectSection>
+
+<ProjectSection title="당근 디자인시스템 AI Integration" startYear={2025}>
+
+- Docs MCP 제작 — 디자인시스템 의사결정 및 가이드라인을 AI 에이전트에 노출 <EvidenceRef n={1} to="e-docs-mcp" />
+- 모든 문서에 LLMs.txt 제공으로 AI 도구 호환성 확보 <EvidenceRef n={2} to="e-llms-txt" />
+- n8n 기반 디자인시스템 CS 자동 아카이브, 디자인시스템 의사결정 지식화 자동화 워크플로우 구축
+- SEED Helpdesk 슬랙 챗봇으로 반복 문의 대응 자동화
+
+<EvidenceRail>
+  <EvidenceCard id="e-docs-mcp" type="link" title="Docs MCP" href="https://seed-design.io/ai-integration/docs-mcp" />
+  <EvidenceCard id="e-llms-txt" type="link" title="LLMs.txt" href="https://seed-design.io/ai-integration/llms-txt" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="당근 디자인시스템 구축" startYear={2024}>
+
+- 다양한 플랫폼(iOS, Android, Web)을 위한 당근 디자인시스템 구축 및 유지보수 <EvidenceRef n={1} to="e-seed-design" />
+- [seed-design.io](https://seed-design.io) 문서 사이트 구축 <EvidenceRef n={2} to="e-docs" />
+- React 기반 컴포넌트 라이브러리 설계 및 구현
+- `@seed-design/cli` 도구 제작 — `init`, `add`, `add-all` 명령어로 컴포넌트 자동 설치 <EvidenceRef n={3} to="e-cli" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-seed-gh" type="github" title="seed-design" href="https://github.com/daangn/seed-design" />
+  <EvidenceCard id="e-docs" type="link" title="seed-design.io 문서" href="https://seed-design.io" thumb="https://seed-design.io/og-image.png" />
+  <EvidenceCard id="e-seed-cli" type="link" title="@seed-design/cli" href="https://seed-design.io/react/getting-started/cli/commands" />
+  <EvidenceCard id="e-sprouting" type="post" title="싹 틔우기 (Sprouting)" href="/posts/sprouting" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="당근 디자인시스템 전사 마이그레이션 리딩" startYear={2024} endYear={2025}>
+
+- Codemod — [19개 Codemod Transformer](https://seed-design.io/react/developer-tools/codemods/available-transforms) 개발 및 릴리즈, CLI 한 줄로 파운데이션 마이그레이션 <EvidenceRef n={1} to="e-codemod" />
+- Migration Figma Plugin — Icon, Foundation, Component 마이그레이션을 위한 플러그인 제작 <EvidenceRef n={2} to="e-migration-figma-plugin" />
+- 당근 전사 웹뷰 직접 마이그레이션 (부동산, 중고차, 알바, 광고, 당근페이 등 39개 서비스)
+- 아이콘 전사 마이그레이션 리딩 — 새 아이콘 네이밍 규칙 수립
+- 아이콘 패키지 배포 — 모노크롬, 멀티컬러 아이콘 배포 지원, 메타데이터 시스템 구축 (React, Vue 패키지) <EvidenceRef n={3} to="e-icon-library" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-codemod" type="link" title="Codemod" href="https://seed-design.io/react/developer-tools/codemods/available-transforms" />
+  <EvidenceCard id="e-migration-figma-plugin" type="image" title="Migration Figma Plugin" thumb="/portfolio/figma-migration-plugin.webp" />
+  <EvidenceCard id="e-icon-library" type="link" title="아이콘 라이브러리" href="https://seed-design.io/docs/foundation/iconography/library" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="Asset Town" startYear={2023}>
+
+- 당근 브랜딩 에셋(모션, 일러스트) 관리 플랫폼 기획 및 개발
+- Sanity CMS 기반 어드민 → 자동 CDN 배포 파이프라인 구축
+- Figma Plugin → 브랜딩 에셋 탐색 및 사용 가능하도록 구축 <EvidenceRef n={1} to="e-at-figma" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-at-figma" type="image" title="에셋타운 피그마 플러그인" thumb="/portfolio/asset-town-figma-plugin.webp" />
+  <EvidenceCard id="e-at-gh" type="github" title="에셋타운 템플릿" href="https://github.com/junghyeonsu/asset-town" />
+  <EvidenceCard id="e-at-intro" type="post" title="Asset Town 소개" href="/posts/asset-town-introduction" />
+  <EvidenceCard id="e-at-sanity" type="post" title="Sanity 어드민" href="/posts/asset-town-admin-with-sanity" />
+  <EvidenceCard id="e-at-cdn" type="post" title="CDN 제공하기" href="/posts/asset-town-provide-cdn-using-webhook-and-cloudflare" />
+  <EvidenceCard id="e-at-figma" type="post" title="Figma 플러그인" href="/posts/asset-town-figma-plugin" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="Asset Storage" startYear={2023}>
+
+- 피그마에서 이미지를 클라우드에 올리고 public URL을 즉시 받는 서비스 제작 <EvidenceRef n={1} to="e-at-figma" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-at-cdn" type="image" title="에셋 스토리지 피그마 플러그인" thumb="/portfolio/asset-storage-figma-plugin.webp" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="Icona" startYear={2023}>
+
+- Figma 아이콘 → 코드 자동 변환 및 배포 시스템 제작
+- 모노크롬/멀티컬러 분리 배포, iOS/Android Sync Workflow 구축
+
+<EvidenceRail>
+  <EvidenceCard id="e-icona-figma-plugin" type="image" title="Icona 피그마 플러그인" thumb="/portfolio/icona-figma-plugin.webp" />
+  <EvidenceCard id="e-icona-intro" type="post" title="Icona 소개" href="/posts/quickly-apply-icons-that-exist-in-figma-to-your-dev-team" />
+  <EvidenceCard id="e-icona-tasks" type="post" title="Icona 남은 과제" href="/posts/about-icona-remaining-tasks" />
+  <EvidenceCard id="e-icona-gh" type="github" title="Icona" href="https://github.com/daangn/icona" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="당근 그로스 캠페인" startYear={2025} startMonth={6}>
+
+- 식빵게임 시즌1, 2, 3 클라이언트 개발 <EvidenceRef n={1} to="e-bread-game-season1" /> <EvidenceRef n={2} to="e-bread-game-season2" /> <EvidenceRef n={3} to="e-bread-game-season3" />
+- 숫자게임 시즌1, 2 클라이언트 개발 <EvidenceRef n={4} to="e-number-game-season1" /> <EvidenceRef n={5} to="e-number-game-season2" />
+- 비밀저금통 클라이언트 개발 <EvidenceRef n={6} to="e-secret-bank" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-bread-game-season1" type="image" title="식빵게임 시즌1" thumb="/portfolio/bread-game-season-1.webp" />
+  <EvidenceCard id="e-bread-game-season2" type="image" title="식빵게임 시즌2" thumb="/portfolio/bread-game-season-2.webp" />
+  <EvidenceCard id="e-bread-game-season3" type="image" title="식빵게임 시즌3" thumb="/portfolio/bread-game-season-3.webp" />
+  <EvidenceCard id="e-number-game-season1" type="image" title="숫자게임 시즌1" thumb="/portfolio/number-game-season-1.webp" />
+  <EvidenceCard id="e-number-game-season2" type="image" title="숫자게임 시즌2" thumb="/portfolio/number-game-season-2.webp" />
+  <EvidenceCard id="e-secret-bank" type="image" title="비밀저금통" thumb="/portfolio/secret-bank.webp" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="당근폼" startYear={2024}>
+
+- 당근 앱 내 설문 웹뷰 클라이언트 개발 <EvidenceRef n={1} to="e-survey-webview" />
+- 섹션, Hidden field, 조건부 라우팅, 이미지/파일 업로드 기능 구현
+
+<EvidenceRail>
+  <EvidenceCard id="e-survey-webview" type="image" title="당근폼 웹뷰" thumb="/portfolio/karrot-form.webp" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="당근 리브랜딩 캠페인 랜딩" startYear={2023} startMonth={8} endYear={2023} endMonth={9}>
+
+- 리브랜딩 캠페인 랜딩 페이지 개발 <EvidenceRef n={1} to="e-landing-page" />
+- 팀 당근 블로그, 당근 테크 블로그 회고 작성 <EvidenceRef n={2} to="e-rebrand" /> <EvidenceRef n={3} to="e-team-daangn" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-landing-page" type="link" title="당근 리브랜딩 랜딩페이지" href="https://brandnew.daangn.com/" thumb="/portfolio/daangn-rebranding-landing-page.webp" />
+  <EvidenceCard id="e-rebrand" type="post" title="리브랜딩 개인 회고" href="/posts/daangn-rebranding" />
+  <EvidenceCard id="e-team-daangn" type="post" title="당근 테크 미디엄 회고" thumb="/portfolio/medium-logo.webp" href="https://medium.com/daangn/%EB%8B%B9%EA%B7%BC-%EB%A6%AC%EB%B8%8C%EB%9E%9C%EB%94%A9-%EC%BA%A0%ED%8E%98%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A5%BC-%EA%B0%9C%EB%B0%9C%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B4-%EA%B2%83-b41d866df9b7" />
+</EvidenceRail>
+
+</ProjectSection>
+
+## Speaking
+
+- **2025.01** 바닐라코딩 데모데이 인터뷰어
+- **2024.10** [당근 테크밋업 연사](https://www.youtube.com/watch?v=34nhOoRYMmc)
+- **2024.03** [NEXTSTEP NPM 배포 강의](/posts/deploy-simple-npm-library/)
+- **2023.10** [테오 컨퍼런스 연사](https://github.com/junghyeonsu/teoconf2)
+- **2023.03** [NEXTSTEP NPM 배포 강의](/posts/deploy-simple-util-npm-library/)
+
+## Contact
 
 - [GitHub](https://github.com/junghyeonsu)
 - [LinkedIn](https://www.linkedin.com/in/hyeonsu-jung-5483911a5/)
 
-### Projects
+## LEGACY
 
-TBD
-
-### Work Experience
-
-TBD
-
-### Side Projects
-
-TBD
-
-### Speaking
-
-- 2025.01.10 바닐라코딩 데모데이 인터뷰어 참가
-- 2024.10.07 당근 테크밋업 연사자 참가
-  - [발표 영상](https://www.youtube.com/watch?v=34nhOoRYMmc)
-- 2024.03 NEXTSTEP NPM 배포 관련 강의 2회차 연사자 참가
-  - [발표 자료](https://junghyeonsu.com/posts/deploy-simple-npm-library/)
-- 2023.10.28 테오 컨퍼런스 2회차 연사자 참가
-  - [공고글](https://jumpit.saramin.co.kr/contents/428)
-  - [발표 자료](https://github.com/junghyeonsu/teoconf2)
-- 2023.03 NEXTSTEP NPM 배포 관련 강의 연사자 참가
-  - [발표 자료](https://junghyeonsu.com/posts/deploy-simple-util-npm-library/)
+- [예전 포트폴리오](https://hyeonsu-jung.vercel.app/)

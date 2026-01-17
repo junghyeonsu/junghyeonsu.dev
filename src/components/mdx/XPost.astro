@@ -1,0 +1,49 @@
+---
+import XPostClient from "./XPostClient";
+
+interface Props {
+  url?: string;
+  id?: string;
+  hideThread?: boolean;
+  hideMedia?: boolean;
+  align?: "left" | "center" | "right";
+}
+
+const { url, id, hideThread = false, hideMedia = false, align = "center" } = Astro.props;
+
+function extractTweetId(input?: string): string | null {
+  if (!input) return null;
+
+  if (/^\d+$/.test(input)) {
+    return input;
+  }
+
+  const patterns = [
+    /(?:twitter\.com|x\.com)\/\w+\/status\/(\d+)/,
+    /(?:twitter\.com|x\.com)\/i\/status\/(\d+)/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = input.match(pattern);
+    if (match?.[1]) {
+      return match[1];
+    }
+  }
+
+  return null;
+}
+
+const tweetId = extractTweetId(url) || extractTweetId(id);
+
+if (!tweetId) {
+  throw new Error(`XPost: Invalid url or id provided. url="${url}", id="${id}"`);
+}
+---
+
+<XPostClient
+  client:visible
+  tweetId={tweetId}
+  hideThread={hideThread}
+  hideMedia={hideMedia}
+  align={align}
+/>

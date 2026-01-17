@@ -3,12 +3,12 @@ import { getCollection, render } from "astro:content";
 import { mdxComponents } from "@/components/mdx";
 import PostLayout from "@/layouts/PostLayout.astro";
 
-// Get portfolio content
 const portfolioEntries = await getCollection("portfolio");
 const portfolio = portfolioEntries[0];
 
 // biome-ignore lint/suspicious/noImplicitAnyLet: Content type is inferred from render
 let Content;
+
 if (portfolio) {
   const rendered = await render(portfolio);
   Content = rendered.Content;
@@ -19,12 +19,10 @@ if (portfolio) {
   title="포트폴리오"
   description="정현수 포트폴리오"
 >
-  <article class="w-full xl:w-[800px]">
-    <h1 class="text-4xl font-black mb-8">포트폴리오</h1>
-
+  <article class="portfolio-page w-full max-w-[800px] mx-auto">
     {
       Content ? (
-        <div class="prose max-w-none">
+        <div class="portfolio-content">
           <Content components={mdxComponents} />
         </div>
       ) : (
@@ -33,3 +31,79 @@ if (portfolio) {
     }
   </article>
 </PostLayout>
+
+<style>
+  .portfolio-page {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .portfolio-content :global(h2) {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    border: none;
+    padding: 0;
+  }
+
+  :global(.dark) .portfolio-content :global(h2) {
+    color: #6b7280;
+  }
+
+  .portfolio-content :global(h2:first-of-type) {
+    margin-top: 0;
+  }
+
+  .portfolio-content :global(hr) {
+    display: none;
+  }
+
+  .portfolio-content :global(ul) {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style-type: disc;
+  }
+
+  .portfolio-content :global(li) {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 0.25rem;
+    display: list-item;
+  }
+
+  .portfolio-content :global(li::marker) {
+    color: #9ca3af;
+  }
+
+  :global(.dark) .portfolio-content :global(li::marker) {
+    color: #6b7280;
+  }
+
+  .portfolio-content :global(p) {
+    margin-bottom: 0.75rem;
+  }
+
+  .portfolio-content :global(a) {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: #d1d5db;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .portfolio-content :global(a:hover) {
+    text-decoration-color: #9ca3af;
+  }
+
+  :global(.dark) .portfolio-content :global(a) {
+    text-decoration-color: #4b5563;
+  }
+
+  :global(.dark) .portfolio-content :global(a:hover) {
+    text-decoration-color: #78716c;
+  }
+</style>

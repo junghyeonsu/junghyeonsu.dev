@@ -15,13 +15,17 @@ const TableOfContentsItem = ({
   tableOfContentsItem,
   activeId,
   delay,
+  depth = 0,
 }: {
   delay: number;
   tableOfContentsItem: TableOfContentsItemType;
   activeId: string;
+  depth?: number;
 }) => {
   const { url, title, items } = tableOfContentsItem;
   const isActive = url === activeId;
+
+  const depthStyles = depth === 0 ? "text-xs" : "text-[11px]";
 
   return (
     <>
@@ -30,11 +34,11 @@ const TableOfContentsItem = ({
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
       >
-        <li id={url}>
+        <li id={url} className="leading-tight py-0.5">
           <a href={url}>
             <span
-              className={`transition-all ${
-                isActive ? "scale-[1.02] text-blue-500" : "scale-100 text-gray-500"
+              className={`transition-colors ${depthStyles} ${
+                isActive ? "text-foreground font-medium" : "text-gray-400 dark:text-gray-500"
               }`}
             >
               {title}
@@ -43,13 +47,14 @@ const TableOfContentsItem = ({
         </li>
       </motion.div>
       {items && (
-        <ul className="list-none pl-5">
+        <ul className="list-none pl-3">
           {items.map((item, index) => (
             <TableOfContentsItem
               delay={(delay + index + 1) / 10}
               activeId={activeId}
               key={item.url}
               tableOfContentsItem={item}
+              depth={depth + 1}
             />
           ))}
         </ul>
@@ -94,22 +99,26 @@ export default function TableOfContents({
 
   if (!tableOfContents?.items?.length) {
     return (
-      <nav className="sticky self-start hidden xl:block top-[150px] w-[250px] ml-[100px]">
-        <h2 className="text-xl font-bold">ON THIS PAGE</h2>
+      <nav className="sticky self-start hidden xl:block top-[150px] w-[200px] ml-[80px]">
+        <h2 className="text-[10px] font-medium tracking-widest text-gray-400 dark:text-gray-500">
+          ON THIS PAGE
+        </h2>
       </nav>
     );
   }
 
   return (
-    <nav className="sticky self-start hidden xl:block top-[150px] w-[250px] ml-[100px]">
+    <nav className="sticky self-start hidden xl:block top-[150px] w-[200px] ml-[80px]">
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <h2 className="text-xl font-bold">ON THIS PAGE</h2>
+        <h2 className="text-[10px] font-medium tracking-widest text-gray-400 dark:text-gray-500">
+          ON THIS PAGE
+        </h2>
       </motion.div>
-      <ul className="mt-2.5 list-none text-sm">
+      <ul className="mt-2 list-none">
         {tableOfContents.items.map((item, index) => (
           <TableOfContentsItem
             delay={(0.1 + index) / 10}
