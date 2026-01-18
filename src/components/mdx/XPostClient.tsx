@@ -31,6 +31,15 @@ interface XPostClientProps {
   align?: "left" | "center" | "right";
 }
 
+const LOAD_TIMEOUT_MS = 10000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number, message: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error(message)), ms)),
+  ]);
+}
+
 function loadWidgetsScript(): Promise<void> {
   if (window.__twttrLoading) {
     return window.__twttrLoading;
@@ -114,14 +123,18 @@ export default function XPostClient({
           throw new Error("Twitter widgets not available");
         }
 
-        const result = await window.twttr.widgets.createTweet(tweetId, containerRef.current, {
-          theme,
-          dnt: true,
-          conversation: hideThread ? "none" : "all",
-          cards: hideMedia ? "hidden" : "visible",
-          align,
-          lang: "ko",
-        });
+        const result = await withTimeout(
+          window.twttr.widgets.createTweet(tweetId, containerRef.current, {
+            theme,
+            dnt: true,
+            conversation: hideThread ? "none" : "all",
+            cards: hideMedia ? "hidden" : "visible",
+            align,
+            lang: "ko",
+          }),
+          LOAD_TIMEOUT_MS,
+          "Tweet load timed out",
+        );
 
         if (!result) {
           throw new Error("Tweet not found or unavailable");
@@ -138,7 +151,7 @@ export default function XPostClient({
   }, [tweetId, theme, hideThread, hideMedia, align]);
 
   return (
-    <div className="my-8">
+    <div className="my-8 relative">
       {isLoading && (
         <div className="flex items-center justify-center py-8">
           <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
@@ -183,11 +196,13 @@ export default function XPostClient({
 
       <div
         ref={containerRef}
-        className={isLoading || error ? "hidden" : ""}
         style={{
-          display: isLoading || error ? "none" : "flex",
+          display: "flex",
           justifyContent:
             align === "center" ? "center" : align === "right" ? "flex-end" : "flex-start",
+          visibility: isLoading || error ? "hidden" : "visible",
+          position: isLoading || error ? "absolute" : "relative",
+          pointerEvents: isLoading || error ? "none" : "auto",
         }}
       />
     </div>
