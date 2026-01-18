@@ -91,7 +91,7 @@ export default function WorkTimeline({ items }: WorkTimelineProps) {
 
   return (
     <div className="my-6">
-      <div className="relative">
+      <div className="relative overflow-x-clip">
         <div className="flex justify-between text-[10px] text-gray-400 dark:text-gray-500 mb-1">
           {years.map((year) => (
             <span key={year}>{year}</span>
