@@ -3,7 +3,7 @@ slug: portfolio
 title: 정현수
 description: 정현수를 소개합니다.
 createdAt: "2023/09/05"
-updatedAt: ""
+updatedAt: "2026/07/11"
 featured: false
 ---
 
@@ -11,8 +11,8 @@ featured: false
   정현수 <span className="text-gray-400 text-base font-normal">June.jung</span>
 </h1>
 
-만드는 것을 좋아합니다. 복잡한 문제를 단순하게 풀고, 그 과정을 글로 남기는 것을 좋아합니다.<br />
-디자인시스템을 만들고, 확장하고, 생산성 폭발을 위한 일을 하고 있습니다.
+디자인과 엔지니어링의 경계에서 제품을 만드는 Design Engineer입니다.<br />
+디자인시스템을 여러 런타임으로 확장하고, 에셋·관측·AI 도구로 디자인 조직의 생산성을 높이는 일을 합니다.
 
 <br />
 <br />
@@ -22,26 +22,67 @@ featured: false
 <WorkTimeline
   items={[
     { id: "intern", company: "Daangn", team: "Frontend Core", role: "Intern", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2022, startMonth: 6, endYear: 2022, endMonth: 10, color: "#5A9CB5" },
-    { id: "ds", company: "Daangn", team: "Design System", role: "Frontend Engineer", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2022, startMonth: 10, color: "#FA8112" },
-    { id: "growthx", company: "Daangn", team: "Growth X TF", role: "Frontend Engineer", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2025, startMonth: 6, color: "#FACE68" },
+    { id: "ds", company: "Daangn", team: "Design System", role: "Frontend Engineer → Design Engineer", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2022, startMonth: 10, color: "#FA8112" },
+    { id: "growthx", company: "Daangn", team: "Growth X TF", role: "Frontend Engineer", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2025, startMonth: 6, endYear: 2026, endMonth: 1, color: "#FACE68" },
+    { id: "design-platform", company: "Daangn", team: "Design Platform", role: "Design Engineer", companyLogo: "/portfolio/daangn-logo.webp", startYear: 2026, startMonth: 7, color: "#8B5CF6" },
   ]}
 />
 
 ## Selected Work
 
-<ProjectSection title="당근 디자인시스템 관측 도구 및 확장된 디자인시스템 구축" startYear={2026}>
+<ProjectSection title="SEED Lynx 런타임 확장" startYear={2026}>
 
-- Seed Observability Platform — 디자인시스템 관측 도구 제작중
-- 웹, Lynx 디자인시스템 확장 예정
+- 새 런타임에서도 같은 디자인 기준을 즉시 사용할 수 있도록 컴포넌트부터 CSS 렌더링 인프라, 배포 파이프라인까지 전 구간에 걸쳐 확장
+- Box·Flex·Stack·Text 레이아웃과 Switch·Checkbox·RadioGroup 폼, BottomSheet·AppBar·Badge·TagGroup·ActionButton 등 컴포넌트 구축
+- `@seed-design/lynx-css` 분리, `[data-*]` 속성의 Lynx 클래스 변환, qvism Web·Lynx 프리셋 분리, `sp` 동적 폰트 스케일과 다크 모드·테마 지원
+- 스니펫 레지스트리, CLI 프레임워크 라우팅, 설치 가이드와 Lynx SPA 카탈로그까지 배포 흐름 완성
+- v0.1.0 릴리스 완료. 현재는 Lynx TF에서만 사용 중
 
 </ProjectSection>
 
-<ProjectSection title="당근 디자인시스템 AI Integration" startYear={2025}>
+<ProjectSection title="SEED 2.0" startYear={2026}>
 
-- Docs MCP 제작 — 디자인시스템 의사결정 및 가이드라인을 AI 에이전트에 노출 <EvidenceRef n={1} to="e-docs-mcp" />
-- 모든 문서에 LLMs.txt 제공으로 AI 도구 호환성 확보 <EvidenceRef n={2} to="e-llms-txt" />
-- n8n 기반 디자인시스템 CS 자동 아카이브, 디자인시스템 의사결정 지식화 자동화 워크플로우 구축
-- SEED Helpdesk 슬랙 챗봇으로 반복 문의 대응 자동화
+- SidePanel과 Accordion 신규 컴포넌트 구현
+- 예측하기 어려웠던 peer dependency 버전 체계를 “breaking change는 major에서만”이라는 원칙으로 정리
+- Compat Table·manifest와 CLI 진단, 버전 고정 스니펫 설치를 제공해 1.x 사용 팀도 안전하게 업그레이드할 수 있는 경로 구축
+- 프론트엔드 챕터에 2.0의 변경점과 배경을 공유해 업그레이드 불확실성 해소
+
+</ProjectSection>
+
+<ProjectSection title="SEED 리브랜딩" startYear={2026}>
+
+- SEED를 명확히 “당근의 디자인시스템”으로 규정하는 방향을 제안하고 리브랜딩 추진
+- 채용, 업계 레퍼런스, 오픈소스 인지도를 위해 지금 브랜딩이 필요한 이유를 정리
+- 브랜딩팀과 정체성과 시각 언어를 구체화하고 문서 랜딩·상세 페이지 리디자인 개발
+- 공개를 위한 마무리 작업 진행 중
+
+</ProjectSection>
+
+<ProjectSection title="디자인시스템 Observability" startYear={2026}>
+
+- SEED가 사내에서 실제로 어떻게 쓰이는지 데이터로 파악하는 내부 텔레메트리 플랫폼을 처음부터 끝까지 구축
+- GitHub App으로 사내 비공개 저장소를 매일 스캔해 `@seed-design/react`·CSS 컴포넌트, 토큰, 스니펫 사용량과 버전을 수집
+- 도입률과 사용 추이를 탐색하는 어드민 UI를 만들어 “누가·어디서·어떤 버전을 쓰는지”를 정량적으로 판단할 기반 마련
+
+</ProjectSection>
+
+<ProjectSection title="SEED 운영 및 확산" startYear={2026}>
+
+- Stackflow AppScreen의 스와이프 백 성능을 개선하고 ImageFrame·AspectRatio·react-image, ContentPlaceholder, 정적 텍스트 스타일 안정화
+- 상반기 프론트엔드 챕터 바이위클리 12회 중 6회에 걸쳐 디자인시스템의 AI 연동, Web·Lynx 확장, AppScreen, SEED 2.0 진행 상황 공유
+- 전사 미팅에서 디자인시스템 현황과 “더 넓게, 더 빠르게”라는 방향 발표
+- 당근 모션 개선 논의에 참여하고 Lynx 아이콘을 포함해 상반기 약 30회 아이콘 배포
+- 디자인과 엔지니어링의 경계에서 일하는 Design Engineer 직군과 JD를 제안했으며 현재 검토 중
+
+</ProjectSection>
+
+<ProjectSection title="Bud — 디자인시스템 AI 에이전트 & 자동화" startYear={2025}>
+
+- Docs MCP로 디자인시스템 의사결정과 가이드라인을 AI 에이전트에 제공 <EvidenceRef n={1} to="e-docs-mcp" />
+- 모든 문서에 LLMs.txt를 제공해 AI 도구 호환성 확보 <EvidenceRef n={2} to="e-llms-txt" />
+- n8n 기반 문의 아카이브와 SEED Helpdesk로 반복 문의 대응·지식 축적 자동화
+- Mastra 기반 Slack Q&A와 RAG 지식 축적, Karby A2A 코딩 위임, Linear·아이콘 배포·주간 리포트 자동화를 확장할 기반 마련
+- 연관 탐색으로 프롬프트 기반 목업 도구 Kraft의 방향과 에이전트 아키텍처를 설계했으며, 현재는 일시 중단
 
 <EvidenceRail>
   <EvidenceCard id="e-docs-mcp" type="link" title="Docs MCP" href="https://seed-design.io/ai-integration/docs-mcp" />
@@ -50,16 +91,52 @@ featured: false
 
 </ProjectSection>
 
-<ProjectSection title="당근 디자인시스템 구축" startYear={2024}>
+<ProjectSection title="Asset Town 통합 리뉴얼" startYear={2023}>
 
-- 다양한 플랫폼(iOS, Android, Web)을 위한 당근 디자인시스템 구축 및 유지보수 <EvidenceRef n={1} to="e-seed-design" />
-- [seed-design.io](https://seed-design.io) 문서 사이트 구축 <EvidenceRef n={2} to="e-docs" />
-- React 기반 컴포넌트 라이브러리 설계 및 구현
-- `@seed-design/cli` 도구 제작 — `init`, `add`, `add-all` 명령어로 컴포넌트 자동 설치 <EvidenceRef n={3} to="e-cli" />
+- 브랜드 에셋 아카이빙을 담당하던 Asset Town과 Figma에서 개인 에셋을 올리던 Asset Storage를 하나의 Asset Town으로 통합 <EvidenceRef n={1} to="e-asset-town-figma" /> <EvidenceRef n={2} to="e-asset-storage-figma" />
+- 우선순위에서 밀린 프로젝트에 오너십을 갖고 AI 시대에 브랜드 에셋 서비스가 맡아야 할 고유한 역할부터 재정의
+- Krayon과 역할이 겹치지 않도록 서비스 경계를 정하고 브랜딩팀과 브랜드 에셋 서비스의 정체성 수립
+- Figma 플러그인과 Sanity CMS 중심 구조를 자체 DB 기반 웹 애플리케이션으로 전면 재구축하고 사내 공개 준비 중
 
 <EvidenceRail>
-  <EvidenceCard id="e-seed-gh" type="github" title="seed-design" href="https://github.com/daangn/seed-design" />
-  <EvidenceCard id="e-docs" type="link" title="seed-design.io 문서" href="https://seed-design.io" />
+  <EvidenceCard id="e-asset-town-figma" type="image" title="Asset Town Figma Plugin" thumb="/portfolio/asset-town-figma-plugin.webp" />
+  <EvidenceCard id="e-asset-storage-figma" type="image" title="Asset Storage Figma Plugin" thumb="/portfolio/asset-storage-figma-plugin.webp" />
+  <EvidenceCard id="e-asset-town-github" type="github" title="Asset Town Template" href="https://github.com/junghyeonsu/asset-town" />
+  <EvidenceCard id="e-asset-town-intro" type="post" title="Asset Town 소개" href="/posts/asset-town-introduction" />
+  <EvidenceCard id="e-asset-town-sanity" type="post" title="Sanity Admin" href="/posts/asset-town-admin-with-sanity" />
+  <EvidenceCard id="e-asset-town-cdn" type="post" title="CDN 제공하기" href="/posts/asset-town-provide-cdn-using-webhook-and-cloudflare" />
+  <EvidenceCard id="e-asset-town-plugin" type="post" title="Figma Plugin" href="/posts/asset-town-figma-plugin" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="당근 그로스 캠페인" startYear={2025} startMonth={6} endYear={2026} endMonth={1}>
+
+- 식빵게임 시즌1, 2, 3 클라이언트 개발 <EvidenceRef n={1} to="e-bread-game-1" /> <EvidenceRef n={2} to="e-bread-game-2" /> <EvidenceRef n={3} to="e-bread-game-3" />
+- 숫자게임 시즌1, 2 클라이언트 개발 <EvidenceRef n={4} to="e-number-game-1" /> <EvidenceRef n={5} to="e-number-game-2" />
+- 비밀저금통 클라이언트 개발 <EvidenceRef n={6} to="e-secret-bank" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-bread-game-1" type="image" title="식빵게임 시즌1" thumb="/portfolio/bread-game-season-1.webp" />
+  <EvidenceCard id="e-bread-game-2" type="image" title="식빵게임 시즌2" thumb="/portfolio/bread-game-season-2.webp" />
+  <EvidenceCard id="e-bread-game-3" type="image" title="식빵게임 시즌3" thumb="/portfolio/bread-game-season-3.webp" />
+  <EvidenceCard id="e-number-game-1" type="image" title="숫자게임 시즌1" thumb="/portfolio/number-game-season-1.webp" />
+  <EvidenceCard id="e-number-game-2" type="image" title="숫자게임 시즌2" thumb="/portfolio/number-game-season-2.webp" />
+  <EvidenceCard id="e-secret-bank" type="image" title="비밀저금통" thumb="/portfolio/secret-bank.webp" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="당근 디자인시스템 구축" startYear={2024}>
+
+- iOS, Android, Web을 위한 당근 디자인시스템 구축 및 유지보수 <EvidenceRef n={1} to="e-seed-github" />
+- [seed-design.io](https://seed-design.io) 문서 사이트 구축 <EvidenceRef n={2} to="e-seed-docs" />
+- React 기반 컴포넌트 라이브러리 설계 및 구현
+- `@seed-design/cli`의 `init`, `add`, `add-all` 명령어로 컴포넌트 설치 자동화 <EvidenceRef n={3} to="e-seed-cli" />
+
+<EvidenceRail>
+  <EvidenceCard id="e-seed-github" type="github" title="seed-design" href="https://github.com/daangn/seed-design" />
+  <EvidenceCard id="e-seed-docs" type="link" title="seed-design.io 문서" href="https://seed-design.io" />
   <EvidenceCard id="e-seed-cli" type="link" title="@seed-design/cli" href="https://seed-design.io/react/getting-started/cli/commands" />
   <EvidenceCard id="e-sprouting" type="post" title="싹 틔우기 (Sprouting)" href="/posts/sprouting" />
 </EvidenceRail>
@@ -68,98 +145,55 @@ featured: false
 
 <ProjectSection title="당근 디자인시스템 전사 마이그레이션 리딩" startYear={2024} endYear={2025}>
 
-- Codemod — [19개 Codemod Transformer](https://seed-design.io/react/developer-tools/codemods/available-transforms) 개발 및 릴리즈, CLI 한 줄로 파운데이션 마이그레이션 <EvidenceRef n={1} to="e-codemod" />
-- Migration Figma Plugin — Icon, Foundation, Component 마이그레이션을 위한 플러그인 제작 <EvidenceRef n={2} to="e-migration-figma-plugin" />
-- 당근 전사 웹뷰 직접 마이그레이션 (부동산, 중고차, 알바, 광고, 당근페이 등 39개 서비스)
-- 아이콘 전사 마이그레이션 리딩 — 새 아이콘 네이밍 규칙 수립
-- 아이콘 패키지 배포 — 모노크롬, 멀티컬러 아이콘 배포 지원, 메타데이터 시스템 구축 (React, Vue 패키지) <EvidenceRef n={3} to="e-icon-library" />
+- Codemod — [19개 Codemod Transformer](https://seed-design.io/react/developer-tools/codemods/available-transforms) 개발 및 릴리스, CLI 한 줄로 파운데이션 마이그레이션 <EvidenceRef n={1} to="e-codemod" />
+- Migration Figma Plugin — Icon, Foundation, Component 마이그레이션을 위한 플러그인 제작 <EvidenceRef n={2} to="e-migration-figma" />
+- 부동산, 중고차, 알바, 광고, 당근페이 등 사내 39개 웹뷰 직접 마이그레이션
+- 아이콘 전사 마이그레이션을 리딩하고 새 아이콘 이름 규칙 수립
+- 모노크롬·멀티컬러 아이콘과 메타데이터를 React·Vue 패키지로 배포 <EvidenceRef n={3} to="e-icon-library" />
 
 <EvidenceRail>
   <EvidenceCard id="e-codemod" type="link" title="Codemod" href="https://seed-design.io/react/developer-tools/codemods/available-transforms" />
-  <EvidenceCard id="e-migration-figma-plugin" type="image" title="Migration Figma Plugin" thumb="/portfolio/figma-migration-plugin.webp" />
+  <EvidenceCard id="e-migration-figma" type="image" title="Migration Figma Plugin" thumb="/portfolio/figma-migration-plugin.webp" />
   <EvidenceCard id="e-icon-library" type="link" title="아이콘 라이브러리" href="https://seed-design.io/docs/foundation/iconography/library" />
-</EvidenceRail>
-
-</ProjectSection>
-
-<ProjectSection title="Asset Town" startYear={2023}>
-
-- 당근 브랜딩 에셋(모션, 일러스트) 관리 플랫폼 기획 및 개발
-- Sanity CMS 기반 어드민 → 자동 CDN 배포 파이프라인 구축
-- Figma Plugin → 브랜딩 에셋 탐색 및 사용 가능하도록 구축 <EvidenceRef n={1} to="e-at-figma" />
-
-<EvidenceRail>
-  <EvidenceCard id="e-at-figma" type="image" title="에셋타운 피그마 플러그인" thumb="/portfolio/asset-town-figma-plugin.webp" />
-  <EvidenceCard id="e-at-gh" type="github" title="에셋타운 템플릿" href="https://github.com/junghyeonsu/asset-town" />
-  <EvidenceCard id="e-at-intro" type="post" title="Asset Town 소개" href="/posts/asset-town-introduction" />
-  <EvidenceCard id="e-at-sanity" type="post" title="Sanity 어드민" href="/posts/asset-town-admin-with-sanity" />
-  <EvidenceCard id="e-at-cdn" type="post" title="CDN 제공하기" href="/posts/asset-town-provide-cdn-using-webhook-and-cloudflare" />
-  <EvidenceCard id="e-at-figma" type="post" title="Figma 플러그인" href="/posts/asset-town-figma-plugin" />
-</EvidenceRail>
-
-</ProjectSection>
-
-<ProjectSection title="Asset Storage" startYear={2023}>
-
-- 피그마에서 이미지를 클라우드에 올리고 public URL을 즉시 받는 서비스 제작 <EvidenceRef n={1} to="e-at-figma" />
-
-<EvidenceRail>
-  <EvidenceCard id="e-at-cdn" type="image" title="에셋 스토리지 피그마 플러그인" thumb="/portfolio/asset-storage-figma-plugin.webp" />
-</EvidenceRail>
-
-</ProjectSection>
-
-<ProjectSection title="Icona" startYear={2023}>
-
-- Figma 아이콘 → 코드 자동 변환 및 배포 시스템 제작
-- 모노크롬/멀티컬러 분리 배포, iOS/Android Sync Workflow 구축
-
-<EvidenceRail>
-  <EvidenceCard id="e-icona-figma-plugin" type="image" title="Icona 피그마 플러그인" thumb="/portfolio/icona-figma-plugin.webp" />
-  <EvidenceCard id="e-icona-intro" type="post" title="Icona 소개" href="/posts/quickly-apply-icons-that-exist-in-figma-to-your-dev-team" />
-  <EvidenceCard id="e-icona-tasks" type="post" title="Icona 남은 과제" href="/posts/about-icona-remaining-tasks" />
-  <EvidenceCard id="e-icona-gh" type="github" title="Icona" href="https://github.com/daangn/icona" />
-</EvidenceRail>
-
-</ProjectSection>
-
-<ProjectSection title="당근 그로스 캠페인" startYear={2025} startMonth={6}>
-
-- 식빵게임 시즌1, 2, 3 클라이언트 개발 <EvidenceRef n={1} to="e-bread-game-season1" /> <EvidenceRef n={2} to="e-bread-game-season2" /> <EvidenceRef n={3} to="e-bread-game-season3" />
-- 숫자게임 시즌1, 2 클라이언트 개발 <EvidenceRef n={4} to="e-number-game-season1" /> <EvidenceRef n={5} to="e-number-game-season2" />
-- 비밀저금통 클라이언트 개발 <EvidenceRef n={6} to="e-secret-bank" />
-
-<EvidenceRail>
-  <EvidenceCard id="e-bread-game-season1" type="image" title="식빵게임 시즌1" thumb="/portfolio/bread-game-season-1.webp" />
-  <EvidenceCard id="e-bread-game-season2" type="image" title="식빵게임 시즌2" thumb="/portfolio/bread-game-season-2.webp" />
-  <EvidenceCard id="e-bread-game-season3" type="image" title="식빵게임 시즌3" thumb="/portfolio/bread-game-season-3.webp" />
-  <EvidenceCard id="e-number-game-season1" type="image" title="숫자게임 시즌1" thumb="/portfolio/number-game-season-1.webp" />
-  <EvidenceCard id="e-number-game-season2" type="image" title="숫자게임 시즌2" thumb="/portfolio/number-game-season-2.webp" />
-  <EvidenceCard id="e-secret-bank" type="image" title="비밀저금통" thumb="/portfolio/secret-bank.webp" />
 </EvidenceRail>
 
 </ProjectSection>
 
 <ProjectSection title="당근폼" startYear={2024}>
 
-- 당근 앱 내 설문 웹뷰 클라이언트 개발 <EvidenceRef n={1} to="e-survey-webview" />
-- 섹션, Hidden field, 조건부 라우팅, 이미지/파일 업로드 기능 구현
+- 당근 앱 내 설문 웹뷰 클라이언트 개발 <EvidenceRef n={1} to="e-daangn-form" />
+- 섹션, 히든 필드, 조건부 라우팅, 이미지·파일 업로드 기능 구현
+- 2026년 포커스 이동, 필수 표시, 히든 필드 UX를 개선하고 분석 트래킹과 안정화 버그 수정 수행
 
 <EvidenceRail>
-  <EvidenceCard id="e-survey-webview" type="image" title="당근폼 웹뷰" thumb="/portfolio/karrot-form.webp" />
+  <EvidenceCard id="e-daangn-form" type="image" title="당근폼 WebView" thumb="/portfolio/karrot-form.webp" />
+</EvidenceRail>
+
+</ProjectSection>
+
+<ProjectSection title="Icona" startYear={2023}>
+
+- Figma 아이콘을 코드로 자동 변환하고 배포하는 시스템 제작
+- 모노크롬·멀티컬러 아이콘을 분리 배포하고 iOS·Android 동기화 워크플로 구축
+
+<EvidenceRail>
+  <EvidenceCard id="e-icona-plugin" type="image" title="Icona Figma Plugin" thumb="/portfolio/icona-figma-plugin.webp" />
+  <EvidenceCard id="e-icona-intro" type="post" title="Icona 소개" href="/posts/quickly-apply-icons-that-exist-in-figma-to-your-dev-team" />
+  <EvidenceCard id="e-icona-tasks" type="post" title="Icona 남은 과제" href="/posts/about-icona-remaining-tasks" />
+  <EvidenceCard id="e-icona-github" type="github" title="Icona" href="https://github.com/daangn/icona" />
 </EvidenceRail>
 
 </ProjectSection>
 
 <ProjectSection title="당근 리브랜딩 캠페인 랜딩" startYear={2023} startMonth={8} endYear={2023} endMonth={9}>
 
-- 리브랜딩 캠페인 랜딩 페이지 개발 <EvidenceRef n={1} to="e-landing-page" />
-- 팀 당근 블로그, 당근 테크 블로그 회고 작성 <EvidenceRef n={2} to="e-rebrand" /> <EvidenceRef n={3} to="e-team-daangn" />
+- 리브랜딩 캠페인 랜딩 페이지 개발 <EvidenceRef n={1} to="e-rebranding-landing" />
+- 팀 당근 블로그와 당근 테크 블로그에 회고 작성 <EvidenceRef n={2} to="e-rebranding-retro" /> <EvidenceRef n={3} to="e-rebranding-medium" />
 
 <EvidenceRail>
-  <EvidenceCard id="e-landing-page" type="link" title="당근 리브랜딩 랜딩페이지" href="https://brandnew.daangn.com/" thumb="/portfolio/daangn-rebranding-landing-page.webp" />
-  <EvidenceCard id="e-rebrand" type="post" title="리브랜딩 개인 회고" href="/posts/daangn-rebranding" />
-  <EvidenceCard id="e-team-daangn" type="post" title="당근 테크 미디엄 회고" thumb="/portfolio/medium-logo.webp" href="https://medium.com/daangn/%EB%8B%B9%EA%B7%BC-%EB%A6%AC%EB%B8%8C%EB%9E%9C%EB%94%A9-%EC%BA%A0%ED%8E%98%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A5%BC-%EA%B0%9C%EB%B0%9C%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B4-%EA%B2%83-b41d866df9b7" />
+  <EvidenceCard id="e-rebranding-landing" type="link" title="당근 리브랜딩 Landing Page" href="https://brandnew.daangn.com/" thumb="/portfolio/daangn-rebranding-landing-page.webp" />
+  <EvidenceCard id="e-rebranding-retro" type="post" title="리브랜딩 개인 회고" href="/posts/daangn-rebranding" />
+  <EvidenceCard id="e-rebranding-medium" type="post" title="당근 Tech Medium 회고" thumb="/portfolio/medium-logo.webp" href="https://medium.com/daangn/%EB%8B%B9%EA%B7%BC-%EB%A6%AC%EB%B8%8C%EB%9E%9C%EB%94%A9-%EC%BA%A0%ED%8E%98%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A5%BC-%EA%B0%9C%EB%B0%9C%ED%95%98%EB%A9%B0-%EB%B0%B0%EC%9A%B4-%EA%B2%83-b41d866df9b7" />
 </EvidenceRail>
 
 </ProjectSection>
