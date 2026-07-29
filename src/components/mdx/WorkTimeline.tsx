@@ -16,15 +16,16 @@ interface WorkTimelineProps {
 }
 
 const TIMELINE_START = 2022;
-const TIMELINE_END = 2026;
-const TOTAL_MONTHS = (TIMELINE_END - TIMELINE_START + 1) * 12;
 
 function getMonthOffset(year: number, month: number): number {
   return (year - TIMELINE_START) * 12 + (month - 1);
 }
 
-function calculateBarPosition(item: TimelineItem): { left: number; width: number } {
-  const now = new Date();
+function calculateBarPosition(
+  item: TimelineItem,
+  totalMonths: number,
+  now: Date,
+): { left: number; width: number } {
   const currentYear = now.getFullYear();
   const currentMonth = now.getMonth() + 1;
 
@@ -34,18 +35,21 @@ function calculateBarPosition(item: TimelineItem): { left: number; width: number
       ? getMonthOffset(item.endYear, item.endMonth)
       : getMonthOffset(currentYear, currentMonth);
 
-  const left = (startOffset / TOTAL_MONTHS) * 100;
-  const width = Math.max(((endOffset - startOffset + 1) / TOTAL_MONTHS) * 100, 3);
+  const left = (startOffset / totalMonths) * 100;
+  const width = Math.max(((endOffset - startOffset + 1) / totalMonths) * 100, 3);
 
   return { left, width };
 }
 
-function formatDuration(item: TimelineItem): string {
-  const now = new Date();
+function formatDuration(item: TimelineItem, now: Date): string {
   const endYear = item.endYear ?? now.getFullYear();
   const endMonth = item.endMonth ?? now.getMonth() + 1;
 
   const totalMonths = (endYear - item.startYear) * 12 + (endMonth - item.startMonth);
+
+  if (!item.endYear && totalMonths === 0) {
+    return "<1 mo";
+  }
 
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
@@ -80,10 +84,17 @@ function sortItems(items: TimelineItem[]): TimelineItem[] {
 }
 
 export default function WorkTimeline({ items }: WorkTimelineProps) {
+  const now = new Date();
   const sortedItems = sortItems(items);
+  const latestItemYear = items.reduce(
+    (latestYear, item) => Math.max(latestYear, item.startYear, item.endYear ?? item.startYear),
+    TIMELINE_START,
+  );
+  const timelineEnd = Math.max(now.getFullYear(), latestItemYear);
+  const totalMonths = (timelineEnd - TIMELINE_START + 1) * 12;
 
   const years = Array.from(
-    { length: TIMELINE_END - TIMELINE_START + 1 },
+    { length: timelineEnd - TIMELINE_START + 1 },
     (_, i) => TIMELINE_START + i,
   );
 
@@ -112,8 +123,8 @@ export default function WorkTimeline({ items }: WorkTimelineProps) {
           </div>
 
           {sortedItems.map((item, index) => {
-            const { left, width } = calculateBarPosition(item);
-            const duration = formatDuration(item);
+            const { left, width } = calculateBarPosition(item, totalMonths, now);
+            const duration = formatDuration(item, now);
             return (
               <div
                 key={item.id}
@@ -167,7 +178,7 @@ export default function WorkTimeline({ items }: WorkTimelineProps) {
                 {item.endYear
                   ? `${item.endYear}.${String(item.endMonth).padStart(2, "0")}`
                   : "Present"}{" "}
-                ({formatDuration(item)})
+                ({formatDuration(item, now)})
               </span>
             </div>
           </div>
